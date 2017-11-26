@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{0A403E34-2DDD-47DD-83A7-3123C5104069}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Eindwerk2018 Status">
+    <Files>
+      <File FileName="Eindwerk2018/Views/Locatie/Index.cshtml" Line="32" Column="23" />
+      <File FileName="Eindwerk2018/Content/bootstrap-slade.css" Line="175" Column="1" />
+      <File FileName="Eindwerk2018/Models/LocatieModel.cs" Line="43" Column="10" />
+      <File FileName="Eindwerk2018 Status" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Eindwerk2018 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>
