@@ -1,40 +1,58 @@
-﻿@{
+﻿@model Eindwerk2018.ViewModels.NieuweLocatieViewModel
+
+@{
     ViewBag.Title = "Locatie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<div class="form-group">
-    <label for="Locatie"> Naam:</label>
-    <input name="Locatie" />
-</div>
+<h2>Nieuwe Locatie</h2>
 
-<div class="form-group">
-    <label for="Locatie"> Gps longitude:</label>
-    <input name="Gps-long" />
-</div>
 
-<div class="form-group">
-    <label for="Locatie"> Gps latitude:</label>
-    <input name="Gps-lat" />
-</div>
+@using (Html.BeginForm("Create", "Locatie"))
+{
 
-<div class="form-group">
-    <label for="Locatie"> L code:</label>
-    <input name="code" />
-</div>
+    <div class="form-group">
+	    
+        @Html.LabelFor(m => m.Locatie.LocatieNaam)
+        @Html.TextBoxFor(m => m.Locatie.LocatieNaam, new { @class = "form-control" })
+	    @Html.ValidationMessageFor(m => m.Locatie.LocatieNaam)
+	
+    </div>
 
-<div class="form-group">
-    <label for="Locatie"> Type:</label>
-    <input name="Type" />
-</div>
+    <div class="form-group">
+    
+        @Html.LabelFor(m => m.Locatie.GpsLong)
+        @Html.TextBoxFor(m => m.Locatie.GpsLong, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Locatie.GpsLong)
+    </div>
 
-<div class="form-group">
-    <label for="Locatie">Infrabel Locatie?:</label>
-    <form action="">
-  <input type="radio" name="infrabel" value="ja"> Ja<br>
-  <input type="radio" name="infrabel" value="neen"> Neen<br>
- 
-</form>
-</div>
+    <div class="form-group">
+    
+        @Html.LabelFor(m => m.Locatie.GpsLat)
+        @Html.TextBoxFor(m => m.Locatie.GpsLat, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Locatie.GpsLat)
+    </div>
 
+    <div class="form-group">
+
+       @Html.LabelFor(m => m.Locatie.LocatieInfrabel)
+        <br />
+        <label>Ja</label>
+            @Html.RadioButtonFor(m => m.Locatie.LocatieInfrabel, true, new { @class = "form-control" })
+      
+        <label>Neen</label>
+        @Html.RadioButtonFor(m => m.Locatie.LocatieInfrabel, false, new { @class = "form-control"  })
+    </div>
+
+    <div class="form-group">
+    
+        @Html.LabelFor(m => m.Locatie.locatieType)
+        @Html.DropDownListFor(m => m.Locatie.locatieType, new SelectList(Model.LocatieTypes, "Id", "naamNL"), "selecteer type", new { @class = "form-control" })
+         
+    </div>
+
+    <button type="submit" class = "btn btn primary">Save</button>
+
+
+
+}

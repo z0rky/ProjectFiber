@@ -1,5 +1,7 @@
 ﻿using System.Web;
+using System.Collections.Generic;
 using System.Web.Optimization;
+using Eindwerk2018.Models;
 
 namespace Eindwerk2018
 {
@@ -26,6 +28,9 @@ namespace Eindwerk2018
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+           
+
         }
     }
 }

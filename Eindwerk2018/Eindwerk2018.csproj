@@ -150,16 +150,13 @@
     <Compile Include="Controllers\KabelController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Models\LocatieModel.cs" />
+    <Compile Include="ViewModels\NieuweLocatieViewModel.cs" />
+    <Compile Include="Models\LocatieType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -195,23 +192,25 @@
     <Content Include="Views\Kabel\Index.cshtml" />
     <Content Include="Views\Other\Index.cshtml" />
     <Content Include="Views\Foid\Index.cshtml" />
+    <Content Include="Content\bootstrap-lumen.css" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <None Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.min.css" />
+    <None Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.css" />
+    <None Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <None Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Locatie\" />
-    <Folder Include="Views\Kabel\" />
-    <Folder Include="Views\Other\" />
-    <Folder Include="Views\Foid\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

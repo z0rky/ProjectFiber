@@ -1,0 +1,20 @@
+﻿@model Eindwerk2018.Models.LocatieModel
+
+@{
+    ViewBag.Title = "LocatieView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LocatieView</h2>
+
+
+@using (Html.BeginForm("Create", "Locatie"))
+{
+
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.LocatieNaam)
+
+        @Html.TextBoxFor(m => m.LocatieNaam, new{ @class =  "form-control"  })
+    </div>
+}
