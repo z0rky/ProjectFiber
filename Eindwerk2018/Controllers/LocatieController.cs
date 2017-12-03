@@ -60,7 +60,7 @@ namespace Eindwerk2018.Controllers
             }
             //schrijf naar database
 
-            return RedirectToAction("Index", "Locaties");
+            return RedirectToAction("Index", "Locatie");
         }
         
         public ActionResult Edit(int id)

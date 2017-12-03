@@ -1,18 +1,40 @@
-﻿
+﻿@model Eindwerk2018.ViewModels.NieuweFoidViewModel
+
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Foid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<h2>Nieuwe FOID</h2>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+@using (Html.BeginForm("Create", "Foid"))
+{
+
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.Foid.Name)
+        @Html.TextBoxFor(m => m.Foid.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Foid.Name)
+
+    </div>
+
+   
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.Foid.Status)
+        <br />
+        <label>in gebruik</label>
+        @Html.RadioButtonFor(m => m.Foid.Status, true, new { @class = "form-control" })
+
+        <label>niet in gebruik</label>
+        @Html.RadioButtonFor(m => m.Foid.Status, false, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn primary">Save</button>
+
+
+    // date_creation = datetime now in controller
+    // requestor xtra table?? dropbox?? of bepaald via security
+
+}
+

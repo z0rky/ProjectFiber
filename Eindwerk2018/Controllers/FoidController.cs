@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Eindwerk2018.Models;
+using Eindwerk2018.ViewModels;
 
 namespace Eindwerk2018.Controllers
 {
@@ -10,6 +12,9 @@ namespace Eindwerk2018.Controllers
     {
         public ActionResult Index()
         {
+            //NieuweFoidviewmodel ophalen
+
+
             return View ();
         }
 
@@ -24,13 +29,19 @@ namespace Eindwerk2018.Controllers
         } 
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Foid foid)
         {
-            try {
-                return RedirectToAction ("Index");
-            } catch {
-                return View ();
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new NieuweFoidViewModel
+                {
+                    Foid = foid
+
+
+                };
+                return View("Index", viewModel);
             }
+            return RedirectToAction("Index", "Foid");
         }
         
         public ActionResult Edit(int id)

@@ -144,12 +144,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Foid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\LocatieController.cs" />
     <Compile Include="Controllers\FoidController.cs" />
     <Compile Include="Controllers\KabelController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Models\LocatieModel.cs" />
+    <Compile Include="ViewModels\NieuweFoidViewModel.cs" />
     <Compile Include="ViewModels\NieuweLocatieViewModel.cs" />
     <Compile Include="Models\LocatieType.cs" />
   </ItemGroup>
