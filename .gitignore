@@ -1,0 +1,56 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+
+# Build results
+Eindwerk2018/[Dd]ebug/
+Eindwerk2018/[Dd]ebugPublic/
+Eindwerk2018/[Rr]elease/
+Eindwerk2018/[Rr]eleases/
+Eindwerk2018/x64/
+Eindwerk2018/x86/
+Eindwerk2018/build/
+Eindwerk2018/bld/
+Eindwerk2018/[Bb]in
+Eindwerk2018/[Oo]bj
+
+/.vs/*
+
+# Roslyn cache directories
+*.ide/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+#NUNIT
+*.VisualState.xml
+TestResult.xml
+
+# SQL Server files
+*.mdf
+*.ldf
+
+### Windows ###
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
