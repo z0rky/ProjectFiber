@@ -20,7 +20,14 @@ namespace Eindwerk2018.Models
 
         public int RequestorId { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        private DateTime creatieDatum;
+
+        public DateTime CreatieDatum
+        {
+            get { return creatieDatum; }
+            set { creatieDatum = DateTime.Now; }
+        }
+
 
 
 
