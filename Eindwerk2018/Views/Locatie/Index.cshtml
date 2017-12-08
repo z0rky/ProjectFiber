@@ -12,22 +12,22 @@
 {
 
     <div class="form-group">
-	    
+
         @Html.LabelFor(m => m.Locatie.LocatieNaam)
         @Html.TextBoxFor(m => m.Locatie.LocatieNaam, new { @class = "form-control" })
-	    @Html.ValidationMessageFor(m => m.Locatie.LocatieNaam)
-	
+        @Html.ValidationMessageFor(m => m.Locatie.LocatieNaam)
+
     </div>
 
     <div class="form-group">
-    
+
         @Html.LabelFor(m => m.Locatie.GpsLong)
         @Html.TextBoxFor(m => m.Locatie.GpsLong, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Locatie.GpsLong)
     </div>
 
     <div class="form-group">
-    
+
         @Html.LabelFor(m => m.Locatie.GpsLat)
         @Html.TextBoxFor(m => m.Locatie.GpsLat, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Locatie.GpsLat)
@@ -35,23 +35,23 @@
 
     <div class="form-group">
 
-       @Html.LabelFor(m => m.Locatie.LocatieInfrabel)
+        @Html.LabelFor(m => m.Locatie.LocatieInfrabel)
         <br />
         <label>Ja</label>
-            @Html.RadioButtonFor(m => m.Locatie.LocatieInfrabel, true, new { @class = "form-control" })
-      
+        @Html.RadioButtonFor(m => m.Locatie.LocatieInfrabel, true, new { @class = "form-control" })
+
         <label>Neen</label>
-        @Html.RadioButtonFor(m => m.Locatie.LocatieInfrabel, false, new { @class = "form-control"  })
+        @Html.RadioButtonFor(m => m.Locatie.LocatieInfrabel, false, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-    
+
         @Html.LabelFor(m => m.Locatie.locatieType)
         @Html.DropDownListFor(m => m.Locatie.locatieType, new SelectList(Model.LocatieTypes, "Id", "naamNL"), "selecteer type", new { @class = "form-control" })
-         
+
     </div>
 
-    <button type="submit" class = "btn btn primary">Save</button>
+    <button type="submit" class="btn btn primary">Save</button>
 
 
 

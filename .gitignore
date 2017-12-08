@@ -22,6 +22,7 @@ Eindwerk2018/[Bb]in
 Eindwerk2018/[Oo]bj
 
 /.vs/*
+.vs
 
 # Roslyn cache directories
 *.ide/
