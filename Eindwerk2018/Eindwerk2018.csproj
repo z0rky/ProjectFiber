@@ -216,8 +216,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <None Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Views\OdfTypes\Details.cshtml" />
-    <Content Include="Views\OdfTypes\Index.cshtml" />
+    <Content Include="Views\OdfType\Details.cshtml" />
+    <Content Include="Views\OdfType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

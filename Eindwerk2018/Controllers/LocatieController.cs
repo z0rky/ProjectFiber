@@ -13,11 +13,9 @@ namespace Eindwerk2018.Controllers
     {
         public List<LocatieType> locatielijst = new List<LocatieType>();
         
-        
         public void  FakeData()
-
         {    
-        locatielijst.Add(new LocatieType(1, "brug", "bridge", "open", "ouvert"));
+            locatielijst.Add(new LocatieType(1, "brug", "bridge", "open", "ouvert"));
             locatielijst.Add(new LocatieType(2, "caravan", "caravan", "gesloten", "fermee"));
             locatielijst.Add(new LocatieType(3, "berg", "mont", "hoog", "haute"));
         }

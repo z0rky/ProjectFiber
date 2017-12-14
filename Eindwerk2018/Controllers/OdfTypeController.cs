@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Eindwerk2018.Models;
@@ -23,17 +24,23 @@ namespace Eindwerk2018.Controllers
         // GET: OdfTypes
         public ActionResult Index()
         {
-            return View();
+            FakeData(); //load data
+
+            var viewModel = odftypelijst;
+            return View(viewModel);
         }
 
         // GET: OdfTypes/Details/5
         public ActionResult Details(int? id)
         {
-            //if(id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //OdfType odfType = db.OdfTypes.Find(id);
-            //if (odfType == null) return HttpNotFound();
+            FakeData(); //load data
 
-            return View();
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            OdfType odfType = odftypelijst.Find(x=>x.Id.Equals(id));
+            //OdfType odfType = odftypelijst.First();
+            if (odfType == null) return HttpNotFound();
+
+            return View(odfType);
         }
 
         // GET: OdfTypes/Create
