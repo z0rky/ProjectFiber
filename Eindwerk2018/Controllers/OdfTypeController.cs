@@ -57,7 +57,7 @@ namespace Eindwerk2018.Controllers
             try
             {
                 // TODO: Add insert logic here
-
+                //add to database
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -69,7 +69,13 @@ namespace Eindwerk2018.Controllers
         // GET: OdfTypes/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            FakeData(); //load data
+
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
+            if (odfType == null) return HttpNotFound();
+
+            return View(odfType);
         }
 
         // POST: OdfTypes/Edit/5
@@ -92,7 +98,13 @@ namespace Eindwerk2018.Controllers
         // GET: OdfTypes/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            FakeData(); //load data
+
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
+            if (odfType == null) return HttpNotFound();
+
+            return View(odfType);
         }
 
         // POST: OdfTypes/Delete/5

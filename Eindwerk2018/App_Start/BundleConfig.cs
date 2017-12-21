@@ -29,8 +29,6 @@ namespace Eindwerk2018
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-           
-
         }
     }
 }

@@ -338,3 +338,7 @@ C:\Users\chris\Source\Repos\ProjectFiber\Eindwerk2018\bin\Microsoft.AI.Dependenc
 C:\Users\chris\Source\Repos\ProjectFiber\Eindwerk2018\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\chris\Source\Repos\ProjectFiber\Eindwerk2018\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\chris\Source\Repos\ProjectFiber\Eindwerk2018\bin\Microsoft.AI.Web.xml
+C:\Users\chris\source\repos\ProjectFiber\Eindwerk2018\bin\EntityFramework.dll
+C:\Users\chris\source\repos\ProjectFiber\Eindwerk2018\bin\EntityFramework.SqlServer.dll
+C:\Users\chris\source\repos\ProjectFiber\Eindwerk2018\bin\EntityFramework.xml
+C:\Users\chris\source\repos\ProjectFiber\Eindwerk2018\bin\EntityFramework.SqlServer.xml
