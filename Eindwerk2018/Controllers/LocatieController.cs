@@ -43,7 +43,7 @@ namespace Eindwerk2018.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(LocatieModel locatie)
+        public ActionResult Create(Locatie locatie)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +54,7 @@ namespace Eindwerk2018.Controllers
                     LocatieTypes = locatielijst
 
                 };
-                return View("Index", viewModel);
+                return View("Details", viewModel);
             }
             //schrijf naar database
 

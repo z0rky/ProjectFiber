@@ -342,3 +342,7 @@ C:\Users\chris\source\repos\ProjectFiber\Eindwerk2018\bin\EntityFramework.dll
 C:\Users\chris\source\repos\ProjectFiber\Eindwerk2018\bin\EntityFramework.SqlServer.dll
 C:\Users\chris\source\repos\ProjectFiber\Eindwerk2018\bin\EntityFramework.xml
 C:\Users\chris\source\repos\ProjectFiber\Eindwerk2018\bin\EntityFramework.SqlServer.xml
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\EntityFramework.dll
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\EntityFramework.SqlServer.dll
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\EntityFramework.xml
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\EntityFramework.SqlServer.xml

@@ -11,7 +11,7 @@ namespace Eindwerk2018.ViewModels
         public IEnumerable<LocatieType> LocatieTypes { get; set; }
 
 
-        public LocatieModel Locatie {get;set;}
+        public Locatie Locatie {get;set;}
 
     }
 }

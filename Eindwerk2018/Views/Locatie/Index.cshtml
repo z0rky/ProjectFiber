@@ -1,4 +1,7 @@
 ﻿@model Eindwerk2018.ViewModels.NieuweLocatieViewModel
+    
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 
 @{
     ViewBag.Title = "Locatie";
@@ -33,21 +36,35 @@
         @Html.ValidationMessageFor(m => m.Locatie.GpsLat)
     </div>
 
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.LocatieInfrabel)
-        <br />
-        <label>Ja</label>
-        @Html.RadioButtonFor(m => m.Locatie.LocatieInfrabel, true, new { @class = "form-control" })
-
-        <label>Neen</label>
-        @Html.RadioButtonFor(m => m.Locatie.LocatieInfrabel, false, new { @class = "form-control" })
-    </div>
+  
 
     <div class="form-group">
 
         @Html.LabelFor(m => m.Locatie.locatieType)
         @Html.DropDownListFor(m => m.Locatie.locatieType, new SelectList(Model.LocatieTypes, "Id", "naamNL"), "selecteer type", new { @class = "form-control" })
+
+    </div>
+
+    <div class="form-group">
+        
+    @Html.CheckBoxFor(m=>m.Locatie.LocatieInfrabel, new { @checked = "checked", id = "InfrabelId" })
+    @Html.LabelFor(m => m.Locatie.LocatieInfrabel)
+     <br>
+    @Html.TextBoxFor(m => m.Locatie.LocatieBedrijf,  new{ @disabled = "disabled", @class = "form-control", id = "LocatieBedrijfId"})
+
+
+    <script> 
+        $('#InfrabelId').click(function() {
+            var $this = $(this);
+
+            if ($this.is(':checked')) {
+                $('#LocatieBedrijfId').attr("disabled", "disabled") 
+            } else {
+                
+                $('#LocatieBedrijfId').removeAttr("disabled"); 
+            }
+        });
+    </script>
 
     </div>
 
