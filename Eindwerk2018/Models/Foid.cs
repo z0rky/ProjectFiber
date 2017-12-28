@@ -16,6 +16,7 @@ namespace Eindwerk2018.Models
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "In Gebruik")]
         public bool Status { get; set; }
 
         public int RequestorId { get; set; }

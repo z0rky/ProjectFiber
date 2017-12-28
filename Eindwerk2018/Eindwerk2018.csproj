@@ -417,6 +417,7 @@
     <Content Include="Views\Odfs\Edit.cshtml" />
     <Content Include="Views\Odfs\Index.cshtml" />
     <Content Include="Views\Locatie\Details.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

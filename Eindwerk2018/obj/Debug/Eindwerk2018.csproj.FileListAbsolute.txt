@@ -346,3 +346,7 @@ C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\EntityFramework.dll
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\EntityFramework.SqlServer.dll
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\EntityFramework.xml
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\EntityFramework.SqlServer.xml
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\MySqlConnector.dll
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\System.Buffers.dll
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\System.Threading.Tasks.Extensions.xml

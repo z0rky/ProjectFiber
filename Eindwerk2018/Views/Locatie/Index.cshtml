@@ -13,6 +13,7 @@
 
 @using (Html.BeginForm("Create", "Locatie"))
 {
+    @Html.ValidationSummary(true, "Los volgende fouten op")
 
     <div class="form-group">
 
@@ -40,9 +41,9 @@
 
     <div class="form-group">
 
-        @Html.LabelFor(m => m.Locatie.locatieType)
-        @Html.DropDownListFor(m => m.Locatie.locatieType, new SelectList(Model.LocatieTypes, "Id", "naamNL"), "selecteer type", new { @class = "form-control" })
-
+        @Html.LabelFor(m => m.Locatie.LocatieTypeId)
+        @Html.DropDownListFor(m => m.Locatie.LocatieTypeId, new SelectList(Model.LocatieTypes,"Id", "naamNL"), "selecteer type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m =>m.Locatie.LocatieTypeId)
     </div>
 
     <div class="form-group">
@@ -68,7 +69,7 @@
 
     </div>
 
-    <button type="submit" class="btn btn primary">Save</button>
+    <button type="submit" class="btn btn-primary">Save</button>
 
 
 

@@ -26,18 +26,20 @@ namespace Eindwerk2018.Controllers
 
             
             FakeData();
+
             var viewModel = new NieuweLocatieViewModel
             {
                 LocatieTypes = locatielijst
 
             };
             
-              return View (viewModel);
+              return View ("Index",viewModel);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(Locatie locatie)
         {
-            return View ();
+           
+            return View ("Details", locatie);
         }
 
 
@@ -54,11 +56,11 @@ namespace Eindwerk2018.Controllers
                     LocatieTypes = locatielijst
 
                 };
-                return View("Details", viewModel);
+                return View("Index", viewModel);
             }
             //schrijf naar database
 
-            return RedirectToAction("Index", "Locatie");
+            return RedirectToAction("Details", "Locatie", locatie);
         }
         
         public ActionResult Edit(int id)
@@ -76,10 +78,7 @@ namespace Eindwerk2018.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
-        {
-            return View ();
-        }
+        
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

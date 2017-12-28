@@ -22,7 +22,7 @@ namespace Eindwerk2018.Models
         [Required]
         [Range(-90, 90)]
         [Display(Name = "GPS Breedtegraad")]
-        public object GpsLat { get; set; }
+        public double GpsLat { get; set; }
 
         [Display(Name = "Infrabel Locatie ")]
         public bool LocatieInfrabel { get; set; }
@@ -33,10 +33,9 @@ namespace Eindwerk2018.Models
 
 
         [Display(Name = "Type van de locatie")]
-        public LocatieType locatieType { get; set; }
+        public int LocatieTypeId { get; set; }      
 
-        public string Ja { get; set; }
-        public string Neen { get; set; }
+       
 
     }
 }

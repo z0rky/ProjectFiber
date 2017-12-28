@@ -1,4 +1,6 @@
 ﻿@model Eindwerk2018.ViewModels.NieuweFoidViewModel
+    
+
 
 @{
     ViewBag.Title = "Foid";
@@ -20,17 +22,14 @@
 
    
     <div class="form-group">
-
+        
+        @Html.CheckBoxFor(m=>m.Foid.Status, new { @checked = "checked", id = "StatusId" })
         @Html.LabelFor(m => m.Foid.Status)
-        <br />
-        <label>in gebruik</label>
-        @Html.RadioButtonFor(m => m.Foid.Status, true, new { @class = "form-control" })
+       
 
-        <label>niet in gebruik</label>
-        @Html.RadioButtonFor(m => m.Foid.Status, false, new { @class = "form-control" })
     </div>
 
-    <button type="submit" class="btn btn primary">Save</button>
+    <button type="submit" class="btn btn-primary">Save</button>
 
 
     // date_creation = datetime now in controller
