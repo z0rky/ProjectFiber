@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Eindwerk2018.Models;
+
 
 
 namespace Eindwerk2018.Models
@@ -33,9 +33,18 @@ namespace Eindwerk2018.Models
 
 
         [Display(Name = "Type van de locatie")]
-        public int LocatieTypeId { get; set; }      
+        public int LocatieTypeId { get; set; }
 
-       
+        //public Locatie(int id, string naam, double lon, double lat, bool infra, int type)
+        //{
+        //    Id = Id;
+        //    LocatieNaam = naam;
+        //    GpsLong = lon;
+        //    GpsLat = lat;
+        //    LocatieInfrabel = infra;
+        //    LocatieTypeId = type;
+
+        //}
 
     }
 }

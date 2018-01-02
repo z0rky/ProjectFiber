@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Eindwerk2018.Models;
 using Eindwerk2018.ViewModels;
+using System.Data.Entity;
 
 
 namespace Eindwerk2018.Controllers
@@ -12,45 +13,66 @@ namespace Eindwerk2018.Controllers
     public class LocatieController : Controller
     {
         public List<LocatieType> locatielijst = new List<LocatieType>();
-        
-        public void  FakeData()
+        public List<Locatie> locatie = new List<Locatie>();
+        public List<Locatie> locatieFakeDataTest = new List<Locatie>();
+
+
+       public void  FakeData()
         {    
             locatielijst.Add(new LocatieType(1, "brug", "bridge", "open", "ouvert"));
             locatielijst.Add(new LocatieType(2, "caravan", "caravan", "gesloten", "fermee"));
             locatielijst.Add(new LocatieType(3, "berg", "mont", "hoog", "haute"));
         }
-        public ActionResult Index()
-        {
+
+       
+
+
+        public ViewResult Index()
+        {   
+            //var locaties = _context.customers.Include(m => m.LocatieTypes )>ToList();
+            //include voor andere models die we nodig hebben -> locatietypes
+            var locaties = GetLocaties();
+            return View(locaties);
+
+
+        } //{
             // database locatietypes toList
 
 
             
+        //   
+        //}
+
+        public ActionResult Details(int id)
+        {
+           
+            return View ("Details");
+        }
+
+        public ActionResult New()
+        {
             FakeData();
 
-            var viewModel = new NieuweLocatieViewModel
+            var viewModel = new LocatieFormViewModel()
             {
                 LocatieTypes = locatielijst
 
             };
-            
-              return View ("Index",viewModel);
+
+            return View("LocatieForm", viewModel);
+
+
         }
 
-        public ActionResult Details(Locatie locatie)
-        {
-           
-            return View ("Details", locatie);
-        }
-
-
+        // create is save geworden, zo kunnen we create en update in 1 view steken
 
         [HttpPost]
-        public ActionResult Create(Locatie locatie)
+        public ActionResult Save (Locatie locatie)
         {
             if (!ModelState.IsValid)
             {
                 FakeData();
-                var viewModel = new NieuweLocatieViewModel
+                var viewModel = new LocatieFormViewModel
                 {
                     Locatie = locatie,
                     LocatieTypes = locatielijst
@@ -58,36 +80,58 @@ namespace Eindwerk2018.Controllers
                 };
                 return View("Index", viewModel);
             }
-            //schrijf naar database
+            if (locatie.Id == 0)
+            {
+                //schrijf naar database
+            }
 
-            return RedirectToAction("Details", "Locatie", locatie);
+            else
+            {
+                // zoeken naar id en info overschrijven in DB 
+                //UPDATE!!!!!!
+            }
+
+            //_context.SaveChanges();
+            //bevestigen DB!!!!!!!!!!
+
+             return RedirectToAction("Details", "Locatie", locatie);
         }
-        
+
+
+
+        private IEnumerable<Locatie> GetLocaties()
+        {
+            return new List<Locatie>
+            {
+                new Locatie {Id=1, LocatieNaam = "Leuven station",GpsLong = 20,GpsLat = 20,LocatieInfrabel = true,LocatieTypeId = 2},
+                new Locatie {Id=2, LocatieNaam = "Gent station",GpsLong = 10,GpsLat = 10,LocatieInfrabel = true,LocatieTypeId = 1},
+                new Locatie {Id=3, LocatieNaam = "Brugge station",GpsLong = 30,GpsLat = 30,LocatieInfrabel = true,LocatieTypeId = 3}
+            };
+
+
+        }
+
+
         public ActionResult Edit(int id)
         {
-            return View ();
-        }
+            
+            FakeData();
+            
+            var locatieTest = GetLocaties();
+            var locatieEdit = locatieTest.SingleOrDefault(c => c.Id == id);
+             
+            if (locatieTest == null)
+                return HttpNotFound();
 
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try {
-                return RedirectToAction ("Index");
-            } catch {
-                return View ();
-            }
-        }
+            var viewModel = new LocatieFormViewModel
+            {
+                Locatie = locatieEdit,
+                LocatieTypes = locatielijst
 
-        
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try {
-                return RedirectToAction ("Index");
-            } catch {
-                return View ();
-            }
+            };
+            return View("LocatieForm", viewModel);
         }
     }
-}
+
+
+    }

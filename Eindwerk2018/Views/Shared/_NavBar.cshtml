@@ -1,5 +1,33 @@
-﻿ <div class="navbar navbar-expand-md navbar-fixed-top">
-    <div class="container-fluid">
+﻿@*<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    @Html.ActionLink("Project Fiber", "Index", "Home", new { area = "  " }, new { @class = "navbar-brand" })
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+        <span class="navbar-toggler-icon"></span>
+                
+    </button>
+            
+        
+    <div class="navbar-collapse collapse" id="navbarColor01">
+        <ul class="nav navbar-nav" mr-auto>
+            <li class="nav-item ">
+                @Html.ActionLink("Search", "Search", "Home")
+            </li>
+       
+            <li class="k-dropdown">
+                <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Add <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>@Html.ActionLink("Locatie", "Index", "Locatie", null, new {id = "locatie"})</li>
+                    <li>@Html.ActionLink("FOID", "Index", "Foid", null, new {id = "FOID"})</li>
+                    <li>@Html.ActionLink("Kabel", "Index", "Kabel", null, new {id = "Kabel"})</li>
+                    <li>@Html.ActionLink("Other", "Index", "Other", null, new {id = "Other"})</li>
+
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>*@
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -9,7 +37,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Search", "Search", "Home")</li>
+                <li>@Html.ActionLink("Locaties", "Index", "Locatie")</li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">Add <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -18,9 +46,9 @@
                         <li>@Html.ActionLink("Kabel", "Index", "Kabel", null, new { id = "Kabel" })</li>
                         <li>@Html.ActionLink("Other", "Index", "Other", null, new { id = "Other" })</li>
 
-                     </ul>
-                 </li>
-             </ul>
-         </div>
-     </div>
- </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

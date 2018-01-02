@@ -1,76 +1,99 @@
-﻿@model Eindwerk2018.ViewModels.NieuweLocatieViewModel
+﻿
+@model  IEnumerable<Eindwerk2018.Models.Locatie>
     
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
 
 @{
     ViewBag.Title = "Locatie";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nieuwe Locatie</h2>
+<h2>Locaties</h2>
 
 
-@using (Html.BeginForm("Create", "Locatie"))
+    <table id="locaties" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Naam</th>
+            <th>GPS Long</th>
+            <th>GPS Lat</th>
+            <th>Infrabel</th>
+            <th>Bedrijf</th>
+            <th>Type</th>
+            <th>Delete</th>      
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var locatie in Model)
+        { 
+        <tr>
+        <td>@Html.ActionLink(locatie.LocatieNaam, "Edit", "Locatie", new {id = locatie.Id }, null)
+            <td>@locatie.GpsLat</td>
+        <td>@locatie.GpsLong</td>
+            <td>@locatie.LocatieInfrabel</td>
+        <td>@locatie.LocatieBedrijf</td>
+            <td>@locatie.LocatieTypeId</td>
+            <td><button data-locaties-id="@locatie.Id" class="btn-link js-delete">Delete</button>
+            </td>
+        </tr> 
+        }
+
+
+        </tbody>    
+    </table>    
+
+<input type="button" class="btn btn-primary" value="Locatie Toevoegen" onclick="location.href='@Url.Action("New", "Locatie")'" />
+@section scripts
 {
-    @Html.ValidationSummary(true, "Los volgende fouten op")
+    <script>
+        $(document).ready(function () {
+            $("#locaties").DataTable();
 
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.LocatieNaam)
-        @Html.TextBoxFor(m => m.Locatie.LocatieNaam, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.LocatieNaam)
-
-    </div>
-
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.GpsLong)
-        @Html.TextBoxFor(m => m.Locatie.GpsLong, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.GpsLong)
-    </div>
-
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.GpsLat)
-        @Html.TextBoxFor(m => m.Locatie.GpsLat, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.GpsLat)
-    </div>
-
-  
-
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.LocatieTypeId)
-        @Html.DropDownListFor(m => m.Locatie.LocatieTypeId, new SelectList(Model.LocatieTypes,"Id", "naamNL"), "selecteer type", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m =>m.Locatie.LocatieTypeId)
-    </div>
-
-    <div class="form-group">
-        
-    @Html.CheckBoxFor(m=>m.Locatie.LocatieInfrabel, new { @checked = "checked", id = "InfrabelId" })
-    @Html.LabelFor(m => m.Locatie.LocatieInfrabel)
-     <br>
-    @Html.TextBoxFor(m => m.Locatie.LocatieBedrijf,  new{ @disabled = "disabled", @class = "form-control", id = "LocatieBedrijfId"})
+            $("#locaties").on("click",".js-delete", function ()
+                {
+                    var button = $(this);
+                    bootbox.confirm("Ben je zeker dat de geselecteerde locatie verwijderd mag worden?",
+                        function (result)
+                        {
+                            if (result)
+                            {
+                                $.ajax(
+                                    {
+                                        url: "/api/locaties/" + button.attr("data-customer-id"),
+                                        methode: "DELETE",
+                                        succes: function ()
+                                        {
+                                            button.parents("tr").remove();
+                                            console.log("succes"); // testen in console
+                                        }
 
 
-    <script> 
-        $('#InfrabelId').click(function() {
-            var $this = $(this);
+                                    });
 
-            if ($this.is(':checked')) {
-                $('#LocatieBedrijfId').attr("disabled", "disabled") 
-            } else {
-                
-                $('#LocatieBedrijfId').removeAttr("disabled"); 
-            }
+
+                            }
+
+                        });
+
+
+                });
         });
+
     </script>
+        
 
-    </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-
+    
 
 
 }
+
+
+
+
+
+
+
+
+
+
