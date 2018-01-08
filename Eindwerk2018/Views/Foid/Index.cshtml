@@ -1,5 +1,5 @@
-﻿@model Eindwerk2018.ViewModels.NieuweFoidViewModel
-    
+﻿
+@model  IEnumerable<Eindwerk2018.Models.Foid>
 
 
 @{
@@ -7,33 +7,93 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nieuwe FOID</h2>
 
-@using (Html.BeginForm("Create", "Foid"))
+<h2>Foid</h2>
+
+
+<table id="foids" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>In Gebruik</th>
+            <th>Creatie Datum</th>
+            <th>Requestor ID</th>
+            <th>Delete</th>        
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var foid in Model)
+        {   
+
+            // hier naar volgende stap ????
+            <tr>
+                <td>@Html.ActionLink(foid.Name, "Details", "Foid", new { id = foid.Id }, null)
+                <td>@foid.Status</td>
+                <td>@foid.CreatieDatum</td>
+                <td>@foid.RequestorId</td>
+                <td>
+                    <button data-foids-id="@foid.Id" class="btn-link js-delete">Delete</button>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+<input type="button" class="btn btn-primary" value="Foid Toevoegen" onclick="location.href='@Url.Action("New", "Foid")'" />
+
+@section scripts
 {
+    <script>
+            $(document).ready(function () {
+            $("#foids").DataTable();
 
-    <div class="form-group">
+            $("#foids").on("click",".js-delete", function ()
+            {
+                var button = $(this);
+                bootbox.confirm("Ben je zeker dat de geselecteerde foid verwijderd mag worden?",
+                    function (result)
+                    {
+                        if (result)
+                        {
+                            $.ajax(
+                                {
+                                    url: "/api/foids/" + button.attr("data-foid-id"),
+                                    methode: "DELETE",
+                                    succes: function ()
+                                    {
+                                        button.parents("tr").remove();
+                                        console.log("succes"); // testen in console
+                                    }
 
-        @Html.LabelFor(m => m.Foid.Name)
-        @Html.TextBoxFor(m => m.Foid.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Foid.Name)
 
-    </div>
-
-   
-    <div class="form-group">
-        
-        @Html.CheckBoxFor(m=>m.Foid.Status, new { @checked = "checked", id = "StatusId" })
-        @Html.LabelFor(m => m.Foid.Status)
-       
-
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
+                                });
 
 
-    // date_creation = datetime now in controller
-    // requestor xtra table?? dropbox?? of bepaald via security
+                        }
+
+                    });
+
+
+            });
+        });
+
+    </script>
+
+
+
+
+
 
 }
+
+
+
+
+
+
+
+
+
 

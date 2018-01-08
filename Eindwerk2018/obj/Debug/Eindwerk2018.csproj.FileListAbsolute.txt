@@ -203,7 +203,6 @@ D:/Eindwerk2018/Eindwerk2018/obj/Debug/Eindwerk2018.pdb
 /Users/zorkmeyers/Desktop/Eindwerk2018/Eindwerk2018/obj/Debug/Eindwerk2018.csproj.CoreCompileInputs.cache
 /Users/zorkmeyers/Desktop/Eindwerk2018/Eindwerk2018/obj/Debug/Eindwerk2018.dll
 /Users/zorkmeyers/Desktop/Eindwerk2018/Eindwerk2018/obj/Debug/Eindwerk2018.pdb
-C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\obj\Debug\Eindwerk2018.csprojResolveAssemblyReference.cache
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\obj\Debug\Eindwerk2018.dll
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\obj\Debug\Eindwerk2018.pdb
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\ApplicationInsights.config
@@ -356,3 +355,4 @@ C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\System.Web.Http.WebHost.dl
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\System.Net.Http.Formatting.xml
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\System.Web.Http.xml
 C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\bin\System.Web.Http.WebHost.xml
+C:\Users\Meyers\Desktop\Eindwerk2018\Eindwerk2018\obj\Debug\Eindwerk2018.csprojResolveAssemblyReference.cache

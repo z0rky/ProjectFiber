@@ -13,5 +13,10 @@ namespace Eindwerk2018.Controllers
         {
             return View();
         }
+
+        public ActionResult New()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

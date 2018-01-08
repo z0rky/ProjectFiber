@@ -45,8 +45,9 @@ namespace Eindwerk2018.Controllers
 
         public ActionResult Details(int id)
         {
-           
-            return View ("Details");
+           //via API, werkt nu nog niet
+
+            return View ("Details" );
         }
 
         public ActionResult New()
@@ -110,6 +111,8 @@ namespace Eindwerk2018.Controllers
 
 
         }
+
+        
 
 
         public ActionResult Edit(int id)

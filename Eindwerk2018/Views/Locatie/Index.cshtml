@@ -27,13 +27,13 @@
         @foreach (var locatie in Model)
         { 
         <tr>
-        <td>@Html.ActionLink(locatie.LocatieNaam, "Edit", "Locatie", new {id = locatie.Id }, null)
-            <td>@locatie.GpsLat</td>
+        <td>@Html.ActionLink(locatie.LocatieNaam, "Details", "Locatie", new {id = locatie.Id }, null)
+        <td>@locatie.GpsLat</td>
         <td>@locatie.GpsLong</td>
-            <td>@locatie.LocatieInfrabel</td>
+        <td>@locatie.LocatieInfrabel</td>
         <td>@locatie.LocatieBedrijf</td>
-            <td>@locatie.LocatieTypeId</td>
-            <td><button data-locaties-id="@locatie.Id" class="btn-link js-delete">Delete</button>
+        <td>@locatie.LocatieTypeId</td>
+        <td><button data-locatie-id="@locatie.Id" class="btn-link js-delete">Delete</button>
             </td>
         </tr> 
         }
@@ -43,6 +43,7 @@
     </table>    
 
 <input type="button" class="btn btn-primary" value="Locatie Toevoegen" onclick="location.href='@Url.Action("New", "Locatie")'" />
+
 @section scripts
 {
     <script>
@@ -59,7 +60,7 @@
                             {
                                 $.ajax(
                                     {
-                                        url: "/api/locaties/" + button.attr("data-customer-id"),
+                                        url: "/api/locaties/" + button.attr("data-locatie-id"),
                                         methode: "DELETE",
                                         succes: function ()
                                         {

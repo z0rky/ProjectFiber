@@ -6,7 +6,7 @@ using Eindwerk2018.Models;
 
 namespace Eindwerk2018.ViewModels
 {
-    public class NieuweKabelViewModel
+    public class KabelFormViewModel
     {
 
         public Kabel Kabel { get; set; }

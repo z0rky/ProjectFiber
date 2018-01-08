@@ -10,12 +10,13 @@ namespace Eindwerk2018.Controllers
 {
     public class FoidController : Controller
     {
-        public ActionResult Index()
+        public ViewResult Index()
         {
             //NieuweFoidviewmodel ophalen
+            var foids = GetFoids();
+            return View(foids);
 
-
-            return View ();
+           
         }
 
         public ActionResult Details(int id)
@@ -23,17 +24,23 @@ namespace Eindwerk2018.Controllers
             return View ();
         }
 
-        public ActionResult Create()
+        public ActionResult New()
         {
-            return View ();
-        } 
+
+
+            var viewModel = new FoidFormViewModel();
+            
+            return View("FoidForm", viewModel);
+
+
+        }
 
         [HttpPost]
-        public ActionResult Create(Foid foid)
+        public ActionResult Save(Foid foid)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new NieuweFoidViewModel
+                var viewModel = new FoidFormViewModel
                 {
                     Foid = foid
 
@@ -44,34 +51,44 @@ namespace Eindwerk2018.Controllers
             return RedirectToAction("Index", "Foid");
         }
         
-        public ActionResult Edit(int id)
-        {
-            return View ();
-        }
+       
 
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try {
-                return RedirectToAction ("Index");
-            } catch {
-                return View ();
-            }
-        }
 
-        public ActionResult Delete(int id)
-        {
-            return View ();
-        }
 
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        private IEnumerable<Foid> GetFoids()
         {
-            try {
-                return RedirectToAction ("Index");
-            } catch {
-                return View ();
-            }
+            return new List<Foid>
+            {
+                new Foid
+                {
+                    Id=1,
+                    Name = "foid1",
+                    Status = true,
+                    RequestorId = 3,
+                    CreatieDatum = DateTime.Now
+
+                },
+                new Foid
+                {
+                    Id=2,
+                    Name = "foid2",
+                    Status = false,
+                    RequestorId = 2,
+                    CreatieDatum = DateTime.Now
+
+                },
+                new Foid
+                {
+                    Id=3,
+                    Name = "foid3",
+                    Status = false,
+                    RequestorId = 1,
+                    CreatieDatum = DateTime.Now
+
+                }
+            };
+
+
         }
     }
 }

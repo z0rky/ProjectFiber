@@ -167,7 +167,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\FoidsController.cs" />
+    <Compile Include="Controllers\Api\KabelsController.cs" />
     <Compile Include="Controllers\Api\LocatiesController.cs" />
+    <Compile Include="Controllers\Api\SectiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OdfsController.cs" />
     <Compile Include="Controllers\OdfTypeController.cs" />
@@ -188,8 +191,8 @@
     <Compile Include="Controllers\KabelController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Models\Locatie.cs" />
-    <Compile Include="ViewModels\NieuweFoidViewModel.cs" />
-    <Compile Include="ViewModels\NieuweKabelViewModel.cs" />
+    <Compile Include="ViewModels\FoidFormViewModel.cs" />
+    <Compile Include="ViewModels\KabelFormViewModel.cs" />
     <Compile Include="ViewModels\LocatieFormViewModel.cs" />
     <Compile Include="Models\LocatieType.cs" />
     <Compile Include="ViewModels\NieuweSectieViewModel.cs" />
@@ -409,9 +412,9 @@
     <Content Include="Content\bootstrap-darkly.css" />
     <Content Include="Content\bootstrap-slade.css" />
     <Content Include="Views\Locatie\LocatieForm.cshtml" />
-    <Content Include="Views\Kabel\Index.cshtml" />
+    <Content Include="Views\Kabel\KabelForm.cshtml" />
     <Content Include="Views\Other\Index.cshtml" />
-    <Content Include="Views\Foid\Index.cshtml" />
+    <Content Include="Views\Foid\FoidForm.cshtml" />
     <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -441,10 +444,17 @@
     <Content Include="Views\Locatie\Details.cshtml" />
     <Content Include="Views\Locatie\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
+    <Content Include="Views\Foid\Index.cshtml" />
+    <Content Include="Views\Kabel\Index.cshtml" />
+    <Content Include="Views\Kabel\Details.cshtml" />
+    <Content Include="Views\Foid\Details.cshtml" />
+    <Content Include="Views\Sectie\Index.cshtml" />
+    <Content Include="Views\SectieType\Index.cshtml" />
+    <Content Include="Views\Sectie\SectieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Sectie\" />
+    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
