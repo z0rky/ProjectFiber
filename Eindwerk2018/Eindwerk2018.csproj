@@ -188,6 +188,11 @@
     <Compile Include="Controllers\KabelController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Models\Locatie.cs" />
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\NieuweFoidViewModel.cs" />
     <Compile Include="ViewModels\NieuweKabelViewModel.cs" />
     <Compile Include="ViewModels\LocatieFormViewModel.cs" />
@@ -391,7 +396,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -448,6 +455,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource.en.resx" />
+    <EmbeddedResource Include="Resources\Resource.fr.resx" />
+    <EmbeddedResource Include="Resources\Resource.nl.resx" />
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
