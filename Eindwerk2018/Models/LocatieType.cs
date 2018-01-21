@@ -5,6 +5,7 @@ namespace Eindwerk2018.Models
 {
     public class LocatieType
     {
+
         
         public int Id   {get;set;}
 

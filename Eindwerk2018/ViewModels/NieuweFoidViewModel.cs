@@ -11,5 +11,11 @@ namespace Eindwerk2018.ViewModels
 
 
         public Foid Foid { get; set; }
+
+        public IEnumerable<Locatie> Locaties { get; set; }
+
+        public IEnumerable<Sectie> Secties{ get; set; }
+
+
     }
 }
