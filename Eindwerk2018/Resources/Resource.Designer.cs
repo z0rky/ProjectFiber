@@ -59,5 +59,311 @@ namespace Eindwerk2018.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        internal static string AdresGemeente {
+            get {
+                return ResourceManager.GetString("AdresGemeente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number.
+        /// </summary>
+        internal static string AdresNummer {
+            get {
+                return ResourceManager.GetString("AdresNummer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postcode.
+        /// </summary>
+        internal static string AdresPostcode {
+            get {
+                return ResourceManager.GetString("AdresPostcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street.
+        /// </summary>
+        internal static string AdresStraat {
+            get {
+                return ResourceManager.GetString("AdresStraat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creation Date.
+        /// </summary>
+        internal static string FoidCreationDate {
+            get {
+                return ResourceManager.GetString("FoidCreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string FoidName {
+            get {
+                return ResourceManager.GetString("FoidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requestor Id.
+        /// </summary>
+        internal static string FoidRequestorId {
+            get {
+                return ResourceManager.GetString("FoidRequestorId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string FoidStatus {
+            get {
+                return ResourceManager.GetString("FoidStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creation Date.
+        /// </summary>
+        internal static string KabelCreationDate {
+            get {
+                return ResourceManager.GetString("KabelCreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string KabelName {
+            get {
+                return ResourceManager.GetString("KabelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference.
+        /// </summary>
+        internal static string KabelReference {
+            get {
+                return ResourceManager.GetString("KabelReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company.
+        /// </summary>
+        internal static string LocationBedrijf {
+            get {
+                return ResourceManager.GetString("LocationBedrijf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPS  Latidude.
+        /// </summary>
+        internal static string LocationGpsLat {
+            get {
+                return ResourceManager.GetString("LocationGpsLat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPS Longitude.
+        /// </summary>
+        internal static string LocationGpsLong {
+            get {
+                return ResourceManager.GetString("LocationGpsLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Infrabel location.
+        /// </summary>
+        internal static string LocationInfrabel {
+            get {
+                return ResourceManager.GetString("LocationInfrabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LocationName {
+            get {
+                return ResourceManager.GetString("LocationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string LocationTypeDescFr {
+            get {
+                return ResourceManager.GetString("LocationTypeDescFr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string LocationTypeDescNl {
+            get {
+                return ResourceManager.GetString("LocationTypeDescNl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type Id.
+        /// </summary>
+        internal static string LocationTypeId {
+            get {
+                return ResourceManager.GetString("LocationTypeId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LocationTypeNameFR {
+            get {
+                return ResourceManager.GetString("LocationTypeNameFR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string LocationTypeNameNl {
+            get {
+                return ResourceManager.GetString("LocationTypeNameNl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location Id.
+        /// </summary>
+        internal static string OdfLocationId {
+            get {
+                return ResourceManager.GetString("OdfLocationId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string OdfTypeDescription {
+            get {
+                return ResourceManager.GetString("OdfTypeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type Id.
+        /// </summary>
+        internal static string OdfTypeId {
+            get {
+                return ResourceManager.GetString("OdfTypeId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string OdfTypeName {
+            get {
+                return ResourceManager.GetString("OdfTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        internal static string SectieActive {
+            get {
+                return ResourceManager.GetString("SectieActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kabel Id.
+        /// </summary>
+        internal static string SectieKabelId {
+            get {
+                return ResourceManager.GetString("SectieKabelId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length.
+        /// </summary>
+        internal static string SectieLength {
+            get {
+                return ResourceManager.GetString("SectieLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odf End Id.
+        /// </summary>
+        internal static string SectieOdfEndId {
+            get {
+                return ResourceManager.GetString("SectieOdfEndId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odf Start Id.
+        /// </summary>
+        internal static string SectieOdfStartId {
+            get {
+                return ResourceManager.GetString("SectieOdfStartId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string SectieTypeDescription {
+            get {
+                return ResourceManager.GetString("SectieTypeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type Id.
+        /// </summary>
+        internal static string SectieTypeId {
+            get {
+                return ResourceManager.GetString("SectieTypeId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string SectieTypeName {
+            get {
+                return ResourceManager.GetString("SectieTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual.
+        /// </summary>
+        internal static string SectieTypeVirtual {
+            get {
+                return ResourceManager.GetString("SectieTypeVirtual", resourceCulture);
+            }
+        }
     }
 }
