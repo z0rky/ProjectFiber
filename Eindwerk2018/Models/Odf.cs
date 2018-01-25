@@ -18,12 +18,12 @@ namespace Eindwerk2018.Models
         [Display(Name = "OdfName", ResourceType = typeof(Resources.Resource))]
         public string Name { get; set; }
 
-        public Odf(int id, int location_id, int type_id, string name)
-        {
-            this.Id = id;
-            this.Location_id = location_id;
-            this.Type_id = type_id;
-            this.Name = name;
-        }
+        //    public Odf(int id, int location_id, int type_id, string name)
+        //    {
+        //        this.Id = id;
+        //        this.Location_id = location_id;
+        //        this.Type_id = type_id;
+        //        this.Name = name;
+        //    }
     }
 }
