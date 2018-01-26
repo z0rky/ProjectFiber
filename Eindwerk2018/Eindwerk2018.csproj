@@ -176,6 +176,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Adres.cs" />
+    <Compile Include="Models\db\Db_General.cs" />
     <Compile Include="Models\db\Db_Odf.cs" />
     <Compile Include="Models\db\Db_Locatie.cs" />
     <Compile Include="Models\db\Db_LocatieType.cs" />
