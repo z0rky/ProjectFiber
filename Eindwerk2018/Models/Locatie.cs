@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Eindwerk2018.Models
 {
@@ -11,28 +10,27 @@ namespace Eindwerk2018.Models
 
         [Required]
         [StringLength(200)]
-        [Display(Name = "Naam")]
+        [Display(Name = "LocationName", ResourceType = typeof(Resources.Resource))]
         public string LocatieNaam { get; set; }
 
         [Required]
         [Range(-180, 180)]
-        [Display(Name = "GPS Lengtegraad")]
+        [Display(Name = "LocationGpsLong", ResourceType = typeof(Resources.Resource))]
         public double GpsLong { get; set; }
 
         [Required]
         [Range(-90, 90)]
-        [Display(Name = "GPS Breedtegraad")]
+        [Display(Name = "LocationGpsLat", ResourceType = typeof(Resources.Resource))]
         public double GpsLat { get; set; }
 
-        [Display(Name = "Infrabel Locatie ")]
+        [Display(Name = "LocationInfrabel", ResourceType = typeof(Resources.Resource))]
         public bool LocatieInfrabel { get; set; }
 
         [StringLength(200)]
-        [Display(Name = "Bedrijf")]
+        [Display(Name = "LocationBedrijf", ResourceType = typeof(Resources.Resource))]
         public string LocatieBedrijf { get; set; }
 
-
-        [Display(Name = "Type van de locatie")]
+        [Display(Name = "LocationTypeId", ResourceType = typeof(Resources.Resource))]
         public int LocatieTypeId { get; set; }
 
         //public Locatie(int id, string naam, double lon, double lat, bool infra, int type)

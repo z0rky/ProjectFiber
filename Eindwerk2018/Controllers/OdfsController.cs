@@ -8,36 +8,27 @@ using System.Web;
 using System.Web.Mvc;
 using Eindwerk2018;
 using Eindwerk2018.Models;
+using Eindwerk2018.Models.db;
 
 namespace Eindwerk2018.Controllers
 {
     public class OdfsController : Controller
     {
-        public List<Odf> odfLijst = new List<Odf>();
-
-        public void FakeData()
-        {
-            odfLijst.Add(new Odf(1,1,1, "Odf 1"));
-            odfLijst.Add(new Odf(2,1,2, "Odf 2"));
-            odfLijst.Add(new Odf(3, 2, 2, "Odf 3"));
-            odfLijst.Add(new Odf(4, 3, 2, "Odf 4"));
-        }
+        private Db_Odf dbOdfs = new Db_Odf();
 
         // GET: Odfs
         public ActionResult Index()
         {
-            FakeData();
-            var viewModel = odfLijst;
+            var viewModel = dbOdfs.List();
             return View(viewModel);
         }
 
         // GET: Odfs/Details/5
         public ActionResult Details(int? id)
         {
-            FakeData();
-
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Odf odf = odfLijst.Find(x => x.Id.Equals(id));
+            //Odf odf = odfLijst.Find(x => x.Id.Equals(id));
+            Odf odf = dbOdfs.Get((int)id);
             if (odf == null) return HttpNotFound();
 
             return View(odf);
@@ -71,8 +62,7 @@ namespace Eindwerk2018.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            FakeData();
-            Odf odf = odfLijst.Find(x => x.Id.Equals(id));
+            Odf odf = dbOdfs.Get((int)id);
 
             if (odf == null) return HttpNotFound();
             return View(odf);
@@ -99,7 +89,7 @@ namespace Eindwerk2018.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Odf odf = odfLijst.Find(x => x.Id.Equals(id));
+            Odf odf = dbOdfs.Get((int)id);
             if (odf == null) return HttpNotFound();
             return View(odf);
         }

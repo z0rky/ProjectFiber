@@ -6,25 +6,29 @@ using System.Web.Mvc;
 using Eindwerk2018.Models;
 using Eindwerk2018.ViewModels;
 using System.Data.Entity;
-
+using Eindwerk2018.Models.db;
 
 namespace Eindwerk2018.Controllers
 {
     public class LocatieController : Controller
     {
+        private Db_LocatieType dbLocatieypes = new Db_LocatieType();
+        private Db_Locatie dbLocaties = new Db_Locatie();
+
         public List<LocatieType> locatielijst = new List<LocatieType>();
         public List<Locatie> locatie = new List<Locatie>();
         public List<Locatie> locatieFakeDataTest = new List<Locatie>();
 
 
-       public void  FakeData()
-        {    
-            locatielijst.Add(new LocatieType(1, "brug", "bridge", "open", "ouvert"));
-            locatielijst.Add(new LocatieType(2, "caravan", "caravan", "gesloten", "fermee"));
-            locatielijst.Add(new LocatieType(3, "berg", "mont", "hoog", "haute"));
+        public void FakeData()
+        {
+            locatielijst = dbLocatieypes.List(); //mag direkt worden opgeroepen
+            //locatielijst.Add(new LocatieType(1, "brug", "bridge", "open", "ouvert"));
+            //locatielijst.Add(new LocatieType(2, "caravan", "caravan", "gesloten", "fermee"));
+            //locatielijst.Add(new LocatieType(3, "berg", "mont", "hoog", "haute"));
         }
 
-       
+
 
 
         public ViewResult Index()
@@ -35,13 +39,7 @@ namespace Eindwerk2018.Controllers
             return View(locaties);
 
 
-        } //{
-            // database locatietypes toList
-
-
-            
-        //   
-        //}
+        } 
 
         public ActionResult Details(int id)
         {
@@ -61,8 +59,6 @@ namespace Eindwerk2018.Controllers
             };
 
             return View("LocatieForm", viewModel);
-
-
         }
 
         // create is save geworden, zo kunnen we create en update in 1 view steken
@@ -102,14 +98,13 @@ namespace Eindwerk2018.Controllers
 
         private IEnumerable<Locatie> GetLocaties()
         {
-            return new List<Locatie>
-            {
-                new Locatie {Id=1, LocatieNaam = "Leuven station",GpsLong = 20,GpsLat = 20,LocatieInfrabel = true,LocatieTypeId = 2},
-                new Locatie {Id=2, LocatieNaam = "Gent station",GpsLong = 10,GpsLat = 10,LocatieInfrabel = true,LocatieTypeId = 1},
-                new Locatie {Id=3, LocatieNaam = "Brugge station",GpsLong = 30,GpsLat = 30,LocatieInfrabel = true,LocatieTypeId = 3}
-            };
-
-
+            return dbLocaties.List();
+            //return new List<Locatie>
+            //{
+            //    new Locatie {Id=1, LocatieNaam = "Leuven station",GpsLong = 20,GpsLat = 20,LocatieInfrabel = true,LocatieTypeId = 2},
+            //    new Locatie {Id=2, LocatieNaam = "Gent station",GpsLong = 10,GpsLat = 10,LocatieInfrabel = true,LocatieTypeId = 1},
+            //    new Locatie {Id=3, LocatieNaam = "Brugge station",GpsLong = 30,GpsLat = 30,LocatieInfrabel = true,LocatieTypeId = 3}
+            //};
         }
 
         
@@ -137,4 +132,4 @@ namespace Eindwerk2018.Controllers
     }
 
 
-    }
+}
