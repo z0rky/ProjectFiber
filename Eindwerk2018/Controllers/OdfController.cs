@@ -12,7 +12,7 @@ using Eindwerk2018.Models.db;
 
 namespace Eindwerk2018.Controllers
 {
-    public class OdfsController : Controller
+    public class OdfController : Controller
     {
         private Db_Odf dbOdfs = new Db_Odf();
 

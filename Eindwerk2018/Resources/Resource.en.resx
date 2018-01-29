@@ -201,6 +201,10 @@
   <data name="SectieLength" xml:space="preserve">
     <value>Length</value>
   </data>
+  <data name="SectieNr" xml:space="preserve">
+    <value>SectieNr</value>
+    <comment>Nr van de sectie, die wordt weergegeven</comment>
+  </data>
   <data name="SectieOdfEndId" xml:space="preserve">
     <value>Odf End Id</value>
   </data>

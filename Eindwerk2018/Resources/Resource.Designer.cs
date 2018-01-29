@@ -313,6 +313,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SectieNr.
+        /// </summary>
+        public static string SectieNr {
+            get {
+                return ResourceManager.GetString("SectieNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odf End Id.
         /// </summary>
         public static string SectieOdfEndId {

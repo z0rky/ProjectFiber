@@ -12,6 +12,9 @@ namespace Eindwerk2018.Models
        
         public int Id { get; set; }
 
+        [Display(Name = "SectieNr", ResourceType = typeof(Resources.Resource))]
+        public int SectieNr { get; set; }
+
         [Display(Name = "SectieTypeId", ResourceType = typeof(Resources.Resource))]
         public int SectionTypeId { get; set; }
 

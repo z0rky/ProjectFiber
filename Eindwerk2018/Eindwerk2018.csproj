@@ -172,7 +172,7 @@
     <Compile Include="Controllers\Api\LocatiesController.cs" />
     <Compile Include="Controllers\Api\SectiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OdfsController.cs" />
+    <Compile Include="Controllers\OdfController.cs" />
     <Compile Include="Controllers\OdfTypeController.cs" />
     <Compile Include="Controllers\SectieController.cs" />
     <Compile Include="Global.asax.cs">
@@ -180,6 +180,10 @@
     </Compile>
     <Compile Include="Models\Adres.cs" />
     <Compile Include="Models\db\Db_General.cs" />
+    <Compile Include="Models\db\Db_KabelType.cs" />
+    <Compile Include="Models\db\Db_Sectie.cs" />
+    <Compile Include="Models\db\Db_SectieType.cs" />
+    <Compile Include="Models\db\Db_Kabel.cs" />
     <Compile Include="Models\db\Db_Odf.cs" />
     <Compile Include="Models\db\Db_Locatie.cs" />
     <Compile Include="Models\db\Db_LocatieType.cs" />
