@@ -205,7 +205,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Description French.
         /// </summary>
         public static string LocationTypeDescFr {
             get {
@@ -214,7 +214,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Description Dutch.
         /// </summary>
         public static string LocationTypeDescNl {
             get {
@@ -232,7 +232,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Name French.
         /// </summary>
         public static string LocationTypeNameFR {
             get {
@@ -241,7 +241,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Name Dutch.
         /// </summary>
         public static string LocationTypeNameNl {
             get {
@@ -295,7 +295,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kabel Id.
+        ///   Looks up a localized string similar to Cable Id.
         /// </summary>
         public static string SectieKabelId {
             get {
@@ -313,7 +313,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SectieNr.
+        ///   Looks up a localized string similar to Sectie Number.
         /// </summary>
         public static string SectieNr {
             get {

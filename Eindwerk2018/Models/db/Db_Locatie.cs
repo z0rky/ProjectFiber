@@ -40,7 +40,7 @@ namespace Eindwerk2018.Models.db
         public void Add(Locatie locatie)
         {
             if (locatie != null)
-            {
+            {  //voorlopig nog geen auto-create id, dus nog geen add, zal het vanavond aanpassen
                 string query = "INSERT INTO location ( name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type) VALUES ('" + locatie.LocatieNaam + "','" + locatie.GpsLong + "','" + locatie.GpsLat + "','Null','" + locatie.LocatieInfrabel + "','" + locatie.LocatieTypeId + "',)"; //query
                 this.ShortQuery(query);
                 //should also add adres
@@ -75,6 +75,7 @@ namespace Eindwerk2018.Models.db
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry))
                 {
+                    //need to add try catch error handling
                     cmd.Connection = con;
                     con.Open();
                     using (MySqlDataReader sdr = cmd.ExecuteReader())

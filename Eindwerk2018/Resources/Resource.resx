@@ -166,19 +166,19 @@
     <value>Name</value>
   </data>
   <data name="LocationTypeDescFr" xml:space="preserve">
-    <value>Description</value>
+    <value>Description French</value>
   </data>
   <data name="LocationTypeDescNl" xml:space="preserve">
-    <value>Description</value>
+    <value>Description Dutch</value>
   </data>
   <data name="LocationTypeId" xml:space="preserve">
     <value>Type Id</value>
   </data>
   <data name="LocationTypeNameFR" xml:space="preserve">
-    <value>Name</value>
+    <value>Name French</value>
   </data>
   <data name="LocationTypeNameNl" xml:space="preserve">
-    <value>Name</value>
+    <value>Name Dutch</value>
   </data>
   <data name="OdfLocationId" xml:space="preserve">
     <value>Location Id</value>
@@ -196,13 +196,13 @@
     <value>Active</value>
   </data>
   <data name="SectieKabelId" xml:space="preserve">
-    <value>Kabel Id</value>
+    <value>Cable Id</value>
   </data>
   <data name="SectieLength" xml:space="preserve">
     <value>Length</value>
   </data>
   <data name="SectieNr" xml:space="preserve">
-    <value>SectieNr</value>
+    <value>Sectie Number</value>
     <comment>Nr van de sectie, die wordt weergegeven</comment>
   </data>
   <data name="SectieOdfEndId" xml:space="preserve">
