@@ -4,14 +4,22 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div>
+    @Html.ActionLink("OdfType", "Index", "OdfType", null, new { id = "OdfType" })<br />
+    @Html.ActionLink("Odf", "Index", "Odf", null, new { id = "Odf" })
+</div>
+<div>
+    <a href="">Location Type</a><br />
+    @Html.ActionLink("Locatie", "Index", "Locatie", null, new { id = "locatie" })
+</div>
+<div>
+    <a href="">Kabel Type</a><br />
+    @Html.ActionLink("Kabel", "Index", "Kabel", null, new { id = "Kabel" })
+</div>
+<div>
+    <a href="">Section Type</a><br />
+    <a href="">Section</a>
+</div>
+<div>
+    <a href="">Company</a>
+</div>

@@ -24,13 +24,13 @@ namespace Eindwerk2018.Models
         [Display(Name = "LocationTypeDescFr", ResourceType = typeof(Resources.Resource))]
         public string DescFR { get; set; }
 
-        public LocatieType(int id, string nl, string fr, string descnl, string descfr)
-        {
-            Id = id;
-            NaamNL = nl;
-            NaamFR = fr;
-            DescNL = descnl;
-            DescFR = descfr;
-        }
+        //public LocatieType(int id, string nl, string fr, string descnl, string descfr)
+        //{
+        //    Id = id;
+        //    NaamNL = nl;
+        //    NaamFR = fr;
+        //    DescNL = descnl;
+        //    DescFR = descfr;
+        //}
     }
 }

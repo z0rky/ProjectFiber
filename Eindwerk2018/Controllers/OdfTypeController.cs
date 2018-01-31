@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Eindwerk2018.Models;
+using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
 
 
@@ -12,32 +13,22 @@ namespace Eindwerk2018.Controllers
 {
     public class OdfTypeController : Controller
     {
-        public List<OdfType> odftypelijst = new List<OdfType>();
-
-        public void FakeData()
-        {
-            odftypelijst.Add(new OdfType(1, "MOf","Mof"));
-            odftypelijst.Add(new OdfType(2, "Las", "Las"));
-            odftypelijst.Add(new OdfType(3, "connectie", "connectie"));
-        }
+        private Db_OdfType dbOdfTypes = new Db_OdfType();
 
         // GET: OdfTypes
         public ActionResult Index()
         {
-            FakeData(); //load data
-
-            var viewModel = odftypelijst;
+            var viewModel = dbOdfTypes.List(); //load lijst
             return View(viewModel);
         }
 
         // GET: OdfTypes/Details/5
         public ActionResult Details(int? id)
         {
-            FakeData(); //load data
-
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            OdfType odfType = odftypelijst.Find(x=>x.Id.Equals(id));
+            //OdfType odfType = odftypelijst.Find(x=>x.Id.Equals(id));
             //OdfType odfType = odftypelijst.First();
+            OdfType odfType = dbOdfTypes.Get((int)id);
             if (odfType == null) return HttpNotFound();
 
             return View(odfType);
@@ -69,10 +60,11 @@ namespace Eindwerk2018.Controllers
         // GET: OdfTypes/Edit/5
         public ActionResult Edit(int id)
         {
-            FakeData(); //load data
+            //FakeData(); //load data
 
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
+            //OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
+            OdfType odfType = dbOdfTypes.Get((int)id);
             if (odfType == null) return HttpNotFound();
 
             return View(odfType);
@@ -98,10 +90,11 @@ namespace Eindwerk2018.Controllers
         // GET: OdfTypes/Delete/5
         public ActionResult Delete(int id)
         {
-            FakeData(); //load data
+            //FakeData(); //load data
 
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
+            //OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
+            OdfType odfType = dbOdfTypes.Get((int)id);
             if (odfType == null) return HttpNotFound();
 
             return View(odfType);

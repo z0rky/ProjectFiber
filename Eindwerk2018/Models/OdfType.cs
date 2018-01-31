@@ -16,11 +16,11 @@ namespace Eindwerk2018.Models
         [Display(Name = "OdfTypeDescription", ResourceType = typeof(Resources.Resource))]
         public string Description { get; set; }
 
-        public OdfType(int id, string name, string description)
-        {
-            this.Id=id;
-            this.Name = name;
-            this.Description = description;
-        }
+        //public OdfType(int id, string name, string description)
+        //{
+        //    this.Id=id;
+        //    this.Name = name;
+        //    this.Description = description;
+        //}
     }
 }
