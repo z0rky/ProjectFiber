@@ -71,7 +71,7 @@ namespace Eindwerk2018.Controllers
         {
             FakeData(); //load data
 
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
             if (odfType == null) return HttpNotFound();
 
@@ -100,7 +100,7 @@ namespace Eindwerk2018.Controllers
         {
             FakeData(); //load data
 
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
             if (odfType == null) return HttpNotFound();
 
