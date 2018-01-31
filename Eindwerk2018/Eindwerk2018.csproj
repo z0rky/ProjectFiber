@@ -176,7 +176,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Adres.cs" />
+    <Compile Include="Models\Color.cs" />
     <Compile Include="Models\db\Db_General.cs" />
+    <Compile Include="Models\db\Db_History.cs" />
+    <Compile Include="Models\db\Db_Color.cs" />
     <Compile Include="Models\db\Db_KabelType.cs" />
     <Compile Include="Models\db\Db_Sectie.cs" />
     <Compile Include="Models\db\Db_SectieType.cs" />
@@ -186,6 +189,7 @@
     <Compile Include="Models\db\Db_LocatieType.cs" />
     <Compile Include="Models\db\Db_OdfType.cs" />
     <Compile Include="Models\Foid.cs" />
+    <Compile Include="Models\History.cs" />
     <Compile Include="Models\Kabel.cs" />
     <Compile Include="Models\Odf.cs" />
     <Compile Include="Models\OdfType.cs" />
@@ -496,6 +500,7 @@
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

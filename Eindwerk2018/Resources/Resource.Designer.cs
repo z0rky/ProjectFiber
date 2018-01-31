@@ -97,6 +97,33 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English Name .
+        /// </summary>
+        public static string ColorNameEn {
+            get {
+                return ResourceManager.GetString("ColorNameEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French Name.
+        /// </summary>
+        public static string ColorNameFr {
+            get {
+                return ResourceManager.GetString("ColorNameFr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dutch Name .
+        /// </summary>
+        public static string ColorNameNl {
+            get {
+                return ResourceManager.GetString("ColorNameNl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creation Date.
         /// </summary>
         public static string FoidCreationDate {
@@ -129,6 +156,51 @@ namespace Eindwerk2018.Resources {
         public static string FoidStatus {
             get {
                 return ResourceManager.GetString("FoidStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Date.
+        /// </summary>
+        public static string HistoryDate {
+            get {
+                return ResourceManager.GetString("HistoryDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string HistoryId {
+            get {
+                return ResourceManager.GetString("HistoryId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table.
+        /// </summary>
+        public static string HistoryTable {
+            get {
+                return ResourceManager.GetString("HistoryTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string HistoryText {
+            get {
+                return ResourceManager.GetString("HistoryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string HistoryUser {
+            get {
+                return ResourceManager.GetString("HistoryUser", resourceCulture);
             }
         }
         

@@ -129,6 +129,15 @@
   <data name="AdresStraat" xml:space="preserve">
     <value>Street</value>
   </data>
+  <data name="ColorNameEn" xml:space="preserve">
+    <value>English Name </value>
+  </data>
+  <data name="ColorNameFr" xml:space="preserve">
+    <value>French Name</value>
+  </data>
+  <data name="ColorNameNl" xml:space="preserve">
+    <value>Dutch Name </value>
+  </data>
   <data name="FoidCreationDate" xml:space="preserve">
     <value>Creation Date</value>
   </data>
@@ -140,6 +149,22 @@
   </data>
   <data name="FoidStatus" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="HistoryDate" xml:space="preserve">
+    <value>Change Date</value>
+  </data>
+  <data name="HistoryId" xml:space="preserve">
+    <value>Id</value>
+    <comment>Id of the table</comment>
+  </data>
+  <data name="HistoryTable" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="HistoryText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="HistoryUser" xml:space="preserve">
+    <value>User</value>
   </data>
   <data name="KabelCreationDate" xml:space="preserve">
     <value>Creation Date</value>
