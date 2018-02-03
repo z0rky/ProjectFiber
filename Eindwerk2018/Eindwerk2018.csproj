@@ -468,11 +468,11 @@
     <Content Include="Views\OdfType\Create.cshtml" />
     <Content Include="Views\OdfType\Edit.cshtml" />
     <Content Include="Views\OdfType\Delete.cshtml" />
-    <Content Include="Views\Odfs\Create.cshtml" />
-    <Content Include="Views\Odfs\Delete.cshtml" />
-    <Content Include="Views\Odfs\Details.cshtml" />
-    <Content Include="Views\Odfs\Edit.cshtml" />
-    <Content Include="Views\Odfs\Index.cshtml" />
+    <Content Include="Views\Odf\Create.cshtml" />
+    <Content Include="Views\Odf\Delete.cshtml" />
+    <Content Include="Views\Odf\Details.cshtml" />
+    <Content Include="Views\Odf\Edit.cshtml" />
+    <Content Include="Views\Odf\Index.cshtml" />
     <Content Include="Views\Locatie\Details.cshtml" />
     <Content Include="Views\Locatie\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />

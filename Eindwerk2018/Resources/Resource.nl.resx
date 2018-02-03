@@ -208,6 +208,9 @@
   <data name="OdfLocationId" xml:space="preserve">
     <value>Locatie Id</value>
   </data>
+  <data name="OdfName" xml:space="preserve">
+    <value>Naam</value>
+  </data>
   <data name="OdfTypeDescription" xml:space="preserve">
     <value>Descriptie</value>
   </data>

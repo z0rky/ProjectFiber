@@ -69,7 +69,7 @@ namespace Eindwerk2018.Models.db
         {
             List<LocatieType> locatieTypes = new List<LocatieType>();
 
-            using (MySqlConnection con = new MySqlConnection(constr)) //perhaps connection can be made once and reused?
+            using (con) //con in Db_general
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry))
                 {

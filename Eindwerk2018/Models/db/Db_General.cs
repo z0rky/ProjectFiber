@@ -11,7 +11,8 @@ namespace Eindwerk2018.Models.db
     {
         //connection string "constr" staat in (root)/Web.config
         //en waarom niet hier? we gebruiken het toch niet voor entityFramework
-        protected string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        protected static string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+        protected MySqlConnection con = new MySqlConnection(constr);
         protected const int Max_row = 100;
 
         //public List<var> List() { return List(0; };
@@ -25,17 +26,25 @@ namespace Eindwerk2018.Models.db
         //short queries
         protected void ShortQuery(string qry)
         {
-            using (MySqlConnection con = new MySqlConnection(constr)) //perhaps connection can be made once and reused?
+            using (con) //perhaps connection can be made once and reused?
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
                     {
-                        while (sdr.Read()) { }  //nothing
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            while (sdr.Read()) { }  //nothing, perhaps not needed ?
+                        }
+                        con.Close();
                     }
-                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database"); //should rethrow and handle it in the user part somwhere
                 }
             }
         }

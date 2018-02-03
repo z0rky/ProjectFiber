@@ -71,29 +71,36 @@ namespace Eindwerk2018.Models.db
         {
             List<Locatie> locaties = new List<Locatie>();
 
-            using (MySqlConnection con = new MySqlConnection(constr)) //perhaps connection can be made once and reused?
+            using (con) //con in Db_general
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry))
                 {
-                    //need to add try catch error handling
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    try
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            locaties.Add(new Locatie
+                            while (sdr.Read())
                             {
-                                Id = Convert.ToInt32(sdr["id"]),
-                                LocatieNaam = sdr["name"].ToString(),
-                                //GpsLong = Convert.ToDouble(sdr["GPS_Longitude"]), //covert problem ?, gaat punten en commas zijn
-                                //GpsLat = Convert.ToDouble(sdr["GPS_Latidude"]),
-                                LocatieInfrabel = Convert.ToBoolean(sdr["infrabel_terein"]),
-                                LocatieTypeId = Convert.ToInt32(sdr["location_type"])
-                            });
+                                locaties.Add(new Locatie
+                                {
+                                    Id = Convert.ToInt32(sdr["id"]),
+                                    LocatieNaam = sdr["name"].ToString(),
+                                    GpsLong = Convert.ToDouble(sdr["GPS_Longitude"].ToString().Replace('.',',')), //covert problem ?, gaat punten en commas zijn
+                                    GpsLat = Convert.ToDouble(sdr["GPS_Latidude"].ToString().Replace('.',',')),
+                                    LocatieInfrabel = Convert.ToBoolean(sdr["infrabel_terein"]),
+                                    LocatieTypeId = Convert.ToInt32(sdr["location_type"])
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                    catch (Exception e)
+                    {
+                        //throw new System.InvalidOperationException("No connection to database");
+                        Console.WriteLine("No connection to database. "+e.Message); //should rethrow and handle it in the user part somewhere
+                    }
                 }
             }
 

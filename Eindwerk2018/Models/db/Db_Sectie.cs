@@ -75,9 +75,9 @@ namespace Eindwerk2018.Models.db
         //for return queries
         private List<Sectie> ListQueries(string qry)
         {
-            List<Sectie> OdfTypes = new List<Sectie>();
+            List<Sectie> secties = new List<Sectie>();
 
-            using (MySqlConnection con = new MySqlConnection(constr)) //perhaps connection can be made once and reused?
+            using (con) //con in Db_general
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry))
                 {
@@ -87,7 +87,7 @@ namespace Eindwerk2018.Models.db
                     {
                         while (sdr.Read())
                         {
-                            OdfTypes.Add(new Sectie
+                            secties.Add(new Sectie
                             {
                                 Id = Convert.ToInt32(sdr["id"]),
                                 SectieNr = Convert.ToInt32(sdr["section_nr"]),
@@ -104,7 +104,7 @@ namespace Eindwerk2018.Models.db
                 }
             }
 
-            return OdfTypes;
+            return secties;
         }
     }
 }

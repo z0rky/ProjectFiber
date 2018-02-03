@@ -70,7 +70,7 @@ namespace Eindwerk2018.Models.db
         {
             List<Kabel> kabelTypes = new List<Kabel>();
 
-            using (MySqlConnection con = new MySqlConnection(constr)) //perhaps connection can be made once and reused?
+            using (con) //con in Db_general
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry))
                 {
