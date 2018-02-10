@@ -8,7 +8,7 @@ using System.Web;
 namespace Eindwerk2018.Models
 {
     public class Adres
-    {
+    { //we are going to include it in Location
         public int Id { get; set; }
 
         [Display(Name = "AdresStraat", ResourceType = typeof(Resources.Resource))]

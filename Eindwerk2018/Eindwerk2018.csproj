@@ -177,9 +177,13 @@
     </Compile>
     <Compile Include="Models\Adres.cs" />
     <Compile Include="Models\Color.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\db\Db_Company.cs" />
+    <Compile Include="Models\db\Db_User.cs" />
     <Compile Include="Models\db\Db_General.cs" />
     <Compile Include="Models\db\Db_History.cs" />
     <Compile Include="Models\db\Db_Color.cs" />
+    <Compile Include="Models\db\Db_Foid.cs" />
     <Compile Include="Models\db\Db_KabelType.cs" />
     <Compile Include="Models\db\Db_Sectie.cs" />
     <Compile Include="Models\db\Db_SectieType.cs" />
@@ -188,13 +192,16 @@
     <Compile Include="Models\db\Db_Locatie.cs" />
     <Compile Include="Models\db\Db_LocatieType.cs" />
     <Compile Include="Models\db\Db_OdfType.cs" />
+    <Compile Include="Models\Fiber.cs" />
     <Compile Include="Models\Foid.cs" />
     <Compile Include="Models\History.cs" />
     <Compile Include="Models\Kabel.cs" />
+    <Compile Include="Models\KabelType.cs" />
     <Compile Include="Models\Odf.cs" />
     <Compile Include="Models\OdfType.cs" />
     <Compile Include="Models\Sectie.cs" />
     <Compile Include="Models\SectieType.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\LocatieController.cs" />
     <Compile Include="Controllers\FoidController.cs" />

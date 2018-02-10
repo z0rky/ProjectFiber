@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Sectie : Db_General
     {
-        public List<Sectie> List() { return List(0); }
-
-        public List<Sectie> List(int Start)
+        public List<Sectie> List(int Start=0)
         {
             if (Start < 0) Start = 0;
 
@@ -79,28 +77,36 @@ namespace Eindwerk2018.Models.db
 
             using (con) //con in Db_general
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            secties.Add(new Sectie
+                            while (sdr.Read())
                             {
-                                Id = Convert.ToInt32(sdr["id"]),
-                                SectieNr = Convert.ToInt32(sdr["section_nr"]),
-                                KabelId = Convert.ToInt32(sdr["kabel_id"]),
-                                OdfStartId = Convert.ToInt32(sdr["odf_start"]),
-                                OdfEndId = Convert.ToInt32(sdr["odf_end"]),
-                                SectionTypeId = Convert.ToInt32(sdr["type_id"]),
-                                Lengte = Convert.ToInt32(sdr["length"]),
-                                Active = Convert.ToBoolean(sdr["active"])
-                            });
+                                secties.Add(new Sectie
+                                {
+                                    Id = Convert.ToInt32(sdr["id"]),
+                                    SectieNr = Convert.ToInt32(sdr["section_nr"]),
+                                    KabelId = Convert.ToInt32(sdr["kabel_id"]),
+                                    OdfStartId = Convert.ToInt32(sdr["odf_start"]),
+                                    OdfEndId = Convert.ToInt32(sdr["odf_end"]),
+                                    SectionTypeId = Convert.ToInt32(sdr["type_id"]),
+                                    Lengte = Convert.ToInt32(sdr["length"]),
+                                    Active = Convert.ToBoolean(sdr["active"])
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
                 }
             }
 

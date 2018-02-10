@@ -15,8 +15,8 @@ namespace Eindwerk2018.Models.db
         protected MySqlConnection con = new MySqlConnection(constr);
         protected const int Max_row = 100;
 
-        //public List<var> List() { return List(0; };
-        //public List<var> List(int Start) {}
+        //public List<var> List() { return List(0; }; //replaced now
+        //public List<var> List(int Start=0) {}
         //public List<var> Search(string search) {}
         //public var Get(int id) {}
         //public void Add(model) {}
@@ -44,7 +44,7 @@ namespace Eindwerk2018.Models.db
                 catch (Exception e)
                 {
                     //throw new System.InvalidOperationException("No connection to database");
-                    Console.WriteLine("No connection to database"); //should rethrow and handle it in the user part somwhere
+                    Console.WriteLine("No connection to database"+e.Message); //should rethrow and handle it in the user part somwhere
                 }
             }
         }

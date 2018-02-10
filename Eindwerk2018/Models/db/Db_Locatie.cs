@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Locatie : Db_General
     {
-        public List<Locatie> List() { return List(0); }
-
-        public List<Locatie> List(int Start)
+        public List<Locatie> List(int Start=0)
         {
             if (Start < 0) Start = 0;
 
@@ -32,7 +30,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type FROM location WHERE id='" + id+"' LIMIT 1"; //query
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type FROM location WHERE id='" + id+"' LIMIT 1"; //Including id to complete the normal class
 
             return ListQueries(query)[0];
         }
