@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Eindwerk2018.Models.db
 {
-    public class DB_User: Db_General
+    public class Db_User: Db_General
     {
         public List<User> List(int Start=0)
         {
