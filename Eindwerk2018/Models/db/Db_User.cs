@@ -7,48 +7,48 @@ using System.Web;
 
 namespace Eindwerk2018.Models.db
 {
-    public class Db_SectieType : Db_General
+    public class Db_User: Db_General
     {
-        public List<SectieType> List(int Start=0)
+        public List<User> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id, name,description, virtual FROM section_type LIMIT " + Start+","+Max_row; //query
+            string query = "SELECT id, first_name,last_name,user_name,email FROM user LIMIT "+Start+","+Max_row; //query
 
             return ListQueries(query);
         }
 
-        public List<SectieType> Search(string search)
+        public List<User> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name,description, virtual FROM section_type WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, first_name,last_name,user_name,email FROM user WHERE first_name LIKE '%" + search + "%' OR last_name LIKE '%" + search + "%' OR user_name LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
 
-        public SectieType Get(int id)
+        public User Get(int id)
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name,description,virtual FROM section_type WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT id, first_name,last_name,user_name,email FROM user WHERE id='" + id + "' LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
 
-        public void Add(SectieType sectieType)
+        public void Add(User user)
         {
-            if (sectieType != null)
+            if (user != null)
             {
-                string query = "INSERT INTO section_type (name,description,virtual) VALUES ('" + sectieType.Naam + "','" + sectieType.Beschrijving+ "','" + sectieType.Virtueel+ "')"; //query
+                string query = "INSERT INTO user (first_name,last_name,user_name,email) VALUES ('" + user.FirstName + "','" + user.LastName + "','" + user.UserName + "','" + user.Email + "')"; //query
                 this.ShortQuery(query);
             }
         }
 
-        public void Edit(SectieType sectieType)
+        public void Edit(User user)
         {
-            if (sectieType != null || sectieType.Id != 0)
+            if (user != null || user.Id != 0)
             {
-                string query = "UPDATE kabel SET name='" + sectieType.Naam + "', description='" + sectieType.Beschrijving + "', virtual'" + sectieType.Virtueel + "' WHERE id='" + sectieType.Id + "' LIMIT 1"; //query
+                string query = "UPDATE user SET first_name='" + user.FirstName + "',  last_name='" + user.LastName + "', user_name='" + user.UserName + "',  email='" + user.Email + " WHERE id='" + user.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -62,9 +62,9 @@ namespace Eindwerk2018.Models.db
         }
 
         //for return queries
-        private List<SectieType> ListQueries(string qry)
+        private List<User> ListQueries(string qry)
         {
-            List<SectieType> kabels = new List<SectieType>();
+            List<User> users = new List<User>();
 
             using (con) //con in Db_general
             {
@@ -78,12 +78,13 @@ namespace Eindwerk2018.Models.db
                         {
                             while (sdr.Read())
                             {
-                                kabels.Add(new SectieType
+                                users.Add(new User
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
-                                    Naam = sdr["name"].ToString(),
-                                    Beschrijving = sdr["description"].ToString(),
-                                    Virtueel = Convert.ToBoolean(sdr["virtual"])
+                                    FirstName = sdr["first_name"].ToString(),
+                                    LastName = sdr["last_name"].ToString(),
+                                    UserName = sdr["user_name"].ToString(),
+                                    Email = sdr["email"].ToString(),
                                 });
                             }
                         }
@@ -97,7 +98,7 @@ namespace Eindwerk2018.Models.db
                 }
             }
 
-            return kabels;
+            return users;
         }
     }
 }

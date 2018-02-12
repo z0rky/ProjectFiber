@@ -118,40 +118,86 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdresGemeente" xml:space="preserve">
-    <value>City</value>
+    <value>Ville</value>
   </data>
   <data name="AdresNummer" xml:space="preserve">
-    <value>Number</value>
+    <value>Nombre</value>
   </data>
   <data name="AdresPostcode" xml:space="preserve">
-    <value>Postcode</value>
+    <value>Code postal</value>
   </data>
   <data name="AdresStraat" xml:space="preserve">
-    <value>Street</value>
+    <value>Rue</value>
+  </data>
+  <data name="ColorNameEn" xml:space="preserve">
+    <value>English Name </value>
+  </data>
+  <data name="ColorNameFr" xml:space="preserve">
+    <value>French Name</value>
+  </data>
+  <data name="ColorNameNl" xml:space="preserve">
+    <value>Dutch Name </value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="FoidComments" xml:space="preserve">
+    <value>Commentaire</value>
   </data>
   <data name="FoidCreationDate" xml:space="preserve">
-    <value>Creation Date</value>
+    <value>Date Creation</value>
+  </data>
+  <data name="FoidEndOdfId" xml:space="preserve">
+    <value>Fin ODF id</value>
+  </data>
+  <data name="FoidLastStatusDate" xml:space="preserve">
+    <value>Date de la dernière mise a jour</value>
+  </data>
+  <data name="FoidLength" xml:space="preserve">
+    <value>Longueur</value>
+  </data>
+  <data name="FoidLengthOtdr" xml:space="preserve">
+    <value>Longueur OTDR</value>
   </data>
   <data name="FoidName" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="FoidRequestorId" xml:space="preserve">
-    <value>Requestor Id</value>
+    <value>Id Demandeur</value>
+  </data>
+  <data name="FoidStartOdfId" xml:space="preserve">
+    <value>Début ODF id</value>
   </data>
   <data name="FoidStatus" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="HistoryDate" xml:space="preserve">
+    <value>Change Date</value>
+  </data>
+  <data name="HistoryId" xml:space="preserve">
+    <value>Id</value>
+    <comment>Id of the table</comment>
+  </data>
+  <data name="HistoryTable" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="HistoryText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="HistoryUser" xml:space="preserve">
+    <value>User</value>
+  </data>
   <data name="KabelCreationDate" xml:space="preserve">
-    <value>Creation Date</value>
+    <value>Date Creation</value>
   </data>
   <data name="KabelName" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="KabelReference" xml:space="preserve">
     <value>Reference</value>
   </data>
   <data name="LocationBedrijf" xml:space="preserve">
-    <value>Company</value>
+    <value>Entreprise</value>
   </data>
   <data name="LocationGpsLat" xml:space="preserve">
     <value>GPS  Latidude</value>
@@ -163,25 +209,28 @@
     <value>Infrabel location</value>
   </data>
   <data name="LocationName" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="LocationTypeDescFr" xml:space="preserve">
-    <value>Description</value>
+    <value>Description Français</value>
   </data>
   <data name="LocationTypeDescNl" xml:space="preserve">
-    <value>Description</value>
+    <value>Description Néerlandais</value>
   </data>
   <data name="LocationTypeId" xml:space="preserve">
     <value>Type Id</value>
   </data>
   <data name="LocationTypeNameFR" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom Français</value>
   </data>
   <data name="LocationTypeNameNl" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom Néerlandais</value>
   </data>
   <data name="OdfLocationId" xml:space="preserve">
     <value>Location Id</value>
+  </data>
+  <data name="OdfName" xml:space="preserve">
+    <value>Nom</value>
   </data>
   <data name="OdfTypeDescription" xml:space="preserve">
     <value>Description</value>
@@ -190,26 +239,29 @@
     <value>Type Id</value>
   </data>
   <data name="OdfTypeName" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="SectieActive" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="SectieFibers" xml:space="preserve">
+    <value>Section Fibres</value>
+  </data>
   <data name="SectieKabelId" xml:space="preserve">
-    <value>Kabel Id</value>
+    <value>Câble Id</value>
   </data>
   <data name="SectieLength" xml:space="preserve">
-    <value>Length</value>
+    <value>Longeur</value>
   </data>
   <data name="SectieNr" xml:space="preserve">
-    <value>SectieNr</value>
+    <value>Sectie Nombre</value>
     <comment>Nr van de sectie, die wordt weergegeven</comment>
   </data>
   <data name="SectieOdfEndId" xml:space="preserve">
-    <value>Odf End Id</value>
+    <value>Odf FinId</value>
   </data>
   <data name="SectieOdfStartId" xml:space="preserve">
-    <value>Odf Start Id</value>
+    <value>Odf Début Id</value>
   </data>
   <data name="SectieTypeDescription" xml:space="preserve">
     <value>Description</value>
@@ -218,9 +270,21 @@
     <value>Type Id</value>
   </data>
   <data name="SectieTypeName" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="SectieTypeVirtual" xml:space="preserve">
-    <value>Virtual</value>
+    <value>Virtuel</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UserFirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="UserLastName" xml:space="preserve">
+    <value>Nom de Famille</value>
+  </data>
+  <data name="UserUserName" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
   </data>
 </root>

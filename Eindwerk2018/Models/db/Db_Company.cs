@@ -7,48 +7,48 @@ using System.Web;
 
 namespace Eindwerk2018.Models.db
 {
-    public class Db_SectieType : Db_General
+    public class Db_Company: Db_General
     {
-        public List<SectieType> List(int Start=0)
+        public List<Company> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id, name,description, virtual FROM section_type LIMIT " + Start+","+Max_row; //query
+            string query = "SELECT id, name FROM Company LIMIT "+Start+","+Max_row; //query
 
             return ListQueries(query);
         }
 
-        public List<SectieType> Search(string search)
+        public List<Company> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name,description, virtual FROM section_type WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, name WHERE company LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
 
-        public SectieType Get(int id)
+        public Company Get(int id)
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name,description,virtual FROM section_type WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT id, name FROM company WHERE id='" + id + "' LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
 
-        public void Add(SectieType sectieType)
+        public void Add(Company company)
         {
-            if (sectieType != null)
+            if (company != null)
             {
-                string query = "INSERT INTO section_type (name,description,virtual) VALUES ('" + sectieType.Naam + "','" + sectieType.Beschrijving+ "','" + sectieType.Virtueel+ "')"; //query
+                string query = "INSERT INTO company (name) VALUES ('" + company.Name + "')"; //query
                 this.ShortQuery(query);
             }
         }
 
-        public void Edit(SectieType sectieType)
+        public void Edit(Company company)
         {
-            if (sectieType != null || sectieType.Id != 0)
+            if (company != null || company.Id != 0)
             {
-                string query = "UPDATE kabel SET name='" + sectieType.Naam + "', description='" + sectieType.Beschrijving + "', virtual'" + sectieType.Virtueel + "' WHERE id='" + sectieType.Id + "' LIMIT 1"; //query
+                string query = "UPDATE company SET name='" + company.Name + "' WHERE id='" + company.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -62,9 +62,9 @@ namespace Eindwerk2018.Models.db
         }
 
         //for return queries
-        private List<SectieType> ListQueries(string qry)
+        private List<Company> ListQueries(string qry)
         {
-            List<SectieType> kabels = new List<SectieType>();
+            List<Company> company = new List<Company>();
 
             using (con) //con in Db_general
             {
@@ -78,12 +78,10 @@ namespace Eindwerk2018.Models.db
                         {
                             while (sdr.Read())
                             {
-                                kabels.Add(new SectieType
+                                company.Add(new Company
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
-                                    Naam = sdr["name"].ToString(),
-                                    Beschrijving = sdr["description"].ToString(),
-                                    Virtueel = Convert.ToBoolean(sdr["virtual"])
+                                    Name = sdr["name"].ToString()
                                 });
                             }
                         }
@@ -97,7 +95,7 @@ namespace Eindwerk2018.Models.db
                 }
             }
 
-            return kabels;
+            return company;
         }
     }
 }

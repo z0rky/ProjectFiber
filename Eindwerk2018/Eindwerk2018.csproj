@@ -172,6 +172,8 @@
     <Compile Include="Controllers\Api\LocatiesController.cs" />
     <Compile Include="Controllers\Api\SectiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OdfController.cs" />
     <Compile Include="Controllers\OdfTypeController.cs" />
     <Compile Include="Controllers\SectieController.cs" />
@@ -179,7 +181,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Adres.cs" />
+    <Compile Include="Models\Color.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\db\Db_Company.cs" />
+    <Compile Include="Models\db\Db_User.cs" />
     <Compile Include="Models\db\Db_General.cs" />
+    <Compile Include="Models\db\Db_History.cs" />
+    <Compile Include="Models\db\Db_Color.cs" />
+    <Compile Include="Models\db\Db_Foid.cs" />
     <Compile Include="Models\db\Db_KabelType.cs" />
     <Compile Include="Models\db\Db_Sectie.cs" />
     <Compile Include="Models\db\Db_SectieType.cs" />
@@ -188,12 +197,16 @@
     <Compile Include="Models\db\Db_Locatie.cs" />
     <Compile Include="Models\db\Db_LocatieType.cs" />
     <Compile Include="Models\db\Db_OdfType.cs" />
+    <Compile Include="Models\Fiber.cs" />
     <Compile Include="Models\Foid.cs" />
+    <Compile Include="Models\History.cs" />
     <Compile Include="Models\Kabel.cs" />
+    <Compile Include="Models\KabelType.cs" />
     <Compile Include="Models\Odf.cs" />
     <Compile Include="Models\OdfType.cs" />
     <Compile Include="Models\Sectie.cs" />
     <Compile Include="Models\SectieType.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\LocatieController.cs" />
     <Compile Include="Controllers\FoidController.cs" />
@@ -472,14 +485,15 @@
     <Content Include="Views\OdfType\Create.cshtml" />
     <Content Include="Views\OdfType\Edit.cshtml" />
     <Content Include="Views\OdfType\Delete.cshtml" />
-    <Content Include="Views\Odfs\Create.cshtml" />
-    <Content Include="Views\Odfs\Delete.cshtml" />
-    <Content Include="Views\Odfs\Details.cshtml" />
-    <Content Include="Views\Odfs\Edit.cshtml" />
-    <Content Include="Views\Odfs\Index.cshtml" />
+    <Content Include="Views\Odf\Create.cshtml" />
+    <Content Include="Views\Odf\Delete.cshtml" />
+    <Content Include="Views\Odf\Details.cshtml" />
+    <Content Include="Views\Odf\Edit.cshtml" />
+    <Content Include="Views\Odf\Index.cshtml" />
     <Content Include="Views\Locatie\Details.cshtml" />
     <Content Include="Views\Locatie\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Foid\Index.cshtml" />
     <Content Include="Views\Kabel\Index.cshtml" />
     <Content Include="Views\Kabel\Details.cshtml" />
@@ -487,6 +501,18 @@
     <Content Include="Views\Sectie\Index.cshtml" />
     <Content Include="Views\SectieType\Index.cshtml" />
     <Content Include="Views\Sectie\SectieForm.cshtml" />
+=======
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="Views\Company\Delete.cshtml" />
+    <Content Include="Views\Company\Details.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -511,6 +537,7 @@
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

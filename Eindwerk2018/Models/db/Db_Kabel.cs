@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Kabel : Db_General
     {
-        public List<Kabel> List() { return List(0); }
-
-        public List<Kabel> List(int Start)
+        public List<Kabel> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
@@ -35,6 +33,15 @@ namespace Eindwerk2018.Models.db
             string query = "SELECT id, name,kabel_type,owner_id,reference,date_creation FROM kabel WHERE id='" + id + "' LIMIT 1"; //query
 
             return ListQueries(query)[0];
+        }
+
+        public List<Sectie> GetSectieList(int id)
+        {
+            if (id == 0) return null;
+
+            string query = "SELECT s.id,s.section_nr,oa.name,ob.name,s.type_id,s.length,s.length_otdr,date_in_service,infrabel_terein FROM sections AS s,ODF AS oa,ODF as ob WHERE s.kabel_id='"+ id +"' AND s.odf_start=oa.id AND s.odf_end=ob.id ORDER BY s.section_nr"; //query
+
+            return null; // ListQueries(query)[0]; //new type of sectie, viewSectie ?
         }
 
         public void Add(Kabel kabel)
@@ -68,26 +75,34 @@ namespace Eindwerk2018.Models.db
         {
             List<Kabel> kabels = new List<Kabel>();
 
-            using (MySqlConnection con = new MySqlConnection(constr)) //perhaps connection can be made once and reused?
+            using (con) //con in Db_general
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            kabels.Add(new Kabel
+                            while (sdr.Read())
                             {
-                                Id = Convert.ToInt32(sdr["id"]),
-                                Naam = sdr["name"].ToString(),
-                                Reference = sdr["reference"].ToString(),
-                                CreatieDatum = Convert.ToDateTime(sdr["date_creation"])
-                            });
+                                kabels.Add(new Kabel
+                                {
+                                    Id = Convert.ToInt32(sdr["id"]),
+                                    Naam = sdr["name"].ToString(),
+                                    Reference = sdr["reference"].ToString(),
+                                    CreatieDatum = Convert.ToDateTime(sdr["date_creation"])
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
                 }
             }
 

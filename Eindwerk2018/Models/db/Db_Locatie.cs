@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Locatie : Db_General
     {
-        public List<Locatie> List() { return List(0); }
-
-        public List<Locatie> List(int Start)
+        public List<Locatie> List(int Start=0)
         {
             if (Start < 0) Start = 0;
 
@@ -32,7 +30,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type FROM location WHERE id='" + id+"' LIMIT 1"; //query
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type FROM location WHERE id='" + id+"' LIMIT 1"; //Including id to complete the normal class
 
             return ListQueries(query)[0];
         }
@@ -40,7 +38,7 @@ namespace Eindwerk2018.Models.db
         public void Add(Locatie locatie)
         {
             if (locatie != null)
-            {
+            {  //voorlopig nog geen auto-create id, dus nog geen add, zal het vanavond aanpassen
                 string query = "INSERT INTO location ( name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type) VALUES ('" + locatie.LocatieNaam + "','" + locatie.GpsLong + "','" + locatie.GpsLat + "','Null','" + locatie.LocatieInfrabel + "','" + locatie.LocatieTypeId + "',)"; //query
                 this.ShortQuery(query);
                 //should also add adres
@@ -71,28 +69,36 @@ namespace Eindwerk2018.Models.db
         {
             List<Locatie> locaties = new List<Locatie>();
 
-            using (MySqlConnection con = new MySqlConnection(constr)) //perhaps connection can be made once and reused?
+            using (con) //con in Db_general
             {
                 using (MySqlCommand cmd = new MySqlCommand(qry))
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    try
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            locaties.Add(new Locatie
+                            while (sdr.Read())
                             {
-                                Id = Convert.ToInt32(sdr["id"]),
-                                LocatieNaam = sdr["name"].ToString(),
-                                //GpsLong = Convert.ToDouble(sdr["GPS_Longitude"]), //covert problem ?, gaat punten en commas zijn
-                                //GpsLat = Convert.ToDouble(sdr["GPS_Latidude"]),
-                                LocatieInfrabel = Convert.ToBoolean(sdr["infrabel_terein"]),
-                                LocatieTypeId = Convert.ToInt32(sdr["location_type"])
-                            });
+                                locaties.Add(new Locatie
+                                {
+                                    Id = Convert.ToInt32(sdr["id"]),
+                                    LocatieNaam = sdr["name"].ToString(),
+                                    GpsLong = Convert.ToDouble(sdr["GPS_Longitude"].ToString().Replace('.',',')), //covert problem ?, gaat punten en commas zijn
+                                    GpsLat = Convert.ToDouble(sdr["GPS_Latidude"].ToString().Replace('.',',')),
+                                    LocatieInfrabel = Convert.ToBoolean(sdr["infrabel_terein"]),
+                                    LocatieTypeId = Convert.ToInt32(sdr["location_type"])
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                    catch (Exception e)
+                    {
+                        //throw new System.InvalidOperationException("No connection to database");
+                        Console.WriteLine("No connection to database. "+e.Message); //should rethrow and handle it in the user part somewhere
+                    }
                 }
             }
 

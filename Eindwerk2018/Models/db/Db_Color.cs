@@ -7,48 +7,48 @@ using System.Web;
 
 namespace Eindwerk2018.Models.db
 {
-    public class Db_SectieType : Db_General
+    public class Db_Color: Db_General
     {
-        public List<SectieType> List(int Start=0)
+        public List<Color> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id, name,description, virtual FROM section_type LIMIT " + Start+","+Max_row; //query
+            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color LIMIT "+Start+","+Max_row; //query
 
             return ListQueries(query);
         }
 
-        public List<SectieType> Search(string search)
+        public List<Color> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name,description, virtual FROM section_type WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color WHERE name_en LIKE '%" + search + "%' OR name_nl LIKE '%" + search + "%' OR name_fr LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
 
-        public SectieType Get(int id)
+        public Color Get(int id)
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name,description,virtual FROM section_type WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color WHERE id='" + id + "' LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
 
-        public void Add(SectieType sectieType)
+        public void Add(Color color)
         {
-            if (sectieType != null)
+            if (color != null)
             {
-                string query = "INSERT INTO section_type (name,description,virtual) VALUES ('" + sectieType.Naam + "','" + sectieType.Beschrijving+ "','" + sectieType.Virtueel+ "')"; //query
+                string query = "INSERT INTO fiber_color (name_en,name_nl,name_fr) VALUES ('" + color.NameEn + "','" + color.NameNl + "','" + color.NameFr + "')"; //query
                 this.ShortQuery(query);
             }
         }
 
-        public void Edit(SectieType sectieType)
+        public void Edit(Color color)
         {
-            if (sectieType != null || sectieType.Id != 0)
+            if (color != null || color.Id != 0)
             {
-                string query = "UPDATE kabel SET name='" + sectieType.Naam + "', description='" + sectieType.Beschrijving + "', virtual'" + sectieType.Virtueel + "' WHERE id='" + sectieType.Id + "' LIMIT 1"; //query
+                string query = "UPDATE fiber_color SET name_en='" + color.NameEn + "',  name_nl='" + color.NameNl + "',  name_fr='" + color.NameFr + "' WHERE id='" + color.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -62,9 +62,9 @@ namespace Eindwerk2018.Models.db
         }
 
         //for return queries
-        private List<SectieType> ListQueries(string qry)
+        private List<Color> ListQueries(string qry)
         {
-            List<SectieType> kabels = new List<SectieType>();
+            List<Color> colors = new List<Color>();
 
             using (con) //con in Db_general
             {
@@ -78,12 +78,12 @@ namespace Eindwerk2018.Models.db
                         {
                             while (sdr.Read())
                             {
-                                kabels.Add(new SectieType
+                                colors.Add(new Color
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
-                                    Naam = sdr["name"].ToString(),
-                                    Beschrijving = sdr["description"].ToString(),
-                                    Virtueel = Convert.ToBoolean(sdr["virtual"])
+                                    NameEn = sdr["name_en"].ToString(),
+                                    NameNl = sdr["name_nl"].ToString(),
+                                    NameFr = sdr["name_fr"].ToString()
                                 });
                             }
                         }
@@ -97,7 +97,7 @@ namespace Eindwerk2018.Models.db
                 }
             }
 
-            return kabels;
+            return colors;
         }
     }
 }

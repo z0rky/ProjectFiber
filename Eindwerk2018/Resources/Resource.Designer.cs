@@ -97,11 +97,92 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English Name .
+        /// </summary>
+        public static string ColorNameEn {
+            get {
+                return ResourceManager.GetString("ColorNameEn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French Name.
+        /// </summary>
+        public static string ColorNameFr {
+            get {
+                return ResourceManager.GetString("ColorNameFr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dutch Name .
+        /// </summary>
+        public static string ColorNameNl {
+            get {
+                return ResourceManager.GetString("ColorNameNl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string CompanyName {
+            get {
+                return ResourceManager.GetString("CompanyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string FoidComments {
+            get {
+                return ResourceManager.GetString("FoidComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creation Date.
         /// </summary>
         public static string FoidCreationDate {
             get {
                 return ResourceManager.GetString("FoidCreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End ODF id.
+        /// </summary>
+        public static string FoidEndOdfId {
+            get {
+                return ResourceManager.GetString("FoidEndOdfId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of last status update.
+        /// </summary>
+        public static string FoidLastStatusDate {
+            get {
+                return ResourceManager.GetString("FoidLastStatusDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length.
+        /// </summary>
+        public static string FoidLength {
+            get {
+                return ResourceManager.GetString("FoidLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Length OTDR.
+        /// </summary>
+        public static string FoidLengthOtdr {
+            get {
+                return ResourceManager.GetString("FoidLengthOtdr", resourceCulture);
             }
         }
         
@@ -124,11 +205,65 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start ODF id.
+        /// </summary>
+        public static string FoidStartOdfId {
+            get {
+                return ResourceManager.GetString("FoidStartOdfId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string FoidStatus {
             get {
                 return ResourceManager.GetString("FoidStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Date.
+        /// </summary>
+        public static string HistoryDate {
+            get {
+                return ResourceManager.GetString("HistoryDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string HistoryId {
+            get {
+                return ResourceManager.GetString("HistoryId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table.
+        /// </summary>
+        public static string HistoryTable {
+            get {
+                return ResourceManager.GetString("HistoryTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string HistoryText {
+            get {
+                return ResourceManager.GetString("HistoryText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string HistoryUser {
+            get {
+                return ResourceManager.GetString("HistoryUser", resourceCulture);
             }
         }
         
@@ -205,7 +340,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Description French.
         /// </summary>
         public static string LocationTypeDescFr {
             get {
@@ -214,7 +349,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Description Dutch.
         /// </summary>
         public static string LocationTypeDescNl {
             get {
@@ -232,7 +367,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Name French.
         /// </summary>
         public static string LocationTypeNameFR {
             get {
@@ -241,7 +376,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Name Dutch.
         /// </summary>
         public static string LocationTypeNameNl {
             get {
@@ -255,6 +390,15 @@ namespace Eindwerk2018.Resources {
         public static string OdfLocationId {
             get {
                 return ResourceManager.GetString("OdfLocationId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string OdfName {
+            get {
+                return ResourceManager.GetString("OdfName", resourceCulture);
             }
         }
         
@@ -295,7 +439,16 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kabel Id.
+        ///   Looks up a localized string similar to Section Fibers.
+        /// </summary>
+        public static string SectieFibers {
+            get {
+                return ResourceManager.GetString("SectieFibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cable Id.
         /// </summary>
         public static string SectieKabelId {
             get {
@@ -313,7 +466,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SectieNr.
+        ///   Looks up a localized string similar to Sectie Number.
         /// </summary>
         public static string SectieNr {
             get {
@@ -372,6 +525,42 @@ namespace Eindwerk2018.Resources {
         public static string SectieTypeVirtual {
             get {
                 return ResourceManager.GetString("SectieTypeVirtual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string UserEmail {
+            get {
+                return ResourceManager.GetString("UserEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string UserFirstName {
+            get {
+                return ResourceManager.GetString("UserFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string UserLastName {
+            get {
+                return ResourceManager.GetString("UserLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        public static string UserUserName {
+            get {
+                return ResourceManager.GetString("UserUserName", resourceCulture);
             }
         }
     }
