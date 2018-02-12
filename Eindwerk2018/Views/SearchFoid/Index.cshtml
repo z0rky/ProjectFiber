@@ -1,0 +1,21 @@
+﻿@model Eindwerk2018.ViewModels.NieuweFoidViewModel
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/content/simple-sidebar.css" rel="stylesheet">
+}
+
+<h2>Foid</h2>
+
+@using (Html.BeginForm("SearchFoid", "SearchFoid"))
+{
+   
+    <div class="form-group">
+        @Html.LabelFor(m => m.Foid.Name)
+        @Html.TextBoxFor(l => l.Foid.Name, new {@class = "form-control", id = "FoidNameId"})
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Search</button>
+    @*<button href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Search Options</button>*@
+}

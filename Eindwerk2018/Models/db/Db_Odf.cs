@@ -9,7 +9,9 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Odf : Db_General
     {
-        public List<Odf> List(int Start=0)
+        public List<Odf> List() { return List(0); }
+
+        public List<Odf> List(int Start)
         {
             if(Start < 0) Start = 0;
 
@@ -68,32 +70,24 @@ namespace Eindwerk2018.Models.db
 
             using (con) //con in Db_general
             {
-                try
+                using (MySqlCommand cmd = new MySqlCommand(qry))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(qry))
+                    cmd.Connection = con;
+                    con.Open();
+                    using (MySqlDataReader sdr = cmd.ExecuteReader())
                     {
-                        cmd.Connection = con;
-                        con.Open();
-                        using (MySqlDataReader sdr = cmd.ExecuteReader())
+                        while (sdr.Read())
                         {
-                            while (sdr.Read())
+                            odfs.Add(new Odf
                             {
-                                odfs.Add(new Odf
-                                {
-                                    Id = Convert.ToInt32(sdr["id"]),
-                                    Location_id = Convert.ToInt32(sdr["location_id"]),
-                                    Type_id = Convert.ToInt32(sdr["type_id"]),
-                                    Name = sdr["name"].ToString()
-                                });
-                            }
+                                Id = Convert.ToInt32(sdr["id"]),
+                                Location_id = Convert.ToInt32(sdr["location_id"]),
+                                Type_id = Convert.ToInt32(sdr["type_id"]),
+                                Name = sdr["name"].ToString()
+                            });
                         }
-                        con.Close();
                     }
-                }
-                catch (Exception e)
-                {
-                    //throw new System.InvalidOperationException("No connection to database");
-                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+                    con.Close();
                 }
             }
 

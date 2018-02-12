@@ -7,11 +7,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Locatie</h2>
+<h2>@Model.LocatieNaam</h2>
 
      <ul>
 
-    <li>LengteGr aad: @Model.GpsLong</li>
+    <li>LengteGraad: @Model.GpsLong</li>
     <li>BreedteGraad: @Model.GpsLat</li>
    
         @if (Model.LocatieInfrabel == false)

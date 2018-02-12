@@ -20,8 +20,5 @@ namespace Eindwerk2018.Models
 
         [Display(Name = "SectieTypeVirtual", ResourceType = typeof(Resources.Resource))]
         public bool Virtueel { get; set; }
-
-        [Display(Name = "SectieFibers", ResourceType = typeof(Resources.Resource))]
-        List <Fiber> Fibers { get; set; }
     }
 }

@@ -9,7 +9,9 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Kabel : Db_General
     {
-        public List<Kabel> List(int Start=0)
+        public List<Kabel> List() { return List(0); }
+
+        public List<Kabel> List(int Start)
         {
             if(Start < 0) Start = 0;
 
@@ -33,15 +35,6 @@ namespace Eindwerk2018.Models.db
             string query = "SELECT id, name,kabel_type,owner_id,reference,date_creation FROM kabel WHERE id='" + id + "' LIMIT 1"; //query
 
             return ListQueries(query)[0];
-        }
-
-        public List<Sectie> GetSectieList(int id)
-        {
-            if (id == 0) return null;
-
-            string query = "SELECT s.id,s.section_nr,oa.name,ob.name,s.type_id,s.length,s.length_otdr,date_in_service,infrabel_terein FROM sections AS s,ODF AS oa,ODF as ob WHERE s.kabel_id='"+ id +"' AND s.odf_start=oa.id AND s.odf_end=ob.id ORDER BY s.section_nr"; //query
-
-            return null; // ListQueries(query)[0]; //new type of sectie, viewSectie ?
         }
 
         public void Add(Kabel kabel)
@@ -77,32 +70,24 @@ namespace Eindwerk2018.Models.db
 
             using (con) //con in Db_general
             {
-                try
+                using (MySqlCommand cmd = new MySqlCommand(qry))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(qry))
+                    cmd.Connection = con;
+                    con.Open();
+                    using (MySqlDataReader sdr = cmd.ExecuteReader())
                     {
-                        cmd.Connection = con;
-                        con.Open();
-                        using (MySqlDataReader sdr = cmd.ExecuteReader())
+                        while (sdr.Read())
                         {
-                            while (sdr.Read())
+                            kabels.Add(new Kabel
                             {
-                                kabels.Add(new Kabel
-                                {
-                                    Id = Convert.ToInt32(sdr["id"]),
-                                    Naam = sdr["name"].ToString(),
-                                    Reference = sdr["reference"].ToString(),
-                                    CreatieDatum = Convert.ToDateTime(sdr["date_creation"])
-                                });
-                            }
+                                Id = Convert.ToInt32(sdr["id"]),
+                                Naam = sdr["name"].ToString(),
+                                Reference = sdr["reference"].ToString(),
+                                CreatieDatum = Convert.ToDateTime(sdr["date_creation"])
+                            });
                         }
-                        con.Close();
                     }
-                }
-                catch (Exception e)
-                {
-                    //throw new System.InvalidOperationException("No connection to database");
-                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+                    con.Close();
                 }
             }
 

@@ -10,94 +10,67 @@ namespace Eindwerk2018.Controllers
 {
     public class KabelController : Controller
     {
-        public ViewResult Index()
-        {
-            var kabels = GetKabels();
-            return View (kabels);
+        public ActionResult Index()
+        {   
+           
+            return View ();
         }
 
         public ActionResult Details(int id)
         {
-            return View ("Details");
+            return View ();
         }
 
-        public ActionResult New()
+        public ActionResult Create()
         {
-            var viewModel = new KabelFormViewModel();
-
-            return View("KabelForm", viewModel);
-
-        }
-
-      
-
-        // create is save geworden, zo kunnen we create en update in 1 view steken
+            return View ();
+        } 
 
         [HttpPost]
-        public ActionResult Save(Kabel kabel)
+        public ActionResult Create(FormCollection collection )
         {
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new KabelFormViewModel
-                {
-                   Kabel = kabel
+            //if (!ModelState.IsValid)
+            //{
+            //    var viewModel = new NieuweFoidViewModel
+            //    {
+            //        Foid = foid
 
 
-                };
-                return View("Index", viewModel);
-            }
-
-            if (kabel.Id == 0)
-            {
-                //schrijf naar database
-            }
-
-            else
-            {
-                // zoeken naar id en info overschrijven in DB 
-                //UPDATE!!!!!!
-            }
-
-            //_context.SaveChanges();
-            //bevestigen DB!!!!!!!!!!
-
-            return RedirectToAction("Details", "Kabel", kabel);
+            //    };
+            //    return View("Index", viewModel);
+            //}
+            //return RedirectToAction("Index", "")
+            return View("index");
         }
-
+        
         public ActionResult Edit(int id)
         {
-
-            
-
-            var kabelTest = GetKabels();
-            var kabelEdit = kabelTest.SingleOrDefault(c => c.Id == id);
-
-            if (kabelTest == null)
-                return HttpNotFound();
-
-            var viewModel = new KabelFormViewModel()
-            {
-                Kabel = kabelEdit
-                
-
-            };
-            return View("KabelForm", viewModel);
+            return View ();
         }
 
-
-        private IEnumerable<Kabel> GetKabels()
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            return new List<Kabel>
-            {
-
-                new Kabel {Id = 1, Naam = "Kabel1", Reference = "yyyyyyyyyyyy"},
-                new Kabel {Id = 2, Naam = "Kabel2", Reference = "xxxxxxxxxxxx"},
-                new Kabel {Id = 3, Naam = "Kabel3", Reference = "qqqqqqqqqqqq"}
-            };
-
+            try {
+                return RedirectToAction ("Index");
+            } catch {
+                return View ();
+            }
         }
 
-       
+        public ActionResult Delete(int id)
+        {
+            return View ();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try {
+                return RedirectToAction ("Index");
+            } catch {
+                return View ();
+            }
+        }
     }
-        
-    }
+}

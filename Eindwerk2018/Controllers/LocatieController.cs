@@ -43,9 +43,8 @@ namespace Eindwerk2018.Controllers
 
         public ActionResult Details(int id)
         {
-           //via API, werkt nu nog niet
-
-            return View ("Details" );
+           
+            return View ("Details");
         }
 
         public ActionResult New()
@@ -61,7 +60,7 @@ namespace Eindwerk2018.Controllers
             return View("LocatieForm", viewModel);
         }
 
-        // create is save geworden, zo kunnen we create en update in 1 view steken
+       
 
         [HttpPost]
         public ActionResult Save (Locatie locatie)
@@ -106,8 +105,6 @@ namespace Eindwerk2018.Controllers
             //    new Locatie {Id=3, LocatieNaam = "Brugge station",GpsLong = 30,GpsLat = 30,LocatieInfrabel = true,LocatieTypeId = 3}
             //};
         }
-
-        
 
 
         public ActionResult Edit(int id)

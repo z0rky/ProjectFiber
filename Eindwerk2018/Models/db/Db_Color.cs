@@ -9,7 +9,9 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Color: Db_General
     {
-        public List<Color> List(int Start=0)
+        public List<Color> List() { return List(0); }
+
+        public List<Color> List(int Start)
         {
             if(Start < 0) Start = 0;
 
@@ -30,7 +32,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT id,name_en, name_nl,name_fr FROM fiber_color WHERE id='" + id + "' LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
@@ -68,32 +70,24 @@ namespace Eindwerk2018.Models.db
 
             using (con) //con in Db_general
             {
-                try
+                using (MySqlCommand cmd = new MySqlCommand(qry))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(qry))
+                    cmd.Connection = con;
+                    con.Open();
+                    using (MySqlDataReader sdr = cmd.ExecuteReader())
                     {
-                        cmd.Connection = con;
-                        con.Open();
-                        using (MySqlDataReader sdr = cmd.ExecuteReader())
+                        while (sdr.Read())
                         {
-                            while (sdr.Read())
+                            colors.Add(new Color
                             {
-                                colors.Add(new Color
-                                {
-                                    Id = Convert.ToInt32(sdr["id"]),
-                                    NameEn = sdr["name_en"].ToString(),
-                                    NameNl = sdr["name_nl"].ToString(),
-                                    NameFr = sdr["name_fr"].ToString()
-                                });
-                            }
+                                Id = Convert.ToInt32(sdr["id"]),
+                                NameEn = sdr["name_en"].ToString(),
+                                NameNl = sdr["name_nl"].ToString(),
+                                NameFr = sdr["name_fr"].ToString()
+                            });
                         }
-                        con.Close();
                     }
-                }
-                catch (Exception e)
-                {
-                    //throw new System.InvalidOperationException("No connection to database");
-                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+                    con.Close();
                 }
             }
 

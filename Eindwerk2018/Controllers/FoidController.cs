@@ -10,13 +10,12 @@ namespace Eindwerk2018.Controllers
 {
     public class FoidController : Controller
     {
-        public ViewResult Index()
+        public ActionResult Index()
         {
             //NieuweFoidviewmodel ophalen
-            var foids = GetFoids();
-            return View(foids);
 
-           
+
+            return View ();
         }
 
         public ActionResult Details(int id)
@@ -24,23 +23,17 @@ namespace Eindwerk2018.Controllers
             return View ();
         }
 
-        public ActionResult New()
+        public ActionResult Create()
         {
-
-
-            var viewModel = new FoidFormViewModel();
-            
-            return View("FoidForm", viewModel);
-
-
-        }
+            return View ();
+        } 
 
         [HttpPost]
-        public ActionResult Save(Foid foid)
+        public ActionResult Create(Foid foid)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new FoidFormViewModel
+                var viewModel = new NieuweFoidViewModel
                 {
                     Foid = foid
 
@@ -51,44 +44,34 @@ namespace Eindwerk2018.Controllers
             return RedirectToAction("Index", "Foid");
         }
         
-       
-
-
-
-        private IEnumerable<Foid> GetFoids()
+        public ActionResult Edit(int id)
         {
-            return new List<Foid>
-            {
-                new Foid
-                {
-                    Id=1,
-                    Name = "foid1",
-                    Status = true,
-                    RequestorId = 3,
-                    CreatieDatum = DateTime.Now
+            return View ();
+        }
 
-                },
-                new Foid
-                {
-                    Id=2,
-                    Name = "foid2",
-                    Status = false,
-                    RequestorId = 2,
-                    CreatieDatum = DateTime.Now
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try {
+                return RedirectToAction ("Index");
+            } catch {
+                return View ();
+            }
+        }
 
-                },
-                new Foid
-                {
-                    Id=3,
-                    Name = "foid3",
-                    Status = false,
-                    RequestorId = 1,
-                    CreatieDatum = DateTime.Now
+        public ActionResult Delete(int id)
+        {
+            return View ();
+        }
 
-                }
-            };
-
-
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try {
+                return RedirectToAction ("Index");
+            } catch {
+                return View ();
+            }
         }
     }
 }

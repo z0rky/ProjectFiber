@@ -33,16 +33,22 @@ namespace Eindwerk2018.Models
         [Display(Name = "LocationTypeId", ResourceType = typeof(Resources.Resource))]
         public int LocatieTypeId { get; set; }
 
-        //public Locatie(int id, string naam, double lon, double lat, bool infra, int type)
-        //{
-        //    Id = Id;
-        //    LocatieNaam = naam;
-        //    GpsLong = lon;
-        //    GpsLat = lat;
-        //    LocatieInfrabel = infra;
-        //    LocatieTypeId = type;
+        [Display(Name= "AdresStraat", ResourceType = typeof(Resources.Resource))]
+        public string Straat { get; set; }
 
-        //}
+        [Display(Name="AdresNummer", ResourceType = typeof(Resources.Resource))]
+        public string HuisNr { get; set; }
 
+        [Range(999, 9999)]
+        [Display(Name = "AdresPostcode", ResourceType = typeof(Resources.Resource))]
+        public int PostCode { get; set; }
+
+        [Display(Name = "AdresGemeente", ResourceType = typeof(Resources.Resource))]
+        public string Plaats { get; set; }
+
+        [Range(8,8)]
+        public int Lcode { get; set; }
+
+      
     }
 }
