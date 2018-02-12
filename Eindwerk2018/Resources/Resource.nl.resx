@@ -141,6 +141,18 @@
   <data name="CompanyName" xml:space="preserve">
     <value>Naam</value>
   </data>
+  <data name="fiberFiberColor" xml:space="preserve">
+    <value>Vezel kleur</value>
+  </data>
+  <data name="fiberFiberNr" xml:space="preserve">
+    <value>Vezel nummer</value>
+  </data>
+  <data name="fiberModuleColor" xml:space="preserve">
+    <value>Module kleur</value>
+  </data>
+  <data name="fiberModuleNr" xml:space="preserve">
+    <value>Module nummer</value>
+  </data>
   <data name="FoidComments" xml:space="preserve">
     <value>Comments</value>
   </data>
