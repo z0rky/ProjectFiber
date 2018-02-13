@@ -10,8 +10,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
+
+
+<table id="OdfTable" class="table table-bordered table-hover">
+    <thead> <tr>
         <th>
             @Html.DisplayNameFor(model => model.Location_id)
         </th>
@@ -23,7 +25,8 @@
         </th>
         <th></th>
     </tr>
-
+    </thead>
+    <tbody>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -42,5 +45,15 @@
         </td>
     </tr>
 }
-
+    </tbody>
 </table>
+
+@section scripts
+{
+    <script>
+    $(document).ready(function() {
+            $("#OdfTable").DataTable();
+    });
+        </script>
+
+    }
