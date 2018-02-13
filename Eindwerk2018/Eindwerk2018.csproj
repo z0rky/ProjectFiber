@@ -172,6 +172,7 @@
     <Compile Include="Controllers\OdfController.cs" />
     <Compile Include="Controllers\OdfTypeController.cs" />
     <Compile Include="Controllers\SearchFoidController.cs" />
+    <Compile Include="Controllers\SearchKabelController.cs" />
     <Compile Include="Controllers\SearchLocatieController.cs" />
     <Compile Include="Controllers\SectieController.cs" />
     <Compile Include="Global.asax.cs">
@@ -342,7 +343,6 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\simple-sidebar.css" />
-    <Content Include="css\simple-sidebar.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -527,6 +527,8 @@
     <Content Include="Scripts\jquerySideBar\jquery.min.map" />
     <Content Include="Scripts\jquerySideBar\jquery.slim.min.map" />
     <Content Include="Views\SearchFoid\Index.cshtml" />
+    <Content Include="Views\SearchKabel\Index.cshtml" />
+    <Content Include="Views\SearchKabel\SearchKabelReference.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

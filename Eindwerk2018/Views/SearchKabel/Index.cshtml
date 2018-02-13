@@ -1,5 +1,4 @@
-﻿@model Eindwerk2018.ViewModels.SearchLocatieViewModel
-    
+﻿@model Eindwerk2018.ViewModels.SearchKabelViewModel
 
 @{
     ViewBag.Title = "Search";
@@ -8,50 +7,46 @@
 }
 
 <div id="wrapper">
-       
+
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
+
+            <li>@Html.ActionLink("Reference", "SearchReference", "SearchKabel")</li>
             
-            <li>@Html.ActionLink("Lcode", "Index", "SearchLocatie")</li>
-            <li>@Html.ActionLink("Naam", "SearchNaam", "SearchLocatie")</li>
-            <li>@Html.ActionLink("Gps", "SearchGps", "SearchLocatie")</li>
-            @*<li>@Html.ActionLink("PostCode", "SearchPostCode", "SearchLocatie")</li>*@
-            <li>@Html.ActionLink("Plaats", "SearchPlaats", "SearchLocatie")</li>
-                        
+
         </ul>
     </div>
-  
+
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <h2>Locatie</h2>
 
-            @using (Html.BeginForm("SearchLocatie", "SearchLocatie"))
+            @using (Html.BeginForm("Index", "SearchKabel"))
             {
-   
+
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Locatie.PostCode)
-                    @Html.TextBoxFor(l => l.Locatie.PostCode, new {@class = "form-control", id = "LocatiePostCodeId"})
+                    @Html.LabelFor(m => m.Kabel.Naam)
+                    @Html.TextBoxFor(l => l.Kabel.Naam, new { @class = "form-control", id = "KabelNaamId" })
                 </div>
 
                 <button type="submit" class="btn btn-primary">Search</button>
                 <button href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Search Options</button>
             }
-            
+
         </div>
     </div>
-   
+
 </div>
 
 <script src="~/Scripts/jquerySideBar/jquery.min.js"></script>
 <script src="~/Scripts/bootstrap_SideBar/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    $("#menu-toggle").click(function(e) {
+    $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
 </script>
-
 
 
 

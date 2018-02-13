@@ -1,4 +1,5 @@
-﻿@model Eindwerk2018.ViewModels.FoidFormViewModel
+﻿@model Eindwerk2018.ViewModels.NieuweFoidViewModel
+    
 
 
 @{
@@ -8,7 +9,7 @@
 
 <h2>Nieuwe FOID</h2>
 
-@using (Html.BeginForm("Save", "Foid"))
+@using (Html.BeginForm("Create", "Foid"))
 {
 
     <div class="form-group">
@@ -29,9 +30,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
-    <input type="button" class="btn btn-primary" value="Back" 
-           onclick="location.href='@Url.Action("Index", "Foid")'" />
-
 
 
     // date_creation = datetime now in controller

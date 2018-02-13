@@ -6967,7 +6967,8 @@ a.list-group-item-success.active:hover,
 a.list-group-item-success.active:focus {
   background-color: #4cae4c;
 }
-a.list-group-item-warning.active {
+a.li
+st-group-item-warning.active {
   background-color: #f0ad4e;
 }
 a.list-group-item-warning.active:hover,
@@ -7004,3 +7005,4 @@ a.list-group-item-danger.active:focus {
 .popover-title {
   border: none;
 }
+page-content-wrapper{backgroud-color:#f0ad4e}
