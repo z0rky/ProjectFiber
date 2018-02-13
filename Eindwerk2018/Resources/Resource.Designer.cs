@@ -124,6 +124,72 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+<<<<<<< HEAD
+=======
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string CompanyName {
+            get {
+                return ResourceManager.GetString("CompanyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fiber Color.
+        /// </summary>
+        public static string fiberFiberColor {
+            get {
+                return ResourceManager.GetString("fiberFiberColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fiber Number.
+        /// </summary>
+        public static string fiberFiberNr {
+            get {
+                return ResourceManager.GetString("fiberFiberNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module Color.
+        /// </summary>
+        public static string fiberModuleColor {
+            get {
+                return ResourceManager.GetString("fiberModuleColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module Number.
+        /// </summary>
+        public static string fiberModuleNr {
+            get {
+                return ResourceManager.GetString("fiberModuleNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Number.
+        /// </summary>
+        public static string fiberOrderNr {
+            get {
+                return ResourceManager.GetString("fiberOrderNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string FoidComments {
+            get {
+                return ResourceManager.GetString("FoidComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+>>>>>>> master
         ///   Looks up a localized string similar to Creation Date.
         /// </summary>
         public static string FoidCreationDate {

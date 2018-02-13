@@ -32,9 +32,48 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
+            //info from table section_yype
             string query = "SELECT id, name,description,virtual FROM section_type WHERE id='" + id + "' LIMIT 1"; //query
+            SectieType sectieType = ListQueries(query)[0];
+            //list of fibers from table section_type_info
+            query = "SELECT s.order_nr,s.fiber_nr,s.fiber_color_id,c.name_en AS fiber_name_en,c.name_nl AS fiber_name_nl,c.name_fr AS fiber_name_fr,s.module_nr,s.module_color_id,cb.name_en AS module_name_en,cb.name_nl AS module_name_nl,cb.name_fr AS module_name_fr FROM section_type_info AS s,fiber_color AS c,fiber_color AS cb WHERE s.type_id='" + id + "' AND s.fiber_color_id=c.id AND  s.module_color_id=cb.id ORDER BY s.order_nr"; //query
 
-            return ListQueries(query)[0];
+            sectieType.Fibers = new List<Fiber>();
+
+            con = new MySqlConnection(constr); //moeten nieuwe maken, omdat de vorige het wegsmijt
+            using (con) //con in Db_general
+            {
+                try
+                {
+                    using (MySqlCommand cmd2 = new MySqlCommand(query))
+                    {
+                         cmd2.Connection = con;
+                         con.Open();  //disposed? Why can't we re-use it ?
+                         using (MySqlDataReader sdr2 = cmd2.ExecuteReader())
+                         {
+                            while (sdr2.Read())
+                            {
+                                sectieType.Fibers.Add(new Fiber
+                                {
+                                    OrderNr = Convert.ToInt32(sdr2["order_nr"]),
+                                    FiberNr = Convert.ToInt32(sdr2["fiber_nr"]),
+                                    FiberColor = new Color { Id= Convert.ToInt32(sdr2["fiber_color_id"]), NameEn= sdr2["fiber_name_en"].ToString(), NameNl = sdr2["fiber_name_nl"].ToString(), NameFr = sdr2["fiber_name_fr"].ToString() },
+                                    ModuleNr = Convert.ToInt32(sdr2["module_nr"]),
+                                    ModuleColor = new Color { Id = Convert.ToInt32(sdr2["module_color_id"]), NameEn = sdr2["module_name_en"].ToString(), NameNl = sdr2["module_name_nl"].ToString(), NameFr = sdr2["module_name_fr"].ToString() }
+                                });
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+                }
+            }
+
+            return sectieType;
         }
 
         public void Add(SectieType sectieType)

@@ -169,6 +169,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\LocatiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\SectieTypeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+>>>>>>> master
     <Compile Include="Controllers\OdfController.cs" />
     <Compile Include="Controllers\OdfTypeController.cs" />
     <Compile Include="Controllers\SearchFoidController.cs" />
@@ -515,6 +521,7 @@
     <Content Include="Views\Locatie\Details.cshtml" />
     <Content Include="Views\Locatie\Index.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\SearchLocatie\Index.cshtml" />
     <Content Include="Views\Shared\_SideBarLocatie.cshtml" />
     <Content Include="Scripts\jquery\jquery.min.map" />
@@ -529,6 +536,23 @@
     <Content Include="Views\SearchFoid\Index.cshtml" />
     <Content Include="Views\SearchKabel\Index.cshtml" />
     <Content Include="Views\SearchKabel\SearchKabelReference.cshtml" />
+=======
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="Views\Company\Delete.cshtml" />
+    <Content Include="Views\Company\Details.cshtml" />
+    <Content Include="Views\Company\Edit.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\SectieType\Index.cshtml" />
+    <Content Include="Views\SectieType\Create.cshtml" />
+    <Content Include="Views\SectieType\Delete.cshtml" />
+    <Content Include="Views\SectieType\Details.cshtml" />
+    <Content Include="Views\SectieType\Edit.cshtml" />
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
