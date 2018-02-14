@@ -7,48 +7,48 @@ using System.Web;
 
 namespace Eindwerk2018.Models.db
 {
-    public class Db_Color: Db_General
+    public class Db_User: Db_General
     {
-        public List<Color> List(int Start=0)
+        public List<User> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color LIMIT "+Start+","+Max_row; //query
+            string query = "SELECT id, first_name,last_name,user_name,email FROM user LIMIT "+Start+","+Max_row; //query
 
             return ListQueries(query);
         }
 
-        public List<Color> Search(string search)
+        public List<User> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color WHERE name_en LIKE '%" + search + "%' OR name_nl LIKE '%" + search + "%' OR name_fr LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, first_name,last_name,user_name,email FROM user WHERE first_name LIKE '%" + search + "%' OR last_name LIKE '%" + search + "%' OR user_name LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
 
-        public Color Get(int id)
+        public User Get(int id)
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT id, first_name,last_name,user_name,email FROM user WHERE id='" + id + "' LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
 
-        public void Add(Color color)
+        public void Add(User user)
         {
-            if (color != null)
+            if (user != null)
             {
-                string query = "INSERT INTO fiber_color (name_en,name_nl,name_fr) VALUES ('" + color.NameEn + "','" + color.NameNl + "','" + color.NameFr + "')"; //query
+                string query = "INSERT INTO user (first_name,last_name,user_name,email) VALUES ('" + user.FirstName + "','" + user.LastName + "','" + user.UserName + "','" + user.Email + "')"; //query
                 this.ShortQuery(query);
             }
         }
 
-        public void Edit(Color color)
+        public void Edit(User user)
         {
-            if (color != null || color.Id != 0)
+            if (user != null || user.Id != 0)
             {
-                string query = "UPDATE fiber_color SET name_en='" + color.NameEn + "',  name_nl='" + color.NameNl + "',  name_fr='" + color.NameFr + "' WHERE id='" + color.Id + "' LIMIT 1"; //query
+                string query = "UPDATE user SET first_name='" + user.FirstName + "',  last_name='" + user.LastName + "', user_name='" + user.UserName + "',  email='" + user.Email + " WHERE id='" + user.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -62,9 +62,9 @@ namespace Eindwerk2018.Models.db
         }
 
         //for return queries
-        private List<Color> ListQueries(string qry)
+        private List<User> ListQueries(string qry)
         {
-            List<Color> colors = new List<Color>();
+            List<User> users = new List<User>();
 
             using (con) //con in Db_general
             {
@@ -78,12 +78,13 @@ namespace Eindwerk2018.Models.db
                         {
                             while (sdr.Read())
                             {
-                                colors.Add(new Color
+                                users.Add(new User
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
-                                    NameEn = sdr["name_en"].ToString(),
-                                    NameNl = sdr["name_nl"].ToString(),
-                                    NameFr = sdr["name_fr"].ToString()
+                                    FirstName = sdr["first_name"].ToString(),
+                                    LastName = sdr["last_name"].ToString(),
+                                    UserName = sdr["user_name"].ToString(),
+                                    Email = sdr["email"].ToString(),
                                 });
                             }
                         }
@@ -97,7 +98,7 @@ namespace Eindwerk2018.Models.db
                 }
             }
 
-            return colors;
+            return users;
         }
     }
 }
