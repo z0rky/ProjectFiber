@@ -13,7 +13,7 @@ namespace Eindwerk2018.Models.db
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id, name FROM Company LIMIT "+Start+","+Max_row; //query
+            string query = "SELECT id, name FROM company LIMIT "+Start+","+Max_row; //query
 
             return ListQueries(query);
         }
@@ -37,7 +37,7 @@ namespace Eindwerk2018.Models.db
 
         public void Add(Company company)
         {
-            if (company != null)
+            if (company != null && company.Name != "")
             {
                 string query = "INSERT INTO company (name) VALUES ('" + company.Name + "')"; //query
                 this.ShortQuery(query);
@@ -46,7 +46,7 @@ namespace Eindwerk2018.Models.db
 
         public void Edit(Company company)
         {
-            if (company != null || company.Id != 0)
+            if (company != null && company.Id != 0 && company.Name != "")
             {
                 string query = "UPDATE company SET name='" + company.Name + "' WHERE id='" + company.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);

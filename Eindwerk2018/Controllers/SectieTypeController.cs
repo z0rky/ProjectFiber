@@ -46,8 +46,7 @@ namespace Eindwerk2018.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                //add to database
+                //dbSectieTypes.Add();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -62,7 +61,6 @@ namespace Eindwerk2018.Controllers
             //FakeData(); //load data
 
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
             SectieType sectieType = dbSectieTypes.Get((int)id);
             if (sectieType == null) return HttpNotFound();
 

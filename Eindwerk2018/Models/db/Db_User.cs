@@ -48,7 +48,7 @@ namespace Eindwerk2018.Models.db
         {
             if (user != null || user.Id != 0)
             {
-                string query = "UPDATE user SET first_name='" + user.FirstName + "',  last_name='" + user.LastName + "', user_name='" + user.UserName + "',  email='" + user.Email + " WHERE id='" + user.Id + "' LIMIT 1"; //query
+                string query = "UPDATE user SET first_name='" + user.FirstName + "',  last_name='" + user.LastName + "', user_name='" + user.UserName + "',  email='" + user.Email + "' WHERE id='" + user.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }

@@ -42,11 +42,13 @@ namespace Eindwerk2018.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Location_id,Type_id,Name")] User user)
+        public ActionResult Create([Bind(Include = "FirstName,LastName,UserName,Email")] User user)
         {
             if (ModelState.IsValid)
             {
+                dbUsers.Add(user);
                 return RedirectToAction("Index");
+                //return RedirectToAction("User", "Details", user.Id); //should let add return id
             }
 
             return View(user);
@@ -68,12 +70,14 @@ namespace Eindwerk2018.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Location_id,Type_id,Name")] User user)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,UserName,Email")] User user)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                dbUsers.Edit(user);
+                return RedirectToAction("User", "Details",user.Id);
             }
+
             return View(user);
         }
 
