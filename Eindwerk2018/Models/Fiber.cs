@@ -22,5 +22,8 @@ namespace Eindwerk2018.Models
 
         [Display(Name = "fiberModuleColor", ResourceType = typeof(Resources.Resource))]
         public Color ModuleColor { get; set; }
+
+        [Display(Name = "fiberQuality", ResourceType = typeof(Resources.Resource))]
+        public string Quality { get; set; }
     }
 }

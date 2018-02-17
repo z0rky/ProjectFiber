@@ -27,7 +27,7 @@ namespace Eindwerk2018.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //Odf odf = odfLijst.Find(x => x.Id.Equals(id));
+
             Odf odf = dbOdfs.Get((int)id);
             if (odf == null) return HttpNotFound();
 
@@ -49,8 +49,7 @@ namespace Eindwerk2018.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.Odfs.Add(odf);
-                //db.SaveChanges();
+                dbOdfs.Add(odf);
                 return RedirectToAction("Index");
             }
 
@@ -77,8 +76,7 @@ namespace Eindwerk2018.Controllers
         {
             if (ModelState.IsValid)
             {
-                //db.Entry(odf).State = EntityState.Modified;
-                //db.SaveChanges();
+                dbOdfs.Edit(odf);
                 return RedirectToAction("Index");
             }
             return View(odf);

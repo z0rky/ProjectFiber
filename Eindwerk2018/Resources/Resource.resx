@@ -141,6 +141,9 @@
   <data name="CompanyName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="fiberQuality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
   <data name="FoidComments" xml:space="preserve">
     <value>Comments</value>
   </data>
@@ -250,6 +253,9 @@
   <data name="SectieKabelId" xml:space="preserve">
     <value>Cable Id</value>
   </data>
+  <data name="SectieKabelName" xml:space="preserve">
+    <value>Cable Name</value>
+  </data>
   <data name="SectieLength" xml:space="preserve">
     <value>Length</value>
   </data>
@@ -260,8 +266,14 @@
   <data name="SectieOdfEndId" xml:space="preserve">
     <value>Odf End Id</value>
   </data>
+  <data name="SectieOdfEndName" xml:space="preserve">
+    <value>ODF End Name</value>
+  </data>
   <data name="SectieOdfStartId" xml:space="preserve">
     <value>Odf Start Id</value>
+  </data>
+  <data name="SectieOdfStartName" xml:space="preserve">
+    <value>ODF Start Name</value>
   </data>
   <data name="SectieTypeDescription" xml:space="preserve">
     <value>Description</value>
@@ -286,5 +298,20 @@
   </data>
   <data name="UserUserName" xml:space="preserve">
     <value>User name</value>
+  </data>
+  <data name="fiberOrderNr" xml:space="preserve">
+    <value>Fiber Order Number</value>
+  </data>
+  <data name="fiberFiberColor" xml:space="preserve">
+    <value>Fiber Color</value>
+  </data>
+  <data name="fiberFiberNr" xml:space="preserve">
+    <value>Fiber Number</value>
+  </data>
+  <data name="fiberModuleColor" xml:space="preserve">
+    <value>Module Color</value>
+  </data>
+  <data name="fiberModuleNr" xml:space="preserve">
+    <value>Module Number</value>
   </data>
 </root>

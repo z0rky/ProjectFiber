@@ -15,14 +15,14 @@ namespace Eindwerk2018.Controllers
     {
         private Db_SectieType dbSectieTypes = new Db_SectieType();
 
-        // GET: OdfTypes
+        // GET
         public ActionResult Index()
         {
             var viewModel = dbSectieTypes.List(); //load lijst
             return View(viewModel);
         }
 
-        // GET: OdfTypes/Details/5
+        // GET: SectieTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -33,13 +33,13 @@ namespace Eindwerk2018.Controllers
             return View(sectieType);
         }
 
-        // GET: OdfTypes/Create
+        // GET: SectieTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: OdfTypes/Create
+        // POST: SectieTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(FormCollection collection)
@@ -55,11 +55,9 @@ namespace Eindwerk2018.Controllers
             }
         }
 
-        // GET: OdfTypes/Edit/5
+        // GET: SectieTypes/Edit/5
         public ActionResult Edit(int id)
         {
-            //FakeData(); //load data
-
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             SectieType sectieType = dbSectieTypes.Get((int)id);
             if (sectieType == null) return HttpNotFound();
@@ -67,7 +65,7 @@ namespace Eindwerk2018.Controllers
             return View(sectieType);
         }
 
-        // POST: OdfTypes/Edit/5
+        // POST: SectieTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, FormCollection collection)
@@ -84,7 +82,7 @@ namespace Eindwerk2018.Controllers
             }
         }
 
-        // GET: OdfTypes/Delete/5
+        // GET: SectieTypes/Delete/5
         public ActionResult Delete(int id)
         {
             //FakeData(); //load data
@@ -97,7 +95,7 @@ namespace Eindwerk2018.Controllers
             return View(sectieType);
         }
 
-        // POST: OdfTypes/Delete/5
+        // POST: SectieTypes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection collection)

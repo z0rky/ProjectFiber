@@ -26,8 +26,7 @@ namespace Eindwerk2018.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //OdfType odfType = odftypelijst.Find(x=>x.Id.Equals(id));
-            //OdfType odfType = odftypelijst.First();
+
             OdfType odfType = dbOdfTypes.Get((int)id);
             if (odfType == null) return HttpNotFound();
 
@@ -43,12 +42,11 @@ namespace Eindwerk2018.Controllers
         // POST: OdfTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include = "OdfTypeName,OdfTypeDescription")] OdfType odfType)
         {
             try
             {
-                // TODO: Add insert logic here
-                //add to database
+                dbOdfTypes.Add(odfType);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -63,7 +61,7 @@ namespace Eindwerk2018.Controllers
             //FakeData(); //load data
 
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
+
             OdfType odfType = dbOdfTypes.Get((int)id);
             if (odfType == null) return HttpNotFound();
 
@@ -73,11 +71,11 @@ namespace Eindwerk2018.Controllers
         // POST: OdfTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit([Bind(Include = "id,OdfTypeName,OdfTypeDescription")] OdfType odfType)
         {
             try
             {
-                // TODO: Add update logic here
+                dbOdfTypes.Edit(odfType);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -93,7 +91,7 @@ namespace Eindwerk2018.Controllers
             //FakeData(); //load data
 
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //OdfType odfType = odftypelijst.Find(x => x.Id.Equals(id));
+
             OdfType odfType = dbOdfTypes.Get((int)id);
             if (odfType == null) return HttpNotFound();
 

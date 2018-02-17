@@ -1,0 +1,32 @@
+﻿@using Eindwerk2018.Models
+@model Eindwerk2018.ViewModels.NieuweKabelViewModel
+
+
+@{
+    ViewBag.Title = "Kabel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Kabel</h2>
+
+@using (Html.BeginForm("Create", "Kabel"))
+{
+
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.Kabel.Naam)
+        @Html.TextBoxFor(m => m.Kabel.Naam, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Kabel.Naam)
+
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn primary">Save</button>
+
+
+    // date_creation = datetime now in controller
+    // requestor xtra table?? dropbox?? of bepaald via security
+
+}

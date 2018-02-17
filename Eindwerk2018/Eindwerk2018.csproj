@@ -551,13 +551,15 @@
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\SectieType\Index.cshtml" />
     <Content Include="Views\SectieType\Create.cshtml" />
-    <Content Include="Views\SectieType\Delete.cshtml" />
+    <Content Include="Views\Sectie\Delete.cshtml" />
     <Content Include="Views\SectieType\Details.cshtml" />
     <Content Include="Views\SectieType\Edit.cshtml" />
+    <Content Include="Views\Kabel\Create.cshtml" />
+    <Content Include="Views\Sectie\Index.cshtml" />
+    <Content Include="Views\Sectie\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Sectie\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

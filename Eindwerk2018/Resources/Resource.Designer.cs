@@ -133,6 +133,60 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fiber Color.
+        /// </summary>
+        public static string fiberFiberColor {
+            get {
+                return ResourceManager.GetString("fiberFiberColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fiber Number.
+        /// </summary>
+        public static string fiberFiberNr {
+            get {
+                return ResourceManager.GetString("fiberFiberNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module Color.
+        /// </summary>
+        public static string fiberModuleColor {
+            get {
+                return ResourceManager.GetString("fiberModuleColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module Number.
+        /// </summary>
+        public static string fiberModuleNr {
+            get {
+                return ResourceManager.GetString("fiberModuleNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fiber Order Number.
+        /// </summary>
+        public static string fiberOrderNr {
+            get {
+                return ResourceManager.GetString("fiberOrderNr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quality.
+        /// </summary>
+        public static string fiberQuality {
+            get {
+                return ResourceManager.GetString("fiberQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comments.
         /// </summary>
         public static string FoidComments {
@@ -457,6 +511,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cable Name.
+        /// </summary>
+        public static string SectieKabelName {
+            get {
+                return ResourceManager.GetString("SectieKabelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Length.
         /// </summary>
         public static string SectieLength {
@@ -484,11 +547,29 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ODF End Name.
+        /// </summary>
+        public static string SectieOdfEndName {
+            get {
+                return ResourceManager.GetString("SectieOdfEndName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odf Start Id.
         /// </summary>
         public static string SectieOdfStartId {
             get {
                 return ResourceManager.GetString("SectieOdfStartId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ODF Start Name.
+        /// </summary>
+        public static string SectieOdfStartName {
+            get {
+                return ResourceManager.GetString("SectieOdfStartName", resourceCulture);
             }
         }
         
