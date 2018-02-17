@@ -11,42 +11,42 @@ using Eindwerk2018.ViewModels;
 
 namespace Eindwerk2018.Controllers
 {
-    public class OdfTypeController : Controller
+    public class SectieTypeController : Controller
     {
-        private Db_OdfType dbOdfTypes = new Db_OdfType();
+        private Db_SectieType dbSectieTypes = new Db_SectieType();
 
-        // GET: OdfTypes
+        // GET
         public ActionResult Index()
         {
-            var viewModel = dbOdfTypes.List(); //load lijst
+            var viewModel = dbSectieTypes.List(); //load lijst
             return View(viewModel);
         }
 
-        // GET: OdfTypes/Details/5
+        // GET: SectieTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            OdfType odfType = dbOdfTypes.Get((int)id);
-            if (odfType == null) return HttpNotFound();
+            SectieType sectieType = dbSectieTypes.Get((int)id);
+            if (sectieType == null) return HttpNotFound();
 
-            return View(odfType);
+            return View(sectieType);
         }
 
-        // GET: OdfTypes/Create
+        // GET: SectieTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: OdfTypes/Create
+        // POST: SectieTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OdfTypeName,OdfTypeDescription")] OdfType odfType)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
-                dbOdfTypes.Add(odfType);
+                //dbSectieTypes.Add();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -55,27 +55,24 @@ namespace Eindwerk2018.Controllers
             }
         }
 
-        // GET: OdfTypes/Edit/5
+        // GET: SectieTypes/Edit/5
         public ActionResult Edit(int id)
         {
-            //FakeData(); //load data
-
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            SectieType sectieType = dbSectieTypes.Get((int)id);
+            if (sectieType == null) return HttpNotFound();
 
-            OdfType odfType = dbOdfTypes.Get((int)id);
-            if (odfType == null) return HttpNotFound();
-
-            return View(odfType);
+            return View(sectieType);
         }
 
-        // POST: OdfTypes/Edit/5
+        // POST: SectieTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,OdfTypeName,OdfTypeDescription")] OdfType odfType)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
-                dbOdfTypes.Edit(odfType);
+                // TODO: Add update logic here
 
                 return RedirectToAction(nameof(Index));
             }
@@ -85,20 +82,20 @@ namespace Eindwerk2018.Controllers
             }
         }
 
-        // GET: OdfTypes/Delete/5
+        // GET: SectieTypes/Delete/5
         public ActionResult Delete(int id)
         {
             //FakeData(); //load data
 
             if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            OdfType odfType = dbOdfTypes.Get((int)id);
-            if (odfType == null) return HttpNotFound();
+            SectieType sectieType = dbSectieTypes.Get((int)id);
+            if (sectieType == null) return HttpNotFound();
 
-            return View(odfType);
+            return View(sectieType);
         }
 
-        // POST: OdfTypes/Delete/5
+        // POST: SectieTypes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection collection)

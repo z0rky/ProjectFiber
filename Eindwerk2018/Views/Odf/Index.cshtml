@@ -25,6 +25,7 @@
         </th>
         <th></th>
     </tr>
+<<<<<<< HEAD
     </thead>
     <tbody>
 @foreach (var item in Model) {
@@ -46,14 +47,65 @@
     </tr>
 }
     </tbody>
+=======
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+>>>>>>> master
 </table>
 
 @section scripts
 {
     <script>
+<<<<<<< HEAD
     $(document).ready(function() {
             $("#OdfTable").DataTable();
     });
         </script>
 
     }
+=======
+        $(document).ready(function ()
+        {
+            $("#odfs").DataTable();
+
+            //$("#odfs").on("click", ".js-delete", function () {
+            //    var button = $(this);
+            //    bootbox.confirm("Ben je zeker dat de geselecteerde locatie verwijderd mag worden?",
+            //        function (result)
+            //        {
+            //            if (result)
+            //            {
+            //                $.ajax(
+            //                    {
+            //                        url: "/api/locaties/" + button.attr("data-customer-id"),
+            //                        methode: "DELETE",
+            //                        succes: function () {
+            //                            button.parents("tr").remove();
+            //                            console.log("succes"); // testen in console
+            //                        }
+            //                    });
+            //            }
+            //        });
+            //});
+        });
+    </script>
+}
+>>>>>>> master

@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_SectieType : Db_General
     {
-        public List<SectieType> List() { return List(0); }
-
-        public List<SectieType> List(int Start)
+        public List<SectieType> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
@@ -70,24 +68,32 @@ namespace Eindwerk2018.Models.db
 
             using (con) //con in Db_general
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            kabels.Add(new SectieType
+                            while (sdr.Read())
                             {
-                                Id = Convert.ToInt32(sdr["id"]),
-                                Naam = sdr["name"].ToString(),
-                                Beschrijving = sdr["description"].ToString(),
-                                Virtueel = Convert.ToBoolean(sdr["virtual"])
-                            });
+                                kabels.Add(new SectieType
+                                {
+                                    Id = Convert.ToInt32(sdr["id"]),
+                                    Naam = sdr["name"].ToString(),
+                                    Beschrijving = sdr["description"].ToString(),
+                                    Virtueel = Convert.ToBoolean(sdr["virtual"])
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
                 }
             }
 

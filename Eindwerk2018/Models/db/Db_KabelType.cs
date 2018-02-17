@@ -11,9 +11,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_KabelType : Db_General
     {
-        public List<Kabel> List() { return List(0); }
-
-        public List<Kabel> List(int Start)
+        public List<KabelType> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
@@ -22,7 +20,7 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
-        public List<Kabel> Search(string search)
+        public List<KabelType> Search(string search)
         {
             if (search == null) return null;
             string query = "SELECT  id, name_nl,name_fr FROM kabel_type WHERE name_nl LIKE '%" + search + "%' OR name_fr LIKE '%" + search + "%'  LIMIT " + Max_row; //query
@@ -30,7 +28,7 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
-        public Kabel Get(int id)
+        public KabelType Get(int id)
         {
             if (id == 0) return null;
 
@@ -39,20 +37,20 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(Kabel kabelType)
+        public void Add(KabelType kabelType)
         {
             if (kabelType != null)
             {
-                string query = "INSERT INTO kabel_type (name_nl,name_fr) VALUES ('" + kabelType.Naam + "','" + kabelType.Naam + "')"; //query
+                string query = "INSERT INTO kabel_type (name_nl,name_fr) VALUES ('" + kabelType.NameNL + "','" + kabelType.NameFR + "')"; //query
                 this.ShortQuery(query);
             }
         }
 
-        public void Edit(Kabel kabelType)
+        public void Edit(KabelType kabelType)
         {
             if (kabelType != null || kabelType.Id != 0)
             {
-                string query = "UPDATE kabel SET name_nl='" + kabelType.Naam + "',name_fr='" + kabelType.Naam + "' WHERE id='" + kabelType.Id + "' LIMIT 1"; //query
+                string query = "UPDATE kabel SET name_nl='" + kabelType.NameNL + "',name_fr='" + kabelType.NameFR + "' WHERE id='" + kabelType.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -66,29 +64,37 @@ namespace Eindwerk2018.Models.db
         }
 
         //for return queries
-        private List<Kabel> ListQueries(string qry)
+        private List<KabelType> ListQueries(string qry)
         {
-            List<Kabel> kabelTypes = new List<Kabel>();
+            List<KabelType> kabelTypes = new List<KabelType>();
 
             using (con) //con in Db_general
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            kabelTypes.Add(new Kabel
+                            while (sdr.Read())
                             {
-                                Id = Convert.ToInt32(sdr["id"])
-                                //NaamNL = sdr["name_nl"].ToString(),
-                                //NaamFR = sdr["name_fr"].ToString(),
-                            });
+                                kabelTypes.Add(new KabelType
+                                {
+                                    Id = Convert.ToInt32(sdr["id"]),
+                                    NameNL = sdr["name_nl"].ToString(),
+                                    NameFR = sdr["name_fr"].ToString()
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
                 }
             }
 

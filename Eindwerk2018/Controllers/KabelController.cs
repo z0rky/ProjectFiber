@@ -1,24 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Eindwerk2018.Models;
+using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
 
 namespace Eindwerk2018.Controllers
 {
     public class KabelController : Controller
     {
+        private Db_Kabel dbKabels = new Db_Kabel();
+
         public ActionResult Index()
-        {   
-           
-            return View ();
+        {
+            var viewModel = dbKabels.List();
+            return View (viewModel);
         }
 
         public ActionResult Details(int id)
         {
-            return View ();
+            if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Kabel kabel = dbKabels.Get((int)id);
+            if (kabel == null) return HttpNotFound();
+
+            return View(kabel);
         }
 
         public ActionResult Create()

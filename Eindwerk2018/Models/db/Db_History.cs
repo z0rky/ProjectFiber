@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_History : Db_General
     {
-        public List<History> List() { return List(0); }
-
-        public List<History> List(int Start)
+        public List<History> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
@@ -44,25 +42,33 @@ namespace Eindwerk2018.Models.db
 
             using (con) //con in Db_general
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            history.Add(new History
+                            while (sdr.Read())
                             {
-                                CreatieDatum = Convert.ToDateTime(sdr["date_creation"]),
-                                Table = sdr["reference"].ToString(),
-                                Id = Convert.ToInt32(sdr["reference"]),
-                                User = Convert.ToInt32(sdr["reference"]),
-                                Text = sdr["reference"].ToString()
-                            });
+                                history.Add(new History
+                                {
+                                    CreatieDatum = Convert.ToDateTime(sdr["date_creation"]),
+                                    Table = sdr["reference"].ToString(),
+                                    Id = Convert.ToInt32(sdr["reference"]),
+                                    User = Convert.ToInt32(sdr["reference"]),
+                                    Text = sdr["reference"].ToString()
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
                 }
             }
 

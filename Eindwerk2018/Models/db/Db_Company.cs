@@ -7,48 +7,48 @@ using System.Web;
 
 namespace Eindwerk2018.Models.db
 {
-    public class Db_Color: Db_General
+    public class Db_Company: Db_General
     {
-        public List<Color> List(int Start=0)
+        public List<Company> List(int Start=0)
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color LIMIT "+Start+","+Max_row; //query
+            string query = "SELECT id, name FROM company LIMIT "+Start+","+Max_row; //query
 
             return ListQueries(query);
         }
 
-        public List<Color> Search(string search)
+        public List<Company> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color WHERE name_en LIKE '%" + search + "%' OR name_nl LIKE '%" + search + "%' OR name_fr LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, name WHERE company LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
 
-        public Color Get(int id)
+        public Company Get(int id)
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name_en, name_nl,name_fr FROM fiber_color WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT id, name FROM company WHERE id='" + id + "' LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
 
-        public void Add(Color color)
+        public void Add(Company company)
         {
-            if (color != null)
+            if (company != null && company.Name != "")
             {
-                string query = "INSERT INTO fiber_color (name_en,name_nl,name_fr) VALUES ('" + color.NameEn + "','" + color.NameNl + "','" + color.NameFr + "')"; //query
+                string query = "INSERT INTO company (name) VALUES ('" + company.Name + "')"; //query
                 this.ShortQuery(query);
             }
         }
 
-        public void Edit(Color color)
+        public void Edit(Company company)
         {
-            if (color != null || color.Id != 0)
+            if (company != null && company.Id != 0 && company.Name != "")
             {
-                string query = "UPDATE fiber_color SET name_en='" + color.NameEn + "',  name_nl='" + color.NameNl + "',  name_fr='" + color.NameFr + "' WHERE id='" + color.Id + "' LIMIT 1"; //query
+                string query = "UPDATE company SET name='" + company.Name + "' WHERE id='" + company.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -62,9 +62,9 @@ namespace Eindwerk2018.Models.db
         }
 
         //for return queries
-        private List<Color> ListQueries(string qry)
+        private List<Company> ListQueries(string qry)
         {
-            List<Color> colors = new List<Color>();
+            List<Company> company = new List<Company>();
 
             using (con) //con in Db_general
             {
@@ -78,12 +78,10 @@ namespace Eindwerk2018.Models.db
                         {
                             while (sdr.Read())
                             {
-                                colors.Add(new Color
+                                company.Add(new Company
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
-                                    NameEn = sdr["name_en"].ToString(),
-                                    NameNl = sdr["name_nl"].ToString(),
-                                    NameFr = sdr["name_fr"].ToString()
+                                    Name = sdr["name"].ToString()
                                 });
                             }
                         }
@@ -97,7 +95,7 @@ namespace Eindwerk2018.Models.db
                 }
             }
 
-            return colors;
+            return company;
         }
     }
 }

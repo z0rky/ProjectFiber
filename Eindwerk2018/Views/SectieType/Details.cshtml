@@ -1,0 +1,47 @@
+﻿@using Eindwerk2018.Models
+@model Eindwerk2018.Models.SectieType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sectie Type</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Naam)</dt>
+        <dd>@Html.DisplayFor(model => model.Naam)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Beschrijving)</dt>
+        <dd>@Html.DisplayFor(model => model.Beschrijving)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Virtueel)</dt>
+        <dd>@Html.DisplayFor(model => model.Virtueel)</dd>
+    </dl>
+
+    <table class="table">
+        <tr>
+            <th>@Eindwerk2018.Resources.Resource.fiberOrderNr</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberFiberColor</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
+        </tr>
+        @foreach (var item in Model.Fibers)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.OrderNr)</td>
+            <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
+            <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
+            <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
+            <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
+        </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

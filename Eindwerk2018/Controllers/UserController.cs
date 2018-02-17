@@ -1,36 +1,33 @@
-﻿using Eindwerk2018.Models;
-using Eindwerk2018.Models.db;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Eindwerk2018;
+using Eindwerk2018.Models;
+using Eindwerk2018.Models.db;
 
 namespace Eindwerk2018.Controllers
 {
-    public class SectieController : Controller
+    public class UserController : Controller
     {
-        private Db_Sectie dbSectie = new Db_Sectie();
+        private Db_User dbUsers = new Db_User();
 
-        // GET: Sectie
-        public ActionResult Index(int? kabelId)
+        // GET: 
+        public ActionResult Index()
         {
-            List < Sectie > secties = new List<Sectie>();
-            if (kabelId == null) secties=dbSectie.List();
-            else secties = dbSectie.Search((int)kabelId);
-
-            return View(secties);
+            var viewModel = dbUsers.List();
+            return View(viewModel);
         }
 
-        // GET: Sectie/Details/5
+        // GET: USer/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Sectie sectie = dbSectie.Get((int)id);
-            if (sectie == null) return HttpNotFound();
+            User user = dbUsers.Get((int)id);
+            if (user == null) return HttpNotFound();
 
-            return View(sectie);
+            return View(user);
         }
 
         // GET: User/Create
@@ -39,21 +36,21 @@ namespace Eindwerk2018.Controllers
             return View();
         }
 
-        // POST: Sectie/Create
+        // POST: USer/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SectieTypeId,SectieKabelId,SectieOdfStartId,SectieOdfEndId,SectieLength")] Sectie sectie)
+        public ActionResult Create([Bind(Include = "FirstName,LastName,UserName,Email")] User user)
         {
             if (ModelState.IsValid)
             {
-                dbSectie.Add(sectie);
+                dbUsers.Add(user);
                 return RedirectToAction("Index");
-                //return RedirectToAction("Sectie", "Details", sectie.Id); //should let add return id
+                //return RedirectToAction("User", "Details", user.Id); //should let add return id
             }
 
-            return View(sectie);
+            return View(user);
         }
 
         // GET: user/Edit/5
@@ -61,10 +58,10 @@ namespace Eindwerk2018.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Sectie sectie = dbSectie.Get((int)id);
+            User user = dbUsers.Get((int)id);
 
-            if (sectie == null) return HttpNotFound();
-            return View(sectie);
+            if (user == null) return HttpNotFound();
+            return View(user);
         }
 
         // POST: User/Edit/5
@@ -72,15 +69,15 @@ namespace Eindwerk2018.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,SectieTypeId,SectieKabelId,SectieOdfStartId,SectieOdfEndId,SectieLength")] Sectie sectie)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,UserName,Email")] User user)
         {
             if (ModelState.IsValid)
             {
-                dbSectie.Edit(sectie);
-                return RedirectToAction("Sectie", "Details", sectie.Id);
+                dbUsers.Edit(user);
+                return RedirectToAction("User", "Details",user.Id);
             }
 
-            return View(sectie);
+            return View(user);
         }
 
         // GET: User/Delete/5
@@ -88,9 +85,9 @@ namespace Eindwerk2018.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Sectie sectie = dbSectie.Get((int)id);
-            if (sectie == null) return HttpNotFound();
-            return View(sectie);
+            User user = dbUsers.Get((int)id);
+            if (user == null) return HttpNotFound();
+            return View(user);
         }
 
         // POST: User/Delete/5
@@ -100,6 +97,16 @@ namespace Eindwerk2018.Controllers
         {
             //get info
             return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                //delete
+                //db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

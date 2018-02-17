@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_OdfType : Db_General
     {
-        public List<OdfType> List() { return List(0); }
-
-        public List<OdfType> List(int Start)
+        public List<OdfType> List(int Start=0)
         {
             if (Start < 0) Start = 0;
 
@@ -70,23 +68,31 @@ namespace Eindwerk2018.Models.db
 
             using (con) //con in Db_general
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            OdfTypes.Add(new OdfType
+                            while (sdr.Read())
                             {
-                                Id = Convert.ToInt32(sdr["id"]),
-                                Name = sdr["name"].ToString(),
-                                Description = sdr["description"].ToString()
-                            });
+                                OdfTypes.Add(new OdfType
+                                {
+                                    Id = Convert.ToInt32(sdr["id"]),
+                                    Name = sdr["name"].ToString(),
+                                    Description = sdr["description"].ToString()
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
                 }
             }
 

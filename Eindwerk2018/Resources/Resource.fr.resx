@@ -138,14 +138,38 @@
   <data name="ColorNameNl" xml:space="preserve">
     <value>Dutch Name </value>
   </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="fiberQuality" xml:space="preserve">
+    <value>Qualité</value>
+  </data>
+  <data name="FoidComments" xml:space="preserve">
+    <value>Commentaire</value>
+  </data>
   <data name="FoidCreationDate" xml:space="preserve">
     <value>Date Creation</value>
+  </data>
+  <data name="FoidEndOdfId" xml:space="preserve">
+    <value>Fin ODF id</value>
+  </data>
+  <data name="FoidLastStatusDate" xml:space="preserve">
+    <value>Date de la dernière mise a jour</value>
+  </data>
+  <data name="FoidLength" xml:space="preserve">
+    <value>Longueur</value>
+  </data>
+  <data name="FoidLengthOtdr" xml:space="preserve">
+    <value>Longueur OTDR</value>
   </data>
   <data name="FoidName" xml:space="preserve">
     <value>Nom</value>
   </data>
   <data name="FoidRequestorId" xml:space="preserve">
     <value>Id Demandeur</value>
+  </data>
+  <data name="FoidStartOdfId" xml:space="preserve">
+    <value>Début ODF id</value>
   </data>
   <data name="FoidStatus" xml:space="preserve">
     <value>Status</value>
@@ -223,8 +247,14 @@
   <data name="SectieActive" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="SectieFibers" xml:space="preserve">
+    <value>Section Fibres</value>
+  </data>
   <data name="SectieKabelId" xml:space="preserve">
     <value>Câble Id</value>
+  </data>
+  <data name="SectieKabelName" xml:space="preserve">
+    <value>Cable Nom</value>
   </data>
   <data name="SectieLength" xml:space="preserve">
     <value>Longeur</value>
@@ -236,8 +266,14 @@
   <data name="SectieOdfEndId" xml:space="preserve">
     <value>Odf FinId</value>
   </data>
+  <data name="SectieOdfEndName" xml:space="preserve">
+    <value>ODF Fin Nom</value>
+  </data>
   <data name="SectieOdfStartId" xml:space="preserve">
     <value>Odf Début Id</value>
+  </data>
+  <data name="SectieOdfStartName" xml:space="preserve">
+    <value>ODF Start Nom</value>
   </data>
   <data name="SectieTypeDescription" xml:space="preserve">
     <value>Description</value>
@@ -250,5 +286,32 @@
   </data>
   <data name="SectieTypeVirtual" xml:space="preserve">
     <value>Virtuel</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="UserFirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="UserLastName" xml:space="preserve">
+    <value>Nom de Famille</value>
+  </data>
+  <data name="UserUserName" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="fiberFiberColor" xml:space="preserve">
+    <value>Fibre Couleur</value>
+  </data>
+  <data name="fiberFiberNr" xml:space="preserve">
+    <value>Fibre Numéro</value>
+  </data>
+  <data name="fiberModuleColor" xml:space="preserve">
+    <value>Module Couleur</value>
+  </data>
+  <data name="fiberModuleNr" xml:space="preserve">
+    <value>Module Numéro</value>
+  </data>
+  <data name="fiberOrderNr" xml:space="preserve">
+    <value>Fibre Order Numéro</value>
   </data>
 </root>
