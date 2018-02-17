@@ -133,6 +133,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this?.
+        /// </summary>
+        public static string DeleteQuestion {
+            get {
+                return ResourceManager.GetString("DeleteQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fiber Color.
         /// </summary>
         public static string fiberFiberColor {
@@ -345,6 +354,96 @@ namespace Eindwerk2018.Resources {
         public static string KabelReference {
             get {
                 return ResourceManager.GetString("KabelReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string LinkAdd {
+            get {
+                return ResourceManager.GetString("LinkAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to index.
+        /// </summary>
+        public static string LinkBackList {
+            get {
+                return ResourceManager.GetString("LinkBackList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create New.
+        /// </summary>
+        public static string LinkCreate {
+            get {
+                return ResourceManager.GetString("LinkCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string LinkCreate2 {
+            get {
+                return ResourceManager.GetString("LinkCreate2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string LinkDelete {
+            get {
+                return ResourceManager.GetString("LinkDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string LinkDetails {
+            get {
+                return ResourceManager.GetString("LinkDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string LinkEdit {
+            get {
+                return ResourceManager.GetString("LinkEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string LinkOther {
+            get {
+                return ResourceManager.GetString("LinkOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string LinkSave {
+            get {
+                return ResourceManager.GetString("LinkSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string LinkSearch {
+            get {
+                return ResourceManager.GetString("LinkSearch", resourceCulture);
             }
         }
         

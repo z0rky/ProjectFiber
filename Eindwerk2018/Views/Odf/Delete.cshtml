@@ -1,13 +1,13 @@
 ﻿@model Eindwerk2018.Models.Odf
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkDelete;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>@Eindwerk2018.Resources.Resource.LinkDelete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@Eindwerk2018.Resources.Resource.DeleteQuestion</h3>
 <div>
     <h4>Odf</h4>
     <hr />
@@ -42,8 +42,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="@Eindwerk2018.Resources.Resource.LinkDelete" class="btn btn-default" /> |
+            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
         </div>
     }
 </div>

@@ -314,4 +314,37 @@
   <data name="fiberOrderNr" xml:space="preserve">
     <value>Fibre Order Numéro</value>
   </data>
+  <data name="LinkCreate" xml:space="preserve">
+    <value>Créer un nouveau</value>
+  </data>
+  <data name="LinkDelete" xml:space="preserve">
+    <value>supprimer</value>
+  </data>
+  <data name="LinkDetails" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="LinkEdit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="LinkSearch" xml:space="preserve">
+    <value>Chercher</value>
+  </data>
+  <data name="LinkBackList" xml:space="preserve">
+    <value>Retour à la liste</value>
+  </data>
+  <data name="LinkCreate2" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="LinkSave" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="DeleteQuestion" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer ceci?</value>
+  </data>
+  <data name="LinkAdd" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="LinkOther" xml:space="preserve">
+    <value>Autre</value>
+  </data>
 </root>

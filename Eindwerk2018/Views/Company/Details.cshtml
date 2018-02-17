@@ -1,11 +1,11 @@
 ﻿@model Eindwerk2018.Models.Company
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkDetails;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>@Eindwerk2018.Resources.Resource.LinkDetails</h2>
 
 <div>
     <h4>Company</h4>
@@ -17,6 +17,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
 </p>

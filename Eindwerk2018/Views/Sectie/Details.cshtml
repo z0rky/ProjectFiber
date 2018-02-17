@@ -2,7 +2,7 @@
 @model Eindwerk2018.Models.Sectie
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkDetails;
 }
 
 <h2>Details</h2>
@@ -49,5 +49,5 @@
 
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index", "Sectie", new { kabelId =Model.KabelId }, null)
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", "Sectie", new { kabelId =Model.KabelId }, null)
 </p>
