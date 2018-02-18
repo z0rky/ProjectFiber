@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -32,7 +33,11 @@ namespace Eindwerk2018.Models.db
 
             string query = "SELECT id,name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf FROM FOID WHERE id='" + id + "' LIMIT 1"; //query
 
-            return ListQueries(query)[0];
+            Foid foid = ListQueries(query)[0];
+
+            foid.Fibers = ListFibers(id);
+
+            return foid;
         }
 
         public List<Sectie> GetSectieList(int id)
@@ -87,17 +92,28 @@ namespace Eindwerk2018.Models.db
                         {
                             while (sdr.Read())
                             {
+                                int lengthOtdr = 0;
+                                if (sdr["length_otdr"].Equals("null")) lengthOtdr = 0;
+                                //else lengthOtdr = Convert.ToInt32(sdr["length_otdr"]);
+
                                 foids.Add(new Foid
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
                                     Name = sdr["name"].ToString(),
-                                    CreatieDatum = Convert.ToDateTime(sdr["date_creation"]),
+                                    CreatieDatum = DateTime.Parse(sdr["date_creation"].ToString()),
+                                    //CreatieDatum = Convert.ToDateTime(sdr["date_last_status"]),
+                                    //CreatieDatum = DateTime.ParseExact(sdr["date_creation"].ToString(), "d/MM/yyyy H:mm:ss", null), //Why always the current date ??
+                                    //CreatieDatum = (DateTime) sdr["date_creation"],
+                                    //CreatieDatum = Convert.ToDateTime(sdr["date_creation"], new CultureInfo("nl-BE")),
+                                    // DateTime.TryParse(sdr["date_creation"].ToString(), CreatieDatum),
+                                    Comments = sdr["date_creation"].ToString(),
                                     Status = Convert.ToInt32(sdr["status"]),
-                                    LastStatusDate= Convert.ToDateTime(sdr["date_last_status"]),
+                                    //LastStatusDate= Convert.ToDateTime(sdr["date_last_status"]),
                                     RequestorId = Convert.ToInt32(sdr["requestor_id"]),
-                                    Comments = sdr["comments"].ToString(),
+                                    //Comments = sdr["comments"].ToString(),
                                     LengthCalculated = Convert.ToInt32(sdr["length_calculated"]),
-                                    LengthOtdr = Convert.ToInt32(sdr["length_otdr"]),
+                                    //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]),
+                                    LengthOtdr = lengthOtdr,
                                     StartOdfId = Convert.ToInt32(sdr["start_odf"]),
                                     EndOdfId = Convert.ToInt32(sdr["end_odf"])
                                 });
@@ -114,6 +130,55 @@ namespace Eindwerk2018.Models.db
             }
 
             return foids;
+        }
+
+        /*Get the fibers on the route*/
+        private List<FiberFoid> ListFibers(int foid)
+        {  //not fibers nor section, somthing new, with all the info ODFs ...
+            if (foid <= 0) return null;
+            con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
+
+            List<FiberFoid> fibers = new List<FiberFoid>();
+            string query = "SELECT k.id AS cable_id,k.name AS cable_name,s.section_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name FROM fibers AS f, sections AS s, kabel AS k, ODF AS os, ODF AS oe WHERE f.FOID='" + foid + "' AND f.section_id=s.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
+
+            using (con) //con in Db_general
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query))
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            while (sdr.Read())
+                            {
+                                fibers.Add(new FiberFoid
+                                {
+                                    KabelId = Convert.ToInt32(sdr["cable_id"]),
+                                    KabelName = sdr["cable_name"].ToString(),
+                                    SectieNr = Convert.ToInt32(sdr["section_nr"]),
+                                    SectieLength = Convert.ToInt32(sdr["length"]),
+                                    FoidSerialNr = Convert.ToInt32(sdr["FOID_serial_nr"]),
+                                    FoidFibreNr = Convert.ToInt32(sdr["FOID_serial_nr"]),
+                                    OdfStartId = Convert.ToInt32(sdr["odf_start_id"]),
+                                    OdfStartName = sdr["odf_start_name"].ToString(),
+                                    OdfEndId = Convert.ToInt32(sdr["odf_end_id"]),
+                                    OdfEndName = sdr["odf_end_name"].ToString()
+                                });
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+                }
+            }
+
+            return fibers;
         }
     }
 }

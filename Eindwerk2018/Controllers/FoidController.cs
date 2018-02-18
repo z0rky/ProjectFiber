@@ -1,26 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Eindwerk2018.Models;
+using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
 
 namespace Eindwerk2018.Controllers
 {
     public class FoidController : Controller
     {
+        private Db_Foid dbFoid = new Db_Foid();
+
         public ActionResult Index()
         {
-            //NieuweFoidviewmodel ophalen
-
-
-            return View ();
+            var viewModel = dbFoid.List();
+            return View (viewModel);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View ();
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Foid foid = dbFoid.Get((int)id);
+            if (foid == null) return HttpNotFound();
+
+            return View (foid);
         }
 
         public ActionResult Create()
@@ -31,45 +37,54 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Create(Foid foid)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var viewModel = new NieuweFoidViewModel
-                {
-                    Foid = foid
-
-
-                };
-                return View("Index", viewModel);
+                dbFoid.Add(foid);
+                return RedirectToAction("Index");
             }
             return RedirectToAction("Index", "Foid");
         }
         
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View ();
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Foid foid = dbFoid.Get((int)id);
+
+            if (foid == null) return HttpNotFound();
+            return View(foid);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Foid foid)
         {
-            try {
-                return RedirectToAction ("Index");
-            } catch {
-                return View ();
+            if (ModelState.IsValid)
+            {
+                dbFoid.Edit(foid);
+                return RedirectToAction("Foid", "Details", foid.Id);
             }
+
+            return View(foid);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View ();
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Foid foid = dbFoid.Get((int)id);
+            if (foid == null) return HttpNotFound();
+            return View(foid);
         }
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try {
+            try
+            {
                 return RedirectToAction ("Index");
-            } catch {
+            }
+            catch
+            {
                 return View ();
             }
         }

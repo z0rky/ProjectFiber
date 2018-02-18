@@ -1,15 +1,14 @@
-﻿
-@model Eindwerk2018.Models.Locatie
+﻿@model Eindwerk2018.Models.Locatie
     
 
 @{
-    ViewBag.Title = "Locatie";
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LocationTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@Model.LocatieNaam</h2>
 
-     <ul>
+   <ul>
 
     <li>LengteGraad: @Model.GpsLong</li>
     <li>BreedteGraad: @Model.GpsLat</li>
@@ -20,10 +19,5 @@
         }
     <li>Type: @Model.LocatieTypeId</li>
         
-        </ul>
+   </ul>
 <input type="button" class="btn btn-primary" value="Foid" onclick="location.href='@Url.Action("Index", "Sectie")'" />
-
-
-
-    
-
