@@ -1,18 +1,18 @@
 ﻿@model Eindwerk2018.Models.User
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkCreate2;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>@Eindwerk2018.Resources.Resource.LinkCreate2</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>User</h4>
+    <h4>@Eindwerk2018.Resources.Resource.UserTitle</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -49,12 +49,12 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="@Eindwerk2018.Resources.Resource.LinkCreate2" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
 </div>

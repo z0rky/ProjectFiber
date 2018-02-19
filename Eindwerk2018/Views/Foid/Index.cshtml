@@ -1,39 +1,48 @@
-﻿@model Eindwerk2018.ViewModels.NieuweFoidViewModel
-    
-
+﻿@using Eindwerk2018.Models
+@model IEnumerable<Eindwerk2018.Models.Foid>
 
 @{
-    ViewBag.Title = "Foid";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
 }
 
-<h2>Nieuwe FOID</h2>
 
-@using (Html.BeginForm("Create", "Foid"))
-{
+<h2>Index</h2>
 
-    <div class="form-group">
+<p>
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.CreatieDatum)</th>
+        <th>@Html.DisplayNameFor(model => model.Status)</th>
+        <th>@Html.DisplayNameFor(model => model.LastStatusDate)</th>
+        <th>@Html.DisplayNameFor(model => model.Comments)</th>
+        <th>@Html.DisplayNameFor(model => model.LengthCalculated)</th>
+        <th>@Html.DisplayNameFor(model => model.LengthOtdr)</th>
 
-        @Html.LabelFor(m => m.Foid.Name)
-        @Html.TextBoxFor(m => m.Foid.Name, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Foid.Name)
+        <th></th>
+    </tr>
 
-    </div>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+        <td>@Html.DisplayFor(modelItem => item.CreatieDatum)</td>
+        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+        <td>@Html.DisplayFor(modelItem => item.LastStatusDate)</td>
+        <td>@Html.DisplayFor(modelItem => item.Comments)</td>
+        <td>@Html.DisplayFor(modelItem => item.LengthCalculated)</td>
+        <td>@Html.DisplayFor(modelItem => item.LengthOtdr)</td>
 
-   
-    <div class="form-group">
-        
-        @Html.CheckBoxFor(m=>m.Foid.Status, new { @checked = "checked", id = "StatusId" })
-        @Html.LabelFor(m => m.Foid.Status)
-       
-
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-
-
-    // date_creation = datetime now in controller
-    // requestor xtra table?? dropbox?? of bepaald via security
-
-}
+        <td>
+            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |
+            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = item.Id }) |
+            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = item.Id })
+        </td>
+    </tr>
+    }
+</table>
 

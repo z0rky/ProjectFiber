@@ -9,7 +9,7 @@
 
 <h2>New Kabel</h2>
 
-@using (Html.BeginForm("Create", "Kabel"))
+@using (Html.BeginForm(Eindwerk2018.Resources.Resource.LinkCreate2, "Kabel"))
 {
 
     <div class="form-group">
@@ -23,7 +23,7 @@
 
 
 
-    <button type="submit" class="btn btn primary">Save</button>
+    <button type="submit" class="btn btn primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
 
 
     // date_creation = datetime now in controller

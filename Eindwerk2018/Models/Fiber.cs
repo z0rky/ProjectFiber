@@ -25,5 +25,17 @@ namespace Eindwerk2018.Models
 
         [Display(Name = "fiberQuality", ResourceType = typeof(Resources.Resource))]
         public string Quality { get; set; }
+
+        [Display(Name = "fiberFoid", ResourceType = typeof(Resources.Resource))]
+        public int Foid { get; set; }
+
+        [Display(Name = "fiberFoidSerialNr", ResourceType = typeof(Resources.Resource))]
+        public int FoidSerialNr { get; set; }
+
+        [Display(Name = "fiberFoidFiberNr", ResourceType = typeof(Resources.Resource))]
+        public int FoidFibreNr { get; set; }
+
+        [Display(Name = "fiberActive", ResourceType = typeof(Resources.Resource))]
+        public Boolean Active { get; set; }
     }
 }

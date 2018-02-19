@@ -198,6 +198,7 @@
     <Compile Include="Models\db\Db_LocatieType.cs" />
     <Compile Include="Models\db\Db_OdfType.cs" />
     <Compile Include="Models\db\Db_User.cs" />
+    <Compile Include="Models\FiberFoid.cs" />
     <Compile Include="Models\Fiber.cs" />
     <Compile Include="Models\Foid.cs" />
     <Compile Include="Models\History.cs" />
@@ -495,7 +496,6 @@
     <Content Include="Views\Locatie\LocatieForm.cshtml" />
     <Content Include="Views\Kabel\Index.cshtml" />
     <Content Include="Views\Other\Index.cshtml" />
-    <Content Include="Views\Foid\Index.cshtml" />
     <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -557,6 +557,11 @@
     <Content Include="Views\Kabel\Create.cshtml" />
     <Content Include="Views\Sectie\Index.cshtml" />
     <Content Include="Views\Sectie\Details.cshtml" />
+    <Content Include="Views\Foid\Index.cshtml" />
+    <Content Include="Views\Foid\Edit.cshtml" />
+    <Content Include="Views\Foid\Create.cshtml" />
+    <Content Include="Views\Foid\Delete.cshtml" />
+    <Content Include="Views\Foid\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -53,5 +53,8 @@ namespace Eindwerk2018.Models
 
         [Display(Name = "FoidEndOdfId", ResourceType = typeof(Resources.Resource))]
         public int EndOdfId { get; set; }
+
+        [Display(Name = "FoidFibers", ResourceType = typeof(Resources.Resource))]
+        public List<FiberFoid> Fibers { get; set; }
     }
 }

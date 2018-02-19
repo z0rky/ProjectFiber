@@ -314,4 +314,109 @@
   <data name="fiberOrderNr" xml:space="preserve">
     <value>Fibre Order Numéro</value>
   </data>
+  <data name="LinkCreate" xml:space="preserve">
+    <value>Créer un nouveau</value>
+  </data>
+  <data name="LinkDelete" xml:space="preserve">
+    <value>supprimer</value>
+  </data>
+  <data name="LinkDetails" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="LinkEdit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="LinkSearch" xml:space="preserve">
+    <value>Chercher</value>
+  </data>
+  <data name="LinkBackList" xml:space="preserve">
+    <value>Retour à la liste</value>
+  </data>
+  <data name="LinkCreate2" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="LinkSave" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="DeleteQuestion" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer ceci?</value>
+  </data>
+  <data name="LinkAdd" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="LinkOther" xml:space="preserve">
+    <value>Autre</value>
+  </data>
+  <data name="AdresTitle" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="ColorTitle" xml:space="preserve">
+    <value>Couleur</value>
+  </data>
+  <data name="CompanyTitle" xml:space="preserve">
+    <value>Société</value>
+  </data>
+  <data name="HistoryTitle" xml:space="preserve">
+    <value>Histoire</value>
+  </data>
+  <data name="LocationTitle" xml:space="preserve">
+    <value>Emplacement</value>
+  </data>
+  <data name="LocationTypeTitle" xml:space="preserve">
+    <value>Emplacement Type</value>
+  </data>
+  <data name="OdfTitle" xml:space="preserve">
+    <value>ODF</value>
+  </data>
+  <data name="OdfTypeTitle" xml:space="preserve">
+    <value>ODF Type</value>
+  </data>
+  <data name="SectieTitle" xml:space="preserve">
+    <value>Section</value>
+  </data>
+  <data name="SectieTypeTitle" xml:space="preserve">
+    <value>Section Type</value>
+  </data>
+  <data name="UserTitle" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="fiberActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="fiberFoid" xml:space="preserve">
+    <value>FOID</value>
+  </data>
+  <data name="fiberFoidFiberNr" xml:space="preserve">
+    <value>FOID Fibre Nombre</value>
+  </data>
+  <data name="fiberFoidKabelId" xml:space="preserve">
+    <value>Câble Id</value>
+  </data>
+  <data name="fiberFoidKabelName" xml:space="preserve">
+    <value>Câble Nom</value>
+  </data>
+  <data name="fiberFoidOdfEndId" xml:space="preserve">
+    <value>End Odf Id</value>
+  </data>
+  <data name="fiberFoidOdfEndName" xml:space="preserve">
+    <value>End Odf Nom</value>
+  </data>
+  <data name="fiberFoidOdfStartId" xml:space="preserve">
+    <value>Start Odf Id</value>
+  </data>
+  <data name="fiberFoidOdfStartName" xml:space="preserve">
+    <value>Start Odf Nom</value>
+  </data>
+  <data name="fiberFoidSectieLength" xml:space="preserve">
+    <value>Section Longeur</value>
+  </data>
+  <data name="fiberFoidSectieNr" xml:space="preserve">
+    <value>Câble Section Nombre</value>
+  </data>
+  <data name="fiberFoidSerialNr" xml:space="preserve">
+    <value>FOID Serie Nombre</value>
+  </data>
+  <data name="FoidFibers" xml:space="preserve">
+    <value>Fibres</value>
+  </data>
 </root>

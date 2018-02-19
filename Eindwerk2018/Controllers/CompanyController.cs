@@ -97,9 +97,7 @@ namespace Eindwerk2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            //Odf odf = db.Odfs.Find(id);
-            //db.Odfs.Remove(odf);
-            //db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

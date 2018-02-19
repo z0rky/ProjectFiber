@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Locatie</h2>
+<h2>@Eindwerk2018.Resources.Resource.LocationTitle</h2>
 
 
 @using (Html.BeginForm("Save", "Locatie"))
@@ -69,8 +69,5 @@
 
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
-
-
-
+    <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
 }

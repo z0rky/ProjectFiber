@@ -2,7 +2,7 @@
     
 
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkSearch;
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="~/content/simple-sidebar.css" rel="stylesheet">
 }
@@ -33,7 +33,7 @@
                     @Html.TextBoxFor(l => l.Locatie.PostCode, new {@class = "form-control", id = "LocatiePostCodeId"})
                 </div>
 
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSearch</button>
                 <button href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Search Options</button>
             }
             
@@ -51,8 +51,3 @@
         $("#wrapper").toggleClass("toggled");
     });
 </script>
-
-
-
-
-
