@@ -12,17 +12,17 @@ namespace Eindwerk2018.Controllers
 {
     public class LocatieController : Controller
     {
-        private Db_LocatieType dbLocatietypes = new Db_LocatieType();
+        private Db_LocatieType dbLocatieypes = new Db_LocatieType();
         private Db_Locatie dbLocaties = new Db_Locatie();
 
-        public  List<LocatieType> locatielijst = new List<LocatieType>();
+        public List<LocatieType> locatielijst = new List<LocatieType>();
         public List<Locatie> locatie = new List<Locatie>();
         public List<Locatie> locatieFakeDataTest = new List<Locatie>();
 
 
         public void FakeData()
         {
-            locatielijst = dbLocatietypes.List(); //mag direkt worden opgeroepen
+            locatielijst = dbLocatieypes.List(); //mag direkt worden opgeroepen
             //locatielijst.Add(new LocatieType(1, "brug", "bridge", "open", "ouvert"));
             //locatielijst.Add(new LocatieType(2, "caravan", "caravan", "gesloten", "fermee"));
             //locatielijst.Add(new LocatieType(3, "berg", "mont", "hoog", "haute"));
@@ -31,27 +31,28 @@ namespace Eindwerk2018.Controllers
 
 
 
-
         public ViewResult Index()
-        {
-
+        {   
+            //var locaties = _context.customers.Include(m => m.LocatieTypes )>ToList();
+            //include voor andere models die we nodig hebben -> locatietypes
             var locaties = GetLocaties();
             return View(locaties);
 
 
         } 
 
-        public ActionResult Details(Locatie locatie)
+        public ActionResult Details(int id)
         {
-            return View ("Details", locatie);
+           
+            return View ("Details");
         }
 
         public ActionResult New()
         {
-            
+            FakeData();
 
             var viewModel = new LocatieFormViewModel()
-            {   
+            {
                 LocatieTypes = locatielijst
 
             };
@@ -66,52 +67,30 @@ namespace Eindwerk2018.Controllers
         {
             if (!ModelState.IsValid)
             {
-               
+                FakeData();
                 var viewModel = new LocatieFormViewModel
                 {
                     Locatie = locatie,
-                    LocatieTypes = dbLocatietypes.List()
+                    LocatieTypes = locatielijst
 
                 };
                 return View("Index", viewModel);
             }
             if (locatie.Id == 0)
             {
-                dbLocaties.Add(locatie);
+                //schrijf naar database
             }
 
             else
             {
-               var locatieId =  locatie.Id;
-               var locatieTest = GetLocaties();
-               var locatieEdit = locatieTest.SingleOrDefault(c => c.Id == locatieId);
-
-
-                locatie.LocatieNaam = locatieEdit.LocatieNaam;
-                locatie.GpsLat = locatieEdit.GpsLat;
-                locatie.GpsLong = locatieEdit.GpsLong;
-                locatie.Lcode = locatieEdit.Lcode;
-                locatie.LocatieBedrijf = locatieEdit.LocatieBedrijf;
-                locatie.LocatieInfrabel = locatieEdit.LocatieInfrabel;
-                locatie.LocatieTypeId = locatieEdit.LocatieTypeId;
-                locatie.Plaats = locatieEdit.Plaats;
-                locatie.PostCode = locatieEdit.PostCode;
-                locatie.Straat = locatieEdit.Straat;
-                locatie.HuisNr = locatieEdit.HuisNr;
-
-                dbLocaties.Add(locatie);
-                
-                
-
-
+                // zoeken naar id en info overschrijven in DB 
+                //UPDATE!!!!!!
             }
-
-
 
             //_context.SaveChanges();
             //bevestigen DB!!!!!!!!!!
 
-            return RedirectToAction("Details", "Locatie", locatie);
+             return RedirectToAction("Details", "Locatie", locatie);
         }
 
 
@@ -119,35 +98,34 @@ namespace Eindwerk2018.Controllers
         private IEnumerable<Locatie> GetLocaties()
         {
             return dbLocaties.List();
-           
+            //return new List<Locatie>
+            //{
+            //    new Locatie {Id=1, LocatieNaam = "Leuven station",GpsLong = 20,GpsLat = 20,LocatieInfrabel = true,LocatieTypeId = 2},
+            //    new Locatie {Id=2, LocatieNaam = "Gent station",GpsLong = 10,GpsLat = 10,LocatieInfrabel = true,LocatieTypeId = 1},
+            //    new Locatie {Id=3, LocatieNaam = "Brugge station",GpsLong = 30,GpsLat = 30,LocatieInfrabel = true,LocatieTypeId = 3}
+            //};
         }
 
-        private IEnumerable<LocatieType> GetLocatieTypes()
+
+        public ActionResult Edit(int id)
         {
-            return dbLocatietypes.List();
+            
+            FakeData();
+            
+            var locatieTest = GetLocaties();
+            var locatieEdit = locatieTest.SingleOrDefault(c => c.Id == id);
+             
+            if (locatieTest == null)
+                return HttpNotFound();
 
+            var viewModel = new LocatieFormViewModel
+            {
+                Locatie = locatieEdit,
+                LocatieTypes = locatielijst
+
+            };
+            return View("LocatieForm", viewModel);
         }
-
-
-        //public ActionResult Edit(int id)
-        //{
-
-        //    FakeData();
-
-        //    var locatieTest = GetLocaties();
-        //    var locatieEdit = locatieTest.SingleOrDefault(c => c.Id == id);
-
-        //    if (locatieTest == null)
-        //        return HttpNotFound();
-
-        //    var viewModel = new LocatieFormViewModel
-        //    {
-        //        Locatie = locatieEdit,
-        //        LocatieTypes = locatielijst
-
-        //    };
-        //    return View("LocatieForm", viewModel);
-        //}
     }
 
 

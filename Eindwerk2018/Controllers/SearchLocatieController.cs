@@ -16,6 +16,7 @@ namespace Eindwerk2018.Controllers
     {
 
         private Db_Locatie dbLocaties = new Db_Locatie();
+        public List<Locatie> LocatieZoek = new List<Locatie>();
 
 
         public ViewResult Index()
@@ -49,7 +50,8 @@ namespace Eindwerk2018.Controllers
         }
 
         public ActionResult SearchLocatie(Locatie locatie)
-        {   
+        {
+            
             
             if (locatie.LocatieNaam != null)
             {
@@ -63,8 +65,11 @@ namespace Eindwerk2018.Controllers
                     return View("SearchLocatieNaam", viewModel);
                 }
                 else
-                {
-                    //query naam
+                {   
+                     
+                    LocatieZoek =  dbLocaties.Search(locatie.LocatieNaam).ToList();
+
+                    return View("Index", LocatieZoek);
                 }
 
 

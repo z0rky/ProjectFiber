@@ -8,75 +8,36 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
 </p>
-
-
-<table id="OdfTable" class="table table-bordered table-hover">
-    <thead> <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Location_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Location_id)</th>
+        <th>@Html.DisplayNameFor(model => model.Type_id)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th></th>
     </tr>
-
-    </thead>
-    <tbody>
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-    </tbody>
-
 
     @foreach (var item in Model)
     {
         <tr>
+            <td>@Html.DisplayFor(modelItem => item.Location_id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Type_id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Location_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = item.Id }) |
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = item.Id })
             </td>
         </tr>
     }
-
 </table>
-<input type="button" class="btn btn-primary" value="Odf Toevoegen" onclick="location.href='@Url.Action("New", "Odf")'" />
+
 @section scripts
 {
     <script>
-   
-         $(document).ready(function ()
+        $(document).ready(function ()
         {
             $("#odfs").DataTable();
 
@@ -102,4 +63,3 @@
         });
     </script>
 }
-

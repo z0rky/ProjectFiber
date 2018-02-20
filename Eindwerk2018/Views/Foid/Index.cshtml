@@ -6,12 +6,13 @@
 }
 
 
-<h2>Index</h2>
+<h2>Foid</h2>
 
-<p>
+<!--<p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
-</p>
-<table class="table">
+</p>-->
+<table class="table" id="FoidTable">
+     <thead>
     <tr>
         <th>@Html.DisplayNameFor(model => model.Id)</th>
         <th>@Html.DisplayNameFor(model => model.Name)</th>
@@ -24,6 +25,8 @@
 
         <th></th>
     </tr>
+     </thead>
+        <tbody>
 
     @foreach (var item in Model)
     {
@@ -44,5 +47,37 @@
         </td>
     </tr>
     }
+    </tbody> 
 </table>
 
+<input type="button" class="btn btn-primary" value="Foid Toevoegen" onclick="location.href='@Url.Action("Create", "Foid")'" />
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#FoidTable").DataTable();
+
+            $("#FoidTable").on("click",".js-delete", function ()
+                {
+                    var button = $(this);
+                    bootbox.confirm("Ben je zeker dat de geselecteerde locatie verwijderd mag worden?",
+                        function (result)
+                        {
+                            if (result)
+                            {
+                                $.ajax(
+                                    {
+                                        url: "/api/locaties/" + button.attr("data-customer-id"),
+                                        methode: "DELETE",
+                                        succes: function ()
+                                        {
+                                            button.parents("tr").remove();
+                                            console.log("succes"); // testen in console
+                                        }
+                                    });
+                            }
+                        });
+                });
+        });
+    </script>
+}

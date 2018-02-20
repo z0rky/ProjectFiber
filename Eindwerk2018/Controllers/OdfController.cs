@@ -112,10 +112,5 @@ namespace Eindwerk2018.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult New()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
