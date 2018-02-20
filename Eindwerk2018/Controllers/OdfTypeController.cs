@@ -71,13 +71,13 @@ namespace Eindwerk2018.Controllers
         // POST: OdfTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,OdfTypeName,OdfTypeDescription")] OdfType odfType)
+        public ActionResult Edit([Bind(Include = "id,Name,Description")] OdfType odfType)
         {
             try
             {
                 dbOdfTypes.Edit(odfType);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "OdfType", new { Id = odfType.Id });
             }
             catch
             {

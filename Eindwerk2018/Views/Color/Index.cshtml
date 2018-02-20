@@ -1,24 +1,28 @@
-﻿@model IEnumerable<Eindwerk2018.Models.Company>
+﻿@model IEnumerable<Eindwerk2018.Models.Color>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Eindwerk2018.Resources.Resource.CompanyTitle</h2>
+<h2>@Eindwerk2018.Resources.Resource.ColorTitle</h2>
 
 <p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
 </p>
 <table class="table">
     <tr>
-        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.NameEn)</th>
+        <th>@Html.DisplayNameFor(model => model.NameNl)</th>
+        <th>@Html.DisplayNameFor(model => model.NameFr)</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+        <td>@Html.DisplayFor(modelItem => item.NameEn)</td>
+        <td>@Html.DisplayFor(modelItem => item.NameNl)</td>
+        <td>@Html.DisplayFor(modelItem => item.NameFr)</td>
 
         <td>
             @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |

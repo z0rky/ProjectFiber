@@ -106,6 +106,7 @@ namespace Eindwerk2018.Models.db
                                     //CreatieDatum = (DateTime) sdr["date_creation"],
                                     //CreatieDatum = Convert.ToDateTime(sdr["date_creation"], new CultureInfo("nl-BE")),
                                     // DateTime.TryParse(sdr["date_creation"].ToString(), CreatieDatum),
+                                    //CreatieDatum = sdr["date_creation"].,
                                     Comments = sdr["date_creation"].ToString(),
                                     Status = Convert.ToInt32(sdr["status"]),
                                     //LastStatusDate= Convert.ToDateTime(sdr["date_last_status"]),
