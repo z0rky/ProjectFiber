@@ -23,13 +23,8 @@ namespace Eindwerk2018.Models
         [Display(Name = "KabelReference", ResourceType = typeof(Resources.Resource))]
         public string Reference { get; set; }
 
-        private DateTime creatieDatum;
-
         [Display(Name = "KabelCreationDate", ResourceType = typeof(Resources.Resource))]
-        public DateTime CreatieDatum
-        {
-            get { return creatieDatum; }
-            set { creatieDatum = DateTime.Now; }
-        }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime CreatieDatum { get; set; }
     }
 }

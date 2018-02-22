@@ -9,6 +9,7 @@ namespace Eindwerk2018.Models
     public class History
     {
         [Display(Name = "HistoryDate", ResourceType = typeof(Resources.Resource))]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         public DateTime CreatieDatum { get; set; }
 
         [Display(Name = "HistoryTable", ResourceType = typeof(Resources.Resource))]
