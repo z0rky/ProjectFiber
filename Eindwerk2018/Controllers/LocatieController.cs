@@ -22,10 +22,7 @@ namespace Eindwerk2018.Controllers
 
         public void FakeData()
         {
-            locatielijst = dbLocatieypes.List(); //mag direkt worden opgeroepen
-            //locatielijst.Add(new LocatieType(1, "brug", "bridge", "open", "ouvert"));
-            //locatielijst.Add(new LocatieType(2, "caravan", "caravan", "gesloten", "fermee"));
-            //locatielijst.Add(new LocatieType(3, "berg", "mont", "hoog", "haute"));
+            locatielijst = dbLocatieypes.List(); 
         }
 
 
@@ -33,8 +30,6 @@ namespace Eindwerk2018.Controllers
 
         public ViewResult Index()
         {   
-            //var locaties = _context.customers.Include(m => m.LocatieTypes )>ToList();
-            //include voor andere models die we nodig hebben -> locatietypes
             var locaties = GetLocaties();
             return View(locaties);
 
@@ -98,13 +93,12 @@ namespace Eindwerk2018.Controllers
         private IEnumerable<Locatie> GetLocaties()
         {
             return dbLocaties.List();
-            //return new List<Locatie>
-            //{
-            //    new Locatie {Id=1, LocatieNaam = "Leuven station",GpsLong = 20,GpsLat = 20,LocatieInfrabel = true,LocatieTypeId = 2},
-            //    new Locatie {Id=2, LocatieNaam = "Gent station",GpsLong = 10,GpsLat = 10,LocatieInfrabel = true,LocatieTypeId = 1},
-            //    new Locatie {Id=3, LocatieNaam = "Brugge station",GpsLong = 30,GpsLat = 30,LocatieInfrabel = true,LocatieTypeId = 3}
-            //};
+           
         }
+
+        
+
+
 
 
         public ActionResult Edit(int id)

@@ -1,0 +1,69 @@
+﻿@model Eindwerk2018.ViewModels.SearchLocatieResultViewModel
+
+@{
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LocationTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Eindwerk2018.Resources.Resource.LocationTitle</h2>
+
+<table id="locaties" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>GPS Long</th>
+            <th>GPS Lat</th>
+            <th>Infrabel</th>
+            <th>Bedrijf</th>
+            <th>Type</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var locatie in Model.GezochteLocaties)
+        {
+            <tr>
+                <td>@Html.ActionLink(locatie.LocatieNaam, "Edit", "Locatie", new { id = locatie.Id }, null)
+                <td>@locatie.GpsLat</td>
+                <td>@locatie.GpsLong</td>
+                <td>@locatie.LocatieInfrabel</td>
+                <td>@locatie.LocatieBedrijf</td>
+                <td>@locatie.LocatieTypeId</td>
+                <td>
+                    <button data-locaties-id="@locatie.Id" class="btn-link js-delete">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<input type="button" class="btn btn-primary" value="Locatie Toevoegen" onclick="location.href='@Url.Action("New", "Locatie")'" />
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#locaties").DataTable();
+
+            $("#locaties").on("click",".js-delete", function ()
+                {
+                    var button = $(this);
+                    bootbox.confirm("Ben je zeker dat de geselecteerde locatie verwijderd mag worden?",
+                        function (result)
+                        {
+                            if (result)
+                            {
+                                $.ajax(
+                                    {
+                                        url: "/api/locaties/" + button.attr("data-customer-id"),
+                                        methode: "DELETE",
+                                        succes: function ()
+                                        {
+                                            button.parents("tr").remove();
+                                            console.log("succes"); // testen in console
+                                        }
+                                    });
+                            }
+                        });
+                });
+        });
+    </script>
+}

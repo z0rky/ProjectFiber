@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Eindwerk2018.Models;
@@ -49,13 +49,24 @@ namespace Eindwerk2018.Controllers
             return View("SearchLocatiePlaats");
         }
 
-        public ActionResult SearchLocatie(Locatie locatie)
+        [HttpPost]
+        public ActionResult ZoekLocatie(Locatie locatie)
         {
             
-            
+
+
             if (locatie.LocatieNaam != null)
             {
                 if (!ModelState.IsValid)
+                {
+                    LocatieZoek = dbLocaties.Search(locatie.LocatieNaam).ToList();
+                    var locatieZoekViewModel = new SearchLocatieResultViewModel
+                    {
+                        GezochteLocaties = LocatieZoek
+                    };
+                    return View("IndexSearchResult", locatieZoekViewModel);
+                }
+                else
                 {
                     var viewModel = new SearchLocatieViewModel
                     {
@@ -63,19 +74,13 @@ namespace Eindwerk2018.Controllers
                     };
 
                     return View("SearchLocatieNaam", viewModel);
-                }
-                else
-                {   
-                     
-                    LocatieZoek =  dbLocaties.Search(locatie.LocatieNaam).ToList();
-
-                    return View("Index", LocatieZoek);
+                    
                 }
 
 
             }
             
-            // mogelijkheid om enel op long of lat te zoeken??
+            // mogelijkheid om enkel op long of lat te zoeken??
             
             if ((locatie.GpsLat !=null) || (locatie.GpsLong != null))
             {
@@ -133,6 +138,12 @@ namespace Eindwerk2018.Controllers
             }
 
             return View("Index");
+        }
+
+        private IEnumerable<Locatie> GezochteLocaties()
+        {
+            return dbLocaties.List();
+
         }
 
     }
