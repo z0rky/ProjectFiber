@@ -38,8 +38,10 @@ namespace Eindwerk2018.Controllers
 
         public ActionResult Details(int id)
         {
-           
-            return View ("Details");
+
+            var DetailsLocatie = dbLocaties.Get(id);
+
+            return View("Details", DetailsLocatie);
         }
 
         public ActionResult New()
@@ -120,6 +122,11 @@ namespace Eindwerk2018.Controllers
             };
             return View("LocatieForm", viewModel);
         }
+
+        //public ActionResult Delete(int id)
+        //{
+        //    dbLocaties.Get(id);
+        //}
     }
 
 
