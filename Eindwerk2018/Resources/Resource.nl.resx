@@ -130,13 +130,13 @@
     <value>Straat</value>
   </data>
   <data name="ColorNameEn" xml:space="preserve">
-    <value>Engelse Naam</value>
+    <value>English Name </value>
   </data>
   <data name="ColorNameFr" xml:space="preserve">
-    <value>Franse Naam</value>
+    <value>French Name</value>
   </data>
   <data name="ColorNameNl" xml:space="preserve">
-    <value>Nederlandse Naam</value>
+    <value>Dutch Name </value>
   </data>
   <data name="CompanyName" xml:space="preserve">
     <value>Naam</value>

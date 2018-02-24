@@ -22,6 +22,6 @@ namespace Eindwerk2018.Models
         public bool Virtueel { get; set; }
 
         [Display(Name = "SectieFibers", ResourceType = typeof(Resources.Resource))]
-        public List <Fiber> Fibers { get; set; }
+        List <Fiber> Fibers { get; set; }
     }
 }

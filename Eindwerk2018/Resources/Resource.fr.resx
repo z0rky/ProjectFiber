@@ -130,13 +130,13 @@
     <value>Rue</value>
   </data>
   <data name="ColorNameEn" xml:space="preserve">
-    <value>Nom Anglais</value>
+    <value>English Name </value>
   </data>
   <data name="ColorNameFr" xml:space="preserve">
-    <value>Nom français</value>
+    <value>French Name</value>
   </data>
   <data name="ColorNameNl" xml:space="preserve">
-    <value>Nom Néerlandais</value>
+    <value>Dutch Name </value>
   </data>
   <data name="CompanyName" xml:space="preserve">
     <value>Nom</value>

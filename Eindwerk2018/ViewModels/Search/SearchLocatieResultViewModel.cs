@@ -9,11 +9,9 @@ using Eindwerk2018.Models;
 
 namespace Eindwerk2018.ViewModels
 {
-    public class SearchLocatieViewModel
+    public class SearchLocatieResultViewModel
     {
-        public Locatie Locatie { get; set; }
-
-        //public IEnumerable<Locatie> GezochteLocaties { get; set; }
+        public IEnumerable<Locatie> GezochteLocaties { get; set; }
 
 
 

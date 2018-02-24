@@ -26,7 +26,7 @@ namespace Eindwerk2018.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
+            //Odf odf = odfLijst.Find(x => x.Id.Equals(id));
             Company company= dbCompany.Get((int)id);
             if (company == null) return HttpNotFound();
 
@@ -76,7 +76,7 @@ namespace Eindwerk2018.Controllers
             if (ModelState.IsValid)
             {
                 dbCompany.Edit(company);
-                return RedirectToAction("Details", "Color", new { Id = company.Id });
+                return RedirectToAction("Company", "Details", company.Id);
             }
 
             return View(company);

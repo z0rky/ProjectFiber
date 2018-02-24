@@ -22,15 +22,13 @@
                         
         </ul>
     </div>
-    <!-- /#sidebar-wrapper -->
-    <!-- Page Content -->
+   
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            @*<a href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Search Options</a>*@
-            
+           
             <h2>Locatie</h2>
            
-            @using (Html.BeginForm("SearchLocatie", "SearchLocatie"))
+            @using (Html.BeginForm("ZoekLocatie", "SearchLocatie"))
             {
    
                 <div class="form-group">
@@ -49,8 +47,6 @@
 
 <script src="~/Scripts/jquerySideBar/jquery.min.js"></script>
 <script src="~/Scripts/bootstrap_SideBar/js/bootstrap.bundle.min.js"></script>
-@*<script src="~/Scripts/js/bootstrap.bundle.min.js"></script>*@
-
 
 <script>
     $("#menu-toggle").click(function(e) {

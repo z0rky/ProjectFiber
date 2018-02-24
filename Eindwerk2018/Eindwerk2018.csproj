@@ -168,7 +168,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\LocatiesController.cs" />
-    <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\SectieTypeController.cs" />
@@ -207,7 +206,6 @@
     <Compile Include="Models\KabelType.cs" />
     <Compile Include="Models\Odf.cs" />
     <Compile Include="Models\OdfType.cs" />
-    <Compile Include="Models\SearchEnums\SearchLocatieEnum.cs" />
     <Compile Include="Models\Sectie.cs" />
     <Compile Include="Models\SectieType.cs" />
     <Compile Include="Models\User.cs" />
@@ -242,8 +240,10 @@
     <Compile Include="ViewModels\LocatieFormViewModel.cs" />
     <Compile Include="Models\LocatieType.cs" />
     <Compile Include="ViewModels\NieuweSectieViewModel.cs" />
+    <Compile Include="ViewModels\Search\SearchFoidResultViewModel .cs" />
     <Compile Include="ViewModels\Search\SearchKabelViewModel.cs" />
     <Compile Include="ViewModels\Search\SearchFoidViewModel.cs" />
+    <Compile Include="ViewModels\Search\SearchLocatieResultViewModel.cs" />
     <Compile Include="ViewModels\Search\SearchLocatieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -563,11 +563,8 @@
     <Content Include="Views\Foid\Create.cshtml" />
     <Content Include="Views\Foid\Delete.cshtml" />
     <Content Include="Views\Foid\Details.cshtml" />
-    <Content Include="Views\Color\Index.cshtml" />
-    <Content Include="Views\Color\Edit.cshtml" />
-    <Content Include="Views\Color\Details.cshtml" />
-    <Content Include="Views\Color\Delete.cshtml" />
-    <Content Include="Views\Color\Create.cshtml" />
+    <Content Include="Views\SearchLocatie\IndexSearchResult.cshtml" />
+    <Content Include="Views\SearchFoid\IndexSearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

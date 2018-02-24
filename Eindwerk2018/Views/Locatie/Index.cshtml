@@ -18,7 +18,7 @@
             <th>Infrabel</th>
             <th>Bedrijf</th>
             <th>Type</th>
-            <th>Delete</th>      
+            <th></th>      
 
         </tr>
         </thead>
@@ -26,13 +26,18 @@
         @foreach (var locatie in Model)
         { 
         <tr>
-        <td>@Html.ActionLink(locatie.LocatieNaam, "Edit", "Locatie", new {id = locatie.Id }, null)
+        <td>@locatie.LocatieNaam</td>
             <td>@locatie.GpsLat</td>
         <td>@locatie.GpsLong</td>
             <td>@locatie.LocatieInfrabel</td>
         <td>@locatie.LocatieBedrijf</td>
             <td>@locatie.LocatieTypeId</td>
-            <td><button data-locaties-id="@locatie.Id" class="btn-link js-delete">Delete</button>
+            <td>
+               
+                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = locatie.Id, @class = "border" } ) |
+                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = locatie.Id }) |
+                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = locatie.Id })
+               
             </td>
         </tr> 
         }
@@ -48,27 +53,6 @@
         $(document).ready(function () {
             $("#locaties").DataTable();
 
-            $("#locaties").on("click",".js-delete", function ()
-                {
-                    var button = $(this);
-                    bootbox.confirm("Ben je zeker dat de geselecteerde locatie verwijderd mag worden?",
-                        function (result)
-                        {
-                            if (result)
-                            {
-                                $.ajax(
-                                    {
-                                        url: "/api/locaties/" + button.attr("data-customer-id"),
-                                        methode: "DELETE",
-                                        succes: function ()
-                                        {
-                                            button.parents("tr").remove();
-                                            console.log("succes"); // testen in console
-                                        }
-                                    });
-                            }
-                        });
-                });
         });
     </script>
 }

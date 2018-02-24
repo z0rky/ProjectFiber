@@ -77,7 +77,7 @@ namespace Eindwerk2018.Controllers
             if (ModelState.IsValid)
             {
                 dbOdfs.Edit(odf);
-                return RedirectToAction("Details", "Odf", new { Id = odf.Id });
+                return RedirectToAction("Index");
             }
             return View(odf);
         }

@@ -18,13 +18,47 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
-        public List<Locatie> Search(string search)
+        public List<Locatie> SearchNaam(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type FROM location WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type " +
+                           "FROM location " +
+                           "WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
+
+        // query nog aanpassen
+        public List<Locatie> SearchPostCode(int search)
+        {
+            if (search == 0) return null;
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type " +
+                           "FROM  " +
+                           "WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+
+            return ListQueries(query);
+        }
+        // query nog aanpassen
+        public List<Locatie> SearchPlaats(string search)
+        {
+            if (search == null) return null;
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type " +
+                           "FROM  " +
+                           "WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+
+            return ListQueries(query);
+        }
+        // query nog aanpassen
+        public List<Locatie> SearchGPS(double search1, double search2)
+        {
+            if (search1 == 0 || search2 == 0) return null;
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type " +
+                           "FROM  " +
+                           "WHERE name LIKE '%" + search1 + "%' LIMIT " + Max_row; //query
+
+            return ListQueries(query);
+        }
+
 
         public Locatie Get(int id)
         {

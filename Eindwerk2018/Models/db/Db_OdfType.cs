@@ -32,7 +32,7 @@ namespace Eindwerk2018.Models.db
 
             string query = "SELECT id, name, description FROM ODF_type WHERE id='"+id+"' LIMIT 1"; //query
 
-            return ListQueries(query)[0]; //should be only 1
+            return ListQueries(query)[0]; //sjould be only 1
         }
 
         public void Add(OdfType odfType)

@@ -10,11 +10,10 @@ namespace Eindwerk2018.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [Display(Name = "ColorNameEn", ResourceType = typeof(Resources.Resource))]
         public String NameEn { get; set; }
 
-        [Display(Name = "ColorNameNl", ResourceType = typeof(Resources.Resource))]
+        [Display(Name = "ColorNameNL", ResourceType = typeof(Resources.Resource))]
         public String NameNl { get; set; }
 
         [Display(Name = "ColorNameFr", ResourceType = typeof(Resources.Resource))]

@@ -68,12 +68,13 @@ namespace Eindwerk2018.Controllers
         // POST: SectieTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Naam,Beschrijving,Virtueel")] SectieType sectieType)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
-                dbSectieTypes.Edit(sectieType);
-                return RedirectToAction("Details", "SectieType", new { Id = sectieType.Id });
+                // TODO: Add update logic here
+
+                return RedirectToAction(nameof(Index));
             }
             catch
             {

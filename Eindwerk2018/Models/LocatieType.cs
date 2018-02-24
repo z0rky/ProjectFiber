@@ -8,12 +8,10 @@ namespace Eindwerk2018.Models
     {
         public int Id { get; set; }
 
-        [Required]
         [StringLength(45)]
         [Display(Name = "LocationTypeNameNl", ResourceType = typeof(Resources.Resource))]
         public string NaamNL { get; set; }
 
-        [Required]
         [StringLength(45)]
         [Display(Name = "LocationTypeNameFR", ResourceType = typeof(Resources.Resource))]
         public string NaamFR { get; set; }

@@ -31,10 +31,8 @@ namespace Eindwerk2018.Models.db
             if (id == 0) return null;
 
             string query = "SELECT id, name,description,virtual FROM section_type WHERE id='" + id + "' LIMIT 1"; //query
-            SectieType sectieType= ListQueries(query)[0];
-            sectieType.Fibers = GetFibers(id);
 
-            return sectieType;
+            return ListQueries(query)[0];
         }
 
         public void Add(SectieType sectieType)
@@ -50,7 +48,7 @@ namespace Eindwerk2018.Models.db
         {
             if (sectieType != null || sectieType.Id != 0)
             {
-                string query = "UPDATE section_type SET name='" + sectieType.Naam + "', description='" + sectieType.Beschrijving + "', virtual=" + sectieType.Virtueel + " WHERE id='" + sectieType.Id + "' LIMIT 1"; //query
+                string query = "UPDATE kabel SET name='" + sectieType.Naam + "', description='" + sectieType.Beschrijving + "', virtual'" + sectieType.Virtueel + "' WHERE id='" + sectieType.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -100,49 +98,6 @@ namespace Eindwerk2018.Models.db
             }
 
             return kabels;
-        }
-
-        public List<Fiber> GetFibers(int SectieTypeId)
-        {
-            if (SectieTypeId == 0) return null;
-            con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
-            List<Fiber> fibers = new List<Fiber>();
-            //color info, is in type info
-            string qry = "SELECT st.fiber_nr,st.order_nr AS order_nr,fc.id AS fiber_color_id,fc.name_en AS fiber_color_name_en,st.module_nr,fm.id AS module_color_id,fm.name_en AS module_color_name_en FROM section_type_info AS st,fiber_color AS fc,fiber_color AS fm WHERE st.type_id='" + SectieTypeId + "' AND st.fiber_color_id=fc.id AND st.module_color_id=fm.id ORDER BY st.order_nr";
-
-            using (con) //con in Db_general
-            {
-                try
-                {
-                    using (MySqlCommand cmd = new MySqlCommand(qry))
-                    {
-                        cmd.Connection = con;
-                        con.Open();
-                        using (MySqlDataReader sdr = cmd.ExecuteReader())
-                        {
-                            while (sdr.Read())
-                            {
-                                fibers.Add(new Fiber
-                                {
-                                    OrderNr = Convert.ToInt32(sdr["order_nr"]),
-                                    FiberNr = Convert.ToInt32(sdr["fiber_nr"]),
-                                    FiberColor = new Color { Id = Convert.ToInt32(sdr["fiber_color_id"]), NameEn = sdr["fiber_color_name_en"].ToString() },
-                                    ModuleNr = Convert.ToInt32(sdr["module_nr"]),
-                                    ModuleColor = new Color { Id = Convert.ToInt32(sdr["module_color_id"]), NameEn = sdr["module_color_name_en"].ToString() }
-                                });
-                            }
-                        }
-                        con.Close();
-                    }
-                }
-                catch (Exception e)
-                {
-                    //throw new System.InvalidOperationException("No connection to database");
-                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
-                }
-            }
-
-            return fibers;
         }
     }
 }

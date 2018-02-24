@@ -77,7 +77,7 @@ namespace Eindwerk2018.Controllers
             if (ModelState.IsValid)
             {
                 dbSectie.Edit(sectie);
-                return RedirectToAction("Details", "Sectie", new { Id = sectie.Id });
+                return RedirectToAction("Sectie", "Details", sectie.Id);
             }
 
             return View(sectie);
