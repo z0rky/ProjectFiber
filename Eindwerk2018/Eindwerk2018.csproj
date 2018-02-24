@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\LocatiesController.cs" />
+    <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\SectieTypeController.cs" />
@@ -565,6 +566,11 @@
     <Content Include="Views\Foid\Details.cshtml" />
     <Content Include="Views\SearchLocatie\IndexSearchResult.cshtml" />
     <Content Include="Views\SearchFoid\IndexSearchResult.cshtml" />
+    <Content Include="Views\Color\Create.cshtml" />
+    <Content Include="Views\Color\Delete.cshtml" />
+    <Content Include="Views\Color\Details.cshtml" />
+    <Content Include="Views\Color\Edit.cshtml" />
+    <Content Include="Views\Color\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
