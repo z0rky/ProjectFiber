@@ -1,0 +1,53 @@
+﻿@using Eindwerk2018.Models
+@model Eindwerk2018.Models.Sectie
+
+@{
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkDetails;
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Eindwerk2018.Resources.Resource.SectieTitle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.KabelName)</dt>
+        <dd>@Html.DisplayFor(model => model.KabelName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.SectieNr)</dt>
+        <dd>@Html.DisplayFor(model => model.SectieNr)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.OdfStartName)</dt>
+        <dd>@Html.DisplayFor(model => model.OdfStartName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.OdfEndName)</dt>
+        <dd>@Html.DisplayFor(model => model.OdfEndName)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Lengte)</dt>
+        <dd>@Html.DisplayFor(model => model.Lengte) m</dd>
+    </dl>
+
+    <table class="table">
+        <tr>
+            <th>@Eindwerk2018.Resources.Resource.fiberOrderNr</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberFiberColor</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
+        </tr>
+        @foreach (var item in Model.Fibers)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.OrderNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
+                <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
+            </tr>
+        }
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", "Sectie", new { kabelId =Model.KabelId }, null)
+</p>

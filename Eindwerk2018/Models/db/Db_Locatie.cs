@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Locatie : Db_General
     {
-        public List<Locatie> List() { return List(0); }
-
-        public List<Locatie> List(int Start)
+        public List<Locatie> List(int Start=0)
         {
             if (Start < 0) Start = 0;
 
@@ -20,19 +18,53 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
-        public List<Locatie> Search(string search)
+        public List<Locatie> SearchNaam(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type FROM location WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type " +
+                           "FROM location " +
+                           "WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
+
+        // query nog aanpassen
+        public List<Locatie> SearchPostCode(int search)
+        {
+            if (search == 0) return null;
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type " +
+                           "FROM  " +
+                           "WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+
+            return ListQueries(query);
+        }
+        // query nog aanpassen
+        public List<Locatie> SearchPlaats(string search)
+        {
+            if (search == null) return null;
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type " +
+                           "FROM  " +
+                           "WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+
+            return ListQueries(query);
+        }
+        // query nog aanpassen
+        public List<Locatie> SearchGPS(double search1, double search2)
+        {
+            if (search1 == 0 || search2 == 0) return null;
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type " +
+                           "FROM  " +
+                           "WHERE name LIKE '%" + search1 + "%' LIMIT " + Max_row; //query
+
+            return ListQueries(query);
+        }
+
 
         public Locatie Get(int id)
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type FROM location WHERE id='" + id+"' LIMIT 1"; //query
+            string query = "SELECT id, name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type FROM location WHERE id='" + id+"' LIMIT 1"; //Including id to complete the normal class
 
             return ListQueries(query)[0];
         }

@@ -11,26 +11,34 @@ namespace Eindwerk2018.Controllers
 {
     public class SearchFoidController : Controller
     {
-        // private Db_Foid dbFoid = new Db_Foid();
+        private Db_Foid dbFoid = new Db_Foid();
+        public List<Foid> FoidZoek = new List<Foid>();
+
 
         public ActionResult Index()
         {
             return View();
         }
 
+        [HttpPost]
         public ActionResult SearchFoid(Foid foid)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new SearchFoidViewModel
+                FoidZoek = dbFoid.Search(foid.Name).ToList();
+                var foidZoekViewModel = new SearchFoidResultViewModel
                 {
-                    Foid = foid
+                    GezochteFoids = FoidZoek
                 };
-
-                RedirectToAction("Index", "Foid", viewModel);
+                return View("IndexSearchResult",foidZoekViewModel);
             }
 
-            return View("Index");
+            var viewModel = new SearchFoidViewModel
+            {
+                Foid = foid
+            };
+
+            return View("Index", viewModel);
         }
 
     }

@@ -1,0 +1,40 @@
+﻿@using Eindwerk2018.Models
+@model IEnumerable<Eindwerk2018.Models.Sectie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.KabelName)</th>
+        <th>@Html.DisplayNameFor(model => model.SectieNr)</th>
+        <th>@Html.DisplayNameFor(model => model.OdfStartName)</th>
+        <th>@Html.DisplayNameFor(model => model.OdfEndName)</th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
+        <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
+        <td>@Html.DisplayFor(modelItem => item.OdfStartName)</td>
+        <td>@Html.DisplayFor(modelItem => item.OdfEndName)</td>
+
+        <td>
+            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |
+            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = item.Id }) |
+            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = item.Id })
+        </td>
+    </tr>
+    }
+
+</table>

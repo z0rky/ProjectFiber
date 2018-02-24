@@ -9,9 +9,7 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_LocatieType : Db_General
     {
-        public List<LocatieType> List() { return List(0); }
-
-        public List<LocatieType> List(int Start)
+        public List<LocatieType> List(int Start=0)
         {
             if (Start < 0) Start = 0;
 
@@ -71,25 +69,33 @@ namespace Eindwerk2018.Models.db
 
             using (con) //con in Db_general
             {
-                using (MySqlCommand cmd = new MySqlCommand(qry))
+                try
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
                     {
-                        while (sdr.Read())
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
-                            locatieTypes.Add(new LocatieType
+                            while (sdr.Read())
                             {
-                                Id = Convert.ToInt32(sdr["id"]),
-                                NaamNL = sdr["name_nl"].ToString(),
-                                NaamFR = sdr["name_fr"].ToString(),
-                                DescNL = sdr["desription_nl"].ToString(),
-                                DescFR = sdr["desription_fr"].ToString()
-                            });
+                                locatieTypes.Add(new LocatieType
+                                {
+                                    Id = Convert.ToInt32(sdr["id"]),
+                                    NaamNL = sdr["name_nl"].ToString(),
+                                    NaamFR = sdr["name_fr"].ToString(),
+                                    DescNL = sdr["desription_nl"].ToString(),
+                                    DescFR = sdr["desription_fr"].ToString()
+                                });
+                            }
                         }
+                        con.Close();
                     }
-                    con.Close();
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
                 }
             }
 

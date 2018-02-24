@@ -1,0 +1,51 @@
+﻿@model Eindwerk2018.ViewModels.SearchFoidResultViewModel
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Foid</h2>
+
+<table class="table" id="FoidTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naam</th>
+            <th>CreatieDatum</th>
+            <th>Status</th>
+            <th>Laatste Datum</th>
+            <th>Comments</th>
+            <th>Berekende Lengte</th>
+            <th>LengthOtdr</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GezochteFoids)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatieDatum)</td>
+                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastStatusDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.Comments)</td>
+                <td>@Html.DisplayFor(modelItem => item.LengthCalculated)</td>
+                <td>@Html.DisplayFor(modelItem => item.LengthOtdr)</td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+<input type="button" class="btn btn-primary" value="New Search" onclick="location.href='@Url.Action("Index", "SearchFoid")'" />
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#FoidTable").DataTable();
+
+        });
+    </script>
+}

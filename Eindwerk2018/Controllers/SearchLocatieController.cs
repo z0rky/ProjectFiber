@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Eindwerk2018.Models;
 using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
+
 
 namespace Eindwerk2018.Controllers
 {
@@ -16,6 +17,7 @@ namespace Eindwerk2018.Controllers
     {
 
         private Db_Locatie dbLocaties = new Db_Locatie();
+        public List<Locatie> LocatieZoek = new List<Locatie>();
 
 
         public ViewResult Index()
@@ -48,12 +50,24 @@ namespace Eindwerk2018.Controllers
             return View("SearchLocatiePlaats");
         }
 
-        public ActionResult SearchLocatie(Locatie locatie)
-        {   
+        [HttpPost]
+        public ActionResult ZoekLocatie(Locatie locatie)
+        {
             
+
+            //naam OK
             if (locatie.LocatieNaam != null)
             {
                 if (!ModelState.IsValid)
+                {
+                    LocatieZoek = dbLocaties.SearchNaam(locatie.LocatieNaam).ToList();
+                    var locatieZoekViewModel = new SearchLocatieResultViewModel
+                    {
+                        GezochteLocaties = LocatieZoek
+                    };
+                    return View("IndexSearchResult", locatieZoekViewModel);
+                }
+                else
                 {
                     var viewModel = new SearchLocatieViewModel
                     {
@@ -61,20 +75,28 @@ namespace Eindwerk2018.Controllers
                     };
 
                     return View("SearchLocatieNaam", viewModel);
-                }
-                else
-                {
-                    //query naam
+                    
                 }
 
 
             }
             
-            // mogelijkheid om enel op long of lat te zoeken??
+            // mogelijkheid om enkel op long of lat te zoeken??
             
-            if ((locatie.GpsLat !=null) || (locatie.GpsLong != null))
+            if ((locatie.GpsLat !=0) || (locatie.GpsLong != 0))
             {
                 if (!ModelState.IsValid)
+                {
+                    LocatieZoek = dbLocaties.SearchGPS(locatie.GpsLat, locatie.GpsLong).ToList();
+                    var locatieZoekViewModel = new SearchLocatieResultViewModel
+                    {
+                        GezochteLocaties = LocatieZoek
+                    };
+                    return View("IndexSearchResult", locatieZoekViewModel);
+
+                    
+                }
+                else
                 {
                     var viewModel = new SearchLocatieViewModel
                     {
@@ -83,16 +105,24 @@ namespace Eindwerk2018.Controllers
 
                     return View("SearchLocatieGps", viewModel);
                 }
-                else
-                {
-                    // query gps
-                }
 
             }
             
-            if (locatie.PostCode != null)
+
+            // nog query maken !!!!!!!!
+            if (locatie.PostCode != 0)
             {
                 if (!ModelState.IsValid)
+                {   
+                    
+                    LocatieZoek = dbLocaties.SearchPostCode(locatie.PostCode).ToList();
+                    var locatieZoekViewModel = new SearchLocatieResultViewModel
+                    {
+                        GezochteLocaties = LocatieZoek
+                    };
+                    return View("IndexSearchResult", locatieZoekViewModel);
+                }
+                else
                 {
                     var viewModel = new SearchLocatieViewModel
                     {
@@ -101,15 +131,23 @@ namespace Eindwerk2018.Controllers
 
                     return View("SearchLocatiePostCode", viewModel);
                 }
-                else
-                {
-                    // query postcode
-                }
 
             }
+
+            // nog query maken !!!!!!!!!!!!
             if (locatie.Plaats != null)
             {
                 if (!ModelState.IsValid)
+                {
+
+                    LocatieZoek = dbLocaties.SearchPlaats(locatie.Plaats).ToList();
+                    var locatieZoekViewModel = new SearchLocatieResultViewModel
+                    {
+                        GezochteLocaties = LocatieZoek
+                    };
+                    return View("IndexSearchResult", locatieZoekViewModel);
+                }
+                else
                 {
                     var viewModel = new SearchLocatieViewModel
                     {
@@ -117,12 +155,8 @@ namespace Eindwerk2018.Controllers
                     };
 
                     return View("SearchLocatiePlaats", viewModel);
-                }
-                else
-                {
-                    // query plaats
 
-                
+
                 }
 
             }
@@ -130,5 +164,18 @@ namespace Eindwerk2018.Controllers
             return View("Index");
         }
 
+        private IEnumerable<Locatie> GezochteLocaties()
+        {
+            return dbLocaties.List();
+
+        }
+
+        public ActionResult Details(int id)
+        {
+
+            var DetailsLocatie = dbLocaties.Get(id);
+
+            return View("~/Views/Locatie/Details.cshtml", DetailsLocatie);
+        }
     }
 }

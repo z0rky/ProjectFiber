@@ -1,29 +1,41 @@
-﻿
-@model Eindwerk2018.Models.Locatie
+﻿@model Eindwerk2018.Models.Locatie
     
 
 @{
-    ViewBag.Title = "Locatie";
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LocationTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@Model.LocatieNaam</h2>
-
-     <ul>
-
-    <li>LengteGraad: @Model.GpsLong</li>
-    <li>BreedteGraad: @Model.GpsLat</li>
    
-        @if (Model.LocatieInfrabel == false)
-        {
-            <li>Bedrijf: @Model.LocatieBedrijf</li>
-        }
-    <li>Type: @Model.LocatieTypeId</li>
-        
-        </ul>
-<input type="button" class="btn btn-primary" value="Foid" onclick="location.href='@Url.Action("Index", "Sectie")'" />
-
-
-
-    
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.Id)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Lcode)</dt>
+        <dd>@Html.DisplayFor(model => model.Lcode)</dd>
+        <dt>@Html.DisplayNameFor(model => model.LocatieNaam)</dt>
+        <dd>@Html.DisplayFor(model => model.LocatieNaam)</dd>
+        <dt>@Html.DisplayNameFor(model => model.GpsLong)</dt>
+        <dd>@Html.DisplayFor(model => model.GpsLong)</dd>
+        <dt>@Html.DisplayNameFor(model => model.GpsLat)</dt>
+        <dd>@Html.DisplayFor(model => model.GpsLat)</dd>
+        <dt>@Html.DisplayNameFor(model => model.LocatieInfrabel)</dt>
+        <dd>@Html.DisplayFor(model => model.LocatieInfrabel)</dd>
+        <dt>@Html.DisplayNameFor(model => model.LocatieBedrijf)</dt>
+        <dd>@Html.DisplayFor(model => model.LocatieBedrijf)</dd>
+        <dt>@Html.DisplayNameFor(model => model.LocatieTypeId)</dt>
+        <dd>@Html.DisplayFor(model => model.LocatieTypeId)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Straat)</dt>
+        <dd>@Html.DisplayFor(model => model.Straat)</dd>
+        <dt>@Html.DisplayNameFor(model => model.HuisNr)</dt>
+        <dd>@Html.DisplayFor(model => model.HuisNr)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Plaats)</dt>
+        <dd>@Html.DisplayFor(model => model.Plaats)</dd>
+    </dl>
+   
+</div>
+<input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
 

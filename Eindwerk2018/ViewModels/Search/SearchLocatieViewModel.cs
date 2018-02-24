@@ -5,8 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using Eindwerk2018.Models;
-using Eindwerk2018.Models.SearchEnums;
-using Newtonsoft.Json;
+
 
 namespace Eindwerk2018.ViewModels
 {
@@ -14,7 +13,9 @@ namespace Eindwerk2018.ViewModels
     {
         public Locatie Locatie { get; set; }
 
-        
+        //public IEnumerable<Locatie> GezochteLocaties { get; set; }
+
+
 
     }
 }
