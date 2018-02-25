@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\KabelTypeController.cs" />
+    <Compile Include="Controllers\LocatieTypeController.cs" />
     <Compile Include="Controllers\SectieTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OdfController.cs" />
@@ -577,6 +578,11 @@
     <Content Include="Views\KabelType\Edit.cshtml" />
     <Content Include="Views\KabelType\Details.cshtml" />
     <Content Include="Views\KabelType\Create.cshtml" />
+    <Content Include="Views\LocatieType\Create.cshtml" />
+    <Content Include="Views\LocatieType\Delete.cshtml" />
+    <Content Include="Views\LocatieType\Details.cshtml" />
+    <Content Include="Views\LocatieType\Edit.cshtml" />
+    <Content Include="Views\LocatieType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

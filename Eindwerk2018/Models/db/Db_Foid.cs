@@ -154,7 +154,7 @@ namespace Eindwerk2018.Models.db
                                     SectieNr = Convert.ToInt32(sdr["section_nr"]),
                                     SectieLength = Convert.ToInt32(sdr["length"]),
                                     FoidSerialNr = Convert.ToInt32(sdr["FOID_serial_nr"]),
-                                    FoidFibreNr = Convert.ToInt32(sdr["FOID_serial_nr"]),
+                                    FoidFibreNr = Convert.ToInt32(sdr["FOID_fibre_nr"]),
                                     OdfStartId = Convert.ToInt32(sdr["odf_start_id"]),
                                     OdfStartName = sdr["odf_start_name"].ToString(),
                                     OdfEndId = Convert.ToInt32(sdr["odf_end_id"]),
