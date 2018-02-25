@@ -44,7 +44,7 @@ namespace Eindwerk2018.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Company company)
+        public ActionResult Create([Bind(Include = "Name")] Company company)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace Eindwerk2018.Controllers
             if (ModelState.IsValid)
             {
                 dbCompany.Edit(company);
-                return RedirectToAction("Company", "Details", company.Id);
+                return RedirectToAction("Details", "Company", new { Id = company.Id });
             }
 
             return View(company);

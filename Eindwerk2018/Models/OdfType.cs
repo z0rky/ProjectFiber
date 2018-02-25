@@ -11,8 +11,11 @@ namespace Eindwerk2018.Models
     public class OdfType
     {
         public int Id { get; set; }
+
+        [Required]
         [Display(Name = "OdfTypeName", ResourceType = typeof(Resources.Resource))]
         public string Name { get; set; }
+
         [Display(Name = "OdfTypeDescription", ResourceType = typeof(Resources.Resource))]
         public string Description { get; set; }
     }
