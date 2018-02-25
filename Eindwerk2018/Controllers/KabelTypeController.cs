@@ -9,41 +9,40 @@ using System.Web.Mvc;
 
 namespace Eindwerk2018.Controllers
 {
-    public class ColorController : Controller
+    public class KabelTypeController : Controller
     {
-        private Db_Color dbColor = new Db_Color();
+        private Db_KabelType dbKabelType = new Db_KabelType();
 
-        // GET: Color
+        // GET: KabelType
         public ActionResult Index()
         {
-            var viewModel = dbColor.List();
+            var viewModel = dbKabelType.List();
             return View(viewModel);
         }
 
-        // GET: Color/Details/5
+        // GET: KabelType/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            KabelType kabelType = dbKabelType.Get((int)id);
+            if (kabelType == null) return HttpNotFound();
 
-            Color color = dbColor.Get((int)id);
-            if (color == null) return HttpNotFound();
-
-            return View(color);
+            return View(kabelType);
         }
 
-        // GET: Color/Create
+        // GET: KabelType/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Color/Create
+        // POST: KabelType/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "NameEn,NameNl,NameFr")] Color color)
+        public ActionResult Create([Bind(Include = "NameNL,NameFR")] KabelType kabelType)
         {
             try
             {
-                dbColor.Add(color);
+                dbKabelType.Add(kabelType);
                 return RedirectToAction("Index");
             }
             catch
@@ -52,42 +51,39 @@ namespace Eindwerk2018.Controllers
             }
         }
 
-        // GET: Color/Edit/5
+        // GET: KabelType/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Color color = dbColor.Get((int)id);
-            if (color == null) return HttpNotFound();
+            KabelType kabelType = dbKabelType.Get((int)id);
 
-            return View(color);
+            if (kabelType == null) return HttpNotFound();
+            return View(kabelType);
         }
 
-        // POST: Color/Edit/5
+        // POST: KabelType/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,NameEn,NameNl,NameFr")] Color color)
+        public ActionResult Edit([Bind(Include = "Id,NameNL,NameFR")] KabelType kabelType)
         {
-            if (ModelState.IsValid)
+            try
             {
-                dbColor.Edit(color);
-                return RedirectToAction("Details", "Color", new { Id = color.Id });
+                dbKabelType.Edit(kabelType);
+                return RedirectToAction("Details", "KabelType", new { Id = kabelType.Id });
             }
-
-            return View(color);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: Color/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: KabelType/Delete/5
+        public ActionResult Delete(int id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            Color color = dbColor.Get((int)id);
-            if (color == null) return HttpNotFound();
-
-            return View(color);
+            return View();
         }
 
-        // POST: Color/Delete/5
+        // POST: KabelType/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

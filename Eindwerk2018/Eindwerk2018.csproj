@@ -171,6 +171,7 @@
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\KabelTypeController.cs" />
     <Compile Include="Controllers\SectieTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OdfController.cs" />
@@ -571,6 +572,11 @@
     <Content Include="Views\Color\Details.cshtml" />
     <Content Include="Views\Color\Edit.cshtml" />
     <Content Include="Views\Color\Index.cshtml" />
+    <Content Include="Views\KabelType\Index.cshtml" />
+    <Content Include="Views\KabelType\Delete.cshtml" />
+    <Content Include="Views\KabelType\Edit.cshtml" />
+    <Content Include="Views\KabelType\Details.cshtml" />
+    <Content Include="Views\KabelType\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

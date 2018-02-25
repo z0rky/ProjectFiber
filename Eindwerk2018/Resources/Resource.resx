@@ -419,4 +419,10 @@
   <data name="FoidFibers" xml:space="preserve">
     <value>Fibers</value>
   </data>
+  <data name="KabelTitle" xml:space="preserve">
+    <value>Cable</value>
+  </data>
+  <data name="KabelTypeTitle" xml:space="preserve">
+    <value>Cable Type</value>
+  </data>
 </root>

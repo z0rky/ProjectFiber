@@ -130,13 +130,13 @@
     <value>Straat</value>
   </data>
   <data name="ColorNameEn" xml:space="preserve">
-    <value>English Name </value>
+    <value>Engelse Naam </value>
   </data>
   <data name="ColorNameFr" xml:space="preserve">
-    <value>French Name</value>
+    <value>Franse Naam</value>
   </data>
   <data name="ColorNameNl" xml:space="preserve">
-    <value>Dutch Name </value>
+    <value>Nederlandse Naam</value>
   </data>
   <data name="CompanyName" xml:space="preserve">
     <value>Naam</value>
@@ -418,5 +418,11 @@
   </data>
   <data name="FoidFibers" xml:space="preserve">
     <value>Vezels</value>
+  </data>
+  <data name="KabelTitle" xml:space="preserve">
+    <value>Kabel</value>
+  </data>
+  <data name="KabelTypeTitle" xml:space="preserve">
+    <value>Kabel Type</value>
   </data>
 </root>

@@ -6,22 +6,23 @@
 
 <div>
     @Html.ActionLink("OdfType", "Index", "OdfType", null, new { id = "OdfType" })<br />
-    @Html.ActionLink("Odf", "Index", "Odf", null, new { id = "Odf" })
+    @Html.ActionLink("Odf", "Index", "Odf")<br />
+    @Html.ActionLink("FOID", "Index", "Foid")
 </div>
 <div>
     <a href="">Location Type</a>-<br />
-    @Html.ActionLink("Locatie", "Index", "Locatie", null, new { id = "locatie" })
+    @Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTitle, "Index", "Locatie")
 </div>
 <div>
-    <a href="">Kabel Type</a>-<br />
-    @Html.ActionLink("Kabel", "Index", "Kabel", null, new { id = "Kabel" })
+    @Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTypeTitle, "Index", "KabelType")<br/>
+    @Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTitle, "Index", "Kabel")
 </div>
 <div>
-    @Html.ActionLink("Sectie Type", "Index", "SectieType", null, new { id = "SectieType" })<br />
-    @Html.ActionLink("Sectie", "Index", "Sectie", null, new { id = "Sectie" })
+    @Html.ActionLink(@Eindwerk2018.Resources.Resource.SectieTypeTitle, "Index", "SectieType")<br />
+    @Html.ActionLink(@Eindwerk2018.Resources.Resource.SectieTitle, "Index", "Sectie")
 </div>
 <div>
-    @Html.ActionLink("Company", "Index", "Company", null, new { id = "Company" })<br />
-    @Html.ActionLink("User", "Index", "User", null, new { id = "User" })<br />
-    @Html.ActionLink("Color", "Index", "Color", null, new { id = "Color" })
+    @Html.ActionLink(@Eindwerk2018.Resources.Resource.CompanyTitle, "Index", "Company")<br />
+    @Html.ActionLink(@Eindwerk2018.Resources.Resource.UserTitle, "Index", "User")<br />
+    @Html.ActionLink(@Eindwerk2018.Resources.Resource.ColorTitle, "Index", "Color")
 </div>
