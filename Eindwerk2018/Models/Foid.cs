@@ -16,16 +16,18 @@ namespace Eindwerk2018.Models
         [Display(Name = "FoidName", ResourceType = typeof(Resources.Resource))]
         public string Name { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "FoidCreationDate", ResourceType = typeof(Resources.Resource))]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreatieDatum { get; set; }
 
         [Required]
         [Display(Name = "FoidStatus", ResourceType = typeof(Resources.Resource))]
         public int Status { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "FoidLastStatusDate", ResourceType = typeof(Resources.Resource))]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime LastStatusDate { get; set; }
 
         [Display(Name = "FoidRequestorId", ResourceType = typeof(Resources.Resource))]
