@@ -92,26 +92,22 @@ namespace Eindwerk2018.Models.db
                         {
                             while (sdr.Read())
                             {
-                                int lengthOtdr = 0;
-                                if (sdr["length_otdr"].ToString().Equals("")) lengthOtdr = 0; //int null give a problem
-                                else lengthOtdr = Convert.ToInt32(sdr["length_otdr"]);
-
                                 foids.Add(new Foid
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
                                     Name = sdr["name"].ToString(),
                                     CreatieDatum = DateTime.Parse(sdr["date_creation"].ToString()),
-                                    Status = Convert.ToInt32(sdr["status"]),
+                                    Status = MyConvertInt(sdr["status"].ToString()),
                                     LastStatusDate= Convert.ToDateTime(sdr["date_last_status"]), //somtimes null, connectionstring adapted (Convert Zero Datetime=True)
-                                    RequestorId = Convert.ToInt32(sdr["requestor_id"]),
+                                    RequestorId = MyConvertInt(sdr["requestor_id"].ToString()),
                                     Requestor = new User { Id= Convert.ToInt32(sdr["requestor_id"]), UserName= sdr["user_name"].ToString() },
                                     Comments = sdr["comments"].ToString(),
-                                    LengthCalculated = Convert.ToInt32(sdr["length_calculated"]),
-                                    //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]), //see above
-                                    LengthOtdr = lengthOtdr,
-                                    StartOdfId = Convert.ToInt32(sdr["start_odf"]),
+                                    LengthCalculated = MyConvertInt(sdr["length_calculated"].ToString()),
+                                    //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]), //when  null, blockes, so created own funtion
+                                    LengthOtdr = MyConvertInt(sdr["length_otdr"].ToString()),
+                                    StartOdfId = MyConvertInt(sdr["start_odf"].ToString()),
                                     StartOdfName = sdr["OdfStartName"].ToString(),
-                                    EndOdfId = Convert.ToInt32(sdr["end_odf"]),
+                                    EndOdfId = MyConvertInt(sdr["end_odf"].ToString()),
                                     EndOdfName = sdr["OdfEndName"].ToString()
                                 });
                             }

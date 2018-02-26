@@ -47,8 +47,6 @@ namespace Eindwerk2018.Models
         public string Plaats { get; set; }
 
         [Range(8,8)]
-        public int Lcode { get; set; }
-
-      
+        public String Lcode { get; set; }
     }
 }

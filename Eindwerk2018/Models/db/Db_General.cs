@@ -26,6 +26,7 @@ namespace Eindwerk2018.Models.db
         //short queries
         protected void ShortQuery(string qry)
         {
+            if(con==null) con = new MySqlConnection(constr);
             using (con) //perhaps connection can be made once and reused?
             {
                 try
@@ -41,12 +42,30 @@ namespace Eindwerk2018.Models.db
                 catch (Exception e)
                 {
                     //throw new System.InvalidOperationException("No connection to database");
-                    Console.WriteLine("No connection to database"+e.Message); //should rethrow and handle it in the user part somwhere
+                    Console.WriteLine("No connection to database" + e.Message); //should rethrow and handle it in the user part somwhere
                 }
             }
         }
 
         //for return queries
         //private List<model> ListQueries(string qry) { }
+
+        protected int MyConvertInt(String var)
+        {
+            int nummer = 0;
+            if (var.Equals("")) nummer = 0; //int null give a problem
+            else nummer = Convert.ToInt32(var);
+
+            return nummer;
+        }
+
+        protected Double MyConvertDouble(String var)
+        {
+            Double nummer;
+            if (var.Equals("")) nummer = 0; //int null give a problem
+            else nummer = Convert.ToDouble(var);
+
+            return nummer;
+        }
     }
 }
