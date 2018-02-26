@@ -14,7 +14,7 @@ namespace Eindwerk2018.Models.db
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id,name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf FROM FOID LIMIT " + Start+","+Max_row; //query
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f LIMIT " + Start+","+ Max_row; //query
 
             return ListQueries(query);
         }
@@ -22,7 +22,7 @@ namespace Eindwerk2018.Models.db
         public List<Foid> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id,name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf FROM FOID WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
@@ -31,7 +31,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT id,name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf FROM FOID WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,u.user_name AS user_name,f.comments,f.length_calculated,f.length_otdr,f.start_odf,oa.name AS OdfStartName,f.end_odf,oe.name AS OdfEndName FROM FOID AS f, user AS u, ODF AS oa, ODF AS oe WHERE  f.id='" + id + "' AND f.start_odf=oa.id AND f.end_odf=oe.id AND f.requestor_id=u.id LIMIT 1"; //query
 
             Foid foid = ListQueries(query)[0];
 
@@ -104,12 +104,15 @@ namespace Eindwerk2018.Models.db
                                     Status = Convert.ToInt32(sdr["status"]),
                                     LastStatusDate= Convert.ToDateTime(sdr["date_last_status"]), //somtimes null, connectionstring adapted (Convert Zero Datetime=True)
                                     RequestorId = Convert.ToInt32(sdr["requestor_id"]),
+                                    Requestor = new User { Id= Convert.ToInt32(sdr["requestor_id"]), UserName= sdr["user_name"].ToString() },
                                     Comments = sdr["comments"].ToString(),
                                     LengthCalculated = Convert.ToInt32(sdr["length_calculated"]),
                                     //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]), //see above
                                     LengthOtdr = lengthOtdr,
                                     StartOdfId = Convert.ToInt32(sdr["start_odf"]),
-                                    EndOdfId = Convert.ToInt32(sdr["end_odf"])
+                                    StartOdfName = sdr["OdfStartName"].ToString(),
+                                    EndOdfId = Convert.ToInt32(sdr["end_odf"]),
+                                    EndOdfName = sdr["OdfEndName"].ToString()
                                 });
                             }
                         }

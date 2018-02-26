@@ -425,4 +425,10 @@
   <data name="KabelTypeTitle" xml:space="preserve">
     <value>Kabel Type</value>
   </data>
+  <data name="RequestorUserName" xml:space="preserve">
+    <value>Aanvrager gebruikersnaam</value>
+  </data>
+  <data name="FoidStartOdfName" xml:space="preserve">
+    <value>Start ODF Naam</value>
+  </data>
 </root>

@@ -421,6 +421,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start ODF Name.
+        /// </summary>
+        public static string FoidStartOdfName {
+            get {
+                return ResourceManager.GetString("FoidStartOdfName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string FoidStatus {
@@ -786,6 +795,15 @@ namespace Eindwerk2018.Resources {
         public static string OdfTypeTitle {
             get {
                 return ResourceManager.GetString("OdfTypeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requestor User name.
+        /// </summary>
+        public static string RequestorUserName {
+            get {
+                return ResourceManager.GetString("RequestorUserName", resourceCulture);
             }
         }
         

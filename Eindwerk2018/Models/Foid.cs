@@ -32,6 +32,7 @@ namespace Eindwerk2018.Models
 
         [Display(Name = "FoidRequestorId", ResourceType = typeof(Resources.Resource))]
         public int RequestorId { get; set; }
+        public User Requestor { get; set; }
 
         [Display(Name = "FoidComments", ResourceType = typeof(Resources.Resource))]
         public string Comments{ get; set; }
@@ -45,8 +46,14 @@ namespace Eindwerk2018.Models
         [Display(Name = "FoidStartOdfId", ResourceType = typeof(Resources.Resource))]
         public int StartOdfId { get; set; }
 
+        [Display(Name = "fiberFoidOdfStartName", ResourceType = typeof(Resources.Resource))]
+        public String StartOdfName { get; set; }
+
         [Display(Name = "FoidEndOdfId", ResourceType = typeof(Resources.Resource))]
         public int EndOdfId { get; set; }
+
+        [Display(Name = "fiberFoidOdfEndName", ResourceType = typeof(Resources.Resource))]
+        public String EndOdfName { get; set; }
 
         [Display(Name = "FoidFibers", ResourceType = typeof(Resources.Resource))]
         public List<FiberFoid> Fibers { get; set; }

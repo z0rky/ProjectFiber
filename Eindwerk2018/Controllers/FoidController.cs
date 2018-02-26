@@ -39,6 +39,8 @@ namespace Eindwerk2018.Controllers
         {
             if (ModelState.IsValid)
             {
+                //add creation date
+                foid.CreatieDatum = new DateTime();
                 dbFoid.Add(foid);
                 return RedirectToAction("Index");
             }
@@ -60,6 +62,8 @@ namespace Eindwerk2018.Controllers
         {
             if (ModelState.IsValid)
             {
+                //if status is changed, update date
+                //foid.LastStatusDate = new DateTime();
                 dbFoid.Edit(foid);
                 return RedirectToAction("Foid", "Details", foid.Id);
             }
