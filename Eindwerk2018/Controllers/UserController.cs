@@ -74,7 +74,7 @@ namespace Eindwerk2018.Controllers
             if (ModelState.IsValid)
             {
                 dbUsers.Edit(user);
-                return RedirectToAction("User", "Details",user.Id);
+                return RedirectToAction("Details", "User", new { Id = user.Id });
             }
 
             return View(user);

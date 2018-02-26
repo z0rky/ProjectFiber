@@ -31,7 +31,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name_nl, name_fr, desription_nl,desription_fr FROM location_type WHERE id='"+ id +"' LIMIT 1"; //query
+            string query = "SELECT id, name_nl, name_fr, description_nl,description_fr FROM location_type WHERE id='"+ id +"' LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
@@ -40,7 +40,7 @@ namespace Eindwerk2018.Models.db
         {
             if (locatieType != null)
             {
-                string query = "INSERT INTO location_type (name_nl, name_fr, desription_nl,desription_fr) VALUES ('" + locatieType.NaamNL + "','"+ locatieType.NaamFR + "','" + locatieType.DescNL + "','" + locatieType.DescFR +"')"; //query
+                string query = "INSERT INTO location_type (name_nl, name_fr, description_nl,description_fr) VALUES ('" + locatieType.NaamNL + "','"+ locatieType.NaamFR + "','" + locatieType.DescNL + "','" + locatieType.DescFR +"')"; //query
                 this.ShortQuery(query);
             }
         }
@@ -49,7 +49,7 @@ namespace Eindwerk2018.Models.db
         {
             if (locatieType != null || locatieType.Id != 0)
             {
-                string query = "UPDATE location_type SET name_nl='" + locatieType.NaamNL + "',name_fr='" + locatieType.NaamFR + "', desription_nl='" + locatieType.DescNL + "', desription_fr='" + locatieType.DescFR + "' WHERE id='" + locatieType.Id + "' LIMIT 1"; //query
+                string query = "UPDATE location_type SET name_nl='" + locatieType.NaamNL + "',name_fr='" + locatieType.NaamFR + "', description_nl='" + locatieType.DescNL + "', description_fr='" + locatieType.DescFR + "' WHERE id='" + locatieType.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -84,8 +84,8 @@ namespace Eindwerk2018.Models.db
                                     Id = Convert.ToInt32(sdr["id"]),
                                     NaamNL = sdr["name_nl"].ToString(),
                                     NaamFR = sdr["name_fr"].ToString(),
-                                    DescNL = sdr["desription_nl"].ToString(),
-                                    DescFR = sdr["desription_fr"].ToString()
+                                    DescNL = sdr["description_nl"].ToString(),
+                                    DescFR = sdr["description_fr"].ToString()
                                 });
                             }
                         }

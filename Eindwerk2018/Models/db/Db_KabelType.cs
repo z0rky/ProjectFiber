@@ -50,7 +50,7 @@ namespace Eindwerk2018.Models.db
         {
             if (kabelType != null || kabelType.Id != 0)
             {
-                string query = "UPDATE kabel SET name_nl='" + kabelType.NameNL + "',name_fr='" + kabelType.NameFR + "' WHERE id='" + kabelType.Id + "' LIMIT 1"; //query
+                string query = "UPDATE kabel_type SET name_nl='" + kabelType.NameNL + "',name_fr='" + kabelType.NameFR + "' WHERE id='" + kabelType.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }

@@ -42,7 +42,7 @@ namespace Eindwerk2018.Controllers
         // POST: OdfTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OdfTypeName,OdfTypeDescription")] OdfType odfType)
+        public ActionResult Create([Bind(Include = "Name,Description")] OdfType odfType)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace Eindwerk2018.Controllers
         // POST: OdfTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,OdfTypeName,OdfTypeDescription")] OdfType odfType)
+        public ActionResult Edit([Bind(Include = "id,Name,Description")] OdfType odfType)
         {
             try
             {

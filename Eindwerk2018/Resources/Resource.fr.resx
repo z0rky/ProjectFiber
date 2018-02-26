@@ -130,13 +130,13 @@
     <value>Rue</value>
   </data>
   <data name="ColorNameEn" xml:space="preserve">
-    <value>English Name </value>
+    <value>Nom Anglais</value>
   </data>
   <data name="ColorNameFr" xml:space="preserve">
-    <value>French Name</value>
+    <value>Nom Français</value>
   </data>
   <data name="ColorNameNl" xml:space="preserve">
-    <value>Dutch Name </value>
+    <value>Nom Néerlandais</value>
   </data>
   <data name="CompanyName" xml:space="preserve">
     <value>Nom</value>
@@ -254,7 +254,7 @@
     <value>Câble Id</value>
   </data>
   <data name="SectieKabelName" xml:space="preserve">
-    <value>Cable Nom</value>
+    <value>Câble Nom</value>
   </data>
   <data name="SectieLength" xml:space="preserve">
     <value>Longeur</value>
@@ -418,5 +418,11 @@
   </data>
   <data name="FoidFibers" xml:space="preserve">
     <value>Fibres</value>
+  </data>
+  <data name="KabelTitle" xml:space="preserve">
+    <value>Câble</value>
+  </data>
+  <data name="KabelTypeTitle" xml:space="preserve">
+    <value>Câble Type</value>
   </data>
 </root>

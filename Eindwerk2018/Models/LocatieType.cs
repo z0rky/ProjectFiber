@@ -8,10 +8,12 @@ namespace Eindwerk2018.Models
     {
         public int Id { get; set; }
 
+        [Required]
         [StringLength(45)]
         [Display(Name = "LocationTypeNameNl", ResourceType = typeof(Resources.Resource))]
         public string NaamNL { get; set; }
 
+        [Required]
         [StringLength(45)]
         [Display(Name = "LocationTypeNameFR", ResourceType = typeof(Resources.Resource))]
         public string NaamFR { get; set; }
@@ -23,14 +25,5 @@ namespace Eindwerk2018.Models
         [StringLength(250)]
         [Display(Name = "LocationTypeDescFr", ResourceType = typeof(Resources.Resource))]
         public string DescFR { get; set; }
-
-        //public LocatieType(int id, string nl, string fr, string descnl, string descfr)
-        //{
-        //    Id = id;
-        //    NaamNL = nl;
-        //    NaamFR = fr;
-        //    DescNL = descnl;
-        //    DescFR = descfr;
-        //}
     }
 }

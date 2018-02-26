@@ -91,16 +91,11 @@ namespace Eindwerk2018.Controllers
         }
 
 
-
         private IEnumerable<Locatie> GetLocaties()
         {
             return dbLocaties.List();
            
         }
-
-        
-
-
 
 
         public ActionResult Edit(int id)

@@ -93,26 +93,20 @@ namespace Eindwerk2018.Models.db
                             while (sdr.Read())
                             {
                                 int lengthOtdr = 0;
-                                if (sdr["length_otdr"].Equals("null")) lengthOtdr = 0;
-                                //else lengthOtdr = Convert.ToInt32(sdr["length_otdr"]);
+                                if (sdr["length_otdr"].ToString().Equals("")) lengthOtdr = 0; //int null give a problem
+                                else lengthOtdr = Convert.ToInt32(sdr["length_otdr"]);
 
                                 foids.Add(new Foid
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
                                     Name = sdr["name"].ToString(),
                                     CreatieDatum = DateTime.Parse(sdr["date_creation"].ToString()),
-                                    //CreatieDatum = Convert.ToDateTime(sdr["date_last_status"]),
-                                    //CreatieDatum = DateTime.ParseExact(sdr["date_creation"].ToString(), "d/MM/yyyy H:mm:ss", null), //Why always the current date ??
-                                    //CreatieDatum = (DateTime) sdr["date_creation"],
-                                    //CreatieDatum = Convert.ToDateTime(sdr["date_creation"], new CultureInfo("nl-BE")),
-                                    // DateTime.TryParse(sdr["date_creation"].ToString(), CreatieDatum),
-                                    Comments = sdr["date_creation"].ToString(),
                                     Status = Convert.ToInt32(sdr["status"]),
-                                    //LastStatusDate= Convert.ToDateTime(sdr["date_last_status"]),
+                                    LastStatusDate= Convert.ToDateTime(sdr["date_last_status"]), //somtimes null, connectionstring adapted (Convert Zero Datetime=True)
                                     RequestorId = Convert.ToInt32(sdr["requestor_id"]),
-                                    //Comments = sdr["comments"].ToString(),
+                                    Comments = sdr["comments"].ToString(),
                                     LengthCalculated = Convert.ToInt32(sdr["length_calculated"]),
-                                    //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]),
+                                    //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]), //see above
                                     LengthOtdr = lengthOtdr,
                                     StartOdfId = Convert.ToInt32(sdr["start_odf"]),
                                     EndOdfId = Convert.ToInt32(sdr["end_odf"])
@@ -160,7 +154,7 @@ namespace Eindwerk2018.Models.db
                                     SectieNr = Convert.ToInt32(sdr["section_nr"]),
                                     SectieLength = Convert.ToInt32(sdr["length"]),
                                     FoidSerialNr = Convert.ToInt32(sdr["FOID_serial_nr"]),
-                                    FoidFibreNr = Convert.ToInt32(sdr["FOID_serial_nr"]),
+                                    FoidFibreNr = Convert.ToInt32(sdr["FOID_fibre_nr"]),
                                     OdfStartId = Convert.ToInt32(sdr["odf_start_id"]),
                                     OdfStartName = sdr["odf_start_name"].ToString(),
                                     OdfEndId = Convert.ToInt32(sdr["odf_end_id"]),

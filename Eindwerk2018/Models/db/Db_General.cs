@@ -34,10 +34,7 @@ namespace Eindwerk2018.Models.db
                     {
                         cmd.Connection = con;
                         con.Open();
-                        using (MySqlDataReader sdr = cmd.ExecuteReader())
-                        {
-                            while (sdr.Read()) { }  //nothing, perhaps not needed ?
-                        }
+                        MySqlDataReader sdr = cmd.ExecuteReader();
                         con.Close();
                     }
                 }
