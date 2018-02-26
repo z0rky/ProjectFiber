@@ -11,7 +11,7 @@
 <!--<p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
 </p>-->
-<table class="table" id="KabelTable">
+<table class="table table-bordered table-hover" id="KabelTable">
     <thead>
     <tr>
         <th>@Html.DisplayNameFor(model => model.Naam)</th>
@@ -41,35 +41,13 @@
         </tbody>   
 </table>
 
-<input type="button" class="btn btn-primary" value="Kabel Toevoegen" onclick="location.href='@Url.Action("Create", "Kabel")'" />
+<input type="button" class="btn btn-primary" value="Kabel Toevoegen" onclick="location.href='@Url.Action("New", "Kabel")'" />
 @section scripts
 {
     <script>
         $(document).ready(function () {
             $("#KabelTable").DataTable();
-
-            $("#KabelTable").on("click",".js-delete", function ()
-                {
-                    var button = $(this);
-                    bootbox.confirm("Ben je zeker dat de geselecteerde locatie verwijderd mag worden?",
-                        function (result)
-                        {
-                            if (result)
-                            {
-                                $.ajax(
-                                    {
-                                        url: "/api/locaties/" + button.attr("data-customer-id"),
-                                        methode: "DELETE",
-                                        succes: function ()
-                                        {
-                                            button.parents("tr").remove();
-                                            console.log("succes"); // testen in console
-                                        }
-                                    });
-                            }
-                        });
-                });
-        });
+             });
     
   
     </script>
