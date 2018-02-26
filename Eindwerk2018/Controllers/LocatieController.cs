@@ -12,7 +12,7 @@ namespace Eindwerk2018.Controllers
 {
     public class LocatieController : Controller
     {
-        private Db_LocatieType dbLocatieypes = new Db_LocatieType();
+        private Db_LocatieType dbLocatietypes = new Db_LocatieType();
         private Db_Locatie dbLocaties = new Db_Locatie();
 
         public List<LocatieType> locatielijst = new List<LocatieType>();
@@ -20,9 +20,9 @@ namespace Eindwerk2018.Controllers
         public List<Locatie> locatieFakeDataTest = new List<Locatie>();
 
 
-        public void FakeData()
+        public void GetLocatieTypes()
         {
-            locatielijst = dbLocatieypes.List(); 
+            locatielijst = dbLocatietypes.List(); 
         }
 
 
@@ -39,6 +39,7 @@ namespace Eindwerk2018.Controllers
         public ActionResult Details(int id)
         {
 
+
             var DetailsLocatie = dbLocaties.Get(id);
 
             return View("Details", DetailsLocatie);
@@ -46,7 +47,7 @@ namespace Eindwerk2018.Controllers
 
         public ActionResult New()
         {
-            FakeData();
+            GetLocatieTypes();
 
             var viewModel = new LocatieFormViewModel()
             {
@@ -64,24 +65,23 @@ namespace Eindwerk2018.Controllers
         {
             if (!ModelState.IsValid)
             {
-                FakeData();
+                GetLocatieTypes();
                 var viewModel = new LocatieFormViewModel
                 {
                     Locatie = locatie,
                     LocatieTypes = locatielijst
 
                 };
-                return View("Index", viewModel);
+                return View("LocatieForm", viewModel);
             }
             if (locatie.Id == 0)
             {
-                //schrijf naar database
+                dbLocaties.Add(locatie);
             }
 
             else
             {
-                // zoeken naar id en info overschrijven in DB 
-                //UPDATE!!!!!!
+                //
             }
 
             //_context.SaveChanges();
@@ -105,10 +105,11 @@ namespace Eindwerk2018.Controllers
 
         public ActionResult Edit(int id)
         {
+
+           GetLocatieTypes();
             
-            FakeData();
-            
-            var locatieTest = GetLocaties();
+
+             var locatieTest = GetLocaties();
             var locatieEdit = locatieTest.SingleOrDefault(c => c.Id == id);
              
             if (locatieTest == null)

@@ -7,9 +7,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New Kabel</h2>
+<h2>New Cable</h2>
 
-@using (Html.BeginForm(Eindwerk2018.Resources.Resource.LinkCreate2, "Kabel"))
+@using (Html.BeginForm("Save","Kabel"))
 {
 
     <div class="form-group">
@@ -20,13 +20,21 @@
 
     </div>
 
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.Kabel.Reference)
+        @Html.TextBoxFor(m => m.Kabel.Reference, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Kabel.Reference)
+
+    </div>
+
 
 
 
     <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
 
 
-    // date_creation = datetime now in controller
-    // requestor xtra table?? dropbox?? of bepaald via security
+    
+   
 
 }

@@ -1,0 +1,50 @@
+﻿@model Eindwerk2018.ViewModels.SearchKabelResultViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kabel</h2>
+
+<table class="table table-bordered table-hover" id="KabelTable">
+    <thead>
+    <tr>
+        <th>Naam</th>
+        <th>Reference</th>
+        <th>CreatieDatum</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @foreach (var item in Model.GezochteKabels)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Naam)</td>
+            <td>@Html.DisplayFor(modelItem => item.Reference)</td>
+            <td>@Html.DisplayFor(modelItem => item.CreatieDatum)</td>
+
+            <td>@Html.ActionLink("Sections", "Index", "Sectie", new { kabelId = item.Id },null)</td>
+            <td>
+               
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = item.Id }) 
+          
+            </td>
+        </tr>
+    }
+    </tbody>   
+</table>
+
+<input type="button" class="btn btn-primary" value="New Search" onclick="location.href='@Url.Action("Index", "SearchKabel")'" />
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#KabelTable").DataTable();
+        });
+    
+  
+    </script>
+}

@@ -241,6 +241,7 @@
     <Compile Include="Models\LocatieType.cs" />
     <Compile Include="ViewModels\NieuweSectieViewModel.cs" />
     <Compile Include="ViewModels\Search\SearchFoidResultViewModel .cs" />
+    <Compile Include="ViewModels\Search\SearchKabelResultViewModel.cs" />
     <Compile Include="ViewModels\Search\SearchKabelViewModel.cs" />
     <Compile Include="ViewModels\Search\SearchFoidViewModel.cs" />
     <Compile Include="ViewModels\Search\SearchLocatieResultViewModel.cs" />
@@ -565,6 +566,9 @@
     <Content Include="Views\Foid\Details.cshtml" />
     <Content Include="Views\SearchLocatie\IndexSearchResult.cshtml" />
     <Content Include="Views\SearchFoid\IndexSearchResult.cshtml" />
+    <Content Include="Views\Kabel\Details.cshtml" />
+    <Content Include="Views\Kabel\DetailsToSections.cshtml" />
+    <Content Include="Views\SearchKabel\IndexSearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

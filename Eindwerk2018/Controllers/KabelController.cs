@@ -13,6 +13,8 @@ namespace Eindwerk2018.Controllers
     public class KabelController : Controller
     {
         private Db_Kabel dbKabels = new Db_Kabel();
+        public List<Kabel> kabels = new List<Kabel>();
+        
 
         public ActionResult Index()
         {
@@ -26,29 +28,36 @@ namespace Eindwerk2018.Controllers
             Kabel kabel = dbKabels.Get((int)id);
             if (kabel == null) return HttpNotFound();
 
-            return View(kabel);
+            return View("Details",kabel);
         }
 
-        public ActionResult Create()
+        public ActionResult New()
         {
-            return View ();
-        } 
+
+            return View("Create");
+        }
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection )
+        public ActionResult Save(Kabel kabel )
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    var viewModel = new NieuweFoidViewModel
-            //    {
-            //        Foid = foid
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new NieuweKabelViewModel
+                {
+                    Kabel = kabel
 
 
-            //    };
-            //    return View("Index", viewModel);
-            //}
-            //return RedirectToAction("Index", "")
-            return View("index");
+                };
+                return View("Create", viewModel);
+            }
+            else
+            {   
+                kabel.CreatieDatum = DateTime.Now;
+               dbKabels.Add(kabel);
+
+                return View("DetailsToSections", kabel);
+            }
+           
         }
         
         public ActionResult Edit(int id)
@@ -56,29 +65,29 @@ namespace Eindwerk2018.Controllers
             return View ();
         }
 
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try {
-                return RedirectToAction ("Index");
-            } catch {
-                return View ();
-            }
-        }
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try {
+        //        return RedirectToAction ("Index");
+        //    } catch {
+        //        return View ();
+        //    }
+        //}
 
-        public ActionResult Delete(int id)
-        {
-            return View ();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View ();
+        //}
 
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try {
-                return RedirectToAction ("Index");
-            } catch {
-                return View ();
-            }
-        }
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try {
+        //        return RedirectToAction ("Index");
+        //    } catch {
+        //        return View ();
+        //    }
+        //}
     }
 }

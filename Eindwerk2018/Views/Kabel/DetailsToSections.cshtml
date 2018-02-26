@@ -1,0 +1,29 @@
+﻿@model Eindwerk2018.Models.Kabel
+    
+
+@{
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LocationTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Naam</h2>
+   
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.Id)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Naam)</dt>
+        <dd>@Html.DisplayFor(model => model.Naam)</dd>
+        <dt>@Html.DisplayNameFor(model => model.CreatieDatum)</dt>
+        <dd>@Html.DisplayFor(model => model.CreatieDatum)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Reference)</dt>
+        <dd>@Html.DisplayFor(model => model.Reference)</dd>
+       
+    </dl>
+   
+</div>
+
+<input type="button" class="btn btn-primary" value="Overzicht" onclick="location.href='@Url.Action("Index", "Kabel")'" />
+<input type="button" class="btn btn-primary" value="Sectie Toevoegen" onclick="location.href='@Url.Action("Create", "Sectie")'" />
