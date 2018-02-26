@@ -643,11 +643,9 @@
     <Content Include="Views\Foid\Details.cshtml" />
     <Content Include="Views\SearchLocatie\IndexSearchResult.cshtml" />
     <Content Include="Views\SearchFoid\IndexSearchResult.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Kabel\Details.cshtml" />
     <Content Include="Views\Kabel\DetailsToSections.cshtml" />
     <Content Include="Views\SearchKabel\IndexSearchResult.cshtml" />
-=======
     <Content Include="Views\Color\Create.cshtml" />
     <Content Include="Views\Color\Delete.cshtml" />
     <Content Include="Views\Color\Details.cshtml" />
@@ -674,7 +672,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
->>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
