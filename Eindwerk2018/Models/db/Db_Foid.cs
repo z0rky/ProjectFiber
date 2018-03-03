@@ -49,13 +49,15 @@ namespace Eindwerk2018.Models.db
             return null; // ListQueries(query)[0]; //new type of sectie, viewSectie ?
         }
 
-        public void Add(Foid foid)
+        public int Add(Foid foid)
         {
             if (foid != null)
             {
                 string query = "INSERT INTO FOID (name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf) VALUES ('" + foid.Name + "','" + foid.CreatieDatum + "','" + foid.Status+ "','" + foid.LastStatusDate + "','" + foid.RequestorId + "','" + foid.Comments + "','" + foid.LengthCalculated + "','" + foid.LengthOtdr + "','" + foid.StartOdfId + "','" + foid.EndOdfId + "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(Foid foid)

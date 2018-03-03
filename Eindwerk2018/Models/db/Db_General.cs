@@ -72,7 +72,8 @@ namespace Eindwerk2018.Models.db
         {
             int lastId = 0;
 
-            if (con == null) con = new MySqlConnection(constr);
+            //if (con == null) con = new MySqlConnection(constr);
+            con = new MySqlConnection(constr);
             using (con) //perhaps connection can be made once and reused?
             {
                 try
@@ -82,7 +83,7 @@ namespace Eindwerk2018.Models.db
                         cmd.Connection = con;
                         con.Open();
                         MySqlDataReader sdr = cmd.ExecuteReader();
-                        lastId = MyConvertInt(sdr["id"].ToString());
+                        if (sdr.Read()) lastId = MyConvertInt(sdr["id"].ToString());
                         con.Close();
                     }
                 }
@@ -100,7 +101,8 @@ namespace Eindwerk2018.Models.db
         {
             int rows = 0;
 
-            if (con == null) con = new MySqlConnection(constr);
+            //if (con == null) con = new MySqlConnection(constr);
+            con = new MySqlConnection(constr); //gewoon opnieuw
             using (con)
             {
                 try

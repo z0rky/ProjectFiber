@@ -30,6 +30,10 @@ namespace Eindwerk2018.Models.db
         {
             if (history != null)
             {
+                //SqlCommand com = new SqlCommand("SELECT lastName , phoneNo , creditCardNo , dateOfBirth  FROM UserExtendedDataSet WHERE UserId = @UserId", con);
+                //com.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = getUserId();
+
+
                 string query = "INSERT INTO history (datum,table,id,user,text) VALUES ('" + history.CreatieDatum + "','" + history.Table + "','" + history.Id + "','" + history.User + "','" + history.Text + "')"; //query
                 this.ShortQuery(query);
             }

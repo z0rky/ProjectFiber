@@ -21,7 +21,7 @@ namespace Eindwerk2018.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreatieDatum { get; set; }
 
-        [Required]
+        //[Required] // because with create it is not yet filled in
         [Display(Name = "FoidStatus", ResourceType = typeof(Resources.Resource))]
         public int Status { get; set; }
 

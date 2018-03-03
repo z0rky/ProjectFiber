@@ -41,30 +41,33 @@ namespace Eindwerk2018.Controllers
         } 
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Name,Comments,LengthOtdr")] Foid foid)
+        public ActionResult Create([Bind(Include = "Foid")] NieuweFoidViewModel newFoid)
         {
             if (ModelState.IsValid)
             {
                 //add creation date
-                foid.CreatieDatum = new DateTime();
-                foid.LastStatusDate = new DateTime();
+                newFoid.Foid.CreatieDatum = DateTime.Today;
+                newFoid.Foid.LastStatusDate = DateTime.Today;
                 //hardcode status as new
-                foid.Status = 0;
+                newFoid.Foid.Status = 0;
 
-                dbFoid.Add(foid);
-                return RedirectToAction("Index");
+                int newId = dbFoid.Add(newFoid.Foid);
+                return RedirectToAction("Edit", "Foid", new { Id = newId });
             }
-            return View(foid);
+            //moet d elijst opnieuw aanmaken
+            newFoid.Users = dbUser.List();
+            return View(newFoid);
         }
         
         public ActionResult Edit(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Foid foid = dbFoid.Get((int)id);
+            //users ophalen
+            var viewModel = new NieuweFoidViewModel() { Foid = dbFoid.Get((int)id), Users = dbUser.List() };
 
-            if (foid == null) return HttpNotFound();
-            return View(foid);
+            if (viewModel.Foid == null) return HttpNotFound();
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -75,7 +78,7 @@ namespace Eindwerk2018.Controllers
                 //if status is changed, update date; hoe weten we wat de vorige status was?
                 //foid.LastStatusDate = new DateTime();
                 dbFoid.Edit(foid);
-                return RedirectToAction("Foid", "Details", foid.Id);
+                return RedirectToAction("Details", "Foid", foid.Id);
             }
 
             return View(foid);
