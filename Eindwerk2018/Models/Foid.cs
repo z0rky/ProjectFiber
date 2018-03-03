@@ -38,9 +38,11 @@ namespace Eindwerk2018.Models
         public string Comments{ get; set; }
 
         [Display(Name = "FoidLength", ResourceType = typeof(Resources.Resource))]
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         public int LengthCalculated { get; set; }
 
         [Display(Name = "FoidLengthOtdr", ResourceType = typeof(Resources.Resource))]
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         public int LengthOtdr { get; set; }
 
         [Display(Name = "FoidStartOdfId", ResourceType = typeof(Resources.Resource))]

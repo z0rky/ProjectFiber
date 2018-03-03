@@ -112,5 +112,14 @@ namespace Eindwerk2018.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public JsonResult SearchOdfs(string Prefix)
+        {
+            List<Odf> odfs = dbOdfs.Search(Prefix); //return too much for this
+            //Converteren
+            var list = from N in odfs select new { N.Id, N.Name };
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }

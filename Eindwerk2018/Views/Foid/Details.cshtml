@@ -20,7 +20,29 @@
         <dd>@Html.DisplayFor(model => model.CreatieDatum)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.Status)</dt>
-        <dd>@Html.DisplayFor(model => model.Status)</dd>
+        <dd>
+            @switch (Html.DisplayFor(model => model.Status).ToString())
+            {
+                case "0":
+                    @Eindwerk2018.Resources.Resource.StatusNew;
+                    break;
+                case "1":
+                    @Eindwerk2018.Resources.Resource.StatusReserved;
+                    break;
+                case "2":
+                    @Eindwerk2018.Resources.Resource.StatusAccept;
+                    break;
+                case "3":
+                    @Eindwerk2018.Resources.Resource.StatusInService;
+                    break;
+                case "9":
+                    @Eindwerk2018.Resources.Resource.StatusRemoved;
+                    break;
+                default:
+                    //{ Onbekend; }
+                break;
+            }
+        </dd>
 
         <dt>@Eindwerk2018.Resources.Resource.RequestorUserName</dt>
         <dd>@Html.DisplayFor(model => model.Requestor.UserName)</dd>
@@ -29,19 +51,32 @@
         <dd>@Html.DisplayFor(model => model.Comments)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.LengthCalculated)</dt>
-        <dd>@Html.DisplayFor(model => model.LengthCalculated)</dd>
+        <dd>
+            @if (Html.DisplayFor(model => model.LengthCalculated).Equals("0"))
+            {
+            <B>Onbekend</B>
+            }
+            else { @(Html.DisplayFor(model => model.LengthCalculated) +" m") }
+        </dd>
 
         <dt>@Html.DisplayNameFor(model => model.LengthOtdr)</dt>
-        <dd>@Html.DisplayFor(model => model.LengthOtdr)</dd>
+        <dd>
+            @if (Html.DisplayFor(model => model.LengthOtdr).Equals("0"))
+            {
+                <B>Onbekend</B>
+            }
+            else
+            { @( Html.DisplayFor(model => model.LengthOtdr) + " m")}
+        </dd>
 
         <dt>@Html.DisplayNameFor(model => model.StartOdfName)</dt>
         <dd>@Html.DisplayFor(model => model.StartOdfName)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.EndOdfName)</dt>
         <dd>@Html.DisplayFor(model => model.EndOdfName)</dd>
-    </dl>
+        </dl>
 
-    <table class="table">
+        <table class="table">
         <tr>
             <th>@Eindwerk2018.Resources.Resource.fiberFoidFiberNr</th>
             <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>

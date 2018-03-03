@@ -90,26 +90,35 @@ namespace Eindwerk2018.Models.db
                         con.Open();
                         using (MySqlDataReader sdr = cmd.ExecuteReader())
                         {
+                            DateTime statusDate = new DateTime(2000,1,1); //just a default date
                             while (sdr.Read())
                             {
-                                foids.Add(new Foid
+                                try { if (!sdr["date_last_status"].Equals(null)) statusDate = Convert.ToDateTime(sdr["date_last_status"].ToString());}
+                                catch (Exception e) { Console.WriteLine("What is this " + e.Message); }
+
+                                try
                                 {
-                                    Id = Convert.ToInt32(sdr["id"]),
-                                    Name = sdr["name"].ToString(),
-                                    CreatieDatum = DateTime.Parse(sdr["date_creation"].ToString()),
-                                    Status = MyConvertInt(sdr["status"].ToString()),
-                                    LastStatusDate= Convert.ToDateTime(sdr["date_last_status"]), //somtimes null, connectionstring adapted (Convert Zero Datetime=True)
-                                    RequestorId = MyConvertInt(sdr["requestor_id"].ToString()),
-                                    Requestor = new User { Id= Convert.ToInt32(sdr["requestor_id"]), UserName= sdr["user_name"].ToString() },
-                                    Comments = sdr["comments"].ToString(),
-                                    LengthCalculated = MyConvertInt(sdr["length_calculated"].ToString()),
-                                    //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]), //when  null, blockes, so created own funtion
-                                    LengthOtdr = MyConvertInt(sdr["length_otdr"].ToString()),
-                                    StartOdfId = MyConvertInt(sdr["start_odf"].ToString()),
-                                    StartOdfName = sdr["OdfStartName"].ToString(),
-                                    EndOdfId = MyConvertInt(sdr["end_odf"].ToString()),
-                                    EndOdfName = sdr["OdfEndName"].ToString()
-                                });
+                                    foids.Add(new Foid
+                                    {
+                                        Id = Convert.ToInt32(sdr["id"]),
+                                        Name = sdr["name"].ToString(),
+                                        CreatieDatum = DateTime.Parse(sdr["date_creation"].ToString()),
+                                        Status = MyConvertInt(sdr["status"].ToString()),
+                                        LastStatusDate= statusDate, //somtimes null, connectionstring adapted (Convert Zero Datetime=True)
+                                        //Lastdate Sometimes has a problem
+                                        RequestorId = MyConvertInt(sdr["requestor_id"].ToString()),
+                                        Requestor = new User { Id = Convert.ToInt32(sdr["requestor_id"]), UserName = sdr["user_name"].ToString() },
+                                        Comments = sdr["comments"].ToString(),
+                                        LengthCalculated = MyConvertInt(sdr["length_calculated"].ToString()),
+                                        //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]), //when  null, blockes, so created own funtion
+                                        LengthOtdr = MyConvertInt(sdr["length_otdr"].ToString()),
+                                        StartOdfId = MyConvertInt(sdr["start_odf"].ToString()),
+                                        StartOdfName = sdr["OdfStartName"].ToString(),
+                                        EndOdfId = MyConvertInt(sdr["end_odf"].ToString()),
+                                        EndOdfName = sdr["OdfEndName"].ToString()
+                                    });
+                                }
+                                catch (Exception e) { Console.WriteLine("Parsing went bad" + e.Message); }
                             }
                         }
                         con.Close();
@@ -117,7 +126,6 @@ namespace Eindwerk2018.Models.db
                 }
                 catch (Exception e)
                 {
-                    //throw new System.InvalidOperationException("No connection to database");
                     Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
                 }
             }

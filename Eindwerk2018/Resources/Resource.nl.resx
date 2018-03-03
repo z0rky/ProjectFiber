@@ -431,4 +431,19 @@
   <data name="FoidStartOdfName" xml:space="preserve">
     <value>Start ODF Naam</value>
   </data>
+  <data name="StatusAccept" xml:space="preserve">
+    <value>Aanvaard</value>
+  </data>
+  <data name="StatusInService" xml:space="preserve">
+    <value>In dienst</value>
+  </data>
+  <data name="StatusNew" xml:space="preserve">
+    <value>Nieuw</value>
+  </data>
+  <data name="StatusRemoved" xml:space="preserve">
+    <value>Verwijderd</value>
+  </data>
+  <data name="StatusReserved" xml:space="preserve">
+    <value>Gereserveerd</value>
+  </data>
 </root>

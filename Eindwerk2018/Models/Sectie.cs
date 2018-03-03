@@ -12,15 +12,18 @@ namespace Eindwerk2018.Models
        
         public int Id { get; set; }
 
+        [Required]
         [Display(Name = "SectieNr", ResourceType = typeof(Resources.Resource))]
         public int SectieNr { get; set; }
 
+        [Required]
         [Display(Name = "SectieTypeId", ResourceType = typeof(Resources.Resource))]
         public int SectionTypeId { get; set; }
 
         [Display(Name = "SectieTypeName", ResourceType = typeof(Resources.Resource))]
         public string SectionTypeName { get; set; }
 
+        [Required]
         [Display(Name = "SectieKabelId", ResourceType = typeof(Resources.Resource))]
         public int KabelId { get; set; }
 
@@ -40,6 +43,7 @@ namespace Eindwerk2018.Models
         public string OdfEndName { get; set; }
 
         [Display(Name = "SectieLength", ResourceType = typeof(Resources.Resource))]
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         public int Lengte { get; set; }
 
         [Display(Name = "SectieActive", ResourceType = typeof(Resources.Resource))]

@@ -34,11 +34,33 @@
         <td>@Html.DisplayFor(modelItem => item.Id)</td>
         <td>@Html.DisplayFor(modelItem => item.Name)</td>
         <td>@Html.DisplayFor(modelItem => item.CreatieDatum)</td>
-        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+        <td>
+            @switch(@Html.DisplayFor(modelItem => item.Status).ToString())
+            {
+                case "0":
+                    @Eindwerk2018.Resources.Resource.StatusNew;
+                    break;
+                case "1":
+                    @Eindwerk2018.Resources.Resource.StatusReserved;
+                    break;
+                case "2":
+                    @Eindwerk2018.Resources.Resource.StatusAccept;
+                    break;
+                case "3":
+                    @Eindwerk2018.Resources.Resource.StatusInService;
+                    break;
+                case "9":
+                    @Eindwerk2018.Resources.Resource.StatusRemoved;
+                    break;
+                default:
+                    //{ Onbekend; }
+                    break;
+            }
+        </td>
         <td>@Html.DisplayFor(modelItem => item.LastStatusDate)</td>
         <td>@Html.DisplayFor(modelItem => item.Comments)</td>
-        <td>@Html.DisplayFor(modelItem => item.LengthCalculated)</td>
-        <td>@Html.DisplayFor(modelItem => item.LengthOtdr)</td>
+        <td>@Html.DisplayFor(modelItem => item.LengthCalculated) m</td>
+        <td>@Html.DisplayFor(modelItem => item.LengthOtdr) m</td>
 
         <td>
             @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |
@@ -56,28 +78,6 @@
     <script>
         $(document).ready(function () {
             $("#FoidTable").DataTable();
-
-            $("#FoidTable").on("click",".js-delete", function ()
-                {
-                    var button = $(this);
-                    bootbox.confirm("Ben je zeker dat de geselecteerde locatie verwijderd mag worden?",
-                        function (result)
-                        {
-                            if (result)
-                            {
-                                $.ajax(
-                                    {
-                                        url: "/api/locaties/" + button.attr("data-customer-id"),
-                                        methode: "DELETE",
-                                        succes: function ()
-                                        {
-                                            button.parents("tr").remove();
-                                            console.log("succes"); // testen in console
-                                        }
-                                    });
-                            }
-                        });
-                });
         });
     </script>
 }

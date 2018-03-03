@@ -13,6 +13,9 @@ namespace Eindwerk2018.Controllers
     public class FoidController : Controller
     {
         private Db_Foid dbFoid = new Db_Foid();
+        private Db_User dbUser = new Db_User();
+        private Db_Odf dbOdf = new Db_Odf();
+
 
         public ActionResult Index()
         {
@@ -31,16 +34,23 @@ namespace Eindwerk2018.Controllers
 
         public ActionResult Create()
         {
-            return View ();
+            //users ophalen
+            var viewModel = new NieuweFoidViewModel() { Users = dbUser.List() }; //not complete list
+
+            return View(viewModel);
         } 
 
         [HttpPost]
-        public ActionResult Create(Foid foid)
+        public ActionResult Create([Bind(Include = "Name,Comments,LengthOtdr")] Foid foid)
         {
             if (ModelState.IsValid)
             {
                 //add creation date
                 foid.CreatieDatum = new DateTime();
+                foid.LastStatusDate = new DateTime();
+                //hardcode status as new
+                foid.Status = 0;
+
                 dbFoid.Add(foid);
                 return RedirectToAction("Index");
             }
@@ -58,11 +68,11 @@ namespace Eindwerk2018.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Foid foid)
+        public ActionResult Edit([Bind(Include = "Id,Name,Comments,LengthOtdr")] Foid foid)
         {
             if (ModelState.IsValid)
             {
-                //if status is changed, update date
+                //if status is changed, update date; hoe weten we wat de vorige status was?
                 //foid.LastStatusDate = new DateTime();
                 dbFoid.Edit(foid);
                 return RedirectToAction("Foid", "Details", foid.Id);

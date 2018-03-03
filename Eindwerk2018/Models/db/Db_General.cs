@@ -67,5 +67,61 @@ namespace Eindwerk2018.Models.db
 
             return nummer;
         }
+
+        protected int GetLastInsertedId()
+        {
+            int lastId = 0;
+
+            if (con == null) con = new MySqlConnection(constr);
+            using (con) //perhaps connection can be made once and reused?
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT LAST_INSERT_ID() AS id"))
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        MySqlDataReader sdr = cmd.ExecuteReader();
+                        lastId = MyConvertInt(sdr["id"].ToString());
+                        con.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database" + e.Message); //should rethrow and handle it in the user part somwhere
+                }
+            }
+
+            return lastId;
+        }
+
+        protected int CountSelectedRows()
+        {
+            int rows = 0;
+
+            if (con == null) con = new MySqlConnection(constr);
+            using (con)
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("SELECT FOUND_ROWS() AS rows"))
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        MySqlDataReader sdr = cmd.ExecuteReader();
+                        rows = MyConvertInt(sdr["rows"].ToString());
+                        con.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database" + e.Message); //should rethrow and handle it in the user part somwhere
+                }
+            }
+
+            return rows;
+        }
     }
 }
