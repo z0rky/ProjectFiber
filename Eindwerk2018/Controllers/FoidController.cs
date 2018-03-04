@@ -35,7 +35,7 @@ namespace Eindwerk2018.Controllers
         public ActionResult Create()
         {
             //users ophalen
-            var viewModel = new NieuweFoidViewModel() { Users = dbUser.List() }; //not complete list
+            var viewModel = new NieuweFoidViewModel() { Users = dbUser.List() };
 
             return View(viewModel);
         } 
@@ -54,7 +54,7 @@ namespace Eindwerk2018.Controllers
                 dbFoid.Add(foid);
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Foid");
+            return View(foid);
         }
         
         public ActionResult Edit(int? id)

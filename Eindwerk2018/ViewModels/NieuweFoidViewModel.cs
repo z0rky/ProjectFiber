@@ -11,5 +11,8 @@ namespace Eindwerk2018.ViewModels
         public Foid Foid { get; set; }
 
         public IEnumerable<User> Users { get; set; }
+
+        //status for edit
+        public IEnumerable<Status> Statuses { get; set; }
     }
 }
