@@ -35,13 +35,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(Color color)
+        public int Add(Color color)
         {
             if (color != null)
             {
                 string query = "INSERT INTO fiber_color (name_en,name_nl,name_fr) VALUES ('" + color.NameEn + "','" + color.NameNl + "','" + color.NameFr + "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(Color color)

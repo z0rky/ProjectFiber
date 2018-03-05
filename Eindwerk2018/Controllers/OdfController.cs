@@ -121,5 +121,18 @@ namespace Eindwerk2018.Controllers
             var list = from N in odfs select new { N.Id, N.Name };
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult SearchConnectedOdf(int? odfId) //Search for connected Odf's of odfId (via section)
+        {
+            if(odfId != null)
+            { 
+                List<Odf> odfs = dbOdfs.Search((int)odfId); //return too much for this
+                //Converteren
+                var list = from N in odfs select new { N.Id, N.Name };
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
+        }
     }
 }

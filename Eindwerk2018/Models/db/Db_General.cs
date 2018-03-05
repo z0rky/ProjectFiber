@@ -68,6 +68,11 @@ namespace Eindwerk2018.Models.db
             return nummer;
         }
 
+        protected String MySqlDate(DateTime time)
+        {
+            return time.Year + "-" + time.Month + "-" + time.Day;
+        }
+
         protected int GetLastInsertedId()
         {
             int lastId = 0;

@@ -48,7 +48,7 @@ namespace Eindwerk2018.Models.db
         {
             if (kabel != null)
             {
-                string query = "INSERT INTO kabel (name,kabel_type,owner_id,reference,date_creation) VALUES ('" + kabel.Naam + "',null,null,'" + kabel.Reference + "','" + kabel.CreatieDatum + "')"; //query
+                string query = "INSERT INTO kabel (name,kabel_type,owner_id,reference,date_creation) VALUES ('" + kabel.Naam + "',null,null,'" + kabel.Reference + "','" + MySqlDate(kabel.CreatieDatum) + "')"; //query
                 this.ShortQuery(query);
             }
         }
@@ -57,7 +57,7 @@ namespace Eindwerk2018.Models.db
         {
             if (kabel != null || kabel.Id != 0)
             {
-                string query = "UPDATE kabel SET name='" + kabel.Naam + "', reference='" + kabel.Reference+ "', date_creation'" + kabel.CreatieDatum + "' WHERE id='" + kabel.Id + "' LIMIT 1"; //query
+                string query = "UPDATE kabel SET name='" + kabel.Naam + "', reference='" + kabel.Reference+ "', date_creation='" + MySqlDate(kabel.CreatieDatum) + "' WHERE id='" + kabel.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }

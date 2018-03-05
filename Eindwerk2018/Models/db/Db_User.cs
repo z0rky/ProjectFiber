@@ -35,13 +35,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(User user)
+        public int Add(User user)
         {
             if (user != null)
             {
                 string query = "INSERT INTO user (first_name,last_name,user_name,email) VALUES ('" + user.FirstName + "','" + user.LastName + "','" + user.UserName + "','" + user.Email + "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(User user)

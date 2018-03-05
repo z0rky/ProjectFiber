@@ -21,7 +21,15 @@ namespace Eindwerk2018.Models.db
         public List<Sectie> Search(int kabelId)
         {  //enkel op sectie id, ook op kabel?
             if (kabelId == 0) return null;
-            string query = "SELECT s.id,s.section_nr,s.kabel_id,k.name AS kabel_name,s.odf_start,os.name AS odf_start_name,s.odf_end,oe.name AS odf_end_name,s.type_id,st.name AS type_name,s.length,s.active FROM sections AS s, kabel AS k, ODF as os, ODF as oe,section_type AS st WHERE kabel_id ='" + kabelId + "' AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=st.id ORDER BY s.kabel_id,s.section_nr LIMIT " + Max_row; //query
+            string query = "SELECT s.id,s.section_nr,s.kabel_id,k.name AS kabel_name,s.odf_start,os.name AS odf_start_name,s.odf_end,oe.name AS odf_end_name,s.type_id,st.name AS type_name,s.length,s.active FROM sections AS s, kabel AS k, ODF as os, ODF as oe,section_type AS st WHERE s.kabel_id ='" + kabelId + "' AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=st.id ORDER BY s.kabel_id,s.section_nr LIMIT " + Max_row; //query
+
+            return ListQueries(query);
+        }
+
+        public List<Sectie> SearchOdf(int odfId)
+        { //might have to expand it to location of odfId
+            if (odfId == 0) return null;
+            string query = "SELECT s.id,s.section_nr,s.kabel_id,k.name AS kabel_name,s.odf_start,os.name AS odf_start_name,s.odf_end,oe.name AS odf_end_name,s.type_id,st.name AS type_name,s.length,s.active FROM sections AS s, kabel AS k, ODF as os, ODF as oe,section_type AS st WHERE (s.odf_start ='" + odfId + "' OR s.odf_end ='" + odfId + "') AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=st.id ORDER BY s.kabel_id,s.section_nr LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
@@ -38,13 +46,15 @@ namespace Eindwerk2018.Models.db
             return sectie; 
         }
 
-        public void Add(Sectie sectie)
+        public int Add(Sectie sectie)
         {
             if (sectie != null)
             {
                 string query = "INSERT INTO sections (section_nr,kabel_id,odf_start,odf_end,type_id,length,active) VALUES ('" + sectie.SectieNr + "','" + sectie.KabelId + "','" + sectie.OdfStartId + "','" + sectie.OdfEndId+ "','" + sectie.SectionTypeId + "','" + sectie.Lengte + "','" + sectie.Active+ "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(Sectie sectie)

@@ -1,0 +1,149 @@
+﻿@model Eindwerk2018.ViewModels.NieuweSectieViewModel
+
+@{
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkCreate2;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Moet ook in bundle config**@
+<link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $("#Sectie_KabelName").autocomplete(
+        {
+            source: function (request, response)
+            {
+                $.ajax({
+                    url: "/Kabel/SearchKabel",
+                     type: "POST",
+                     dataType: "json",
+                     data: { Prefix: request.term },
+                     success: function (data) {
+                         response($.map(data, function (item) {
+                             return { label: item.Naam, value: item.Naam, id: item.Id };
+                         }))
+                     },
+                     error: function (err) { console.log(err); } @*Change this to something usefull*@
+                })
+            },
+            minLength: 3,
+            select: function (event, ui) { $("#Foid_StartOdfId").val(ui.item.id);}
+        });
+        $("#Sectie_OdfStartName").autocomplete(
+        {
+            source: function (request, response)
+            {
+                $.ajax({
+                    url: "/Odf/SearchOdfs",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Name, value: item.Name, id: item.Id };
+                        }))
+                    },
+                    error: function (err) { console.log(err); } @*Change this to something usefull*@
+                })
+            },
+            minLength: 3,
+            select: function (event, ui) { $("#Foid_StartOdfId").val(ui.item.id); }
+        });
+        $("#Sectie_OdfEndName").autocomplete(
+        {
+            source: function (request, response)
+            {
+                $.ajax({
+                    url: "/Odf/SearchOdfs",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.Name, value: item.Name, id: item.Id};
+                        }))
+                    }
+                })
+            },
+            minLength: 3,
+            select: function (event, ui) { $("#Foid_EndOdfId").val(ui.item.id); }
+        });
+    });
+</script>
+
+<h2>@Eindwerk2018.Resources.Resource.LinkCreate2</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>@Eindwerk2018.Resources.Resource.SectieTitle</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sectie.KabelName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Sectie.KabelName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Sectie.KabelName, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Sectie.KabelId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sectie.SectieNr, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Sectie.SectieNr, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Sectie.SectieNr, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sectie.SectionTypeName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Sectie.SectionTypeId, new SelectList(Model.SectieTypes, "Id", "Naam"), "--", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Sectie.SectionTypeId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sectie.OdfStartName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Sectie.OdfStartName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Sectie.OdfStartName, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Sectie.OdfStartId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sectie.OdfEndName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Sectie.OdfEndName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Sectie.OdfEndName, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Sectie.OdfEndId)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sectie.Lengte, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Sectie.Lengte, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Sectie.Lengte, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Eindwerk2018.Resources.Resource.LinkCreate2" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
+</div>

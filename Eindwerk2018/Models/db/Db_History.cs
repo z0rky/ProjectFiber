@@ -34,7 +34,7 @@ namespace Eindwerk2018.Models.db
                 //com.Parameters.Add("@UserId", SqlDbType.NVarChar).Value = getUserId();
 
 
-                string query = "INSERT INTO history (datum,table,id,user,text) VALUES ('" + history.CreatieDatum + "','" + history.Table + "','" + history.Id + "','" + history.User + "','" + history.Text + "')"; //query
+                string query = "INSERT INTO history (datum,table,id,user,text) VALUES ('" + MySqlDate(history.CreatieDatum) + "','" + history.Table + "','" + history.Id + "','" + history.User + "','" + history.Text + "')"; //query
                 this.ShortQuery(query);
             }
         }

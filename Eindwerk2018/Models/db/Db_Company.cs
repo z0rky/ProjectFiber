@@ -35,13 +35,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(Company company)
+        public int Add(Company company)
         {
             if (company != null && company.Name != "")
             {
                 string query = "INSERT INTO company (name) VALUES ('" + company.Name + "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(Company company)

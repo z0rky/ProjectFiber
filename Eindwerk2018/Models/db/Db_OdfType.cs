@@ -35,13 +35,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0]; //sjould be only 1
         }
 
-        public void Add(OdfType odfType)
+        public int Add(OdfType odfType)
         {
             if (odfType != null)
             {
                 string query = "INSERT INTO ODF_type (name,description) VALUES ('" + odfType.Name + "','" + odfType.Description + "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(OdfType odfType)
