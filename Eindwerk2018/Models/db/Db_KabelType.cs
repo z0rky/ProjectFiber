@@ -37,13 +37,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(KabelType kabelType)
+        public int Add(KabelType kabelType)
         {
             if (kabelType != null)
             {
                 string query = "INSERT INTO kabel_type (name_nl,name_fr) VALUES ('" + kabelType.NameNL + "','" + kabelType.NameFR + "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(KabelType kabelType)

@@ -44,13 +44,15 @@ namespace Eindwerk2018.Models.db
             return null; // ListQueries(query)[0]; //new type of sectie, viewSectie ?
         }
 
-        public void Add(Kabel kabel)
+        public int Add(Kabel kabel)
         {
             if (kabel != null)
             {
                 string query = "INSERT INTO kabel (name,kabel_type,owner_id,reference,date_creation) VALUES ('" + kabel.Naam + "',null,null,'" + kabel.Reference + "','" + MySqlDate(kabel.CreatieDatum) + "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(Kabel kabel)

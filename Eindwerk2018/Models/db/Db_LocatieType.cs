@@ -36,13 +36,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(LocatieType locatieType)
+        public int Add(LocatieType locatieType)
         {
             if (locatieType != null)
             {
                 string query = "INSERT INTO location_type (name_nl, name_fr, description_nl,description_fr) VALUES ('" + locatieType.NaamNL + "','"+ locatieType.NaamFR + "','" + locatieType.DescNL + "','" + locatieType.DescFR +"')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(LocatieType locatieType)

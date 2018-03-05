@@ -50,13 +50,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(Odf odf)
+        public int Add(Odf odf)
         {
             if (odf != null)
             {
                 string query = "INSERT INTO ODF (location_id, type_id, name) VALUES ('" + odf.Location_id + "','" + odf.Type_id + "','" + odf.Name + "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(Odf odf)

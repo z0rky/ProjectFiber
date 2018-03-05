@@ -65,14 +65,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(Locatie locatie)
+        public int Add(Locatie locatie)
         {
             if (locatie != null)
             {
                 string query = "INSERT INTO location ( name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein, location_type) VALUES ('" + locatie.LocatieNaam + "','" + locatie.GpsLong + "','" + locatie.GpsLat + "','Null','" + locatie.LocatieInfrabel + "','" + locatie.LocatieTypeId + "',)"; //query
                 this.ShortQuery(query);
-                //should also add adres, first test if there is info
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(Locatie locatie)
