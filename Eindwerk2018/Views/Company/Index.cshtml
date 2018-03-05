@@ -7,15 +7,17 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
-</p>
-<table class="table">
+</p>*@
+<table class="table table-bordered table-hover" id="bedrijf">
+    <thead>
     <tr>
         <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th></th>
     </tr>
-
+    </thead>
+    <tbody>
 @foreach (var item in Model) {
     <tr>
         <td>@Html.DisplayFor(modelItem => item.Name)</td>
@@ -27,5 +29,17 @@
         </td>
     </tr>
 }
-
+</tbody>
 </table>
+
+<input type="button" class="btn btn-primary" Value="@Eindwerk2018.Resources.Resource.LinkCreate" onclick="location.href='@Url.Action("Create", "Company")'" />
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#bedrijf").DataTable();
+        });
+    
+  
+    </script>
+}

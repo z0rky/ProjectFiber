@@ -10,92 +10,81 @@
 
 <h2>@Eindwerk2018.Resources.Resource.LocationTitle</h2>
 
+    @using (Html.BeginForm("Save", "Locatie"))
+    {
+        @Html.ValidationSummary(true, "Los volgende fouten op")
 
-@using (Html.BeginForm("Save", "Locatie"))
-{
-    @Html.ValidationSummary(true, "Los volgende fouten op")
+        <div class="form-group">
+            @Html.LabelFor(m => m.Locatie.LocatieNaam)
+            @Html.TextBoxFor(m => m.Locatie.LocatieNaam, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Locatie.LocatieNaam)
+        </div>
 
-    <div class="form-group">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Locatie.GpsLong)
+            @Html.TextBoxFor(m => m.Locatie.GpsLong, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Locatie.GpsLong)
+        </div>
 
-        @Html.LabelFor(m => m.Locatie.LocatieNaam)
-        @Html.TextBoxFor(m => m.Locatie.LocatieNaam, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.LocatieNaam)
+        <div class="form-group">
+            @Html.LabelFor(m => m.Locatie.GpsLat)
+            @Html.TextBoxFor(m => m.Locatie.GpsLat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Locatie.GpsLat)
+        </div>
 
-    </div>
 
-    <div class="form-group">
 
-        @Html.LabelFor(m => m.Locatie.GpsLong)
-        @Html.TextBoxFor(m => m.Locatie.GpsLong, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.GpsLong)
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Locatie.LocatieTypeId)
+            @Html.DropDownListFor(m => m.Locatie.LocatieTypeId, new SelectList(Model.LocatieTypes, "Id", "naamNL"), "selecteer type", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Locatie.LocatieTypeId)
+        </div>
 
-    <div class="form-group">
 
-        @Html.LabelFor(m => m.Locatie.GpsLat)
-        @Html.TextBoxFor(m => m.Locatie.GpsLat, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.GpsLat)
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Locatie.Plaats)
+            @Html.TextBoxFor(m => m.Locatie.Plaats, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Locatie.Plaats)
+        </div>
 
+        <div class="form-group">
+            @Html.LabelFor(m => m.Locatie.PostCode)
+            @Html.TextBoxFor(m => m.Locatie.PostCode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Locatie.PostCode)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Locatie.Straat)
+            @Html.TextBoxFor(m => m.Locatie.Straat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Locatie.Straat)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Locatie.HuisNr)
+            @Html.TextBoxFor(m => m.Locatie.HuisNr, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Locatie.HuisNr)
+        </div>
+
+        <div class="form-group">
+            @Html.CheckBoxFor(m => m.Locatie.LocatieInfrabel, new { @checked = "checked", id = "InfrabelId" })
+            @Html.LabelFor(m => m.Locatie.LocatieInfrabel)
+            <br>
+            @Html.TextBoxFor(m => m.Locatie.LocatieBedrijf, new { @disabled = "disabled", @class = "form-control", id = "LocatieBedrijfId" })
+            <script>
+                $('#InfrabelId').click(function () {
+                    var $this = $(this);
+
+                    if ($this.is(':checked')) {
+                        $('#LocatieBedrijfId').attr("disabled", "disabled")
+                    } else {
+
+                        $('#LocatieBedrijfId').removeAttr("disabled");
+                    }
+                });
+            </script>
+        </div>
+
+        <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+        <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
+    }
   
-
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.LocatieTypeId)
-        @Html.DropDownListFor(m => m.Locatie.LocatieTypeId, new SelectList(Model.LocatieTypes,"Id", "naamNL"), "selecteer type", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m =>m.Locatie.LocatieTypeId)
-    </div>
-
-    
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.Plaats)
-        @Html.TextBoxFor(m => m.Locatie.Plaats, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.Plaats)
-    </div>
-
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.PostCode)
-        @Html.TextBoxFor(m => m.Locatie.PostCode, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.PostCode)
-    </div>
-
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.Straat)
-        @Html.TextBoxFor(m => m.Locatie.Straat, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.Straat)
-    </div>
-
-    <div class="form-group">
-
-        @Html.LabelFor(m => m.Locatie.HuisNr)
-        @Html.TextBoxFor(m => m.Locatie.HuisNr, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Locatie.HuisNr)
-    </div>
-
-    <div class="form-group">
-
-        @Html.CheckBoxFor(m => m.Locatie.LocatieInfrabel, new { @checked = "checked", id = "InfrabelId" })
-        @Html.LabelFor(m => m.Locatie.LocatieInfrabel)
-        <br>
-        @Html.TextBoxFor(m => m.Locatie.LocatieBedrijf, new { @disabled = "disabled", @class = "form-control", id = "LocatieBedrijfId" })
-
-        <script>
-            $('#InfrabelId').click(function () {
-                var $this = $(this);
-
-                if ($this.is(':checked')) {
-                    $('#LocatieBedrijfId').attr("disabled", "disabled")
-                } else {
-
-                    $('#LocatieBedrijfId').removeAttr("disabled");
-                }
-            });
-        </script>
-    </div>
-    
-    <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
-    <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
-}

@@ -8,20 +8,23 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
-</p>
-<table class="table">
+</p>*@
+<table class="table table-bordered table-hover" id="odfTypeTable">
+    <thead>
     <tr>
         <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th></th>
     </tr>
+    </thead>
+    <tbody>
 
     @foreach (var item in Model)
     {
+
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
-
             <td>
                 @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |
                 @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = item.Id }) |
@@ -29,4 +32,17 @@
             </td>
         </tr>
     }
-    </table>
+    </tbody>
+</table>
+
+<input type="button" class="btn btn-primary" Value="@Eindwerk2018.Resources.Resource.LinkCreate" onclick="location.href='@Url.Action("Create", "OdfType")'" />
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#odfTypeTable").DataTable();
+        });
+    
+  
+    </script>
+}
