@@ -46,13 +46,27 @@ namespace Eindwerk2018.Models.db
             return sectie; 
         }
 
+        public Sectie GetLastSection(int kabelId)
+        {
+            if (kabelId != 0)
+            {
+                string query = "SELECT s.id,s.section_nr,s.kabel_id,k.name AS kabel_name,s.odf_start,os.name AS odf_start_name,s.odf_end,oe.name AS odf_end_name,s.type_id,st.name AS type_name,s.length,s.active FROM sections AS s, kabel AS k, ODF as os, ODF as oe,section_type AS st WHERE kabel_id='" + kabelId + "' AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=st.id AND section_nr=( SELECT MAX(section_nr) FROM sections WHERE kabel_id='" + kabelId + "')"; //query
+                try { return ListQueries(query)[0]; }
+                catch (Exception e) { }
+            }
+            return null;
+        }
+
         public int Add(Sectie sectie)
         {
             if (sectie != null)
             {
                 string query = "INSERT INTO sections (section_nr,kabel_id,odf_start,odf_end,type_id,length,active) VALUES ('" + sectie.SectieNr + "','" + sectie.KabelId + "','" + sectie.OdfStartId + "','" + sectie.OdfEndId+ "','" + sectie.SectionTypeId + "','" + sectie.Lengte + "','" + sectie.Active+ "')"; //query
                 this.ShortQuery(query);
-                return GetLastInsertedId(); //return new id
+                int newId = GetLastInsertedId(); //return new id
+                query = "INSERT INTO fibers (section_id,fiber_nr) SELECT '"+ newId + "',fiber_nr FROM section_type_info WHERE type_id='"+sectie.SectionTypeId+"'"; //others are default fields,
+                this.ShortQuery(query);
+                return newId;
             }
             return 0;
         }
@@ -87,7 +101,7 @@ namespace Eindwerk2018.Models.db
         private List<Sectie> ListQueries(string qry)
         {
             List<Sectie> secties = new List<Sectie>();
-
+            con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
             using (con) //con in Db_general
             {
                 try

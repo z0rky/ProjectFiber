@@ -31,8 +31,29 @@
                 })
             },
             minLength: 3,
-            select: function (event, ui) { $("#Foid_StartOdfId").val(ui.item.id);}
+            select: function (event, ui)
+            {
+                $("#Sectie_KabelId").val(ui.item.id);
+                
+                //en ook de laatste sectie nr opzoeken
+                $.ajax({
+                    url: "/Sectie/LastSectionOfKabel",
+                    type: "POST",
+                    dataType: "json",
+                    data: { kabelId: ui.item.id },
+                    success: function (data) {
+                        //$.map(data, function (item) { return { label: item.SectieNr, value: item.SectionTypeName, id: item.SectionTypeId }; })
+                        $("#Sectie_SectieNr").val(data.SectieNr + 100);
+                        $("#Sectie_SectionTypeId").val(data.SectionTypeId);
+                        //last odf use as next ODF
+                        $("#Sectie_OdfStartName").val(data.OdfEndName);
+                        $("#Sectie_OdfStartId").val(data.OdfEndId);
+                    },
+                    error: function (err) { console.log(err); }
+                });
+            }
         });
+
         $("#Sectie_OdfStartName").autocomplete(
         {
             source: function (request, response)
@@ -51,7 +72,7 @@
                 })
             },
             minLength: 3,
-            select: function (event, ui) { $("#Foid_StartOdfId").val(ui.item.id); }
+            select: function (event, ui) { $("#Sectie_OdfStartId").val(ui.item.id); }
         });
         $("#Sectie_OdfEndName").autocomplete(
         {
@@ -70,7 +91,7 @@
                 })
             },
             minLength: 3,
-            select: function (event, ui) { $("#Foid_EndOdfId").val(ui.item.id); }
+            select: function (event, ui) { $("#Sectie_OdfEndId").val(ui.item.id); }
         });
     });
 </script>

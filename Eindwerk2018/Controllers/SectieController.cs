@@ -30,6 +30,7 @@ namespace Eindwerk2018.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Sectie sectie = dbSectie.Get((int)id);
+
             if (sectie == null) return HttpNotFound();
 
             return View(sectie);
@@ -54,9 +55,8 @@ namespace Eindwerk2018.Controllers
             {
                 newSectie.Sectie.Active = true; //een nieuwe is altijd actief
                 int newId = dbSectie.Add(newSectie.Sectie);
+                //also add all fibers from section_type_inf in fibers (is in the dbSectie.Add)
 
-                //should also add all fibers
-   
                 return RedirectToAction("Details", "Sectie", new { Id = newId });
             }
 
@@ -80,10 +80,10 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,SectieTypeId,SectieKabelId,SectieOdfStartId,SectieOdfEndId,SectieLength")] Sectie sectie)
-        {
+        { //wordt nog niet gedaan, en mag waarschinlijk ook niet
             if (ModelState.IsValid)
             {
-                dbSectie.Edit(sectie);
+                //dbSectie.Edit(sectie);
                 return RedirectToAction("Sectie", "Details", sectie.Id);
             }
 
@@ -112,10 +112,29 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public JsonResult SearchSecties(int? odfId)
         {
-            List<Sectie> secties = dbSectie.SearchOdf((int) odfId); //return too much for this
-            //Converteren
-            var list = from N in secties select new { N.Id, N.KabelName, N.SectieNr }; //hoe kablename en SectieNr samen voegen ?
-            return Json(list, JsonRequestBehavior.AllowGet);
+            if(odfId != null)
+            { 
+                List<Sectie> secties = dbSectie.SearchOdf((int) odfId); //return too much for this
+                //Converteren
+                var list = from N in secties select new { N.Id, N.KabelName, N.SectieNr }; //hoe kablename en SectieNr samen voegen ?
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
+
+        [HttpPost]
+        public JsonResult LastSectionOfKabel(int? kabelId)
+        {
+            if (kabelId != null)
+            {
+                Sectie lastSectie = dbSectie.GetLastSection((int)kabelId); //return too much for this
+                //Converteren
+                if (lastSectie == null) lastSectie = new Sectie { SectieNr =0, SectionTypeId=0, SectionTypeName=null, OdfEndId=0, OdfEndName=null }; //empty aanmaken
+
+                var list = new { lastSectie.SectieNr, lastSectie.SectionTypeId, lastSectie.SectionTypeName, lastSectie.OdfEndId, lastSectie.OdfEndName };
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            return null;
         }
     }
 }
