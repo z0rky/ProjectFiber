@@ -18,5 +18,8 @@ namespace Eindwerk2018.ViewModels
 
         //Second step, adding the fiber
         public List<FiberFoid> Fibers { get; set; }
+
+        //new secties
+        public List<int> Newsecties { get; set; }
     }
 }

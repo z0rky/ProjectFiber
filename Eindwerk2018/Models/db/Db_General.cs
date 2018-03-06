@@ -26,7 +26,7 @@ namespace Eindwerk2018.Models.db
         //short queries
         protected void ShortQuery(string qry)
         {
-            if(con==null) con = new MySqlConnection(constr);
+            con = new MySqlConnection(constr);
             using (con) //perhaps connection can be made once and reused?
             {
                 try

@@ -116,7 +116,7 @@ namespace Eindwerk2018.Controllers
             { 
                 List<Sectie> secties = dbSectie.SearchOdf((int) odfId); //return too much for this
                 //Converteren
-                var list = from N in secties select new { N.Id, N.KabelName, N.SectieNr }; //hoe kablename en SectieNr samen voegen ?
+                var list = from N in secties select new { N.Id, N.KabelName, N.SectieNr, N.OdfStartId, N.OdfStartName, N.OdfEndId, N.OdfEndName };
                 return Json(list, JsonRequestBehavior.AllowGet);
             }
             return null;
@@ -133,6 +133,19 @@ namespace Eindwerk2018.Controllers
 
                 var list = new { lastSectie.SectieNr, lastSectie.SectionTypeId, lastSectie.SectionTypeName, lastSectie.OdfEndId, lastSectie.OdfEndName };
                 return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
+
+        [HttpPost]
+        public JsonResult ReturnSectiesInfo(int? sectieId)
+        {
+            if (sectieId != null && sectieId != 0)
+            {
+                Sectie sectie = dbSectie.Get((int)sectieId);
+                //Converteren
+                var ajaxSectie = new { sectie.Id, sectie.SectieNr, sectie.KabelId, sectie.KabelName, sectie.OdfStartId, sectie.OdfStartName, sectie.OdfEndId, sectie.OdfEndName };
+                return Json(ajaxSectie, JsonRequestBehavior.AllowGet);
             }
             return null;
         }

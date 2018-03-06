@@ -125,7 +125,7 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public JsonResult SearchConnectedOdf(int? odfId) //Search for connected Odf's of odfId (via section)
         {
-            if(odfId != null)
+            if(odfId != null && odfId !=0)
             { 
                 List<Odf> odfs = dbOdfs.Search((int)odfId); //return too much for this
                 //Converteren

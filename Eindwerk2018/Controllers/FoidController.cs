@@ -54,7 +54,7 @@ namespace Eindwerk2018.Controllers
                 int newId = dbFoid.Add(newFoid.Foid);
                 return RedirectToAction("Edit", "Foid", new { Id = newId });
             }
-            //moet d elijst opnieuw aanmaken
+            //moet de lijst opnieuw aanmaken
             newFoid.Users = dbUser.List();
             return View(newFoid);
         }
@@ -140,11 +140,41 @@ namespace Eindwerk2018.Controllers
                 secties.Add(new Sectie { SectieNr = fiber.SectieNr, KabelId = fiber.KabelId, KabelName = fiber.KabelName}); //ID?
             }
 
-
-
             var viewModel = new AddSectieFoidViewModel() { Foid = foid, StartOdfs = startOdfs, EndOdfs = endOdfs, Secties = secties };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditSections([Bind(Include = "Foid,Secties,Newsecties")] AddSectieFoidViewModel sectieFoid)
+        {
+            //for now just assuming there are only new secties
+            //not really checking anything
+
+            //and fiber number ? first free? how many?
+            //for now assuming 2 fibers
+            int serieNr = 100;
+            int foidFibreNr = 1;
+            int fiberNr = 1; //lookup with ListFreeFibers
+
+            foreach (int sectieId in sectieFoid.Newsecties)
+            {
+                List<Fiber> freeFiberList = dbFoid.ListFreeFibers(sectieId);
+                foidFibreNr = 1;
+                fiberNr = freeFiberList[0].FiberNr;
+
+                dbFoid.AddSecties(new FiberFoid() { Foid = sectieFoid.Foid.Id, SectieNr = sectieId, FoidSerialNr = serieNr, FoidFibreNr = foidFibreNr, FiberNr = fiberNr });
+                //for now 2 foidFibreNr
+                foidFibreNr = 2;
+                fiberNr = freeFiberList[1].FiberNr;
+
+                dbFoid.AddSecties(new FiberFoid() { Foid = sectieFoid.Foid.Id, SectieNr = sectieId, FoidSerialNr = serieNr, FoidFibreNr = foidFibreNr, FiberNr = fiberNr });
+                serieNr += 100;
+            };
+
+            return RedirectToAction("Details", "Foid", new { Id = sectieFoid.Foid.Id });
+
+            //return View();
         }
     }
 }

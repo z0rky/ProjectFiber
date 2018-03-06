@@ -60,6 +60,17 @@ namespace Eindwerk2018.Models.db
             return 0;
         }
 
+        public int AddSecties(FiberFoid fiberFoid)
+        {
+            if (fiberFoid != null)
+            {
+                string query = "UPDATE fibers SET FOID='"+ fiberFoid.Foid +"', FOID_serial_nr='"+ fiberFoid.FoidSerialNr + "', FOID_fibre_nr='" + fiberFoid.FoidFibreNr + "' WHERE section_id='" + fiberFoid.SectieNr + "' AND fiber_nr='" + fiberFoid.FiberNr + "'"; //query
+                this.ShortQuery(query);
+                return 1;
+            }
+            return 0;
+        }
+
         public void Edit(Foid foid)
         {
             if (foid != null || foid.Id != 0)
@@ -80,7 +91,7 @@ namespace Eindwerk2018.Models.db
         }
 
         //for return queries
-        private List<Foid> ListQueries(string qry)
+        public List<Foid> ListQueries(string qry)
         {
             List<Foid> foids = new List<Foid>();
 
@@ -144,7 +155,7 @@ namespace Eindwerk2018.Models.db
             con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
 
             List<FiberFoid> fibers = new List<FiberFoid>();
-            string query = "SELECT k.id AS cable_id,k.name AS cable_name,s.section_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name FROM fibers AS f, sections AS s, kabel AS k, ODF AS os, ODF AS oe WHERE f.FOID='" + foid + "' AND f.section_id=s.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
+            string query = "SELECT k.id AS cable_id,k.name AS cable_name,s.section_nr,f.fiber_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name FROM fibers AS f, sections AS s, kabel AS k, ODF AS os, ODF AS oe WHERE f.FOID='" + foid + "' AND f.section_id=s.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
 
             using (con) //con in Db_general
             {
@@ -160,16 +171,58 @@ namespace Eindwerk2018.Models.db
                             {
                                 fibers.Add(new FiberFoid
                                 {
-                                    KabelId = Convert.ToInt32(sdr["cable_id"]),
+                                    KabelId = MyConvertInt(sdr["cable_id"].ToString()),
                                     KabelName = sdr["cable_name"].ToString(),
-                                    SectieNr = Convert.ToInt32(sdr["section_nr"]),
-                                    SectieLength = Convert.ToInt32(sdr["length"]),
-                                    FoidSerialNr = Convert.ToInt32(sdr["FOID_serial_nr"]),
-                                    FoidFibreNr = Convert.ToInt32(sdr["FOID_fibre_nr"]),
-                                    OdfStartId = Convert.ToInt32(sdr["odf_start_id"]),
+                                    SectieNr = MyConvertInt(sdr["section_nr"].ToString()),
+                                    FiberNr = MyConvertInt(sdr["fiber_nr"].ToString()),
+                                    SectieLength = MyConvertInt(sdr["length"].ToString()),
+                                    FoidSerialNr = MyConvertInt(sdr["FOID_serial_nr"].ToString()),
+                                    FoidFibreNr = MyConvertInt(sdr["FOID_fibre_nr"].ToString()),
+                                    OdfStartId = MyConvertInt(sdr["odf_start_id"].ToString()),
                                     OdfStartName = sdr["odf_start_name"].ToString(),
-                                    OdfEndId = Convert.ToInt32(sdr["odf_end_id"]),
+                                    OdfEndId = MyConvertInt(sdr["odf_end_id"].ToString()),
                                     OdfEndName = sdr["odf_end_name"].ToString()
+                                });
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+                }
+            }
+
+            return fibers;
+        }
+
+        /*Get a list of free fibers*/
+        public List<Fiber> ListFreeFibers(int sectieId)
+        {
+            if (sectieId <= 0) return null;
+            con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
+
+            List<Fiber> fibers = new List<Fiber>();
+            string query = "SELECT fiber_nr,quality FROM fibers WHERE section_id='"+sectieId+"' AND FOID='0' ORDER BY fiber_nr";
+
+            using (con) //con in Db_general
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query))
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            while (sdr.Read())
+                            {
+                                fibers.Add(new Fiber
+                                {
+                                    FiberNr = MyConvertInt(sdr["fiber_nr"].ToString()),
+                                    Quality = sdr["quality"].ToString()
                                 });
                             }
                         }

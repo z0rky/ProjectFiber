@@ -40,9 +40,14 @@ namespace Eindwerk2018.Models.db
 
             string query = "SELECT s.id,s.section_nr,s.kabel_id,k.name AS kabel_name,s.odf_start,os.name AS odf_start_name,s.odf_end,oe.name AS odf_end_name,s.type_id,st.name AS type_name,s.length,s.active FROM sections AS s, kabel AS k, ODF as os, ODF as oe,section_type AS st WHERE s.id='" + id+ "' AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=st.id LIMIT 1"; //query
 
-            Sectie sectie = ListQueries(query)[0]; //should be only 1
+            Sectie sectie = new Sectie();
+            try
+            {
+                sectie = ListQueries(query)[0]; //should be only 1
+                sectie.Fibers = GetFibers(id);
+            }
+            catch (Exception e) { ; }
 
-            sectie.Fibers=GetFibers(id);
             return sectie; 
         }
 
@@ -116,17 +121,17 @@ namespace Eindwerk2018.Models.db
                             {
                                 secties.Add(new Sectie
                                 {
-                                    Id = Convert.ToInt32(sdr["id"]),
-                                    SectieNr = Convert.ToInt32(sdr["section_nr"]),
-                                    KabelId = Convert.ToInt32(sdr["kabel_id"]),
+                                    Id = MyConvertInt(sdr["id"].ToString()),
+                                    SectieNr = MyConvertInt(sdr["section_nr"].ToString()),
+                                    KabelId = MyConvertInt(sdr["kabel_id"].ToString()),
                                     KabelName = sdr["kabel_name"].ToString(),
-                                    OdfStartId = Convert.ToInt32(sdr["odf_start"]),
+                                    OdfStartId = MyConvertInt(sdr["odf_start"].ToString()),
                                     OdfStartName = sdr["odf_start_name"].ToString(),
-                                    OdfEndId = Convert.ToInt32(sdr["odf_end"]),
+                                    OdfEndId = MyConvertInt(sdr["odf_end"].ToString()),
                                     OdfEndName = sdr["odf_end_name"].ToString(),
-                                    SectionTypeId = Convert.ToInt32(sdr["type_id"]),
+                                    SectionTypeId = MyConvertInt(sdr["type_id"].ToString()),
                                     SectionTypeName = sdr["type_name"].ToString(),
-                                    Lengte = Convert.ToInt32(sdr["length"]),
+                                    Lengte = MyConvertInt(sdr["length"].ToString()),
                                     Active = Convert.ToBoolean(sdr["active"])
                                 });
                             }

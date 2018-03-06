@@ -77,24 +77,26 @@
         </dl>
 
         <table class="table">
-        <tr>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidFiberNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidSectieNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
-        </tr>
+            <tr>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidFiberNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidSectieNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
+            </tr>
         @foreach (var item in Model.Fibers)
         {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.FoidFibreNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.FoidSerialNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
-            <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.OdfStartName)</td>
-            <td>@Html.DisplayFor(modelItem => item.OdfEndName)</td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FoidFibreNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.FoidSerialNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
+                <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.OdfStartName)</td>
+                <td>@Html.DisplayFor(modelItem => item.OdfEndName)</td>
+            </tr>
         }
     </table>
 </div>
