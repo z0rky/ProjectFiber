@@ -53,7 +53,7 @@ namespace Eindwerk2018.Models.db
         {
             if (foid != null)
             {
-                string query = "INSERT INTO FOID (name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf) VALUES ('" + foid.Name + "','" + foid.CreatieDatum + "','" + foid.Status+ "','" + foid.LastStatusDate + "','" + foid.RequestorId + "','" + foid.Comments + "','" + foid.LengthCalculated + "','" + foid.LengthOtdr + "','" + foid.StartOdfId + "','" + foid.EndOdfId + "')"; //query
+                string query = "INSERT INTO FOID (name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf) VALUES ('" + foid.Name + "','" + MySqlDate(foid.CreatieDatum) +"','" + foid.Status+ "','" + MySqlDate(foid.LastStatusDate) + "','" + foid.RequestorId + "','" + foid.Comments + "','" + foid.LengthCalculated + "','" + foid.LengthOtdr + "','" + foid.StartOdfId + "','" + foid.EndOdfId + "')"; //query
                 this.ShortQuery(query);
                 return GetLastInsertedId(); //return new id
             }
@@ -64,7 +64,9 @@ namespace Eindwerk2018.Models.db
         {
             if (foid != null || foid.Id != 0)
             {
-                string query = "UPDATE FOID SET name='" + foid.Name + "', date_creation='" + foid.CreatieDatum+ "', status='" + foid.Status + "', date_last_status='" + foid.LastStatusDate + "', requestor_id='" + foid.RequestorId + "', comments='" + foid.Comments + "', length_calculated='" + foid.LengthOtdr + "', start_odf='" + foid.StartOdfId + "', end_odf='" + foid.EndOdfId + "' WHERE id='" + foid.Id + "' LIMIT 1"; //query
+                //length_calculated='" + foid.LengthOtdr + "', should be updated by another process, not by edit
+                //fibers/sections is also another funtions
+                string query = "UPDATE FOID SET name='" + foid.Name + "', status='" + foid.Status + "', date_last_status='" + MySqlDate(foid.LastStatusDate) + "', requestor_id='" + foid.RequestorId + "', comments='" + foid.Comments + "', start_odf='" + foid.StartOdfId + "', end_odf='" + foid.EndOdfId + "' WHERE id='" + foid.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }

@@ -601,6 +601,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Sections.
+        /// </summary>
+        public static string LinkEditSection {
+            get {
+                return ResourceManager.GetString("LinkEditSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other.
         /// </summary>
         public static string LinkOther {
@@ -925,7 +934,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Type Name.
         /// </summary>
         public static string SectieTypeName {
             get {

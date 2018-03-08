@@ -1,5 +1,6 @@
 ﻿using Eindwerk2018.Models;
 using Eindwerk2018.Models.db;
+using Eindwerk2018.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Eindwerk2018.Controllers
     public class SectieController : Controller
     {
         private Db_Sectie dbSectie = new Db_Sectie();
+        private Db_SectieType dbSectieType = new Db_SectieType();
 
         // GET: Sectie
         public ActionResult Index(int? kabelId)
@@ -36,7 +38,9 @@ namespace Eindwerk2018.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new NieuweSectieViewModel() { SectieTypes = dbSectieType.List() };
+
+            return View(viewModel);
         }
 
         // POST: Sectie/Create
@@ -44,16 +48,19 @@ namespace Eindwerk2018.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SectieTypeId,SectieKabelId,SectieOdfStartId,SectieOdfEndId,SectieLength")] Sectie sectie)
+        public ActionResult Create([Bind(Include = "Sectie")] NieuweSectieViewModel newSectie)
         {
             if (ModelState.IsValid)
             {
-                dbSectie.Add(sectie);
-                return RedirectToAction("Index");
-                //return RedirectToAction("Sectie", "Details", sectie.Id); //should let add return id
+                newSectie.Sectie.Active = true; //een nieuwe is altijd actief
+                int newId = dbSectie.Add(newSectie.Sectie);
+
+                //should also add all fibers
+   
+                return RedirectToAction("Details", "Sectie", new { Id = newId });
             }
 
-            return View(sectie);
+            return View(newSectie);
         }
 
         // GET: user/Edit/5
@@ -100,6 +107,15 @@ namespace Eindwerk2018.Controllers
         {
             //get info
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public JsonResult SearchSecties(int? odfId)
+        {
+            List<Sectie> secties = dbSectie.SearchOdf((int) odfId); //return too much for this
+            //Converteren
+            var list = from N in secties select new { N.Id, N.KabelName, N.SectieNr }; //hoe kablename en SectieNr samen voegen ?
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
     }
 }

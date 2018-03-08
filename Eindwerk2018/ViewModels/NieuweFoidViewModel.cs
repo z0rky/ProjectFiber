@@ -9,6 +9,7 @@ namespace Eindwerk2018.ViewModels
     public class NieuweFoidViewModel
     {
         public Foid Foid { get; set; }
+        public int OldStatus { get; set; }
 
         public IEnumerable<User> Users { get; set; }
 

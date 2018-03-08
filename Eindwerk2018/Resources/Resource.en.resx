@@ -282,7 +282,7 @@
     <value>Type Id</value>
   </data>
   <data name="SectieTypeName" xml:space="preserve">
-    <value>Name</value>
+    <value>Type Name</value>
   </data>
   <data name="SectieTypeVirtual" xml:space="preserve">
     <value>Virtual</value>
@@ -445,5 +445,8 @@
   </data>
   <data name="StatusReserved" xml:space="preserve">
     <value>Reserved</value>
+  </data>
+  <data name="LinkEditSection" xml:space="preserve">
+    <value>Edit Sections</value>
   </data>
 </root>

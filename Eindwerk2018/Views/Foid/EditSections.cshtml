@@ -1,0 +1,169 @@
+﻿@model Eindwerk2018.ViewModels.AddSectieFoidViewModel
+
+@{
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkEdit;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int CountOfOdfs = 0;
+    int LastOdfId = 0;
+}
+
+@*Moet ook in bundle config**@
+<link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+
+<h2>@Eindwerk2018.Resources.Resource.LinkEdit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>FOID</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Foid.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Foid.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Foid.Id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Foid.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Foid.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Foid.StartOdfName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Foid.StartOdfName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Foid.EndOdfName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Foid.EndOdfName)
+            </div>
+        </div>
+
+        <h4>@Eindwerk2018.Resources.Resource.SectieTitle</h4>
+        <hr />
+
+        <table class="table">
+            <tr>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
+            </tr>
+            @for (int i = 0; i < Model.StartOdfs.Count; i++)
+            {
+                CountOfOdfs = i;
+                LastOdfId = Model.EndOdfs[i].Id;
+                <tr>
+                    <td colspan="2">
+                        @Html.HiddenFor(model => Model.StartOdfs[i].Id)
+                        @Html.EditorFor(model => Model.StartOdfs[i].Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.DisplayFor(model => model.Secties[i].KabelName)
+                        - @Html.DisplayFor(model => model.Secties[i].SectieNr)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.HiddenFor(model => Model.EndOdfs[i].Id)
+                        @Html.EditorFor(model => Model.EndOdfs[i].Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+            }
+
+            @*Gaat moeten aangepast worden dat ge alleen moogt bijvoegen als EndOdf van FOID nog niet gelijk is StartOdf of End Odf van laatste sectie*@
+            <tr>
+                <td>
+                    @{
+                        CountOfOdfs++;
+                        string CountOfOdfsStr = "sectie" + CountOfOdfs; @*Omdat het anders niet wilt schrijven*@
+                        if (LastOdfId == 0) { LastOdfId = Model.Foid.EndOdfId; };
+                    }
+                    <select class="form-control" id="OdfList" name="OdfList"></select>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-group">
+        <input class="form-control" id='@CountOfOdfsStr' name='@CountOfOdfsStr' type="text" />
+        <div col-md-10><button id="b1" class="btn btn-default add-more " type="button">+</button></div>
+    </div>
+
+    <div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="@Eindwerk2018.Resources.Resource.LinkSave" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        //this too add fields
+        var next = @CountOfOdfs;
+        $(".add-more").click(function (e)
+        {
+            e.preventDefault();
+            var addto = "#sectie" + next;
+            var addRemove = "#sectie" + (next);
+            next = next + 1;
+            var newIn = '<input class="form-control" id="sectie' + next + '" name="sectie' + next + '" type="text">';
+            var newInput = $(newIn);
+            var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me">-</button>';
+            var removeButton = $(removeBtn);
+            $(addto).after(newInput);
+            $(addRemove).after(removeButton);
+            $("#sectie" + next).attr('data-source', $(addto).attr('data-source'));
+            $("#count").val(next);
+
+            $('.remove-me').click(function (e)
+            {
+                e.preventDefault();
+                var fieldNum = this.id.charAt(this.id.length - 1);
+                var fieldID = "#sectie" + fieldNum;
+                $(this).remove();
+                $(fieldID).remove();
+            });
+        });
+
+        //search for the correct Odfs
+        //$('#OdfList').click(function() { //should always be loaded
+            var odfId = @LastOdfId;
+            var procemessage = "<option value='0'> Please wait...</option>";
+            $("#OdfList").html(procemessage).show();
+
+            $.ajax({
+                url: "/Odf/SearchConnectedOdf",
+                type: 'POST',
+                dataType: 'json',
+                data: { 'odfId': odfId },
+                success: function(data)
+                {
+                    var markup = "<option value='0'>--</option>";
+                    for (var x = 0; x < data.length; x++) markup += "<option value=" + data[x].Id + ">" + data[x].Name + "</option>";
+                    $("#OdfList").html(markup).show();
+                }
+            });
+        //});
+    });
+</script>

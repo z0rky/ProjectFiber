@@ -89,5 +89,14 @@ namespace Eindwerk2018.Controllers
         //        return View ();
         //    }
         //}
+
+        [HttpPost]
+        public JsonResult SearchKabel(string Prefix)
+        {
+            List<Kabel> kabels = dbKabels.Search(Prefix); //return too much for this
+            //Converteren
+            var list = from N in kabels select new { N.Id, N.Naam };
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }

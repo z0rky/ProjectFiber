@@ -35,13 +35,15 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query)[0];
         }
 
-        public void Add(SectieType sectieType)
+        public int Add(SectieType sectieType)
         {
             if (sectieType != null)
             {
                 string query = "INSERT INTO section_type (name,description,virtual) VALUES ('" + sectieType.Naam + "','" + sectieType.Beschrijving+ "','" + sectieType.Virtueel+ "')"; //query
                 this.ShortQuery(query);
+                return GetLastInsertedId(); //return new id
             }
+            return 0;
         }
 
         public void Edit(SectieType sectieType)

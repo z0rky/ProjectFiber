@@ -63,25 +63,39 @@ namespace Eindwerk2018.Controllers
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            //users ophalen
-            var viewModel = new NieuweFoidViewModel() { Foid = dbFoid.Get((int)id), Users = dbUser.List() };
+            //statussen aanmaken
+            var listStatuses = new List<Status>
+            {  //name wordt in NameEn gezet, maar eigelijk is het al de juiste vertaling
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusNew , Id = 0 },
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusReserved , Id = 1 },
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusAccept , Id = 2 },
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusInService , Id = 3 },
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusRemoved , Id = 9 }
+            };
 
-            if (viewModel.Foid == null) return HttpNotFound();
+            //foid ophalen
+            Foid foid = dbFoid.Get((int)id);
+            if (foid == null) return HttpNotFound();
+
+            //users ophalen
+            var viewModel = new NieuweFoidViewModel() { Foid = foid,OldStatus=foid.Status, Users = dbUser.List(), Statuses = listStatuses };
+
             return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Name,Comments,LengthOtdr")] Foid foid)
+        public ActionResult Edit([Bind(Include = "Foid,OldStatus")] NieuweFoidViewModel newFoid)
         {
             if (ModelState.IsValid)
             {
-                //if status is changed, update date; hoe weten we wat de vorige status was?
-                //foid.LastStatusDate = new DateTime();
-                dbFoid.Edit(foid);
-                return RedirectToAction("Details", "Foid", foid.Id);
+                //if status is changed, update date; hoe weten we wat de vorige status was? -> added field OldStatus
+                if(newFoid.OldStatus != newFoid.Foid.Status) newFoid.Foid.LastStatusDate = DateTime.Today;
+                //toevoegen
+                dbFoid.Edit(newFoid.Foid);
+                return RedirectToAction("Details", "Foid", newFoid.Foid.Id);
             }
 
-            return View(foid);
+            return View(newFoid);
         }
 
         public ActionResult Delete(int? id)
@@ -104,6 +118,33 @@ namespace Eindwerk2018.Controllers
             {
                 return View ();
             }
+        }
+
+        public ActionResult EditSections(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            //foid ophalen
+            Foid foid = dbFoid.Get((int)id);
+            if (foid == null) return HttpNotFound();
+
+            //fiber omzetten naar Odfs en Secties
+            List<Odf> startOdfs = new List<Odf>();
+            List<Odf> endOdfs = new List<Odf>();
+            List<Sectie> secties = new List<Sectie>();
+            foreach (FiberFoid fiber in foid.Fibers.Where(f=> f.FoidFibreNr==1)) //should only select the first fiber, all the other are doubles
+            {
+                startOdfs.Add(new Odf { Id = fiber.OdfStartId, Name = fiber.OdfStartName });
+                //end odf ook?
+                endOdfs.Add(new Odf { Id = fiber.OdfEndId, Name = fiber.OdfEndName });
+                secties.Add(new Sectie { SectieNr = fiber.SectieNr, KabelId = fiber.KabelId, KabelName = fiber.KabelName}); //ID?
+            }
+
+
+
+            var viewModel = new AddSectieFoidViewModel() { Foid = foid, StartOdfs = startOdfs, EndOdfs = endOdfs, Secties = secties };
+
+            return View(viewModel);
         }
     }
 }
