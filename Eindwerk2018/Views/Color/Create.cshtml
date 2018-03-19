@@ -39,12 +39,13 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="@Eindwerk2018.Resources.Resource.LinkCreate" class="btn btn-default" />
+            <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+            <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
         </div>
     </div>
 </div>
 }
 
-<div>
+@*<div>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
-</div>
+</div>*@
