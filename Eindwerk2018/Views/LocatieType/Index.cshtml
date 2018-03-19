@@ -5,29 +5,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Eindwerk2018.Resources.Resource.LocationTypeTitle</h2>
 
-<p>
-    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
-</p>
-<table class="table">
+
+<table id="locatieType" class="table table-bordered table-hover">
+    <thead>
     <tr>
         <th>@Html.DisplayNameFor(model => model.NaamNL)</th>
         <th>@Html.DisplayNameFor(model => model.NaamFR)</th>
         <th></th>
     </tr>
+    </thead>
+    <tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.NaamNL)</td>
-        <td>@Html.DisplayFor(modelItem => item.NaamFR)</td>
+    @foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.NaamNL)</td>
+            <td>@Html.DisplayFor(modelItem => item.NaamFR)</td>
 
-        <td>
-            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |
-            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = item.Id }) |
-            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
-
+            <td>
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = item.Id }) |
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+    </tbody>   
 </table>
+
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkCreate onclick="location.href='@Url.Action("Create", "LocatieType")'" />
+
+@section scripts
+{
+    <script>
+     $(document).ready(function() {
+         $("#locatieType").DataTable();
+
+     });
+ </script>
+}
+    
+
