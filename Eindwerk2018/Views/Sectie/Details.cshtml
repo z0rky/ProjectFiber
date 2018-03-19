@@ -27,7 +27,8 @@
         <dd>@Html.DisplayFor(model => model.Lengte) m</dd>
     </dl>
 
-    <table class="table">
+    <table id="sectieTable" class="table table-bordered table-hover">
+        <thead>
         <tr>
             <th>@Eindwerk2018.Resources.Resource.fiberOrderNr</th>
             <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
@@ -35,6 +36,8 @@
             <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
             <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
         </tr>
+        </thead>
+        <tbody>
         @foreach (var item in Model.Fibers)
         {
             <tr>
@@ -45,9 +48,20 @@
                 <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
             </tr>
         }
+        </tbody>
     </table>
 
-</div>
+    <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+    @section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                $("#sectieTable").DataTable();
+
+            });
+        </script>
+    }
+@*</div>
 <p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", "Sectie", new { kabelId =Model.KabelId }, null)
-</p>
+</p>*@
