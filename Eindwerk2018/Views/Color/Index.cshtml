@@ -7,17 +7,19 @@
 
 <h2>@Eindwerk2018.Resources.Resource.ColorTitle</h2>
 
-<p>
+@*<p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
-</p>
-<table class="table">
+</p>*@
+<table id="kleurTable" class="table table-bordered table-hover">
+    <thead>
     <tr>
         <th>@Html.DisplayNameFor(model => model.NameEn)</th>
         <th>@Html.DisplayNameFor(model => model.NameNl)</th>
         <th>@Html.DisplayNameFor(model => model.NameFr)</th>
         <th></th>
     </tr>
-
+    </thead>
+    <tbody>
     @foreach (var item in Model)
     {
         <tr>
@@ -32,5 +34,16 @@
             </td>
         </tr>
     }
-
+    </tbody>
 </table>
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkCreate2 onclick="location.href='@Url.Action("Create", "Color")'" />
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#kleurTable").DataTable();
+        });
+    
+  
+    </script>
+}
