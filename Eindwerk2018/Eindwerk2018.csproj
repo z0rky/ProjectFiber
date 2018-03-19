@@ -693,6 +693,7 @@
     <Content Include="Views\Foid\EditSections.cshtml" />
     <Content Include="Views\Foid\Edit.cshtml" />
     <Content Include="Views\Sectie\Create.cshtml" />
+    <Content Include="Views\Kabel\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

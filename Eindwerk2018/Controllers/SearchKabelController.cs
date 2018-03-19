@@ -20,30 +20,44 @@ namespace Eindwerk2018.Controllers
             return View();
         }
 
+        public ActionResult SearchReference()
+        {
+            return View("SearchKabelReference");
+
+        }
+
 
 
         [HttpPost]
         public ActionResult SearchKabel(Kabel kabel)
         {
-            if (!ModelState.IsValid)
+            if (kabel.Naam != null)
             {
-                KabelsZoek = dbKabels.Search(kabel.Naam).ToList();
-                var kabelZoekViewModel = new SearchKabelResultViewModel
-                {
-                    GezochteKabels = KabelsZoek
-                };
-                return View("IndexSearchResult", kabelZoekViewModel);
+            
+                    KabelsZoek = dbKabels.Search(kabel.Naam).ToList();
+                    var kabelZoekViewModel = new SearchKabelResultViewModel
+                    {
+                        GezochteKabels = KabelsZoek
+                    };
+                    return View("IndexSearchResult", kabelZoekViewModel);
+              
+                   
             }
-            else
+
+            if (kabel.Reference != null)
             {
-                var kabelZoekViewModel = new SearchKabelViewModel()
-                {
-                    Kabel = kabel
-                };
-
-                return View("SearchKabelReference", kabelZoekViewModel);
-
+               
+                  KabelsZoek = dbKabels.Search(kabel.Reference).ToList();
+                    var kabelZoekViewModel = new SearchKabelResultViewModel
+                    {
+                        GezochteKabels = KabelsZoek
+                    };
+                    return View("IndexSearchResult", kabelZoekViewModel);
+              
             }
+
+
+            return View("Index");
         }
 
         public ActionResult Details(int id)
