@@ -57,12 +57,15 @@
         <hr />
 
         <table class="table" id="myTable">
+            <thead>
             <tr>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
             </tr>
-            @for (int i = 0; i < Model.StartOdfs.Count; i++)
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.StartOdfs.Count; i++)
             {
                 CountOfOdfs = i;
                 LastOdfId = Model.EndOdfs[i].Id;
@@ -88,7 +91,7 @@
                 string CountOfOdfsStr = "sectie" + CountOfOdfs; @*Omdat het anders niet wilt schrijven*@
                 if (LastOdfId == 0) { LastOdfId = Model.Foid.StartOdfId; };
             }
-
+            </tbody>
         </table>
     </div>
         <div class="form-group">
@@ -98,14 +101,16 @@
 
         <div>
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@Eindwerk2018.Resources.Resource.LinkSave" class="btn btn-default" />
+                <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+                <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
+               
             </div>
         </div>
 }
 
-        <div>
+        @*<div>
             @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
-        </div>
+        </div>*@
 
         <script type="text/javascript">
             var next = @CountOfOdfs;
