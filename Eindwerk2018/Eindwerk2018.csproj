@@ -174,7 +174,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\KabelTypeController.cs" />
     <Compile Include="Controllers\LocatieTypeController.cs" />
-    <Compile Include="Controllers\PdfGenerationController.cs" />
+    <Compile Include="Controllers\PdfController.cs" />
     <Compile Include="Controllers\SectieTypeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\OdfController.cs" />
@@ -221,6 +221,7 @@
     <Compile Include="Controllers\KabelController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Models\Locatie.cs" />
+    <Compile Include="Reports\PdfReports.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -698,10 +699,11 @@
     <Content Include="Views\Foid\Edit.cshtml" />
     <Content Include="Views\Sectie\Create.cshtml" />
     <Content Include="Views\Kabel\Edit.cshtml" />
+    <Content Include="Views\PdfGeneration\GeneratePdf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\PdfGeneration\" />
+    <Folder Include="Views\Pdf\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
