@@ -295,6 +295,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Sectie.
+        /// </summary>
+        public static string fiberFoidvirtual {
+            get {
+                return ResourceManager.GetString("fiberFoidvirtual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Module Color.
         /// </summary>
         public static string fiberModuleColor {
@@ -754,6 +763,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location Name.
+        /// </summary>
+        public static string OdfLocationName {
+            get {
+                return ResourceManager.GetString("OdfLocationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string OdfName {
@@ -957,6 +975,15 @@ namespace Eindwerk2018.Resources {
         public static string SectieTypeVirtual {
             get {
                 return ResourceManager.GetString("SectieTypeVirtual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Section.
+        /// </summary>
+        public static string SectieVirtual {
+            get {
+                return ResourceManager.GetString("SectieVirtual", resourceCulture);
             }
         }
         

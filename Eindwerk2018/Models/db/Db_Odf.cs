@@ -13,7 +13,7 @@ namespace Eindwerk2018.Models.db
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id, location_id, type_id, name FROM ODF LIMIT "+Start+","+Max_row; //query
+            string query = "SELECT o.id, o.location_id, l.name AS locatie_name, o.type_id, ot.name AS type_name, o.name FROM ODF AS o, ODF_type AS ot, location AS l WHERE o.type_id=ot.id AND o.location_id=l.id ORDER BY o.id DESC LIMIT " + Start+","+Max_row; //query
 
             return ListQueries(query);
         }
@@ -21,7 +21,7 @@ namespace Eindwerk2018.Models.db
         public List<Odf> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, location_id, type_id, name FROM ODF WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT o.id, o.location_id, l.name AS locatie_name, o.type_id, ot.name AS type_name, o.name FROM ODF AS o, ODF_type AS ot, location AS l WHERE name LIKE '%" + search + "%' AND o.type_id=ot.id AND o.location_id=l.id LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
@@ -29,8 +29,8 @@ namespace Eindwerk2018.Models.db
         public List<Odf> Search(int odfId) //Search for connected Odf's (via section), and location?
         {
             if (odfId == 0) return null;
-            string query = "SELECT o.id, o.location_id, o.type_id, o.name FROM ODF AS o,sections AS s WHERE s.odf_start='"+ odfId + "' AND s.odf_end=o.id " +
-                " UNION SELECT o.id, o.location_id, o.type_id, o.name FROM ODF AS o,sections AS s WHERE s.odf_end='" + odfId + "' AND s.odf_start=o.id " +
+            string query = "SELECT o.id, o.location_id,'' AS locatie_name, o.type_id, '' AS type_name, o.name FROM ODF AS o,sections AS s WHERE s.odf_start='" + odfId + "' AND s.odf_end=o.id " +
+                " UNION SELECT o.id, o.location_id,'' AS locatie_name, o.type_id, '' AS type_name, o.name FROM ODF AS o,sections AS s WHERE s.odf_end='" + odfId + "' AND s.odf_start=o.id " +
                 "LIMIT " + Max_row; //query
             //query that includes location, still needs to be tested
             /*string query = "SELECT o.id, o.location_id, o.type_id, o.name FROM ODF AS o,sections AS s WHERE s.odf_end IN(SELECT ob.id FROM ODF AS oa, ODF AS ob WHERE oa.id= '27843' AND oa.location_id= ob.location_id) AND s.odf_start = o.id"+
@@ -45,16 +45,16 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, location_id, type_id, name FROM ODF WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT o.id, o.location_id, l.name AS locatie_name, o.type_id, ot.name AS type_name, o.name FROM ODF AS o, ODF_type AS ot, location AS l WHERE o.id='" + id + "' AND o.type_id=ot.id AND o.location_id=l.id LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
 
         public int Add(Odf odf)
         {
-            if (odf != null)
+            if (odf != null && odf.Name != null)
             {
-                string query = "INSERT INTO ODF (location_id, type_id, name) VALUES ('" + odf.Location_id + "','" + odf.Type_id + "','" + odf.Name + "')"; //query
+                string query = "INSERT INTO ODF (location_id, type_id, name) VALUES ('" + odf.Location.Id + "','" + odf.OdfType.Id + "','" + odf.Name + "')"; //query
                 this.ShortQuery(query);
                 return GetLastInsertedId(); //return new id
             }
@@ -65,7 +65,7 @@ namespace Eindwerk2018.Models.db
         {
             if (odf != null || odf.Id != 0)
             {
-                string query = "UPDATE ODF SET name='" + odf.Name + "', location_id='" + odf.Location_id + "', type_id='" + odf.Type_id + "' WHERE id='" + odf.Id + "' LIMIT 1"; //query
+                string query = "UPDATE ODF SET name='" + odf.Name + "', location_id='" + odf.Location.Id + "', type_id='" + odf.OdfType.Id + "' WHERE id='" + odf.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -98,8 +98,8 @@ namespace Eindwerk2018.Models.db
                                 odfs.Add(new Odf
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
-                                    Location_id = Convert.ToInt32(sdr["location_id"]),
-                                    Type_id = Convert.ToInt32(sdr["type_id"]),
+                                    Location = new Locatie{ Id = Convert.ToInt32(sdr["location_id"]), LocatieNaam = sdr["locatie_name"].ToString() },
+                                    OdfType = new OdfType { Id = Convert.ToInt32(sdr["type_id"]), Name = sdr["type_name"].ToString() },
                                     Name = sdr["name"].ToString()
                                 });
                             }

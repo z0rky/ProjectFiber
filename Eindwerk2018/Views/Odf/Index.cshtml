@@ -7,45 +7,44 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
-</p>
+@*<p>
+        @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
+    </p>
+*@
 <table class="table table-bordered table-hover" id="odfTable">
     <thead>
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Location_id)</th>
-        <th>@Html.DisplayNameFor(model => model.Type_id)</th>
-        <th>@Html.DisplayNameFor(model => model.Name)</th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Location)</th>
+            <th>@Html.DisplayNameFor(model => model.OdfType)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Location_id)</td>
-            <td>@Html.DisplayFor(modelItem => item.Type_id)</td>
-            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Location.LocatieNaam)</td>
+                <td>@Html.DisplayFor(modelItem => item.OdfType.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
 
-            <td>
-                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new {id = item.Id}) |
-                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new {id = item.Id}) |
-                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new {id = item.Id})
-            </td>
-        </tr>
-    }
-        </tbody>
+                <td>
+                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = item.Id }) |
+                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = item.Id }) |
+                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
-<input type="button" class="btn btn-primary" Value="@Eindwerk2018.Resources.Resource.LinkCreate"  onclick="location.href='@Url.Action("Create", "Odf")'" />
-@*mogelijkheid op toevoegen sectie vanaf hier????*@
+<input type="button" class="btn btn-primary" Value="@Eindwerk2018.Resources.Resource.LinkCreate" onclick="location.href='@Url.Action("Create", "Odf")'" />
 
 @section scripts
 {
     <script>
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             $("#odfTable").DataTable();
 
             //$("#odfs").on("click", ".js-delete", function () {

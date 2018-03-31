@@ -9,6 +9,7 @@ namespace Eindwerk2018.Models
 {
     public class Foid
     {
+        [Display(Name = "Foid")]
         public int Id { get; set; }
 
         [Required]
@@ -59,5 +60,9 @@ namespace Eindwerk2018.Models
 
         [Display(Name = "FoidFibers", ResourceType = typeof(Resources.Resource))]
         public List<FiberFoid> Fibers { get; set; }
+
+        //should replace List<FiberFoid> Fibers
+        [Display(Name = "FoidFibers", ResourceType = typeof(Resources.Resource))] //for now same description
+        public List<Sectie> Secties { get; set; }
     }
 }

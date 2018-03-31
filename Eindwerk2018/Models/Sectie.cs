@@ -49,6 +49,9 @@ namespace Eindwerk2018.Models
         [Display(Name = "SectieActive", ResourceType = typeof(Resources.Resource))]
         public bool Active { get; set; }
 
+        [Display(Name = "Sectievirtual", ResourceType = typeof(Resources.Resource))]
+        public Boolean SectieVirtual { get; set; }
+
         public List<Fiber> Fibers { get; set; }
     }
 }

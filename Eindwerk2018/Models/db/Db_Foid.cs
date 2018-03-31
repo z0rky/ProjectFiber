@@ -14,7 +14,7 @@ namespace Eindwerk2018.Models.db
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f LIMIT " + Start+","+ Max_row; //query
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f ORDER BY f.id DESC LIMIT " + Start+","+ Max_row; //query
 
             return ListQueries(query);
         }
@@ -35,7 +35,8 @@ namespace Eindwerk2018.Models.db
 
             Foid foid = ListQueries(query)[0];
 
-            foid.Fibers = ListFibers(id);
+            //foid.Fibers = ListFibers(id);
+            foid.Secties = ListSections(id);
 
             return foid;
         }
@@ -151,11 +152,12 @@ namespace Eindwerk2018.Models.db
         /*Get the fibers on the route*/
         private List<FiberFoid> ListFibers(int foid)
         {  //not fibers nor section, somthing new, with all the info ODFs ...
+            //actually sections might be better -> ListSections(int foid)
             if (foid <= 0) return null;
             con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
 
             List<FiberFoid> fibers = new List<FiberFoid>();
-            string query = "SELECT k.id AS cable_id,k.name AS cable_name,s.section_nr,f.fiber_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name FROM fibers AS f, sections AS s, kabel AS k, ODF AS os, ODF AS oe WHERE f.FOID='" + foid + "' AND f.section_id=s.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
+            string query = "SELECT k.id AS cable_id,k.name AS cable_name,s.section_nr,f.fiber_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,st.virtual,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name FROM fibers AS f, sections AS s, section_type AS st, kabel AS k, ODF AS os, ODF AS oe WHERE f.FOID='" + foid + "' AND f.section_id=s.id AND s.type_id=st.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
 
             using (con) //con in Db_general
             {
@@ -178,6 +180,7 @@ namespace Eindwerk2018.Models.db
                                     SectieLength = MyConvertInt(sdr["length"].ToString()),
                                     FoidSerialNr = MyConvertInt(sdr["FOID_serial_nr"].ToString()),
                                     FoidFibreNr = MyConvertInt(sdr["FOID_fibre_nr"].ToString()),
+                                    SectieVirtual = Convert.ToBoolean(sdr["virtual"]),
                                     OdfStartId = MyConvertInt(sdr["odf_start_id"].ToString()),
                                     OdfStartName = sdr["odf_start_name"].ToString(),
                                     OdfEndId = MyConvertInt(sdr["odf_end_id"].ToString()),
@@ -196,6 +199,80 @@ namespace Eindwerk2018.Models.db
             }
 
             return fibers;
+        }
+
+        /*Get the sections on the route, could replace ListFibers(int foid)*/
+        private List<Sectie> ListSections(int foid)
+        {
+            if (foid <= 0) return null;
+            con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
+
+            List<Sectie> sectiefibers = new List<Sectie>();
+            string query = "SELECT s.id AS sectie_id,k.id AS cable_id,k.name AS cable_name,s.section_nr,f.fiber_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,st.virtual,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name FROM fibers AS f, sections AS s, section_type AS st, kabel AS k, ODF AS os, ODF AS oe WHERE f.FOID='" + foid + "' AND f.section_id=s.id AND s.type_id=st.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
+
+            using (con) //con in Db_general
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query))
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            while (sdr.Read())
+                            {
+                                sectiefibers.Add(new Sectie
+                                {
+                                    Id = MyConvertInt(sdr["sectie_id"].ToString()),
+                                    KabelId = MyConvertInt(sdr["cable_id"].ToString()),
+                                    KabelName = sdr["cable_name"].ToString(),
+                                    SectieNr = MyConvertInt(sdr["section_nr"].ToString()),
+                                    Lengte = MyConvertInt(sdr["length"].ToString()),
+                                    Fibers = new List<Fiber>
+                                    {
+                                        new Fiber
+                                        {
+                                            FiberNr = MyConvertInt(sdr["fiber_nr"].ToString()),
+                                            FoidSerialNr = MyConvertInt(sdr["FOID_serial_nr"].ToString()),
+                                            FoidFibreNr = MyConvertInt(sdr["FOID_fibre_nr"].ToString())
+                                        }
+                                    },
+                                    SectieVirtual = Convert.ToBoolean(sdr["virtual"]),
+                                    OdfStartId = MyConvertInt(sdr["odf_start_id"].ToString()),
+                                    OdfStartName = sdr["odf_start_name"].ToString(),
+                                    OdfEndId = MyConvertInt(sdr["odf_end_id"].ToString()),
+                                    OdfEndName = sdr["odf_end_name"].ToString()
+                                });
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+                }
+            }
+
+            //combine
+            int sectieId = 0;
+            Sectie tmpSectie = null;
+            List<Sectie> listSecties = new List<Sectie>();
+            foreach (Sectie sectie in sectiefibers)
+            {
+                if (sectie.Id != sectieId)
+                {
+                    sectieId = sectie.Id;
+                    if (tmpSectie != null) listSecties.Add(tmpSectie);//only write, when change
+                    tmpSectie = sectie;
+                }
+                else tmpSectie.Fibers.Add(sectie.Fibers.First());
+            }
+            listSecties.Add(tmpSectie); //write one last time
+
+            return listSecties;
         }
 
         /*Get a list of free fibers*/

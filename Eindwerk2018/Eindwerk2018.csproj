@@ -243,6 +243,7 @@
       <DependentUpon>Resource.nl.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddSectieFoidViewModel.cs" />
+    <Compile Include="ViewModels\NieuweOdfViewModel.cs" />
     <Compile Include="ViewModels\NieuweFoidViewModel.cs" />
     <Compile Include="ViewModels\NieuweKabelViewModel.cs" />
     <Compile Include="ViewModels\LocatieFormViewModel.cs" />

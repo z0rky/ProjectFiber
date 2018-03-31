@@ -11,30 +11,18 @@
 
 @using (Html.BeginForm("Save","Kabel"))
 {
-
     <div class="form-group">
-
         @Html.LabelFor(m => m.Kabel.Naam)
         @Html.TextBoxFor(m => m.Kabel.Naam, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Kabel.Naam)
-
     </div>
 
     <div class="form-group">
-
         @Html.LabelFor(m => m.Kabel.Reference)
         @Html.TextBoxFor(m => m.Kabel.Reference, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Kabel.Reference)
-
     </div>
-
-
 
     <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
     <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
-
-
-    
-   
-
 }

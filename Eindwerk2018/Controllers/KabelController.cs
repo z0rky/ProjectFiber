@@ -33,7 +33,6 @@ namespace Eindwerk2018.Controllers
 
         public ActionResult New()
         {
-
             return View("Create");
         }
 
@@ -45,17 +44,15 @@ namespace Eindwerk2018.Controllers
                 var viewModel = new NieuweKabelViewModel
                 {
                     Kabel = kabel
-
-
                 };
                 return View("Create", viewModel);
             }
             else
             {   
                 kabel.CreatieDatum = DateTime.Now;
-               dbKabels.Add(kabel);
+                int newId = dbKabels.Add(kabel);
 
-                return View("DetailsToSections", kabel);
+                return RedirectToAction("Edit", "Kabel", new { Id = newId });
             }
            
         }

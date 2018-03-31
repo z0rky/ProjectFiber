@@ -13,12 +13,10 @@ namespace Eindwerk2018.Models
         [Display(Name = "LocationName", ResourceType = typeof(Resources.Resource))]
         public string LocatieNaam { get; set; }
 
-        [Required]
         [Range(-180, 180)]
         [Display(Name = "LocationGpsLong", ResourceType = typeof(Resources.Resource))]
         public double GpsLong { get; set; }
 
-        [Required]
         [Range(-90, 90)]
         [Display(Name = "LocationGpsLat", ResourceType = typeof(Resources.Resource))]
         public double GpsLat { get; set; }

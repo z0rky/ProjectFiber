@@ -449,4 +449,13 @@
   <data name="LinkEditSection" xml:space="preserve">
     <value>Secties Bijwerken</value>
   </data>
+  <data name="fiberFoidvirtual" xml:space="preserve">
+    <value>Virtueel Sectie</value>
+  </data>
+  <data name="SectieVirtual" xml:space="preserve">
+    <value>Virtueel Sectie</value>
+  </data>
+  <data name="OdfLocationName" xml:space="preserve">
+    <value>Locatie Naam</value>
+  </data>
 </root>

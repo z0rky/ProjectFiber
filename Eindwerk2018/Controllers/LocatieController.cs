@@ -25,21 +25,14 @@ namespace Eindwerk2018.Controllers
             locatielijst = dbLocatietypes.List(); 
         }
 
-
-
-
         public ViewResult Index()
         {   
             var locaties = GetLocaties();
             return View(locaties);
-
-
         } 
 
         public ActionResult Details(int id)
         {
-
-
             var DetailsLocatie = dbLocaties.Get(id);
 
             return View("Details", DetailsLocatie);
@@ -100,11 +93,9 @@ namespace Eindwerk2018.Controllers
 
         public ActionResult Edit(int id)
         {
-
            GetLocatieTypes();
             
-
-             var locatieTest = GetLocaties();
+            var locatieTest = GetLocaties();
             var locatieEdit = locatieTest.SingleOrDefault(c => c.Id == id);
              
             if (locatieTest == null)
@@ -123,7 +114,14 @@ namespace Eindwerk2018.Controllers
         //{
         //    dbLocaties.Get(id);
         //}
+
+        [HttpPost]
+        public JsonResult SearchLocaties(string Prefix)
+        {
+            List<Locatie> locaties = dbLocaties.SearchNaam(Prefix); //return too much for this
+            //Converteren
+            var list = from N in locaties select new { N.Id, N.LocatieNaam };
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
-
-
 }

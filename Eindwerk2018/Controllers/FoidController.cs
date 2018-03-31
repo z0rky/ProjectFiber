@@ -29,6 +29,10 @@ namespace Eindwerk2018.Controllers
             Foid foid = dbFoid.Get((int)id);
             if (foid == null) return HttpNotFound();
 
+            //should order foid.Fibers;
+            //and also add subkabels
+            foid.Secties = OrderSecties(foid.Secties,foid.StartOdfId,foid.EndOdfId);
+
             return View (foid);
         }
 
@@ -131,14 +135,23 @@ namespace Eindwerk2018.Controllers
             //fiber omzetten naar Odfs en Secties
             List<Odf> startOdfs = new List<Odf>();
             List<Odf> endOdfs = new List<Odf>();
-            List<Sectie> secties = new List<Sectie>();
-            foreach (FiberFoid fiber in foid.Fibers.Where(f=> f.FoidFibreNr==1)) //should only select the first fiber, all the other are doubles
+            List<Sectie> secties = foid.Secties;
+            //odf start end should still be swapped
+            foreach (Sectie sectie in secties)
+            {
+                startOdfs.Add(new Odf { Id = sectie.OdfStartId, Name = sectie.OdfStartName });
+                //end odf ook?
+                endOdfs.Add(new Odf { Id = sectie.OdfEndId, Name = sectie.OdfEndName });
+                //secties.Add(new Sectie { SectieNr = sectie.SectieNr, KabelId = sectie.KabelId, KabelName = sectie.KabelName }); //ID?
+            }
+            //nolonger needed
+            /*foreach (FiberFoid fiber in foid.Fibers.Where(f=> f.FoidFibreNr==1)) //should only select the first fiber, all the other are doubles
             {
                 startOdfs.Add(new Odf { Id = fiber.OdfStartId, Name = fiber.OdfStartName });
                 //end odf ook?
                 endOdfs.Add(new Odf { Id = fiber.OdfEndId, Name = fiber.OdfEndName });
                 secties.Add(new Sectie { SectieNr = fiber.SectieNr, KabelId = fiber.KabelId, KabelName = fiber.KabelName}); //ID?
-            }
+            }*/
 
             var viewModel = new AddSectieFoidViewModel() { Foid = foid, StartOdfs = startOdfs, EndOdfs = endOdfs, Secties = secties };
 
@@ -173,8 +186,41 @@ namespace Eindwerk2018.Controllers
             };
 
             return RedirectToAction("Details", "Foid", new { Id = sectieFoid.Foid.Id });
+        }
 
-            //return View();
+        private List<Sectie> OrderSecties(List<Sectie> startList, int beginStartOdfId, int beginEndOdfId)
+        {
+            List<Sectie> returnFiberList = new List<Sectie>();
+
+            int startOdfId = beginStartOdfId;
+            //not good can be multiple fibers !!
+
+            foreach (Sectie sectie in startList)
+            {
+                //set start odf from first = to second
+                if (startOdfId == sectie.OdfStartId) startOdfId = sectie.OdfEndId; //is the start for the next one
+                else
+                {   //swap start and end (id and name)
+                    startOdfId = sectie.OdfStartId; //is the start for the next one
+                    String tmp = sectie.OdfStartName;
+                    sectie.OdfStartId = sectie.OdfEndId;
+                    sectie.OdfStartName = sectie.OdfEndName;
+                    sectie.OdfEndId = startOdfId;
+                    sectie.OdfEndName = tmp;
+                }
+                returnFiberList.Add(sectie); //add it
+
+                //should order foid.Fibers, combination of foidfibers;
+                //and also add subkabels
+                //checked on SectieVirtual if true, get sub thing, and should also check it, reuse this script
+                if (sectie.SectieVirtual == true)
+                {
+                    //ophalen route
+                    //Door dezelfde functie jagen
+                }
+            }
+
+            return returnFiberList;
         }
     }
 }

@@ -56,7 +56,7 @@
             {
             <B>Onbekend</B>
             }
-            else { @(Html.DisplayFor(model => model.LengthCalculated) +" m") }
+            else { @(Html.DisplayFor(model => model.LengthCalculated)) <i>m</i> }
         </dd>
 
         <dt>@Html.DisplayNameFor(model => model.LengthOtdr)</dt>
@@ -66,7 +66,7 @@
                 <B>Onbekend</B>
             }
             else
-            { @( Html.DisplayFor(model => model.LengthOtdr) + " m")}
+            { @( Html.DisplayFor(model => model.LengthOtdr)) <i>m</i> }
         </dd>
 
         <dt>@Html.DisplayNameFor(model => model.StartOdfName)</dt>
@@ -78,24 +78,28 @@
 
         <table class="table">
             <tr>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidFiberNr</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidSectieNr</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
             </tr>
-        @foreach (var item in Model.Fibers)
+        @foreach (var item in Model.Secties)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.FoidFibreNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.FoidSerialNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
-                <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.Fibers[0].FoidSerialNr)</td>
                 <td>@Html.DisplayFor(modelItem => item.OdfStartName)</td>
                 <td>@Html.DisplayFor(modelItem => item.OdfEndName)</td>
+                <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
+                <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
+                <td>
+                    @foreach (var fiber in item.Fibers)
+        {
+            @Html.DisplayFor(modelItem => fiber.FiberNr)
+            <br />
+}
+                </td>
             </tr>
         }
     </table>

@@ -20,6 +20,9 @@ namespace Eindwerk2018.Models
         [Display(Name = "fiberFoidSectieLength", ResourceType = typeof(Resources.Resource))]
         public int SectieLength { get; set; }
 
+        [Display(Name = "fiberFoidvirtual", ResourceType = typeof(Resources.Resource))]
+        public Boolean SectieVirtual { get; set; }
+
         [Display(Name = "fiberFoidOdfStartId", ResourceType = typeof(Resources.Resource))]
         public int OdfStartId { get; set; }
 

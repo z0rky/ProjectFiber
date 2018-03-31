@@ -167,16 +167,28 @@
                 success: function (data) {
                     newIn +='<input type="hidden" name="Newsecties[]" value="'+ data.Id +'">';
                     var newInput = $(newIn);
+                    var displayStartOdf = "";
+                    var displayEndOdf = "";
 
                     //html toevoegen aan table
                     $("#myTable > tbody").append(newInput);
-
-                    $("#" + newStartOdf).text(data.OdfStartName);
-                    $("#" + newKableName).text(data.KabelName + " - "+data.SectieNr);
-                    $("#" + newEndOdf).text(data.OdfEndName);
+                    
                     //odfid opnieuw instellen, ma eerst nakijken of het niet hetzelfde is (volgorde is niet altijd juist)
-                    if (odfId == data.OdfStartId) odfId = data.OdfEndId;
-                    else odfId = data.OdfStartId;
+                    if (odfId == data.OdfStartId) {
+                        odfId = data.OdfEndId;
+                        displayStartOdf = data.OdfStartName;
+                        displayEndOdf = data.OdfEndName;
+                    }
+                    else
+                    {
+                        odfId = data.OdfStartId;
+                        displayStartOdf = data.OdfEndName;
+                        displayEndOdf = data.OdfStartName;
+                    }
+
+                    $("#" + newStartOdf).text(displayStartOdf);
+                    $("#" + newKableName).text(data.KabelName + " - " + data.SectieNr);
+                    $("#" + newEndOdf).text(displayEndOdf);
 
                     next++; //increase counter
                     //redo odf list start new funtion
