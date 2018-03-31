@@ -21,25 +21,20 @@ namespace Eindwerk2018.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchFoid(Foid foid)
+        public ActionResult SearchFoid(String SearchString)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                FoidZoek = dbFoid.Search(foid.Name).ToList();
-                var foidZoekViewModel = new SearchFoidResultViewModel
-                {
-                    GezochteFoids = FoidZoek
-                };
-                return View("IndexSearchResult",foidZoekViewModel);
+                //test of het FOid nr is, or name-search
+                if(int.TryParse(SearchString, out int n)) FoidZoek = dbFoid.SearchOnId(SearchString);
+                else FoidZoek = dbFoid.Search(SearchString);
+
+                //return View("Index","Foid", FoidZoek); //kan het niet vinden
+                //return RedirectToAction("Index", "Foid", FoidZoek); //niet juist, herlaad de lijst
+                return View("../Foid/Index", FoidZoek);
             }
 
-            var viewModel = new SearchFoidViewModel
-            {
-                Foid = foid
-            };
-
-
-            return View("Index", viewModel);
+            return View();
         }
 
     }

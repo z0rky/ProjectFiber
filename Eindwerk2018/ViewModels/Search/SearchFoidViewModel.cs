@@ -8,6 +8,7 @@ namespace Eindwerk2018.ViewModels
 {
     public class SearchFoidViewModel
     {
-        public Foid Foid { get; set; }
+        //public Foid Foid { get; set; }
+        public String SearchString { get; set; }
     }
 }

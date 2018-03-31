@@ -59,7 +59,7 @@ namespace Eindwerk2018.Models.db
         {
             if (kabel != null || kabel.Id != 0)
             {
-                string query = "UPDATE kabel SET name='" + kabel.Naam + "', reference='" + kabel.Reference+ "', date_creation='" + MySqlDate(kabel.CreatieDatum) + "' WHERE id='" + kabel.Id + "' LIMIT 1"; //query
+                string query = "UPDATE kabel SET name='" + kabel.Naam + "', reference='" + kabel.Reference+ "' WHERE id='" + kabel.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
