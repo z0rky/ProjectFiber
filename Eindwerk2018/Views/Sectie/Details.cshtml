@@ -29,13 +29,14 @@
 
     <table id="sectieTable" class="table table-bordered table-hover">
         <thead>
-        <tr>
-            <th>@Eindwerk2018.Resources.Resource.fiberOrderNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFiberColor</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
-        </tr>
+            <tr>
+                <th>@Eindwerk2018.Resources.Resource.fiberOrderNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFiberColor</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoid</th>
+            </tr>
         </thead>
         <tbody>
         @foreach (var item in Model.Fibers)
@@ -46,6 +47,7 @@
                 <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
                 <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
                 <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
+                <td>@Html.DisplayFor(modelItem => item.Foid)</td>
             </tr>
         }
         </tbody>
@@ -57,7 +59,6 @@
         <script>
             $(document).ready(function () {
                 $("#sectieTable").DataTable();
-
             });
         </script>
     }
