@@ -59,9 +59,45 @@ namespace Eindwerk2018.Controllers
         
         public ActionResult Edit(int id)
         {
-            return View ();
+            if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Kabel kabel = dbKabels.Get((int)id);
+            if (kabel == null) return HttpNotFound();
+
+            return View("Edit", kabel);
         }
 
+<<<<<<< HEAD
+=======
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "Id,Naam,Reference")] Kabel kabel)
+        {
+            try
+            {
+                dbKabels.Edit(kabel);
+                return RedirectToAction("Details", "Kabel", new { Id = kabel.Id });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try {
+        //        return RedirectToAction ("Index");
+        //    } catch {
+        //        return View ();
+        //    }
+        //}
+
+>>>>>>> master
         [HttpPost]
         public JsonResult SearchKabel(string Prefix)
         {

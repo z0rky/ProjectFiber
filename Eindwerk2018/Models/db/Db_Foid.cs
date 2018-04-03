@@ -27,6 +27,14 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
+        public List<Foid> SearchOnId(string search)
+        {
+            if (search == null) return null;
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f WHERE f.id LIKE '%" + search + "%' LIMIT " + Max_row; //query
+
+            return ListQueries(query);
+        }
+
         public Foid Get(int id)
         {
             if (id == 0) return null;
