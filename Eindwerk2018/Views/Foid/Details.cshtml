@@ -9,7 +9,7 @@
 <div>
     <h4>FOID</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" id="foidDetails">
         <dt>@Html.DisplayNameFor(model => model.Id)</dt>
         <dd>@Html.DisplayFor(model => model.Id)</dd>
 
@@ -76,7 +76,8 @@
         <dd>@Html.DisplayFor(model => model.EndOdfName)</dd>
         </dl>
 
-        <table class="table">
+        <table class="table table-bordered table-hover" id="foidInfo">
+            <thead>
             <tr>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
@@ -85,6 +86,8 @@
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidSectieNr</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
             </tr>
+            </thead>
+            <tbody>
         @foreach (var item in Model.Secties)
         {
             <tr>
@@ -102,9 +105,21 @@
                 </td>
             </tr>
         }
-    </table>
+                
+                </tbody>
+        </table>
 </div>
 <p>
-    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = Model.Id }) |
-    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", null, new { @class = "btn btn-primary" })
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","Foid", new {id = Model.Id })'">@Eindwerk2018.Resources.Resource.LinkEdit</button>
 </p>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#locaties").DataTable();
+
+        });
+    </script>
+}
+

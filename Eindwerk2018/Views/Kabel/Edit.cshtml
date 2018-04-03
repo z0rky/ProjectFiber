@@ -1,8 +1,38 @@
-﻿@model dynamic
+﻿@using Eindwerk2018.Controllers
+@using Eindwerk2018.Models
+@model Eindwerk2018.Models.Kabel
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewBag.Title = Eindwerk2018.Resources.Resource.KabelName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 }
 
-<h2>title</h2>
+<h2>@Eindwerk2018.Resources.Resource.KabelName</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Kabel.)
+        @Html.TextBoxFor(m => m.Locatie.LocatieNaam, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Locatie.LocatieNaam)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Locatie.GpsLong)
+        @Html.TextBoxFor(m => m.Locatie.GpsLong, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Locatie.GpsLong)
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+            <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
+        </div>
+    </div>
+@*</div>*@
+}
+

@@ -62,31 +62,6 @@ namespace Eindwerk2018.Controllers
             return View ();
         }
 
-        //[HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
-        //{
-        //    try {
-        //        return RedirectToAction ("Index");
-        //    } catch {
-        //        return View ();
-        //    }
-        //}
-
-        //public ActionResult Delete(int id)
-        //{
-        //    return View ();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try {
-        //        return RedirectToAction ("Index");
-        //    } catch {
-        //        return View ();
-        //    }
-        //}
-
         [HttpPost]
         public JsonResult SearchKabel(string Prefix)
         {
