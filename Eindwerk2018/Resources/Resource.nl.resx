@@ -458,4 +458,16 @@
   <data name="OdfLocationName" xml:space="preserve">
     <value>Locatie Naam</value>
   </data>
+  <data name="LocationBK" xml:space="preserve">
+    <value>Kilometer punt</value>
+  </data>
+  <data name="LocationLcode" xml:space="preserve">
+    <value>Bar Code</value>
+  </data>
+  <data name="LocationLijnNr" xml:space="preserve">
+    <value>Lijn Nummer</value>
+  </data>
+  <data name="fiberFoidName" xml:space="preserve">
+    <value>FOID Naam</value>
+  </data>
 </root>

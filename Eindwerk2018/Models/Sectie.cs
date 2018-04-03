@@ -53,5 +53,10 @@ namespace Eindwerk2018.Models
         public Boolean SectieVirtual { get; set; }
 
         public List<Fiber> Fibers { get; set; }
+
+        public List<Fiber> ListFreeFibers { get; set; }
+        //for free fibers, if we need to edit fibers
+
+        public int Level { get; set; } //voor foid in cwdm
     }
 }

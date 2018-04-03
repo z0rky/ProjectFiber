@@ -23,12 +23,14 @@ namespace Eindwerk2018.Controllers
         }
 
         // GET: SectieTypes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (id == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             SectieType sectieType = dbSectieTypes.Get((int)id);
             if (sectieType == null) return HttpNotFound();
+
+            sectieType.Fibers = dbSectieTypes.GetFibers(id);
 
             return View(sectieType);
         }
@@ -101,9 +103,7 @@ namespace Eindwerk2018.Controllers
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
-            {
-                // TODO: Add delete logic here
-
+            {  // TODO: Add delete logic here
                 return RedirectToAction(nameof(Index));
             }
             catch

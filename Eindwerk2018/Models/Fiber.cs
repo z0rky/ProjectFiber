@@ -29,6 +29,9 @@ namespace Eindwerk2018.Models
         [Display(Name = "fiberFoid", ResourceType = typeof(Resources.Resource))]
         public int Foid { get; set; }
 
+        [Display(Name = "fiberFoidName", ResourceType = typeof(Resources.Resource))]
+        public String FoidName { get; set; }
+
         [Display(Name = "fiberFoidSerialNr", ResourceType = typeof(Resources.Resource))]
         public int FoidSerialNr { get; set; }
 

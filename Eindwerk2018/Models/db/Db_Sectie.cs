@@ -155,7 +155,7 @@ namespace Eindwerk2018.Models.db
             con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
             List<Fiber> fibers = new List<Fiber>();
             //color info, is in type info
-            string qry = "SELECT f.Foid,f.fiber_nr,st.order_nr AS order_nr,fc.id AS fiber_color_id,fc.name_en AS fiber_color_name_en,st.module_nr,fm.id AS module_color_id,fm.name_en AS module_color_name_en,f.quality FROM fibers AS f,sections AS s,section_type_info AS st,fiber_color AS fc,fiber_color AS fm WHERE f.section_id='" + SectieId +"' AND f.fiber_nr=st.fiber_nr AND f.section_id=s.id AND s.type_id=st.type_id AND st.fiber_color_id=fc.id AND st.module_color_id=fm.id ORDER BY st.order_nr";
+            string qry = "SELECT f.Foid,fo.name AS foid_name,f.fiber_nr,st.order_nr AS order_nr,fc.id AS fiber_color_id,fc.name_en AS fiber_color_name_en,st.module_nr,fm.id AS module_color_id,fm.name_en AS module_color_name_en,f.quality FROM fibers AS f LEFT JOIN FOID AS fo ON f.FOID=fo.id,sections AS s,section_type_info AS st,fiber_color AS fc,fiber_color AS fm WHERE f.section_id='" + SectieId +"' AND f.fiber_nr=st.fiber_nr AND f.section_id=s.id AND s.type_id=st.type_id AND st.fiber_color_id=fc.id AND st.module_color_id=fm.id ORDER BY st.order_nr";
 
             using (con) //con in Db_general
             {
@@ -172,6 +172,7 @@ namespace Eindwerk2018.Models.db
                                 fibers.Add(new Fiber
                                 {
                                     Foid = MyConvertInt(sdr["Foid"].ToString()),
+                                    FoidName = sdr["foid_name"].ToString(),
                                     OrderNr = MyConvertInt(sdr["order_nr"].ToString()),
                                     FiberNr = MyConvertInt(sdr["fiber_nr"].ToString()),
                                     FiberColor = new Color { Id= MyConvertInt(sdr["fiber_color_id"].ToString()), NameEn = sdr["fiber_color_name_en"].ToString() },

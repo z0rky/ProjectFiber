@@ -29,7 +29,10 @@
                     })
                 },
                 minLength: 3,
-                select: function (event, ui) { $("#LocatieId").val(ui.item.id); $("#OdfName").val(ui.item.LocatieNaam); }
+                select: function (event, ui) {
+                    $("#LocatieId").val(ui.item.id);
+                    $("#OdfName").val(ui.item.label+" ODF");
+                }
             });
     });
 </script>
