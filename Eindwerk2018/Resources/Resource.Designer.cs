@@ -673,7 +673,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GPS  Latidude.
+        ///   Looks up a localized string similar to GPS  Latidude ( 50,540135 ).
         /// </summary>
         public static string LocationGpsLat {
             get {
@@ -682,7 +682,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GPS Longitude.
+        ///   Looks up a localized string similar to GPS Longitude  ( 3,551163 ).
         /// </summary>
         public static string LocationGpsLong {
             get {

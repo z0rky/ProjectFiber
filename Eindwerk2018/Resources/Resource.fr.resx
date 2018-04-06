@@ -203,10 +203,10 @@
     <value>Entreprise</value>
   </data>
   <data name="LocationGpsLat" xml:space="preserve">
-    <value>GPS  Latidude</value>
+    <value>GPS  Latidude ( 50,540135 )</value>
   </data>
   <data name="LocationGpsLong" xml:space="preserve">
-    <value>GPS Longitude</value>
+    <value>GPS Longitude  ( 3,551163 )</value>
   </data>
   <data name="LocationInfrabel" xml:space="preserve">
     <value>Infrabel location</value>
