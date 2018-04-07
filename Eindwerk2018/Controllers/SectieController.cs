@@ -158,11 +158,15 @@ namespace Eindwerk2018.Controllers
         }
 
 
-        public ActionResult ReportSectie(Sectie sectie)
-        {   
+        public ActionResult ReportSectie(Sectie sectie )
+        {
+            int tempId = sectie.Id;
+            Sectie sectie2 = dbSectie.Get(tempId);
+
+
             BezettingVanDeVezelsModel bezettingVanDeVezelsModel = new BezettingVanDeVezelsModel();
-            bezettingVanDeVezelsModel.sectie = sectie;
-            bezettingVanDeVezelsModel.Fibers = sectie.Fibers;
+            bezettingVanDeVezelsModel.sectie = sectie2;
+            bezettingVanDeVezelsModel.Fibers = sectie2.Fibers.ToList();
 
             BezettingVanDeVezelsPdfReport bezettingVanDeVezelsPdfReport = new BezettingVanDeVezelsPdfReport();
             byte[] abytes2 = bezettingVanDeVezelsPdfReport.PrepareReport(bezettingVanDeVezelsModel);

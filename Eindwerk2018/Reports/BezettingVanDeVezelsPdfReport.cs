@@ -12,10 +12,10 @@ namespace Eindwerk2018.Reports
     public class BezettingVanDeVezelsPdfReport
     {
         #region Declaration
-        int _totalColumn = 3;
+        int _totalColumn = 5;
         Document _document;
         Font _fontStyle;
-        PdfPTable _pdfPTable = new PdfPTable(3);
+        PdfPTable _pdfPTable = new PdfPTable(5);
         PdfPCell _pdfPCell;
         MemoryStream _memoryStream = new MemoryStream();
         IEnumerable<Fiber> _fibers = new List<Fiber>();
@@ -24,7 +24,7 @@ namespace Eindwerk2018.Reports
 
         public byte[] PrepareReport(BezettingVanDeVezelsModel bezettingVanDeVezelsModel)
         {
-            _fibers = bezettingVanDeVezelsModel.Fibers;
+            _fibers = bezettingVanDeVezelsModel.Fibers.ToList();
             _sectie = bezettingVanDeVezelsModel.sectie;
 
             #region
@@ -36,12 +36,12 @@ namespace Eindwerk2018.Reports
             _fontStyle = FontFactory.GetFont("Arial", 8f, 1);
             PdfWriter.GetInstance(_document, _memoryStream);
             _document.Open();
-            _pdfPTable.SetWidths(new float[]{20f,150f,100f});
+            _pdfPTable.SetWidths(new float[]{20f,40f,40f,40f,40f});
             #endregion
 
             this.ReportHeader();
             this.ReportBody();
-            _pdfPTable.HeaderRows = 2;
+            _pdfPTable.HeaderRows = 0;
             _document.Add(_pdfPTable);
             _document.Close();
             return _memoryStream.ToArray();
@@ -96,25 +96,25 @@ namespace Eindwerk2018.Reports
 
             _pdfPCell = new PdfPCell(new Phrase("In Dienst: " + _sectie.Active, _fontStyle));
             _pdfPCell.Colspan = _totalColumn;
-            _pdfPCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfPCell.Border = 0;
             _pdfPCell.ExtraParagraphSpace = 0;
             _pdfPTable.AddCell(_pdfPCell);
 
             _pdfPCell = new PdfPCell(new Phrase("Volgnummer: " + _sectie.SectieNr, _fontStyle));
             _pdfPCell.Colspan = _totalColumn;
-            _pdfPCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfPCell.Border = 0;
             _pdfPCell.ExtraParagraphSpace = 0;
             _pdfPTable.AddCell(_pdfPCell);
 
             _pdfPCell = new PdfPCell(new Phrase("Type sectie: " + _sectie.SectionTypeName, _fontStyle));
             _pdfPCell.Colspan = _totalColumn;
-            _pdfPCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            _pdfPCell.HorizontalAlignment = Element.ALIGN_LEFT;
             _pdfPCell.Border = 0;
             _pdfPCell.ExtraParagraphSpace = 0;
             _pdfPTable.AddCell(_pdfPCell);
-            // _pdfPTable.CompleteRow();
+            _pdfPTable.CompleteRow();
 
         }
 
@@ -169,13 +169,13 @@ namespace Eindwerk2018.Reports
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(fiber.ModuleColor.ToString(), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(fiber.ModuleColor.NameEn, _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(fiber.FiberColor.ToString(), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(fiber.FiberColor.NameEn, _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;

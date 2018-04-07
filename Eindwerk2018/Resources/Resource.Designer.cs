@@ -1017,9 +1017,9 @@ namespace Eindwerk2018.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual Section.
         /// </summary>
-        public static string SectieVirtual {
+        public static string Sectievirtual {
             get {
-                return ResourceManager.GetString("SectieVirtual", resourceCulture);
+                return ResourceManager.GetString("Sectievirtual", resourceCulture);
             }
         }
         
