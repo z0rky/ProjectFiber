@@ -15,6 +15,7 @@ namespace Eindwerk2018.Controllers
     {
         private Db_Sectie dbSectie = new Db_Sectie();
         private Db_SectieType dbSectieType = new Db_SectieType();
+        //BezettingVanDeVezelsModel bezettingVanDeVezelsModel; 
 
         // GET: Sectie
         public ActionResult Index(int? kabelId)
@@ -29,8 +30,13 @@ namespace Eindwerk2018.Controllers
         // GET: Sectie/Details/5
         public ActionResult Details(int? id)
         {
+
+
+           //bezettingVanDeVezelsModel = new BezettingVanDeVezelsModel();
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Sectie sectie = dbSectie.Get((int)id);
+            //bezettingVanDeVezelsModel.sectie = sectie;
+            //bezettingVanDeVezelsModel.Fibers = sectie.Fibers;
 
             if (sectie == null) return HttpNotFound();
 
@@ -153,9 +159,13 @@ namespace Eindwerk2018.Controllers
 
 
         public ActionResult ReportSectie(Sectie sectie)
-        {
-            PdfReportsSectie pdfReportsSectie = new PdfReportsSectie();
-            byte[] abytes2 = pdfReportsSectie.PrepareReport(GetSectie());
+        {   
+            BezettingVanDeVezelsModel bezettingVanDeVezelsModel = new BezettingVanDeVezelsModel();
+            bezettingVanDeVezelsModel.sectie = sectie;
+            bezettingVanDeVezelsModel.Fibers = sectie.Fibers;
+
+            BezettingVanDeVezelsPdfReport bezettingVanDeVezelsPdfReport = new BezettingVanDeVezelsPdfReport();
+            byte[] abytes2 = bezettingVanDeVezelsPdfReport.PrepareReport(bezettingVanDeVezelsModel);
             return File(abytes2, "application/pdf");
         }
 
