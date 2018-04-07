@@ -9,8 +9,7 @@ using iTextSharp.text.pdf;
 
 namespace Eindwerk2018.Reports
 {
-    public class PdfReports
-  
+    public class PdfReportsSectie
     {
         #region Declaration
         int _totalColumn = 3;
@@ -19,12 +18,12 @@ namespace Eindwerk2018.Reports
         PdfPTable _pdfPTable = new PdfPTable(3);
         PdfPCell _pdfPCell;
         MemoryStream _memoryStream = new MemoryStream();
-        List<Foid> _foids = new List<Foid>();
+        List<Sectie> _secties = new List<Sectie>();
         #endregion
 
-        public byte[] PrepareReport(List<Foid> foids)
+        public byte[] PrepareReport(List<Sectie> secties)
         {
-            _foids = foids;
+            _secties = secties;
 
             #region
             _document = new Document(PageSize.A4, 0f,0f,0f,0f);
@@ -102,7 +101,7 @@ namespace Eindwerk2018.Reports
             #region Table Body
             _fontStyle = FontFactory.GetFont("Tahoma", 9f, 1);
             int serialNumber = 1;
-            foreach (Foid foid in _foids )
+            foreach (Sectie sectie in _secties )
             {
                 _pdfPCell = new PdfPCell(new Phrase(serialNumber++.ToString(), _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
@@ -110,13 +109,13 @@ namespace Eindwerk2018.Reports
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(foid.Name, _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(sectie.Id.ToString(), _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(foid.Status.ToString(), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(sectie.Lengte.ToString(), _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;

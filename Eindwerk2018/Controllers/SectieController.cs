@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Eindwerk2018.Reports;
 
 namespace Eindwerk2018.Controllers
 {
@@ -148,6 +149,30 @@ namespace Eindwerk2018.Controllers
                 return Json(ajaxSectie, JsonRequestBehavior.AllowGet);
             }
             return null;
+        }
+
+
+        public ActionResult ReportSectie(Sectie sectie)
+        {
+            PdfReportsSectie pdfReportsSectie = new PdfReportsSectie();
+            byte[] abytes2 = pdfReportsSectie.PrepareReport(GetSectie());
+            return File(abytes2, "application/pdf");
+        }
+
+        public List<Sectie> GetSectie()
+        {
+            List<Sectie> sectieList = new List<Sectie>();
+            //// get foids to print
+
+            Sectie sectie = new Sectie();
+
+            sectie.Id = 1;
+            sectie.Lengte = 23;
+            sectieList.Add(sectie);
+
+
+            return sectieList;
+
         }
     }
 }

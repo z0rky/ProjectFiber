@@ -9,7 +9,7 @@
 
 <div>
     <h4>@Eindwerk2018.Resources.Resource.SectieTitle</h4>
-    <hr />
+    @*<hr />*@
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.KabelName)</dt>
         <dd>@Html.DisplayFor(model => model.KabelName)</dd>
@@ -53,7 +53,11 @@
         </tbody>
     </table>
 
-    <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+<input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ReportSectie", Model.Id)'">Print</button>
+@*<input type="button" class="btn btn-primary" value="Foid Toevoegen" onclick="location.href='@Url.Action("ReportSectie", "Sectie")'" />*@
+
+
     @section scripts
     {
         <script>
@@ -62,7 +66,4 @@
             });
         </script>
     }
-@*</div>
-<p>
-    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", "Sectie", new { kabelId =Model.KabelId }, null)
-</p>*@
+

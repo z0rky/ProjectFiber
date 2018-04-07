@@ -66,8 +66,6 @@ namespace Eindwerk2018.Controllers
             return View("Edit", kabel);
         }
 
-<<<<<<< HEAD
-=======
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,Naam,Reference")] Kabel kabel)
         {
@@ -97,7 +95,6 @@ namespace Eindwerk2018.Controllers
         //    }
         //}
 
->>>>>>> master
         [HttpPost]
         public JsonResult SearchKabel(string Prefix)
         {
