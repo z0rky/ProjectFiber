@@ -28,31 +28,29 @@
     </dl>
 
     <table id="sectieTable" class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>@Eindwerk2018.Resources.Resource.fiberOrderNr</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFiberColor</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoid</th>
-            </tr>
-        </thead>
-        <tbody>
+        <tr>
+            <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberFoid</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberFoidName</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberFiberColor</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
+            <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
+        </tr>
+
         @foreach (var item in Model.Fibers)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.OrderNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
-                <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
-                <td>@Html.DisplayFor(modelItem => item.Foid)</td>
-            </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
+            <td>@Html.DisplayFor(modelItem => item.Foid)</td>
+            <td>@Html.DisplayFor(modelItem => item.FoidName)</td>
+            <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
+            <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
+            <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
+        </tr>
         }
-        </tbody>
     </table>
 
+<<<<<<< HEAD
 <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
 <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ReportSectie", Model.Id)'">Print</button>
 @*<input type="button" class="btn btn-primary" value="Foid Toevoegen" onclick="location.href='@Url.Action("ReportSectie", "Sectie")'" />*@
@@ -67,3 +65,11 @@
         </script>
     }
 
+=======
+    <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+
+</div>
+<p>
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", "Sectie", new { kabelId =Model.KabelId }, null)
+</p>
+>>>>>>> master

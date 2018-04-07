@@ -232,6 +232,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FOID name.
+        /// </summary>
+        public static string fiberFoidName {
+            get {
+                return ResourceManager.GetString("fiberFoidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End Odf Id.
         /// </summary>
         public static string fiberFoidOdfEndId {
@@ -655,7 +664,16 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GPS  Latidude.
+        ///   Looks up a localized string similar to Kilometric point.
+        /// </summary>
+        public static string LocationBK {
+            get {
+                return ResourceManager.GetString("LocationBK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GPS  Latidude ( 50,540135 ).
         /// </summary>
         public static string LocationGpsLat {
             get {
@@ -664,7 +682,7 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GPS Longitude.
+        ///   Looks up a localized string similar to GPS Longitude  ( 3,551163 ).
         /// </summary>
         public static string LocationGpsLong {
             get {
@@ -678,6 +696,24 @@ namespace Eindwerk2018.Resources {
         public static string LocationInfrabel {
             get {
                 return ResourceManager.GetString("LocationInfrabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bar Code.
+        /// </summary>
+        public static string LocationLcode {
+            get {
+                return ResourceManager.GetString("LocationLcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line Number.
+        /// </summary>
+        public static string LocationLijnNr {
+            get {
+                return ResourceManager.GetString("LocationLijnNr", resourceCulture);
             }
         }
         

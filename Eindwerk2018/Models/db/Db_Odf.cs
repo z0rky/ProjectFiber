@@ -21,7 +21,7 @@ namespace Eindwerk2018.Models.db
         public List<Odf> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT o.id, o.location_id, l.name AS locatie_name, o.type_id, ot.name AS type_name, o.name FROM ODF AS o, ODF_type AS ot, location AS l WHERE name LIKE '%" + search + "%' AND o.type_id=ot.id AND o.location_id=l.id LIMIT " + Max_row; //query
+            string query = "SELECT o.id, o.location_id, l.name AS locatie_name, o.type_id, ot.name AS type_name, o.name FROM ODF AS o, ODF_type AS ot, location AS l WHERE o.name LIKE '%" + search + "%' AND o.type_id=ot.id AND o.location_id=l.id LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }

@@ -43,7 +43,8 @@ namespace Eindwerk2018.Models
         public int LengthCalculated { get; set; }
 
         [Display(Name = "FoidLengthOtdr", ResourceType = typeof(Resources.Resource))]
-        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = false)]
+        [Required(AllowEmptyStrings = true)] //werkt niet
         public int LengthOtdr { get; set; }
 
         [Display(Name = "FoidStartOdfId", ResourceType = typeof(Resources.Resource))]

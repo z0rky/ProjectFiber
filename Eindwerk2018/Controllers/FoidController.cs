@@ -94,12 +94,33 @@ namespace Eindwerk2018.Controllers
             {
                 //if status is changed, update date; hoe weten we wat de vorige status was? -> added field OldStatus
                 if(newFoid.OldStatus != newFoid.Foid.Status) newFoid.Foid.LastStatusDate = DateTime.Today;
-                //toevoegen
+
+                //Bij status new (0) en removed (9), zou fibers moeten leeg gemaakt worden
+                if (newFoid.Foid.Status == 0 || newFoid.Foid.Status == 9) dbFoid.DeleteFibers(newFoid.Foid.Id);
+
+                //Edit
                 dbFoid.Edit(newFoid.Foid);
-                return RedirectToAction("Details", "Foid", newFoid.Foid.Id);
+                return RedirectToAction("Details", "Foid", new { Id = newFoid.Foid.Id });
             }
 
-            return View(newFoid);
+            //statussen aanmaken
+            var listStatuses = new List<Status>
+            {  //name wordt in NameEn gezet, maar eigelijk is het al de juiste vertaling
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusNew , Id = 0 },
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusReserved , Id = 1 },
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusAccept , Id = 2 },
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusInService , Id = 3 },
+                    new Status{ NameEn = Eindwerk2018.Resources.Resource.StatusRemoved , Id = 9 }
+            };
+
+            //foid ophalen
+            Foid foid = dbFoid.Get((int) newFoid.Foid.Id);
+            if (foid == null) return HttpNotFound();
+
+            //users ophalen
+            var viewModel = new NieuweFoidViewModel() { Foid = foid, OldStatus = foid.Status, Users = dbUser.List(), Statuses = listStatuses };
+
+            return View(viewModel);
         }
 
         public ActionResult Delete(int? id)
@@ -144,14 +165,6 @@ namespace Eindwerk2018.Controllers
                 endOdfs.Add(new Odf { Id = sectie.OdfEndId, Name = sectie.OdfEndName });
                 //secties.Add(new Sectie { SectieNr = sectie.SectieNr, KabelId = sectie.KabelId, KabelName = sectie.KabelName }); //ID?
             }
-            //nolonger needed
-            /*foreach (FiberFoid fiber in foid.Fibers.Where(f=> f.FoidFibreNr==1)) //should only select the first fiber, all the other are doubles
-            {
-                startOdfs.Add(new Odf { Id = fiber.OdfStartId, Name = fiber.OdfStartName });
-                //end odf ook?
-                endOdfs.Add(new Odf { Id = fiber.OdfEndId, Name = fiber.OdfEndName });
-                secties.Add(new Sectie { SectieNr = fiber.SectieNr, KabelId = fiber.KabelId, KabelName = fiber.KabelName}); //ID?
-            }*/
 
             var viewModel = new AddSectieFoidViewModel() { Foid = foid, StartOdfs = startOdfs, EndOdfs = endOdfs, Secties = secties };
 
@@ -188,15 +201,46 @@ namespace Eindwerk2018.Controllers
             return RedirectToAction("Details", "Foid", new { Id = sectieFoid.Foid.Id });
         }
 
-        private List<Sectie> OrderSecties(List<Sectie> startList, int beginStartOdfId, int beginEndOdfId)
+        public ActionResult EditFibers(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Foid foid = dbFoid.Get((int)id);
+            if (foid == null) return HttpNotFound();
+
+            //should order foid.Fibers;
+            //and also add subkabels
+            foid.Secties = OrderSecties(foid.Secties, foid.StartOdfId, foid.EndOdfId);
+
+            foreach (Sectie sectie in foid.Secties)
+            { //add the free drivers
+                sectie.ListFreeFibers = dbFoid.ListFreeFibers(sectie.Id);
+            }
+
+            return View(foid);
+        }
+
+        [HttpPost]
+        public ActionResult EditFibers([Bind(Include = "Foid")] Foid foid)
+        {
+            //update only fibers
+
+            return View(foid);
+        }
+
+
+        private List<Sectie> OrderSecties(List<Sectie> startList, int beginStartOdfId, int beginEndOdfId, int level=0)
         {
             List<Sectie> returnFiberList = new List<Sectie>();
+
+            if (startList == null) return returnFiberList; //safty check
+            if (startList[0] == null) return returnFiberList;
 
             int startOdfId = beginStartOdfId;
             //not good can be multiple fibers !!
 
             foreach (Sectie sectie in startList)
             {
+                sectie.Level = level;
                 //set start odf from first = to second
                 if (startOdfId == sectie.OdfStartId) startOdfId = sectie.OdfEndId; //is the start for the next one
                 else
@@ -215,8 +259,14 @@ namespace Eindwerk2018.Controllers
                 //checked on SectieVirtual if true, get sub thing, and should also check it, reuse this script
                 if (sectie.SectieVirtual == true)
                 {
+                    //eerst ophalen van de FOID van virtuele sectie
+                    //uit de naam ?
+                    String sectieFoid = sectie.KabelName.Substring(sectie.KabelName.IndexOf('.')+1);
                     //ophalen route
                     //Door dezelfde functie jagen
+                    List<Sectie> tmpList = OrderSecties(dbFoid.ListSections(Convert.ToInt32(sectieFoid)), sectie.OdfStartId, sectie.OdfEndId, level + 1);
+                    //geen subsectie -> just add another sectie
+                    foreach (Sectie subSectie in tmpList) returnFiberList.Add(subSectie);
                 }
             }
 

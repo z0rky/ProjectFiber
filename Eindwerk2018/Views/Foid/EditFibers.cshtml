@@ -1,0 +1,59 @@
+﻿@model Eindwerk2018.Models.Foid
+
+@{
+    ViewBag.Title = Eindwerk2018.Resources.Resource.LinkDetails;
+}
+
+<h2>@Eindwerk2018.Resources.Resource.LinkDetails</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>FOID</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+            <dd>@Html.DisplayFor(model => model.Id)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd>@Html.DisplayFor(model => model.Name)</dd>
+        </dl>
+
+        <table class="table">
+            <tr>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidSectieNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Secties)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Fibers[0].FoidSerialNr)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OdfStartName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OdfEndName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
+                    <td>
+                        @foreach (var fiber in item.Fibers)
+                        {
+                            @Html.DropDownListFor(model => fiber.FiberNr, new SelectList(item.ListFreeFibers, "FiberNr", "FiberNr"), new { @class = "form-control" })
+                            <br />
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+            <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
+        </div>
+    </div>
+}

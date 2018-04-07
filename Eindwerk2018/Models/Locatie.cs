@@ -45,6 +45,13 @@ namespace Eindwerk2018.Models
         public string Plaats { get; set; }
 
         [Range(8,8)]
+        [Display(Name = "LocationLcode", ResourceType = typeof(Resources.Resource))]
         public String Lcode { get; set; }
+
+        [Display(Name = "LocationLijnNr", ResourceType = typeof(Resources.Resource))]
+        public String LijnNr { get; set; }
+
+        [Display(Name = "LocationBK", ResourceType = typeof(Resources.Resource))]
+        public int BK { get; set; }
     }
 }

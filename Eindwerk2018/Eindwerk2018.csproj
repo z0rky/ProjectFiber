@@ -704,6 +704,7 @@
     <Content Include="Views\Sectie\Create.cshtml" />
     <Content Include="Views\Kabel\Edit.cshtml" />
     <Content Include="Views\PdfGeneration\GeneratePdf.cshtml" />
+    <Content Include="Views\Foid\EditFibers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

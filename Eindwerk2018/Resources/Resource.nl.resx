@@ -203,10 +203,10 @@
     <value>Bedrijf</value>
   </data>
   <data name="LocationGpsLat" xml:space="preserve">
-    <value>GPS  Latidude</value>
+    <value>GPS  Latidude ( 50,540135 )</value>
   </data>
   <data name="LocationGpsLong" xml:space="preserve">
-    <value>GPS Longitude</value>
+    <value>GPS Longitude  ( 3,551163 )</value>
   </data>
   <data name="LocationInfrabel" xml:space="preserve">
     <value>Infrabel locatie</value>
@@ -457,5 +457,17 @@
   </data>
   <data name="OdfLocationName" xml:space="preserve">
     <value>Locatie Naam</value>
+  </data>
+  <data name="LocationBK" xml:space="preserve">
+    <value>Kilometer punt</value>
+  </data>
+  <data name="LocationLcode" xml:space="preserve">
+    <value>Bar Code</value>
+  </data>
+  <data name="LocationLijnNr" xml:space="preserve">
+    <value>Lijn Nummer</value>
+  </data>
+  <data name="fiberFoidName" xml:space="preserve">
+    <value>FOID Naam</value>
   </data>
 </root>

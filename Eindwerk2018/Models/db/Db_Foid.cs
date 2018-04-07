@@ -99,6 +99,15 @@ namespace Eindwerk2018.Models.db
             }
         }
 
+        public void DeleteFibers(int id)
+        {
+            if (id != 0)
+            {
+                string query = "UPDATE fibers SET FOID='0', FOID_serial_nr='0',FOID_fibre_nr='0' WHERE FOID='"+id+"'"; //query
+                this.ShortQuery(query);
+            }
+        }
+
         //for return queries
         public List<Foid> ListQueries(string qry)
         {
@@ -210,7 +219,7 @@ namespace Eindwerk2018.Models.db
         }
 
         /*Get the sections on the route, could replace ListFibers(int foid)*/
-        private List<Sectie> ListSections(int foid)
+        public List<Sectie> ListSections(int foid)
         {
             if (foid <= 0) return null;
             con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
