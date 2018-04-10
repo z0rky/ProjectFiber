@@ -207,24 +207,51 @@ namespace Eindwerk2018.Controllers
             Foid foid = dbFoid.Get((int)id);
             if (foid == null) return HttpNotFound();
 
+            EditFiberSectieViewModel viewModel = new EditFiberSectieViewModel();
+            
             //should order foid.Fibers;
             //and also add subkabels
-            foid.Secties = OrderSecties(foid.Secties, foid.StartOdfId, foid.EndOdfId);
+            try
+            {
+                foid.Secties = OrderSecties(foid.Secties, foid.StartOdfId, foid.EndOdfId,11); //11 for no cwdm sub sections
+                //get the nr of fibers used.
+                viewModel.NrOfFibers = foid.Secties[0].Fibers.Count();
+                
 
-            foreach (Sectie sectie in foid.Secties)
-            { //add the free drivers
-                sectie.ListFreeFibers = dbFoid.ListFreeFibers(sectie.Id);
+                foreach (Sectie sectie in foid.Secties)
+                { //add the free drivers
+                    sectie.ListFreeFibers = dbFoid.ListFreeFibers(sectie.Id);
+                    //add current selected fibers
+                    foreach(Fiber fiber in sectie.Fibers) sectie.ListFreeFibers.Add(fiber);
+                    //and order them
+                    sectie.ListFreeFibers = sectie.ListFreeFibers.OrderBy(F => F.FiberNr).ToList();
+                }
             }
+            catch (Exception e) { }
 
-            return View(foid);
+            if (viewModel.NrOfFibers == 0) viewModel.NrOfFibers = 2; //set default ot 2
+            viewModel.OldNrOfFibers = viewModel.NrOfFibers;
+            viewModel.Foid = foid;
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult EditFibers([Bind(Include = "Foid")] Foid foid)
+        //public ActionResult EditFibers([Bind(Include = "Foid,NrOfFibers,OldNrOfFibers")] EditFiberSectieViewModel viewModel)
+        public ActionResult EditFibers(EditFiberSectieViewModel viewModel)
         {
-            //update only fibers
+            //secties are not added
+            //check if nr of fiber equials nr of fibers.
+            if (viewModel.NrOfFibers == viewModel.OldNrOfFibers)
+            {
+                //update only fibers
+            }
+            else
+            {
+                //updaet secties with new nr of fibers
+            }
 
-            return View(foid);
+            return View(viewModel);
         }
 
 
@@ -236,7 +263,6 @@ namespace Eindwerk2018.Controllers
             if (startList[0] == null) return returnFiberList;
 
             int startOdfId = beginStartOdfId;
-            //not good can be multiple fibers !!
 
             foreach (Sectie sectie in startList)
             {
@@ -257,7 +283,7 @@ namespace Eindwerk2018.Controllers
                 //should order foid.Fibers, combination of foidfibers;
                 //and also add subkabels
                 //checked on SectieVirtual if true, get sub thing, and should also check it, reuse this script
-                if (sectie.SectieVirtual == true)
+                if (sectie.SectieVirtual == true && level <10) // limit the amount of re-use of the function
                 {
                     //eerst ophalen van de FOID van virtuele sectie
                     //uit de naam ?

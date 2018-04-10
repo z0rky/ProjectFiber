@@ -470,4 +470,7 @@
   <data name="fiberFoidName" xml:space="preserve">
     <value>FOID name</value>
   </data>
+  <data name="FoidNrOfFibers" xml:space="preserve">
+    <value>Number of Fibers</value>
+  </data>
 </root>

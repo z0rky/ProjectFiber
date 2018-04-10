@@ -243,6 +243,7 @@
       <DependentUpon>Resource.nl.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddSectieFoidViewModel.cs" />
+    <Compile Include="ViewModels\EditFiberSectieViewModel.cs" />
     <Compile Include="ViewModels\NieuweOdfViewModel.cs" />
     <Compile Include="ViewModels\NieuweFoidViewModel.cs" />
     <Compile Include="ViewModels\NieuweKabelViewModel.cs" />
@@ -702,6 +703,7 @@
     <Content Include="Views\Kabel\Edit.cshtml" />
     <Content Include="Views\PdfGeneration\GeneratePdf.cshtml" />
     <Content Include="Views\Foid\EditFibers.cshtml" />
+    <Content Include="Views\Shared\EditorTemplate\Fiber.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

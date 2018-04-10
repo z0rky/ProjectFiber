@@ -421,6 +421,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of Fibers.
+        /// </summary>
+        public static string FoidNrOfFibers {
+            get {
+                return ResourceManager.GetString("FoidNrOfFibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Requestor Id.
         /// </summary>
         public static string FoidRequestorId {

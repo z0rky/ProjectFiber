@@ -22,5 +22,8 @@ namespace Eindwerk2018.Models
 
         [Display(Name = "UserEmail", ResourceType = typeof(Resources.Resource))]
         public String Email { get; set; }
+
+        //om een combinatie te krijgen in de drop downlist, bv in Foid/create
+        public String FullName { get { return FirstName+" "+LastName+" ("+UserName+")"; } }
     }
 }
