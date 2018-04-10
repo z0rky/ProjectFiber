@@ -13,8 +13,8 @@ namespace Eindwerk2018.Controllers
         // GET: Pdf
         public ActionResult Report(Foid foid)
         {
-            PdfReports pdfReports = new PdfReports();
-            byte[] abytes = pdfReports.PrepareReport(GetFoids());
+            PdfReports pdfReportsFoid = new PdfReports();
+            byte[] abytes = pdfReportsFoid.PrepareReport(GetFoids());
             return File(abytes, "application/pdf");
         }
 
@@ -34,5 +34,28 @@ namespace Eindwerk2018.Controllers
             return foidsList;
 
         }
+        
+        //public ActionResult ReportSectie(Sectie sectie)
+        //{
+        //    PdfReportsSectie pdfReportsSectie = new PdfReportsSectie();
+        //    byte[] abytes2 = pdfReportsSectie.PrepareReport(GetSectie());
+        //    return File(abytes2, "application/pdf");
+        //}
+
+        //public List<Sectie> GetSectie()
+        //{
+        //    List<Sectie> sectieList = new List<Sectie>();
+        //    //// get foids to print
+
+        //    Sectie sectie = new Sectie();
+
+        //    sectie.Id = 1;
+        //    sectie.Lengte = 23;
+        //    sectieList.Add(sectie);
+
+
+        //    return sectieList;
+
+        //}
     }
 }

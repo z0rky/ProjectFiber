@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Eindwerk2018.Reports;
 
 namespace Eindwerk2018.Controllers
 {
@@ -14,6 +15,7 @@ namespace Eindwerk2018.Controllers
     {
         private Db_Sectie dbSectie = new Db_Sectie();
         private Db_SectieType dbSectieType = new Db_SectieType();
+        //BezettingVanDeVezelsModel bezettingVanDeVezelsModel; 
 
         // GET: Sectie
         public ActionResult Index(int? kabelId)
@@ -28,8 +30,13 @@ namespace Eindwerk2018.Controllers
         // GET: Sectie/Details/5
         public ActionResult Details(int? id)
         {
+
+
+           //bezettingVanDeVezelsModel = new BezettingVanDeVezelsModel();
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Sectie sectie = dbSectie.Get((int)id);
+            //bezettingVanDeVezelsModel.sectie = sectie;
+            //bezettingVanDeVezelsModel.Fibers = sectie.Fibers;
 
             if (sectie == null) return HttpNotFound();
 
@@ -148,6 +155,38 @@ namespace Eindwerk2018.Controllers
                 return Json(ajaxSectie, JsonRequestBehavior.AllowGet);
             }
             return null;
+        }
+
+
+        public ActionResult ReportSectie(Sectie sectie )
+        {
+            int tempId = sectie.Id;
+            Sectie sectie2 = dbSectie.Get(tempId);
+
+
+            BezettingVanDeVezelsModel bezettingVanDeVezelsModel = new BezettingVanDeVezelsModel();
+            bezettingVanDeVezelsModel.sectie = sectie2;
+            bezettingVanDeVezelsModel.Fibers = sectie2.Fibers.ToList();
+
+            BezettingVanDeVezelsPdfReport bezettingVanDeVezelsPdfReport = new BezettingVanDeVezelsPdfReport();
+            byte[] abytes2 = bezettingVanDeVezelsPdfReport.PrepareReport(bezettingVanDeVezelsModel);
+            return File(abytes2, "application/pdf");
+        }
+
+        public List<Sectie> GetSectie()
+        {
+            List<Sectie> sectieList = new List<Sectie>();
+            //// get foids to print
+
+            Sectie sectie = new Sectie();
+
+            sectie.Id = 1;
+            sectie.Lengte = 23;
+            sectieList.Add(sectie);
+
+
+            return sectieList;
+
         }
     }
 }

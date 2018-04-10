@@ -221,7 +221,10 @@
     <Compile Include="Controllers\KabelController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Models\Locatie.cs" />
+    <Compile Include="Reports\BezettingVanDeVezelsModel.cs" />
+    <Compile Include="Reports\BezettingVanDeVezelsPdfReport.cs" />
     <Compile Include="Reports\PdfReports.cs" />
+    <Compile Include="Reports\PdfReportsSectie.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
