@@ -707,6 +707,7 @@
     <Content Include="Views\PdfGeneration\GeneratePdf.cshtml" />
     <Content Include="Views\Foid\EditFibers.cshtml" />
     <Content Include="Views\Shared\EditorTemplate\Fiber.cshtml" />
+    <Content Include="Views\Shared\_Navbar_level2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
