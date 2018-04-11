@@ -21,7 +21,7 @@
 
     <div class="form-horizontal">
         <h4>FOID</h4>
-        <hr />
+        @*<hr />*@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Foid.Id)
 
@@ -54,72 +54,144 @@
         </div>
 
         <h4>@Eindwerk2018.Resources.Resource.SectieTitle</h4>
-        <hr />
+        @*<hr />*@
 
-        <table class="table" id="myTable">
+        <table class="table table-bordered table-hover" id="myTable">
             <thead>
-            <tr>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
-            </tr>
+                <tr>
+                    <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
+                    <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
+                    <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
+                </tr>
             </thead>
             <tbody>
                 @for (int i = 0; i < Model.StartOdfs.Count; i++)
-            {
-                CountOfOdfs = i;
-                LastOdfId = Model.EndOdfs[i].Id;
-                <tr>
-                    <td>
-                        @Html.HiddenFor(model => Model.StartOdfs[i].Id)
-                        @Html.DisplayFor(model => Model.StartOdfs[i].Name, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.Secties[i].KabelName)
-                        - @Html.DisplayFor(model => model.Secties[i].SectieNr)
-                    </td>
-                    <td>
-                        @Html.HiddenFor(model => Model.EndOdfs[i].Id)
-                        @Html.DisplayFor(model => Model.EndOdfs[i].Name, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
-                </tr>
-            }
+                {
+                    CountOfOdfs = i;
+                    LastOdfId = Model.EndOdfs[i].Id;
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(model => Model.StartOdfs[i].Id)
+                            @Html.DisplayFor(model => Model.StartOdfs[i].Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Secties[i].KabelName)
+                            - @Html.DisplayFor(model => model.Secties[i].SectieNr)
+                        </td>
+                        <td>
+                            @Html.HiddenFor(model => Model.EndOdfs[i].Id)
+                            @Html.DisplayFor(model => Model.EndOdfs[i].Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+                }
 
 
-            @{
-                CountOfOdfs++;
-                string CountOfOdfsStr = "sectie" + CountOfOdfs; @*Omdat het anders niet wilt schrijven*@
-                if (LastOdfId == 0) { LastOdfId = Model.Foid.StartOdfId; };
-            }
+                @{
+                    CountOfOdfs++;
+                    string CountOfOdfsStr = "sectie" + CountOfOdfs; @*Omdat het anders niet wilt schrijven*@
+                    if (LastOdfId == 0) { LastOdfId = Model.Foid.StartOdfId; };
+                }
             </tbody>
         </table>
     </div>
-        <div class="form-group">
-            <select class="form-control" id="OdfList" name="OdfList"></select>
-        </div>
+    <div class="form-group">
+        <select class="form-control" id="OdfList" name="OdfList"></select>
+    </div>
 
 
-        <div>
-            <div class="col-md-offset-2 col-md-10">
-                <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
-                <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
-               
-            </div>
+    <div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+            <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
+
         </div>
+    </div>
 }
 
-        @*<div>
-            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
-        </div>*@
+@*<div>
+        @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
+    </div>*@
 
-        <script type="text/javascript">
-            var next = @CountOfOdfs;
-            var odfId = @LastOdfId;
+<script type="text/javascript">
+    var next = @CountOfOdfs;
+    var odfId = @LastOdfId;
 
-        $(document).ready(function ()
-        {
-            //search for the correct Odfs
-            //$('#OdfList').click(function() { //should always be loaded
+    $(document).ready(function ()
+    {
+        //search for the correct Odfs
+        //$('#OdfList').click(function() { //should always be loaded
+        var procemessage = "<option value='0'> Please wait...</option>";
+        $("#OdfList").html(procemessage).show();
+
+        $.ajax({
+            url: "/Sectie/SearchSecties",
+            type: 'POST',
+            dataType: 'json',
+            data: { 'odfId': odfId },
+            success: function(data)
+            {
+                var markup = "<option value='0'>--</option>";
+                for (var x = 0; x < data.length; x++) markup += "<option value=" + data[x].Id + ">" + data[x].KabelName + " (" + data[x].OdfEndName + ")</option>";
+                $("#OdfList").html(markup).show();
+            },
+            error: function (err)
+            {
+                console.log(err);
+                procemessage = "<option value='0'>Error Loading list</option>";
+                $("#OdfList").html(procemessage).show();
+            }
+        });
+        //});
+    });
+
+    $('#OdfList').change(function () {
+        var sectieid = $(this).val();
+
+        //count
+        var newStartOdf = "OdfList" + next;
+        var newKableName = "KabelName" + next;
+        var newEndOdf = "EndOdf" + next;
+
+        //html aanmaken
+        var newIn = '<tr><td><div id="' + newStartOdf+'"></div></td>';
+        newIn += '<td><div id="' + newKableName +'"></div></td>';
+        newIn += '<td><div id="' + newEndOdf +'"></div></td>';
+        newIn += '</tr>';
+
+
+        $.ajax({
+            url: "/Sectie/ReturnSectiesInfo",
+            type: 'POST',
+            dataType: 'json',
+            data: { 'sectieId': sectieid },
+            success: function (data) {
+                newIn +='<input type="hidden" name="Newsecties[]" value="'+ data.Id +'">';
+                var newInput = $(newIn);
+                var displayStartOdf = "";
+                var displayEndOdf = "";
+
+                //html toevoegen aan table
+                $("#myTable > tbody").append(newInput);
+
+                //odfid opnieuw instellen, ma eerst nakijken of het niet hetzelfde is (volgorde is niet altijd juist)
+                if (odfId == data.OdfStartId) {
+                    odfId = data.OdfEndId;
+                    displayStartOdf = data.OdfStartName;
+                    displayEndOdf = data.OdfEndName;
+                }
+                else
+                {
+                    odfId = data.OdfStartId;
+                    displayStartOdf = data.OdfEndName;
+                    displayEndOdf = data.OdfStartName;
+                }
+
+                $("#" + newStartOdf).text(displayStartOdf);
+                $("#" + newKableName).text(data.KabelName + " - " + data.SectieNr);
+                $("#" + newEndOdf).text(displayEndOdf);
+
+                next++; //increase counter
+                //redo odf list start new funtion
                 var procemessage = "<option value='0'> Please wait...</option>";
                 $("#OdfList").html(procemessage).show();
 
@@ -128,10 +200,15 @@
                     type: 'POST',
                     dataType: 'json',
                     data: { 'odfId': odfId },
-                    success: function(data)
-                    {
+                    success: function (data) {
                         var markup = "<option value='0'>--</option>";
-                        for (var x = 0; x < data.length; x++) markup += "<option value=" + data[x].Id + ">" + data[x].KabelName + " (" + data[x].OdfEndName + ")</option>";
+                        for (var x = 0; x < data.length; x++)
+                        {//zouden moeten nakijken of EndOdfid niet gelijk is aan de OdfId dat we zoeken,(kan wel is omgedraaid zijn)
+                            markup += "<option value=" + data[x].Id + ">" + data[x].KabelName + " (";
+                            if (odfId == data[x].OdfStartId) markup += data[x].OdfEndName;
+                            else markup += data[x].OdfStartName;
+                            markup += ")</option>";
+                        }
                         $("#OdfList").html(markup).show();
                     },
                     error: function (err)
@@ -141,85 +218,19 @@
                         $("#OdfList").html(procemessage).show();
                     }
                 });
-            //});
+            },
+            error: function (err) { console.log(err); }
         });
+    });
+</script>
 
-        $('#OdfList').change(function () {
-            var sectieid = $(this).val();
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#myTable").DataTable();
 
-            //count
-            var newStartOdf = "OdfList" + next;
-            var newKableName = "KabelName" + next;
-            var newEndOdf = "EndOdf" + next;
-
-            //html aanmaken
-            var newIn = '<tr><td><div id="' + newStartOdf+'"></div></td>';
-            newIn += '<td><div id="' + newKableName +'"></div></td>';
-            newIn += '<td><div id="' + newEndOdf +'"></div></td>';
-            newIn += '</tr>';
-
-
-            $.ajax({
-                url: "/Sectie/ReturnSectiesInfo",
-                type: 'POST',
-                dataType: 'json',
-                data: { 'sectieId': sectieid },
-                success: function (data) {
-                    newIn +='<input type="hidden" name="Newsecties[]" value="'+ data.Id +'">';
-                    var newInput = $(newIn);
-                    var displayStartOdf = "";
-                    var displayEndOdf = "";
-
-                    //html toevoegen aan table
-                    $("#myTable > tbody").append(newInput);
-                    
-                    //odfid opnieuw instellen, ma eerst nakijken of het niet hetzelfde is (volgorde is niet altijd juist)
-                    if (odfId == data.OdfStartId) {
-                        odfId = data.OdfEndId;
-                        displayStartOdf = data.OdfStartName;
-                        displayEndOdf = data.OdfEndName;
-                    }
-                    else
-                    {
-                        odfId = data.OdfStartId;
-                        displayStartOdf = data.OdfEndName;
-                        displayEndOdf = data.OdfStartName;
-                    }
-
-                    $("#" + newStartOdf).text(displayStartOdf);
-                    $("#" + newKableName).text(data.KabelName + " - " + data.SectieNr);
-                    $("#" + newEndOdf).text(displayEndOdf);
-
-                    next++; //increase counter
-                    //redo odf list start new funtion
-                    var procemessage = "<option value='0'> Please wait...</option>";
-                    $("#OdfList").html(procemessage).show();
-
-                    $.ajax({
-                        url: "/Sectie/SearchSecties",
-                        type: 'POST',
-                        dataType: 'json',
-                        data: { 'odfId': odfId },
-                        success: function (data) {
-                            var markup = "<option value='0'>--</option>";
-                            for (var x = 0; x < data.length; x++)
-                            {//zouden moeten nakijken of EndOdfid niet gelijk is aan de OdfId dat we zoeken,(kan wel is omgedraaid zijn)
-                                markup += "<option value=" + data[x].Id + ">" + data[x].KabelName + " (";
-                                if (odfId == data[x].OdfStartId) markup += data[x].OdfEndName;
-                                else markup += data[x].OdfStartName;
-                                markup += ")</option>";
-                            }
-                            $("#OdfList").html(markup).show();
-                        },
-                        error: function (err)
-                        {
-                            console.log(err);
-                            procemessage = "<option value='0'>Error Loading list</option>";
-                            $("#OdfList").html(procemessage).show();
-                        }
-                    });
-                },
-                error: function (err) { console.log(err); }
-            });
         });
-        </script>
+    </script>
+}
+
