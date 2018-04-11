@@ -30,10 +30,9 @@ namespace Eindwerk2018
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      //"~/Content/bootstrap-cyborg.css",
-                      //"~/Content/bootstrap-cerulean.css",
-                      //"~/Content/bootstrap-lumen3.css",
-                      "~/Content/bootstrap-superhero.css",
+                       //"~/Content/bootstrap-cyborg.css",
+                       //"~/Content/bootstrap-cerulean.css",
+                "~/Content/bootstrap-superhero.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/jquery-ui.css"

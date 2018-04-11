@@ -8,7 +8,7 @@
 
 <div>
     <h4>@Eindwerk2018.Resources.Resource.SectieTypeTitle</h4>
-    <hr />
+    @*<hr />*@
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Naam)</dt>
         <dd>@Html.DisplayFor(model => model.Naam)</dd>
@@ -20,7 +20,8 @@
         <dd>@Html.DisplayFor(model => model.Virtueel)</dd>
     </dl>
 
-    <table class="table">
+    <table class="table table-bordered table-hover" id="sectieTypeId">
+        <thead>
         <tr>
             <th>@Eindwerk2018.Resources.Resource.fiberOrderNr</th>
             <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
@@ -28,19 +29,33 @@
             <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
             <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
         </tr>
+        </thead>
+        <tbody>
         @foreach (var item in Model.Fibers)
         {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.OrderNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
-            <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.OrderNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
+                <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
+            </tr>
         }
+        </tbody>
     </table>
 </div>
-<p>
-    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = Model.Id }) |
-    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index")
-</p>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            $("#sectieTypeId").DataTable();
+
+        });
+    </script>
+}
+    
+    <p>
+        @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", null, new { @class = "btn btn-primary" })
+        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","SectieType", new {id = Model.Id })'">@Eindwerk2018.Resources.Resource.LinkEdit</button>
+    </p>
