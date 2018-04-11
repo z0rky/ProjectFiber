@@ -28,6 +28,7 @@
     </dl>
 
     <table id="sectieTable" class="table table-bordered table-hover">
+        <thead>
         <tr>
             <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
             <th>@Eindwerk2018.Resources.Resource.fiberFoid</th>
@@ -36,18 +37,21 @@
             <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
             <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
         </tr>
+        </thead>
+        <tbody>
 
         @foreach (var item in Model.Fibers)
         {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.Foid)</td>
-            <td>@Html.DisplayFor(modelItem => item.FoidName)</td>
-            <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
-            <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.Foid)</td>
+                <td>@Html.DisplayFor(modelItem => item.FoidName)</td>
+                <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
+                <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
+                <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
+            </tr>
         }
+        </tbody>
     </table>
 
 
