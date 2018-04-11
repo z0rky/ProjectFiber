@@ -44,7 +44,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+            @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", null, new { @class = "btn btn-primary" })
             <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
         </div>
     </div>
