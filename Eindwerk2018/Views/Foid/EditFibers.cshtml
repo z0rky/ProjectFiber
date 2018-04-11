@@ -4,6 +4,18 @@
     ViewBag.Title = Eindwerk2018.Resources.Resource.LinkDetails;
 }
 
+@*Moet ook in bundle config**@
+<link rel="stylesheet" href="~/Scripts/jquery-ui-1.12.1/jquery-ui.min.css" />
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+       $("#OldNrOfFibers").val($("#NrOfFibers").val());
+    });
+</script>
+
 <h2>@Eindwerk2018.Resources.Resource.LinkDetails</h2>
 
 @using (Html.BeginForm())
@@ -22,7 +34,7 @@
             <dd>@Html.DisplayFor(model => model.Foid.Name)</dd>
 
             <dt>@Eindwerk2018.Resources.Resource.FoidNrOfFibers</dt>
-            <dd>@Html.DropDownListFor(model => model.NrOfFibers, new SelectList(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }), new { @class = "form-control" })</dd>
+            <dd>@Html.DropDownListFor(model => model.NrOfFibers, new SelectList(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 }), new { @class = "form-control", @onchange = "this.form.submit();" })</dd>
             @Html.HiddenFor(model => model.OldNrOfFibers)
         </dl>
 
@@ -36,32 +48,24 @@
                 <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
                 <th></th>
             </tr>
-            @*Gans dit in editorfor? maar hoe de free fiberz toevoegen? *@
-            @foreach (var item in Model.Foid.Secties)
+            @foreach (var sectie in Model.Foid.Secties)
             {
-            <tr>
-                @Html.HiddenFor(modelItem => item.Id)
-                <td>@Html.DisplayFor(modelItem => item.Fibers[0].FoidSerialNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.OdfStartName)</td>
-                <td>@Html.DisplayFor(modelItem => item.OdfEndName)</td>
-                <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
-                <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
-                <td>
-                    @* @foreach (var fiber in item.Fibers)
-            {
-                //Hoe doet ge dit? -> editor template ?
-                @Html.DropDownListFor(modelItem => fiber.FiberNr, new SelectList(item.ListFreeFibers, "FiberNr", "FiberNr"), new { @class = "form-control" })
-                    <br />
-            }
-            @Html.EditorFor(m => item.Fibers); //nope not working wel
-                    *@
-                    @for (int i = 0; i < item.Fibers.Count; i++)
-                    {
-                        @Html.DropDownListFor(modelItem => item.Fibers[i].FiberNr, new SelectList(item.ListFreeFibers, "FiberNr", "FiberNr"), new { @class = "form-control" })
-                        <br />
-                    }
-                </td>
-            </tr>
+                <tr>
+                    @Html.Hidden("Secties[]", sectie.Id)
+                    <td>@Html.DisplayFor(m => sectie.Fibers[0].FoidSerialNr)</td>
+                    <td>@Html.DisplayFor(m => sectie.OdfStartName)</td>
+                    <td>@Html.DisplayFor(m => sectie.OdfEndName)</td>
+                    <td>@Html.DisplayFor(m => sectie.KabelName)</td>
+                    <td>@Html.DisplayFor(m => sectie.SectieNr)</td>
+                    <td>
+                        @foreach (var fiber in sectie.Fibers)
+                        {
+                            //@Html.DropDownListFor(modelItem => fiber.FiberNr, new SelectList(sectie.ListFreeFibers, "FiberNr", "FiberNr"), new { @class = "form-control" })
+                            @Html.DropDownList("SectieFiber[]", new SelectList(sectie.ListFreeFibers, "FiberNr", "FiberNr", fiber.FiberNr.ToString()), new { @class = "form-control" })
+                            <br />
+                        }
+                    </td>
+                </tr>
             }
         </table>
     </div>

@@ -76,40 +76,6 @@
         <dd>@Html.DisplayFor(model => model.EndOdfName)</dd>
         </dl>
 
-<<<<<<< HEAD
-        <table class="table table-bordered table-hover" id="foidInfo">
-            <thead>
-            <tr>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFoidSectieNr</th>
-                <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
-            </tr>
-            </thead>
-            <tbody>
-        @foreach (var item in Model.Secties)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Fibers[0].FoidSerialNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.OdfStartName)</td>
-                <td>@Html.DisplayFor(modelItem => item.OdfEndName)</td>
-                <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
-                <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
-                <td>
-                    @foreach (var fiber in item.Fibers)
-        {
-            @Html.DisplayFor(modelItem => fiber.FiberNr)
-            <br />
-}
-                </td>
-            </tr>
-        }
-                
-                </tbody>
-        </table>
-=======
     <table class="table">
         <tr>
             <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
@@ -141,7 +107,7 @@
         </tr>
          }
     </table>
->>>>>>> master
+
 </div>
 <p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", null, new { @class = "btn btn-primary" })
