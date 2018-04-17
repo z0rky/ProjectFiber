@@ -447,7 +447,7 @@
     <value>Gereserveerd</value>
   </data>
   <data name="LinkEditSection" xml:space="preserve">
-    <value>Secties Bijwerken</value>
+    <value>Secties bewerken</value>
   </data>
   <data name="fiberFoidvirtual" xml:space="preserve">
     <value>Virtueel Sectie</value>
@@ -472,5 +472,8 @@
   </data>
   <data name="FoidNrOfFibers" xml:space="preserve">
     <value>Aantal fibers</value>
+  </data>
+  <data name="LinkEditFibers" xml:space="preserve">
+    <value>Vezels bewerken</value>
   </data>
 </root>

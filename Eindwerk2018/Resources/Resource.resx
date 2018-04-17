@@ -473,4 +473,7 @@
   <data name="FoidNrOfFibers" xml:space="preserve">
     <value>Number of Fibers</value>
   </data>
+  <data name="LinkEditFibers" xml:space="preserve">
+    <value>Edit Fibers</value>
+  </data>
 </root>

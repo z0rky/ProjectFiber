@@ -628,6 +628,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Fibers.
+        /// </summary>
+        public static string LinkEditFibers {
+            get {
+                return ResourceManager.GetString("LinkEditFibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Sections.
         /// </summary>
         public static string LinkEditSection {
