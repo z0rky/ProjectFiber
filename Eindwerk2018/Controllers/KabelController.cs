@@ -13,6 +13,8 @@ namespace Eindwerk2018.Controllers
     public class KabelController : Controller
     {
         private Db_Kabel dbKabels = new Db_Kabel();
+        private Db_KabelType dbKabelstype = new Db_KabelType();
+        private Db_Company dbCompanies = new Db_Company();
         public List<Kabel> kabels = new List<Kabel>();
         
 
@@ -31,30 +33,32 @@ namespace Eindwerk2018.Controllers
             return View("Details",kabel);
         }
 
-        public ActionResult New()
+        public ActionResult Create()
         {
-            return View("Create");
+            //Types ophalen
+            var viewModel = new NieuweKabelViewModel() { Kabel = new Kabel{ OwnerId=1 }, KabelTypes = dbKabelstype.List(), Companies = dbCompanies.List() };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Save(Kabel kabel )
+        public ActionResult Create(NieuweKabelViewModel kabelView )
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var viewModel = new NieuweKabelViewModel
-                {
-                    Kabel = kabel
-                };
-                return View("Create", viewModel);
-            }
-            else
-            {   
-                kabel.CreatieDatum = DateTime.Now;
-                int newId = dbKabels.Add(kabel);
+                kabelView.Kabel.CreatieDatum = DateTime.Now;
+                int newId = dbKabels.Add(kabelView.Kabel);
 
-                return RedirectToAction("Edit", "Kabel", new { Id = newId });
+                if (newId != 0) return RedirectToAction("Edit", "Kabel", new { Id = newId });
             }
-           
+
+            var viewModel = new NieuweKabelViewModel
+            {
+                Kabel = kabelView.Kabel,
+                KabelTypes = dbKabelstype.List(),
+                Companies = dbCompanies.List()
+            };
+            return View("Create", viewModel);
         }
         
         public ActionResult Edit(int id)
@@ -63,22 +67,38 @@ namespace Eindwerk2018.Controllers
             Kabel kabel = dbKabels.Get((int)id);
             if (kabel == null) return HttpNotFound();
 
-            return View("Edit", kabel);
+            var viewModel = new NieuweKabelViewModel
+            {
+                Kabel = kabel,
+                KabelTypes = dbKabelstype.List(),
+                Companies = dbCompanies.List()
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Naam,Reference")] Kabel kabel)
+        public ActionResult Edit([Bind(Include = "Kabel")] NieuweKabelViewModel kabelView)
         {
-            try
+            if (ModelState.IsValid)
             {
-                dbKabels.Edit(kabel);
-                return RedirectToAction("Details", "Kabel", new { Id = kabel.Id });
+                try
+                {
+                    dbKabels.Edit(kabelView.Kabel);
+                    return RedirectToAction("Details", "Kabel", new { Id = kabelView.Kabel.Id });
+                }
+                catch { }
             }
-            catch
+
+            var viewModel = new NieuweKabelViewModel
             {
-                return View();
-            }
-        }
+                Kabel = kabelView.Kabel,
+                KabelTypes = dbKabelstype.List(),
+                Companies = dbCompanies.List()
+            };
+
+            return View(viewModel);
+         }
 
         public ActionResult Delete(int id)
         {

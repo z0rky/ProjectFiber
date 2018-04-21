@@ -44,15 +44,15 @@ namespace Eindwerk2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Description")] OdfType odfType)
         {
-            if(!ModelState.IsValid) return View(odfType);
-
-            try
-            {
-                dbOdfTypes.Add(odfType);
-                return RedirectToAction(nameof(Index));
+            if(ModelState.IsValid)
+            { 
+                try
+                {
+                    dbOdfTypes.Add(odfType);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch { }
             }
-            catch { }
-
             return View(odfType);
         }
 

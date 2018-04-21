@@ -40,15 +40,17 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "NameNL,NameFR")] KabelType kabelType)
         {
-            try
+            if (ModelState.IsValid)
             {
-                dbKabelType.Add(kabelType);
-                return RedirectToAction("Index");
+                try
+                {
+                    dbKabelType.Add(kabelType);
+                    return RedirectToAction("Index");
+                }
+                catch { }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(kabelType);
         }
 
         // GET: KabelType/Edit/5
@@ -66,15 +68,16 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,NameNL,NameFR")] KabelType kabelType)
         {
-            try
+            if (ModelState.IsValid)
             {
-                dbKabelType.Edit(kabelType);
-                return RedirectToAction("Details", "KabelType", new { Id = kabelType.Id });
+                try
+                {
+                    dbKabelType.Edit(kabelType);
+                    return RedirectToAction("Details", "KabelType", new { Id = kabelType.Id });
+                }
+                catch { }
             }
-            catch
-            {
-                return View();
-            }
+            return View(kabelType);
         }
 
         // GET: KabelType/Delete/5

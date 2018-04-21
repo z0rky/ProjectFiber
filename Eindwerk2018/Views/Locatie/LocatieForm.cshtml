@@ -89,13 +89,12 @@
                 if ($this.is(':checked')) {
                     $('#LocatieBedrijfId').attr("disabled", "disabled")
                 } else {
-
                     $('#LocatieBedrijfId').removeAttr("disabled");
                 }
             });
         </script>
     </div>
 
-    <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+    <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
     <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
 }

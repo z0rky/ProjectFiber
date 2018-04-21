@@ -7,22 +7,50 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New Cable</h2>
+<h2>@Eindwerk2018.Resources.Resource.LinkCreate</h2>
 
-@using (Html.BeginForm("Save","Kabel"))
+@using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>@Eindwerk2018.Resources.Resource.KabelTitle</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <div class="form-group">
-        @Html.LabelFor(m => m.Kabel.Naam)
-        @Html.TextBoxFor(m => m.Kabel.Naam, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Kabel.Naam)
+        @Html.LabelFor(m => m.Kabel.Naam, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Kabel.Naam, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Kabel.Naam)
+        </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Kabel.Reference)
-        @Html.TextBoxFor(m => m.Kabel.Reference, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Kabel.Reference)
+        @Html.LabelFor(m => m.Kabel.KabelTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Kabel.KabelTypeId, new SelectList(Model.KabelTypes, "Id", "NameNL"), "--", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Kabel.KabelTypeId, "", new { @class = "text-danger" })
+        </div>
     </div>
 
-    <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Kabel.OwnerId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Kabel.OwnerId, new SelectList(Model.Companies, "Id", "Name"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Kabel.OwnerId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Kabel.Reference, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Kabel.Reference, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Kabel.Reference)
+        </div>
+    </div>
+
+    <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
     <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
+</div>
 }

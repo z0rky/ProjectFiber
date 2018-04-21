@@ -9,7 +9,6 @@
 <h2>@Model.LocatieNaam</h2>
    
 <div>
-   
     <hr />
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Id)</dt>
@@ -44,7 +43,7 @@
     </dl>
    
 </div>
-<input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
 
 <script>
     function initialize() {

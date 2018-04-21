@@ -23,9 +23,7 @@ namespace Eindwerk2018.Controllers
         public ActionResult SearchReference()
         {
             return View("SearchKabelReference");
-
         }
-
 
 
         [HttpPost]
@@ -40,29 +38,23 @@ namespace Eindwerk2018.Controllers
                         GezochteKabels = KabelsZoek
                     };
                     return View("IndexSearchResult", kabelZoekViewModel);
-              
-                   
             }
 
             if (kabel.Reference != null)
             {
-               
                   KabelsZoek = dbKabels.Search(kabel.Reference).ToList();
                     var kabelZoekViewModel = new SearchKabelResultViewModel
                     {
                         GezochteKabels = KabelsZoek
                     };
                     return View("IndexSearchResult", kabelZoekViewModel);
-              
             }
-
 
             return View("Index");
         }
 
         public ActionResult Details(int id)
         {
-
             var DetailsKabel = dbKabels.Get(id);
 
             return View("~/Views/Kabel/Details.cshtml", DetailsKabel);

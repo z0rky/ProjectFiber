@@ -48,7 +48,7 @@ namespace Eindwerk2018.Models.db
         {
             if (kabel != null)
             {
-                string query = "INSERT INTO kabel (name,kabel_type,owner_id,reference,date_creation) VALUES ('" + kabel.Naam + "',null,null,'" + kabel.Reference + "','" + MySqlDate(kabel.CreatieDatum) + "')"; //query
+                string query = "INSERT INTO kabel (name,kabel_type,owner_id,reference,date_creation) VALUES ('" + kabel.Naam + "','"+ kabel.KabelTypeId + "','" + kabel.OwnerId + "','" + kabel.Reference + "','" + MySqlDate(kabel.CreatieDatum) + "')"; //query
                 this.ShortQuery(query);
                 return GetLastInsertedId(); //return new id
             }

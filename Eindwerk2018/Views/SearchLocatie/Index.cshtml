@@ -7,19 +7,15 @@
     <link href="~/content/simple-sidebar.css" rel="stylesheet">
 }
 
-
-
 <div id="wrapper">
        
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-          
             @*<li>@Html.ActionLink("Lcode", "Index", "SearchLocatie")</li>*@
             <li>@Html.ActionLink("Naam", "SearchNaam", "SearchLocatie")</li>
             <li>@Html.ActionLink("Gps", "SearchGps", "SearchLocatie")</li>
             <li>@Html.ActionLink("PostCode", "SearchPostCode", "SearchLocatie")</li>
             <li>@Html.ActionLink("Plaats", "SearchPlaats", "SearchLocatie")</li>
-                        
         </ul>
     </div>
    
@@ -37,7 +33,7 @@
                 </div>
     
                 <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSearch</button>
-                <button href="#menu-toggle" class="btn btn-primary" id="menu-toggle">Search Options</button>
+                <button href="#menu-toggle" class="btn btn-primary" id="menu-toggle">@Eindwerk2018.Resources.Resource.LinkSearchOptions</button>
             }
           
         </div>

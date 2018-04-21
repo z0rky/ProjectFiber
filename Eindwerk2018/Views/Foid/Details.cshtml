@@ -99,15 +99,15 @@
                 <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
                 <td>
                     @foreach (var fiber in item.Fibers)
-        {
-            @Html.DisplayFor(modelItem => fiber.FiberNr)
-            <br />
-}
+                    {
+                        @Html.DisplayFor(modelItem => fiber.FiberNr)
+                        <br />
+                    }
                 </td>
             </tr>
         }
                 
-                </tbody>
+            </tbody>
         </table>
 
     @*<table class="table table-bordered table-hover" id="foidId">

@@ -1,5 +1,5 @@
 ﻿@model Eindwerk2018.Models.Kabel
-    
+
 
 @{
     ViewBag.Title = Eindwerk2018.Resources.Resource.LocationTitle;
@@ -7,9 +7,9 @@
 }
 
 <h2>@Model.Naam</h2>
-   
+
 <div>
-   
+
     @*<hr />*@
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Id)</dt>
@@ -20,9 +20,10 @@
         <dd>@Html.DisplayFor(model => model.CreatieDatum)</dd>
         <dt>@Html.DisplayNameFor(model => model.Reference)</dt>
         <dd>@Html.DisplayFor(model => model.Reference)</dd>
-       
+
     </dl>
-   
+
 </div>
-<input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
+<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","Kabel", new {id = Model.Id })'">@Eindwerk2018.Resources.Resource.LinkEdit</button>
 

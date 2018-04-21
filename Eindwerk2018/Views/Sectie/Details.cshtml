@@ -55,24 +55,20 @@
     </table>
 
 
-<input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
 <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ReportSectie", Model)'">Print</button>
 @*<input type="button" class="btn btn-primary" value="Foid Toevoegen" onclick="location.href='@Url.Action("ReportSectie", "Sectie")'" />*@
 
 
-    @section scripts
-    {
-        <script>
-            $(document).ready(function () {
-                $("#sectieTable").DataTable();
-            });
-        </script>
-    }
-
-
-    
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#sectieTable").DataTable();
+        });
+    </script>
+}
 </div>
 @*<p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", "Sectie", new { kabelId =Model.KabelId }, null)
 </p>*@
-

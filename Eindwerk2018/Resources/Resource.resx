@@ -476,4 +476,19 @@
   <data name="LinkEditFibers" xml:space="preserve">
     <value>Edit Fibers</value>
   </data>
+  <data name="KabelKabelType" xml:space="preserve">
+    <value>CableType</value>
+  </data>
+  <data name="KabelOwner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="LinkBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="LinkNewSearch" xml:space="preserve">
+    <value>New search</value>
+  </data>
+  <data name="LinkSearchOptions" xml:space="preserve">
+    <value>Search Options</value>
+  </data>
 </root>

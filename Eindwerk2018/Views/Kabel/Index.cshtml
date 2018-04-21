@@ -41,14 +41,12 @@
         </tbody>   
 </table>
 
-<input type="button" class="btn btn-primary" value="Kabel Toevoegen" onclick="location.href='@Url.Action("New", "Kabel")'" />
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkCreate  onclick="location.href='@Url.Action("Create", "Kabel")'" />
 @section scripts
 {
     <script>
         $(document).ready(function () {
             $("#KabelTable").DataTable();
              });
-    
-  
     </script>
-    }
+ }

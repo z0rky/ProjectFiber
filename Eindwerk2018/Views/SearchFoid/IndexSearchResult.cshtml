@@ -18,7 +18,6 @@
             <th>Comments</th>
             <th>Berekende Lengte</th>
             <th>LengthOtdr</th>
-           
         </tr>
     </thead>
     <tbody>
@@ -33,19 +32,17 @@
                 <td>@Html.DisplayFor(modelItem => item.Comments)</td>
                 <td>@Html.DisplayFor(modelItem => item.LengthCalculated)</td>
                 <td>@Html.DisplayFor(modelItem => item.LengthOtdr)</td>
-               
             </tr>
         }
     </tbody>
 </table>
-<input type="button" class="btn btn-primary" value="New Search" onclick="location.href='@Url.Action("Index", "SearchFoid")'" />
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkSearch onclick="location.href='@Url.Action("Index", "SearchFoid")'" />
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
             $("#FoidTable").DataTable();
-
-        });
+       });
     </script>
 }
