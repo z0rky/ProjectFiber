@@ -12,6 +12,9 @@
 
 @using (Html.BeginForm("Save", "Locatie"))
 {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Locatie.Id)
+
     @Html.ValidationSummary(true, "Los volgende fouten op")
 
     <div class="form-group">

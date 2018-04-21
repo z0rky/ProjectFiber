@@ -118,21 +118,10 @@ namespace Eindwerk2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            //Odf odf = db.Odfs.Find(id);
-            //db.Odfs.Remove(odf);
-            //db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                //delete
-                //db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         [HttpPost]
         public JsonResult SearchOdfs(string Prefix)

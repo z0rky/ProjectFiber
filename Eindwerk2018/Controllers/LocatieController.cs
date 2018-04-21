@@ -63,7 +63,6 @@ namespace Eindwerk2018.Controllers
                 {
                     Locatie = locatie,
                     LocatieTypes = locatielijst
-
                 };
                 return View("LocatieForm", viewModel);
             }
@@ -72,22 +71,13 @@ namespace Eindwerk2018.Controllers
                 dbLocaties.Add(locatie);
             }
 
-            else
-            {
-                //
-            }
-
-            //_context.SaveChanges();
-            //bevestigen DB!!!!!!!!!!
-
-             return RedirectToAction("Details", "Locatie", locatie);
+             return RedirectToAction("Details", "Locatie", new { Id = locatie.Id });
         }
 
 
         private IEnumerable<Locatie> GetLocaties()
         {
             return dbLocaties.List();
-           
         }
 
 

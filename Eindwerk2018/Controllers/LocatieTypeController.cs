@@ -41,6 +41,8 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "NaamNL,NaamFR,DescNL,DescFR")] LocatieType locatieType)
         {
+            if (!ModelState.IsValid) return View(locatieType);
+
             try
             {
                 // TODO: Add insert logic here
@@ -49,7 +51,7 @@ namespace Eindwerk2018.Controllers
             }
             catch
             {
-                return View();
+                return View(locatieType);
             }
         }
 
@@ -68,6 +70,8 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,NaamNL,NaamFR,DescNL,DescFR")] LocatieType locatieType)
         {
+            if (!ModelState.IsValid) return View(locatieType);
+
             try
             {
                 dbLocatieTypes.Edit(locatieType);
@@ -75,7 +79,7 @@ namespace Eindwerk2018.Controllers
             }
             catch
             {
-                return View();
+                return View(locatieType);
             }
         }
 

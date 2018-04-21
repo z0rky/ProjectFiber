@@ -44,15 +44,16 @@ namespace Eindwerk2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Description")] OdfType odfType)
         {
+            if(!ModelState.IsValid) return View(odfType);
+
             try
             {
                 dbOdfTypes.Add(odfType);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            catch { }
+
+            return View(odfType);
         }
 
         // GET: OdfTypes/Edit/5
@@ -73,6 +74,8 @@ namespace Eindwerk2018.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Name,Description")] OdfType odfType)
         {
+            if (!ModelState.IsValid) return View(odfType);
+
             try
             {
                 dbOdfTypes.Edit(odfType);
@@ -81,7 +84,7 @@ namespace Eindwerk2018.Controllers
             }
             catch
             {
-                return View();
+                return View(odfType);
             }
         }
 
