@@ -36,7 +36,7 @@ namespace Eindwerk2018.Controllers
         public ActionResult Create()
         {
             //Types ophalen
-            var viewModel = new NieuweKabelViewModel() { Kabel = new Kabel{ OwnerId=1 }, KabelTypes = dbKabelstype.List(), Companies = dbCompanies.List() };
+            var viewModel = new NieuweKabelViewModel() { Kabel = new Kabel{ Owner =new Company { Id = 1 } }, KabelTypes = dbKabelstype.List(), Companies = dbCompanies.List() };
 
             return View(viewModel);
         }
@@ -44,7 +44,8 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Create(NieuweKabelViewModel kabelView )
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid) //is false because name of owner and Type is not filled in
+            if (kabelView.Kabel.Naam != null && kabelView.Kabel.Naam.Trim() != "" && kabelView.Kabel.Owner.Id > 0 && kabelView.Kabel.KabelType.Id > 0)
             {
                 kabelView.Kabel.CreatieDatum = DateTime.Now;
                 int newId = dbKabels.Add(kabelView.Kabel);
@@ -80,7 +81,8 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Kabel")] NieuweKabelViewModel kabelView)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid) //is false because name of owner and Type is not filled in
+            if(kabelView.Kabel.Naam != null && kabelView.Kabel.Naam.Trim() !="" && kabelView.Kabel.Owner.Id>0 && kabelView.Kabel.KabelType.Id> 0)
             {
                 try
                 {

@@ -56,7 +56,7 @@ namespace Eindwerk2018.Controllers
                 newFoid.Foid.Status = 0;
 
                 int newId = dbFoid.Add(newFoid.Foid);
-                return RedirectToAction("Edit", "Foid", new { Id = newId });
+                return RedirectToAction("Details", "Foid", new { Id = newId });
             }
             //moet de lijst opnieuw aanmaken
             newFoid.Users = dbUser.List();
@@ -158,12 +158,15 @@ namespace Eindwerk2018.Controllers
             List<Odf> endOdfs = new List<Odf>();
             List<Sectie> secties = foid.Secties;
             //odf start end should still be swapped
-            foreach (Sectie sectie in secties)
-            {
-                startOdfs.Add(new Odf { Id = sectie.OdfStartId, Name = sectie.OdfStartName });
-                //end odf ook?
-                endOdfs.Add(new Odf { Id = sectie.OdfEndId, Name = sectie.OdfEndName });
-                //secties.Add(new Sectie { SectieNr = sectie.SectieNr, KabelId = sectie.KabelId, KabelName = sectie.KabelName }); //ID?
+            if(secties[0] != null) //test
+            { 
+                foreach (Sectie sectie in secties)
+                {
+                    startOdfs.Add(new Odf { Id = sectie.OdfStartId, Name = sectie.OdfStartName });
+                    //end odf ook?
+                    endOdfs.Add(new Odf { Id = sectie.OdfEndId, Name = sectie.OdfEndName });
+                    //secties.Add(new Sectie { SectieNr = sectie.SectieNr, KabelId = sectie.KabelId, KabelName = sectie.KabelName }); //ID?
+                }
             }
 
             var viewModel = new AddSectieFoidViewModel() { Foid = foid, StartOdfs = startOdfs, EndOdfs = endOdfs, Secties = secties };
@@ -284,9 +287,12 @@ namespace Eindwerk2018.Controllers
 
                     //add or delete ?
                     if (viewModel.NrOfFibers < viewModel.OldNrOfFibers)
-                    {
-                        for(int i = 0; i<sectie.Fibers.Count();i++)
-                            if( (i+1) > viewModel.NrOfFibers) sectie.Fibers[i] = null;
+                    {   //add
+                        //int nrFibTemp = sectie.Fibers.Count(); //cant be set in the for, because it wil change when we remove
+                        //for (int i = 0; i < nrFibTemp; i++)
+                        //    if ((i + 1) > viewModel.NrOfFibers) sectie.Fibers.RemoveAt(i);
+                        //beter :-)
+                        while(viewModel.NrOfFibers < sectie.Fibers.Count()) sectie.Fibers.RemoveAt(sectie.Fibers.Count()-1);
                     }
                     else //groter -> add fibers
                     {
@@ -303,9 +309,10 @@ namespace Eindwerk2018.Controllers
                         }
                     }
 
-                    //add own fiber + order
-                    foreach (Fiber fiber in sectie.Fibers) sectie.ListFreeFibers.Add(fiber);
-                    sectie.ListFreeFibers = sectie.ListFreeFibers.OrderBy(F => F.FiberNr).ToList();
+                    //add own
+                    foreach (Fiber fiber in sectie.Fibers) if(fiber != null && fiber.FiberNr != 0) sectie.ListFreeFibers.Add(fiber);
+                    //order
+                    sectie.ListFreeFibers = sectie.ListFreeFibers.OrderBy(F => F.FiberNr).ToList(); //error
                 }
             }
 

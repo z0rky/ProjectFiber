@@ -27,18 +27,18 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Kabel.KabelTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.Kabel.KabelType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Kabel.KabelTypeId, new SelectList(Model.KabelTypes, "Id", "NameNL"), "--", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Kabel.KabelTypeId, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(m => m.Kabel.KabelType.Id, new SelectList(Model.KabelTypes, "Id", "NameNL"), "--", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Kabel.KabelType, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Kabel.OwnerId, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.Kabel.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Kabel.OwnerId, new SelectList(Model.Companies, "Id", "Name"), new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Kabel.OwnerId, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(m => m.Kabel.Owner.Id, new SelectList(Model.Companies, "Id", "Name"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Kabel.Owner, "", new { @class = "text-danger" })
         </div>
     </div>
 

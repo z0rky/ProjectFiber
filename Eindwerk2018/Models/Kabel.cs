@@ -19,11 +19,11 @@ namespace Eindwerk2018.Models
 
         [Required]
         [Display(Name = "KabelKabelType", ResourceType = typeof(Resources.Resource))]
-        public int KabelTypeId { get; set; }
+        public KabelType KabelType { get; set; }
 
         [Required]
         [Display(Name = "KabelOwner", ResourceType = typeof(Resources.Resource))]
-        public int OwnerId { get; set; }
+        public Company Owner { get; set; }
 
         //company
         [StringLength(200)]
