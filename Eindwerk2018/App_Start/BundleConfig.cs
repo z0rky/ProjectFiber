@@ -17,7 +17,9 @@ namespace Eindwerk2018
                 "~/Scripts/bootbox.js",
                 "~/Scripts/respond.js",
                 "~/Scripts/datatables/jquery.datatables.js",
-                "~/Scripts/datatables/datatables.bootstrap.js"
+                "~/Scripts/datatables/datatables.bootstrap.js",
+                "~/Scripts/jquerySideBar/jquery.min.js"
+                //"~/Scripts/bootstrap_SideBar/js/bootstrap.bundle.min.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
