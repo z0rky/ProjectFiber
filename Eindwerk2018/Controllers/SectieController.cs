@@ -30,13 +30,8 @@ namespace Eindwerk2018.Controllers
         // GET: Sectie/Details/5
         public ActionResult Details(int? id)
         {
-
-
-           //bezettingVanDeVezelsModel = new BezettingVanDeVezelsModel();
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Sectie sectie = dbSectie.Get((int)id);
-            //bezettingVanDeVezelsModel.sectie = sectie;
-            //bezettingVanDeVezelsModel.Fibers = sectie.Fibers;
 
             if (sectie == null) return HttpNotFound();
 
@@ -176,7 +171,7 @@ namespace Eindwerk2018.Controllers
         public List<Sectie> GetSectie()
         {
             List<Sectie> sectieList = new List<Sectie>();
-            //// get foids to print
+            // get foids to print
 
             Sectie sectie = new Sectie();
 
@@ -184,9 +179,50 @@ namespace Eindwerk2018.Controllers
             sectie.Lengte = 23;
             sectieList.Add(sectie);
 
-
             return sectieList;
+        }
 
+        public void SplitSection(int sectieId, int odfId)
+        {
+            if (sectieId != 0 && odfId != 0)
+            {
+                Sectie splitSectie = dbSectie.Get((int)sectieId);
+
+                //update end odf of first and end odf of second
+                Sectie newSectie = new Sectie {
+                            KabelId = splitSectie.KabelId,
+                            OdfStartId = odfId, //new odf
+                            OdfEndId = splitSectie.OdfEndId,
+                            SectionTypeId = splitSectie.SectionTypeId,
+                            Active = true
+                        };
+
+                splitSectie.OdfEndId = odfId; //new odf
+                //remove length
+                splitSectie.Lengte = 0;
+                //date ?
+
+
+                //so how to do it
+                //change section nr, how ??
+                //100 = 25 and 75 ? //100 = 75 and 125 ?
+
+                //get next nr and put the difference in 2
+                //SELECT section_nr FROM sections WHERE kabel_id='' AND section_nr > '' LIMIT 1
+                int newSectieNr = (dbSectie.NextSectionNr(splitSectie.KabelId, splitSectie.SectieNr) - splitSectie.SectieNr) /2;
+                newSectie.SectieNr = newSectieNr;
+
+                //insert section sectie in db, section and fibers
+                dbSectie.Edit(splitSectie); //first section
+                dbSectie.Add(newSectie); //new section
+
+                //fibers are still empty
+                List<Fiber> fibers = dbSectie.GetFibers(splitSectie.Id);
+                // is er geen betere manier ?
+                //sql select insert, maar dan moet wel add eruit worden gehaald.
+
+                //update FOID serial nr !
+            }
         }
     }
 }

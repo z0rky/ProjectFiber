@@ -78,7 +78,6 @@
 
 
         <table class="table table-bordered table-hover" id="foidInfo">
-            <thead>
             <tr>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
@@ -87,8 +86,7 @@
                 <th>@Eindwerk2018.Resources.Resource.fiberFoidSectieNr</th>
                 <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
             </tr>
-            </thead>
-            <tbody>
+
         @foreach (var item in Model.Secties)
         {
             <tr>
@@ -107,47 +105,8 @@
             </tr>
         }
                 
-            </tbody>
+
         </table>
-
-    @*<table class="table table-bordered table-hover" id="foidId">
-        <thead>
-        <tr>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidSerialNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidSectieNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model.Secties)
-        {
-            <tr>
-                @if (item.Level > 0)
-                {
-                    <td bgcolor="green">CWDM</td>
-                }
-
-                <td>@Html.DisplayFor(modelItem => item.Fibers[0].FoidSerialNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.OdfStartName)</td>
-                <td>@Html.DisplayFor(modelItem => item.OdfEndName)</td>
-                <td>@Html.DisplayFor(modelItem => item.KabelName)</td>
-                <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
-                <td>
-                    @foreach (var fiber in item.Fibers)
-                    {
-                        @Html.DisplayFor(modelItem => fiber.FiberNr)
-                        <br/>
-                    }
-                </td>
-            </tr>
-        }
-        </tbody>*@
-    @*</table>*@
-
 </div>
 <p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", null, new { @class = "btn btn-primary" })
@@ -156,11 +115,3 @@
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEditFibers, "EditFibers", new { id = Model.Id }, new { @class = "btn btn-primary" })
     @*<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","Foid", new {id = Model.Id })'">@Eindwerk2018.Resources.Resource.LinkEdit</button>*@
 </p>
-@section scripts
-{
-    <script>
-        $(document).ready(function () {
-            $("#foidInfo").DataTable();
-        });
-    </script>
-}
