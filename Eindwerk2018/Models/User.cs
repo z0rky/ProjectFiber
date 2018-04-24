@@ -20,6 +20,7 @@ namespace Eindwerk2018.Models
         [Display(Name = "UserUserName", ResourceType = typeof(Resources.Resource))]
         public String UserName { get; set; }
 
+        [EmailAddress]
         [Display(Name = "UserEmail", ResourceType = typeof(Resources.Resource))]
         public String Email { get; set; }
 

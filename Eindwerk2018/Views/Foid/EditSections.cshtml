@@ -57,14 +57,12 @@
         @*<hr />*@
 
         <table class="table table-bordered table-hover" id="myTable">
-            <thead>
                 <tr>
                     <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfStartName</th>
                     <th>@Eindwerk2018.Resources.Resource.fiberFoidKabelName</th>
                     <th>@Eindwerk2018.Resources.Resource.fiberFoidOdfEndName</th>
                 </tr>
-            </thead>
-            <tbody>
+
                 @for (int i = 0; i < Model.StartOdfs.Count; i++)
                 {
                     CountOfOdfs = i;
@@ -91,7 +89,7 @@
                     string CountOfOdfsStr = "sectie" + CountOfOdfs; @*Omdat het anders niet wilt schrijven*@
                     if (LastOdfId == 0) { LastOdfId = Model.Foid.StartOdfId; };
                 }
-            </tbody>
+
         </table>
     </div>
     <div class="form-group">
@@ -101,7 +99,7 @@
 
     <div>
         <div class="col-md-offset-2 col-md-10">
-            <input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+            <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
             <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSave</button>
 
         </div>
@@ -223,14 +221,4 @@
         });
     });
 </script>
-
-@section scripts
-{
-    <script>
-        $(document).ready(function () {
-            $("#myTable").DataTable();
-
-        });
-    </script>
-}
 

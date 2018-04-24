@@ -13,11 +13,11 @@ namespace Eindwerk2018.Models
         [Display(Name = "LocationName", ResourceType = typeof(Resources.Resource))]
         public string LocatieNaam { get; set; }
 
-        [Range(-180, 180)]
+        //[Range(-180, 180)] //makes it required, not something we want
         [Display(Name = "LocationGpsLong", ResourceType = typeof(Resources.Resource))]
         public double GpsLong { get; set; }
 
-        [Range(-90, 90)]
+        //[Range(-90, 90)] //makes it required, not something we want
         [Display(Name = "LocationGpsLat", ResourceType = typeof(Resources.Resource))]
         public double GpsLat { get; set; }
 
@@ -37,14 +37,14 @@ namespace Eindwerk2018.Models
         [Display(Name="AdresNummer", ResourceType = typeof(Resources.Resource))]
         public string HuisNr { get; set; }
 
-        [Range(999, 9999)]
+        //[Range(999, 9999)] //makes it required, not something we want
         [Display(Name = "AdresPostcode", ResourceType = typeof(Resources.Resource))]
         public int PostCode { get; set; }
 
         [Display(Name = "AdresGemeente", ResourceType = typeof(Resources.Resource))]
         public string Plaats { get; set; }
 
-        [Range(8,8)]
+        //[Range(8,8)]  //makes it required, not something we want
         [Display(Name = "LocationLcode", ResourceType = typeof(Resources.Resource))]
         public String Lcode { get; set; }
 

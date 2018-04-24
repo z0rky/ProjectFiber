@@ -16,7 +16,6 @@
             <th>Bedrijf</th>
             <th>Type</th>
             <th></th>
-          
         </tr>
     </thead>
     <tbody>
@@ -31,14 +30,13 @@
                 <td>@locatie.LocatieTypeId</td>
                 <td>
                 @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = locatie.Id })
-                   
                     </td>
             </tr>
         }
 
     </tbody>
 </table>
-<input type="button" class="btn btn-primary" value="New Search" onclick="location.href='@Url.Action("Index", "SearchLocatie")'" />
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkNewSearch onclick="location.href='@Url.Action("Index", "SearchLocatie")'" />
 @section scripts
 {
     <script>

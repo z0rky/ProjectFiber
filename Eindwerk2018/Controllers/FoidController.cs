@@ -56,7 +56,7 @@ namespace Eindwerk2018.Controllers
                 newFoid.Foid.Status = 0;
 
                 int newId = dbFoid.Add(newFoid.Foid);
-                return RedirectToAction("Edit", "Foid", new { Id = newId });
+                return RedirectToAction("Details", "Foid", new { Id = newId });
             }
             //moet de lijst opnieuw aanmaken
             newFoid.Users = dbUser.List();
@@ -158,12 +158,15 @@ namespace Eindwerk2018.Controllers
             List<Odf> endOdfs = new List<Odf>();
             List<Sectie> secties = foid.Secties;
             //odf start end should still be swapped
-            foreach (Sectie sectie in secties)
-            {
-                startOdfs.Add(new Odf { Id = sectie.OdfStartId, Name = sectie.OdfStartName });
-                //end odf ook?
-                endOdfs.Add(new Odf { Id = sectie.OdfEndId, Name = sectie.OdfEndName });
-                //secties.Add(new Sectie { SectieNr = sectie.SectieNr, KabelId = sectie.KabelId, KabelName = sectie.KabelName }); //ID?
+            if(secties[0] != null) //test
+            { 
+                foreach (Sectie sectie in secties)
+                {
+                    startOdfs.Add(new Odf { Id = sectie.OdfStartId, Name = sectie.OdfStartName });
+                    //end odf ook?
+                    endOdfs.Add(new Odf { Id = sectie.OdfEndId, Name = sectie.OdfEndName });
+                    //secties.Add(new Sectie { SectieNr = sectie.SectieNr, KabelId = sectie.KabelId, KabelName = sectie.KabelName }); //ID?
+                }
             }
 
             var viewModel = new AddSectieFoidViewModel() { Foid = foid, StartOdfs = startOdfs, EndOdfs = endOdfs, Secties = secties };
@@ -237,20 +240,86 @@ namespace Eindwerk2018.Controllers
         }
 
         [HttpPost]
-        //public ActionResult EditFibers([Bind(Include = "Foid,NrOfFibers,OldNrOfFibers")] EditFiberSectieViewModel viewModel)
-        public ActionResult EditFibers(EditFiberSectieViewModel viewModel)
+        //public ActionResult EditFibers(FormCollection collection) //could work, but difficult
+        public ActionResult EditFibers([Bind(Include = "Foid,NrOfFibers,OldNrOfFibers,Secties,SectieFiber")] EditFiberSectieViewModel viewModel)
         {
-            //secties are not added
+            if (viewModel.NrOfFibers == 0) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             //check if nr of fiber equials nr of fibers.
             if (viewModel.NrOfFibers == viewModel.OldNrOfFibers)
             {
+                //based on viewModel.Secties and viewModel.SectieFibers
+                //add to foid
+                Foid updateFoid = new Foid { Id= viewModel.Foid.Id};
+                updateFoid.Secties = new List<Sectie>();
+                foreach (int sectieId in viewModel.Secties) updateFoid.Secties.Add(new Sectie { Id= sectieId, Fibers = new List<Fiber>() });
+
+                int j = 0;
+                int i = 1;
+                foreach (int fiberId in viewModel.SectieFiber)
+                {
+                    updateFoid.Secties[j].Fibers.Add(new Fiber { FiberNr = fiberId });
+                    if( i % viewModel.NrOfFibers == 0) j++;
+                    i++;
+                }
+
                 //update only fibers
+                dbFoid.UpdateFibers(updateFoid);
+
+                return RedirectToAction("Details", "Foid", new { Id = viewModel.Foid.Id });
             }
             else
             {
-                //updaet secties with new nr of fibers
+                //update secties with new nr of fibers
+                try
+                { //renew everything
+                    Foid foid = dbFoid.Get((int)viewModel.Foid.Id);
+                    viewModel.Foid = foid;
+                    viewModel.Foid.Secties = OrderSecties(foid.Secties, foid.StartOdfId, foid.EndOdfId, 11);
+                }
+                catch (Exception e) { }
+
+                //so remove or add fibers in for each section
+                foreach (Sectie sectie in viewModel.Foid.Secties)
+                {
+                    //add free fibers
+                    sectie.ListFreeFibers = dbFoid.ListFreeFibers(sectie.Id);
+
+                    //add or delete ?
+                    if (viewModel.NrOfFibers < viewModel.OldNrOfFibers)
+                    {   //add
+                        //int nrFibTemp = sectie.Fibers.Count(); //cant be set in the for, because it wil change when we remove
+                        //for (int i = 0; i < nrFibTemp; i++)
+                        //    if ((i + 1) > viewModel.NrOfFibers) sectie.Fibers.RemoveAt(i);
+                        //beter :-)
+                        while(viewModel.NrOfFibers < sectie.Fibers.Count()) sectie.Fibers.RemoveAt(sectie.Fibers.Count()-1);
+                    }
+                    else //groter -> add fibers
+                    {
+                        int j = 1;
+                        for (int i = viewModel.OldNrOfFibers; i < viewModel.NrOfFibers; i++)
+                        {
+                            try
+                            {
+                                sectie.Fibers.Add(new Fiber { FiberNr = sectie.ListFreeFibers[j].FiberNr }); //should be the first next free fiber -> j 
+                            }
+                            catch (Exception e) { }
+
+                            j++;
+                        }
+                    }
+
+                    //add own
+                    foreach (Fiber fiber in sectie.Fibers) if(fiber != null && fiber.FiberNr != 0) sectie.ListFreeFibers.Add(fiber);
+                    //order
+                    sectie.ListFreeFibers = sectie.ListFreeFibers.OrderBy(F => F.FiberNr).ToList(); //error
+                }
             }
 
+            //old gelijk zetten voor nieuwe pagina
+            viewModel.OldNrOfFibers = viewModel.NrOfFibers;
+            //OldNrOfFibers does not get to the page, Why ??
+            //we can't update? -> Nu gedaan met jquery
             return View(viewModel);
         }
 

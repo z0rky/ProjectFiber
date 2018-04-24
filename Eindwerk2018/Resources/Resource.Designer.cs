@@ -529,11 +529,29 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CableType.
+        /// </summary>
+        public static string KabelKabelType {
+            get {
+                return ResourceManager.GetString("KabelKabelType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string KabelName {
             get {
                 return ResourceManager.GetString("KabelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string KabelOwner {
+            get {
+                return ResourceManager.GetString("KabelOwner", resourceCulture);
             }
         }
         
@@ -570,6 +588,15 @@ namespace Eindwerk2018.Resources {
         public static string LinkAdd {
             get {
                 return ResourceManager.GetString("LinkAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string LinkBack {
+            get {
+                return ResourceManager.GetString("LinkBack", resourceCulture);
             }
         }
         
@@ -628,11 +655,29 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Fibers.
+        /// </summary>
+        public static string LinkEditFibers {
+            get {
+                return ResourceManager.GetString("LinkEditFibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Sections.
         /// </summary>
         public static string LinkEditSection {
             get {
                 return ResourceManager.GetString("LinkEditSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New search.
+        /// </summary>
+        public static string LinkNewSearch {
+            get {
+                return ResourceManager.GetString("LinkNewSearch", resourceCulture);
             }
         }
         
@@ -660,6 +705,15 @@ namespace Eindwerk2018.Resources {
         public static string LinkSearch {
             get {
                 return ResourceManager.GetString("LinkSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Options.
+        /// </summary>
+        public static string LinkSearchOptions {
+            get {
+                return ResourceManager.GetString("LinkSearchOptions", resourceCulture);
             }
         }
         

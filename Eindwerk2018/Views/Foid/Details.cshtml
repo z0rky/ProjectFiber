@@ -99,15 +99,15 @@
                 <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
                 <td>
                     @foreach (var fiber in item.Fibers)
-        {
-            @Html.DisplayFor(modelItem => fiber.FiberNr)
-            <br />
-}
+                    {
+                        @Html.DisplayFor(modelItem => fiber.FiberNr)
+                        <br />
+                    }
                 </td>
             </tr>
         }
                 
-                </tbody>
+            </tbody>
         </table>
 
     @*<table class="table table-bordered table-hover" id="foidId">
@@ -151,15 +151,16 @@
 </div>
 <p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", null, new { @class = "btn btn-primary" })
-    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","Foid", new {id = Model.Id })'">@Eindwerk2018.Resources.Resource.LinkEdit</button>
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEditSection, "EditSections", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEditFibers, "EditFibers", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @*<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","Foid", new {id = Model.Id })'">@Eindwerk2018.Resources.Resource.LinkEdit</button>*@
 </p>
 @section scripts
 {
     <script>
         $(document).ready(function () {
             $("#foidInfo").DataTable();
-
         });
     </script>
 }
-

@@ -9,7 +9,6 @@
 <h2>@Model.LocatieNaam</h2>
    
 <div>
-   
     <hr />
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Id)</dt>
@@ -19,9 +18,9 @@
         <dt>@Html.DisplayNameFor(model => model.LocatieNaam)</dt>
         <dd>@Html.DisplayFor(model => model.LocatieNaam)</dd>
         <dt>@Html.DisplayNameFor(model => model.GpsLong)</dt>
-        <dd>@Html.DisplayFor(model => model.GpsLong)</dd>
+        <dd>@Html.DisplayFor(model => model.GpsLong) &deg;E</dd>
         <dt>@Html.DisplayNameFor(model => model.GpsLat)</dt>
-        <dd>@Html.DisplayFor(model => model.GpsLat)</dd>
+        <dd>@Html.DisplayFor(model => model.GpsLat) &deg;N</dd>
 
         <dt>@Html.DisplayNameFor(model => model.LijnNr)</dt>
         <dd>@Html.DisplayFor(model => model.LijnNr)</dd>
@@ -44,7 +43,7 @@
     </dl>
    
 </div>
-<input type="button" class="btn btn-primary" value="Overzicht" onclick="history.go(-1);" />
+<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
 
 <script>
     function initialize() {
@@ -65,6 +64,4 @@
     }
 
     window.onload = loadScript;
-
-
 </script>

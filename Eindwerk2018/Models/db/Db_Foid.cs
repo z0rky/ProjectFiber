@@ -10,11 +10,11 @@ namespace Eindwerk2018.Models.db
 {
     public class Db_Foid : Db_General
     {
-        public List<Foid> List(int Start=0)
+        public List<Foid> List(int Start = 0)
         {
-            if(Start < 0) Start = 0;
+            if (Start < 0) Start = 0;
 
-            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f ORDER BY f.id DESC LIMIT " + Start+","+ Max_row; //query
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f ORDER BY f.id DESC LIMIT " + Start + "," + Max_row; //query
 
             return ListQueries(query);
         }
@@ -53,7 +53,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT f.FOID_serial_nr,f.FOID_fibre_nr,k.name,s.section_nr,oa.name,ob.name,s.type_id,s.length,s.length_otdr,date_in_service,infrabel_terein FROM fibers AS f,sections AS s,kabel AS k,ODF AS oa,ODF as ob WHERE f.FOID='"+id+"' AND f.section_id=s.id AND s.kabel_id=k.id AND s.odf_start=oa.id AND s.odf_end=ob.id ORDER BY s.section_nr,f.FOID_fibre_nr;"; //query
+            string query = "SELECT f.FOID_serial_nr,f.FOID_fibre_nr,k.name,s.section_nr,oa.name,ob.name,s.type_id,s.length,s.length_otdr,date_in_service,infrabel_terein FROM fibers AS f,sections AS s,kabel AS k,ODF AS oa,ODF as ob WHERE f.FOID='" + id + "' AND f.section_id=s.id AND s.kabel_id=k.id AND s.odf_start=oa.id AND s.odf_end=ob.id ORDER BY s.section_nr,f.FOID_fibre_nr;"; //query
 
             return null; // ListQueries(query)[0]; //new type of sectie, viewSectie ?
         }
@@ -62,7 +62,7 @@ namespace Eindwerk2018.Models.db
         {
             if (foid != null)
             {
-                string query = "INSERT INTO FOID (name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf) VALUES ('" + foid.Name + "','" + MySqlDate(foid.CreatieDatum) +"','" + foid.Status+ "','" + MySqlDate(foid.LastStatusDate) + "','" + foid.RequestorId + "','" + foid.Comments + "','" + foid.LengthCalculated + "','" + foid.LengthOtdr + "','" + foid.StartOdfId + "','" + foid.EndOdfId + "')"; //query
+                string query = "INSERT INTO FOID (name,date_creation,status,date_last_status,requestor_id,comments,length_calculated,length_otdr,start_odf,end_odf) VALUES ('" + foid.Name + "','" + MySqlDate(foid.CreatieDatum) + "','" + foid.Status + "','" + MySqlDate(foid.LastStatusDate) + "','" + foid.RequestorId + "','" + foid.Comments + "','" + foid.LengthCalculated + "','" + foid.LengthOtdr + "','" + foid.StartOdfId + "','" + foid.EndOdfId + "')"; //query
                 this.ShortQuery(query);
                 return GetLastInsertedId(); //return new id
             }
@@ -73,7 +73,7 @@ namespace Eindwerk2018.Models.db
         {
             if (fiberFoid != null)
             {
-                string query = "UPDATE fibers SET FOID='"+ fiberFoid.Foid +"', FOID_serial_nr='"+ fiberFoid.FoidSerialNr + "', FOID_fibre_nr='" + fiberFoid.FoidFibreNr + "' WHERE section_id='" + fiberFoid.SectieNr + "' AND fiber_nr='" + fiberFoid.FiberNr + "'"; //query
+                string query = "UPDATE fibers SET FOID='" + fiberFoid.Foid + "', FOID_serial_nr='" + fiberFoid.FoidSerialNr + "', FOID_fibre_nr='" + fiberFoid.FoidFibreNr + "' WHERE section_id='" + fiberFoid.SectieNr + "' AND fiber_nr='" + fiberFoid.FiberNr + "'"; //query
                 this.ShortQuery(query);
                 return 1;
             }
@@ -88,6 +88,26 @@ namespace Eindwerk2018.Models.db
                 //fibers/sections is also another funtions
                 string query = "UPDATE FOID SET name='" + foid.Name + "', status='" + foid.Status + "', date_last_status='" + MySqlDate(foid.LastStatusDate) + "', requestor_id='" + foid.RequestorId + "', comments='" + foid.Comments + "', start_odf='" + foid.StartOdfId + "', end_odf='" + foid.EndOdfId + "' WHERE id='" + foid.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
+            }
+        }
+
+        public void UpdateFibers(Foid foid)
+        {
+            //First clear
+            string query = "UPDATE fibers SET FOID='0',FOID_serial_nr='0',FOID_fibre_nr='0' WHERE FOID='"+ foid.Id +"'"; //query
+            this.ShortQuery(query);
+            //then add for each fiber in each section
+            int foid_serial = 100;
+            foreach(Sectie sectie in foid.Secties)
+            {
+                int foid_fiber_serial = 1;
+                foreach (Fiber fiber in sectie.Fibers)
+                {
+                    query = "UPDATE fibers SET FOID='"+ foid.Id +"',FOID_serial_nr='"+ foid_serial + "', FOID_fibre_nr='"+ foid_fiber_serial + "' WHERE section_id='"+ sectie.Id +"' AND fiber_nr='"+fiber.FiberNr+"'";
+                    this.ShortQuery(query);
+                    foid_fiber_serial++;
+                }
+                foid_serial += 100;
             }
         }
 

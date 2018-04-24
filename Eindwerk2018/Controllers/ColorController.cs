@@ -41,15 +41,17 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "NameEn,NameNl,NameFr")] Color color)
         {
-            try
+            if(ModelState.IsValid)
             {
-                dbColor.Add(color);
-                return RedirectToAction("Index");
+                try
+                {
+                    dbColor.Add(color);
+                    return RedirectToAction("Index");
+                }
+                catch { }
             }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
 
         // GET: Color/Edit/5
@@ -67,12 +69,11 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,NameEn,NameNl,NameFr")] Color color)
         {
-            if (ModelState.IsValid)
+           if (ModelState.IsValid)
             {
                 dbColor.Edit(color);
                 return RedirectToAction("Details", "Color", new { Id = color.Id });
             }
-
             return View(color);
         }
 

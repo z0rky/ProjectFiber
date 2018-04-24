@@ -13,7 +13,7 @@ namespace Eindwerk2018.Models.db
         {
             if(Start < 0) Start = 0;
 
-            string query = "SELECT id, name,kabel_type,owner_id,reference,date_creation FROM kabel LIMIT "+Start+","+Max_row; //query
+            string query = "SELECT id, name,kabel_type,'' AS type_name,owner_id,'' AS owner_name,reference,date_creation FROM kabel LIMIT " + Start+","+Max_row; //query
 
             return ListQueries(query);
         }
@@ -21,7 +21,7 @@ namespace Eindwerk2018.Models.db
         public List<Kabel> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name,kabel_type,owner_id,reference,date_creation FROM kabel WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, name,kabel_type,'' AS type_name,owner_id,'' AS owner_name,reference,date_creation FROM kabel WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
@@ -30,7 +30,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT id, name,kabel_type,owner_id,reference,date_creation FROM kabel WHERE id='" + id + "' LIMIT 1"; //query
+            string query = "SELECT k.id,k.name,k.kabel_type,kt.name_nl AS type_name,k.owner_id,c.name AS owner_name,k.reference,k.date_creation FROM kabel AS k,kabel_type AS kt,company AS c WHERE k.id='" + id + "' AND k.kabel_type=kt.id AND k.owner_id=c.id LIMIT 1"; //query
 
             return ListQueries(query)[0];
         }
@@ -48,7 +48,7 @@ namespace Eindwerk2018.Models.db
         {
             if (kabel != null)
             {
-                string query = "INSERT INTO kabel (name,kabel_type,owner_id,reference,date_creation) VALUES ('" + kabel.Naam + "',null,null,'" + kabel.Reference + "','" + MySqlDate(kabel.CreatieDatum) + "')"; //query
+                string query = "INSERT INTO kabel (name,kabel_type,owner_id,reference,date_creation) VALUES ('" + kabel.Naam + "','"+ kabel.KabelType.Id + "','" + kabel.Owner.Id + "','" + kabel.Reference + "','" + MySqlDate(kabel.CreatieDatum) + "')"; //query
                 this.ShortQuery(query);
                 return GetLastInsertedId(); //return new id
             }
@@ -59,7 +59,7 @@ namespace Eindwerk2018.Models.db
         {
             if (kabel != null || kabel.Id != 0)
             {
-                string query = "UPDATE kabel SET name='" + kabel.Naam + "', reference='" + kabel.Reference+ "' WHERE id='" + kabel.Id + "' LIMIT 1"; //query
+                string query = "UPDATE kabel SET name='" + kabel.Naam + "',kabel_type='"+ kabel.KabelType.Id + "',owner_id='"+ kabel.Owner.Id + "', reference='" + kabel.Reference+ "' WHERE id='" + kabel.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -93,6 +93,8 @@ namespace Eindwerk2018.Models.db
                                 {
                                     Id = Convert.ToInt32(sdr["id"]),
                                     Naam = sdr["name"].ToString(),
+                                    KabelType = new KabelType { Id= MyConvertInt(sdr["kabel_type"].ToString()),NameNL = sdr["type_name"].ToString() },
+                                    Owner = new Company { Id = MyConvertInt(sdr["owner_id"].ToString()), Name = sdr["owner_name"].ToString() },
                                     Reference = sdr["reference"].ToString(),
                                     CreatieDatum = Convert.ToDateTime(sdr["date_creation"])
                                 });

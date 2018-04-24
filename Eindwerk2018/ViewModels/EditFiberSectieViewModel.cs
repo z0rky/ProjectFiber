@@ -12,5 +12,9 @@ namespace Eindwerk2018.ViewModels
 
         public int NrOfFibers { get; set; }
         public int OldNrOfFibers { get; set; } //to check on return
+
+        //list of fibers and their secties ?
+        public List<int> Secties { get; set; } //we need this for the correct order?
+        public List<int> SectieFiber { get; set; }
     }
 }

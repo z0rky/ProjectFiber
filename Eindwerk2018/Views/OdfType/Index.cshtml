@@ -5,7 +5,6 @@
     ViewBag.Title = "Index";
 }
 
-
 <h2>Index</h2>
 
 @*<p>
@@ -22,7 +21,6 @@
 
     @foreach (var item in Model)
     {
-
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>
@@ -42,7 +40,5 @@
         $(document).ready(function () {
             $("#odfTypeTable").DataTable();
         });
-    
-  
     </script>
 }

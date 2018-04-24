@@ -17,8 +17,15 @@ namespace Eindwerk2018.Models
         [Display(Name = "KabelName", ResourceType = typeof(Resources.Resource))]
         public string Naam { get; set; }
 
-        //company
         [Required]
+        [Display(Name = "KabelKabelType", ResourceType = typeof(Resources.Resource))]
+        public KabelType KabelType { get; set; }
+
+        [Required]
+        [Display(Name = "KabelOwner", ResourceType = typeof(Resources.Resource))]
+        public Company Owner { get; set; }
+
+        //company
         [StringLength(200)]
         [Display(Name = "KabelReference", ResourceType = typeof(Resources.Resource))]
         public string Reference { get; set; }
