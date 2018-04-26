@@ -209,19 +209,21 @@ namespace Eindwerk2018.Controllers
 
                 //get next nr and put the difference in 2
                 //SELECT section_nr FROM sections WHERE kabel_id='' AND section_nr > '' LIMIT 1
-                int newSectieNr = (dbSectie.NextSectionNr(splitSectie.KabelId, splitSectie.SectieNr) - splitSectie.SectieNr) /2;
+                int addNr = (dbSectie.NextSectionNr(splitSectie.KabelId, splitSectie.SectieNr) - splitSectie.SectieNr) /2;
+                int newSectieNr = splitSectie.SectieNr + addNr;
                 newSectie.SectieNr = newSectieNr;
 
                 //insert section sectie in db, section and fibers
                 dbSectie.Edit(splitSectie); //first section
-                dbSectie.Add(newSectie); //new section
-
+                //dbSectie.Add(newSectie); //new section
                 //fibers are still empty
-                List<Fiber> fibers = dbSectie.GetFibers(splitSectie.Id);
+
                 // is er geen betere manier ?
                 //sql select insert, maar dan moet wel add eruit worden gehaald.
+                dbSectie.AddSplitSectie(splitSectie);
 
-                //update FOID serial nr !
+                //update FOID serial nr ! how ? direction is important ?
+                //Which one comes first rename all ?
             }
         }
     }

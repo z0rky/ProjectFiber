@@ -234,5 +234,20 @@ namespace Eindwerk2018.Models.db
 
             return nextSectionNr;
         }
+
+
+        public int AddSplitSectie(Sectie sectie)
+        {
+            if (sectie != null)
+            {
+                string query = "INSERT INTO sections (section_nr,kabel_id,odf_start,odf_end,type_id,length,active) VALUES ('" + sectie.SectieNr + "','" + sectie.KabelId + "','" + sectie.OdfStartId + "','" + sectie.OdfEndId + "','" + sectie.SectionTypeId + "','" + sectie.Lengte + "','" + sectie.Active + "')"; //query
+                this.ShortQuery(query);
+                int newId = GetLastInsertedId(); //return new id
+                query = "INSERT INTO fibers (section_id,fiber_nr,FOID,FOID_serial_nr,FOID_fibre_nr) SELECT '" + newId + "',fiber_nr,FOID,FOID_serial_nr,FOID_fibre_nr FROM section_type_info WHERE type_id='" + sectie.SectionTypeId + "'"; //others are default fields,
+                this.ShortQuery(query);
+                return newId;
+            }
+            return 0;
+        }
     }
 }

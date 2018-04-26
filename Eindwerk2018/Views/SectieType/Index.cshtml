@@ -5,9 +5,7 @@
     ViewBag.Title = "Index";
 }
 
-
 <h2>@Eindwerk2018.Resources.Resource.SectieTypeTitle</h2>
-
 
 <table id="sectieType" class="table table-bordered table-hover">
     <thead>
@@ -37,10 +35,10 @@
 
 @section scripts
 {
-    <script>
+<script>
         $(document).ready(function() {
-            $("#sectieType").DataTable();
+            $("#sectieType").DataTable({ searching: false, bInfo: false });
         });
-    </script>
+</script>
 }
     
