@@ -252,6 +252,7 @@
     <Compile Include="ViewModels\NieuweKabelViewModel.cs" />
     <Compile Include="ViewModels\LocatieFormViewModel.cs" />
     <Compile Include="Models\LocatieType.cs" />
+    <Compile Include="ViewModels\SplitSectieViewModel.cs" />
     <Compile Include="ViewModels\NieuweSectieViewModel.cs" />
     <Compile Include="ViewModels\Search\SearchFoidResultViewModel .cs" />
     <Compile Include="ViewModels\Search\SearchKabelResultViewModel.cs" />
@@ -710,6 +711,7 @@
     <Content Include="Views\PdfGeneration\GeneratePdf.cshtml" />
     <Content Include="Views\Foid\EditFibers.cshtml" />
     <Content Include="Views\Shared\_Navbar_level2.cshtml" />
+    <Content Include="Views\Sectie\Split.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

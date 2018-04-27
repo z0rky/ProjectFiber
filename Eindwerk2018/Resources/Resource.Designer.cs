@@ -718,6 +718,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Split.
+        /// </summary>
+        public static string LinkSplit {
+            get {
+                return ResourceManager.GetString("LinkSplit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company.
         /// </summary>
         public static string LocationBedrijf {
@@ -1020,6 +1029,15 @@ namespace Eindwerk2018.Resources {
         public static string SectieOdfStartName {
             get {
                 return ResourceManager.GetString("SectieOdfStartName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odf to insert.
+        /// </summary>
+        public static string SectieSplitOdf {
+            get {
+                return ResourceManager.GetString("SectieSplitOdf", resourceCulture);
             }
         }
         

@@ -160,7 +160,7 @@ namespace Eindwerk2018.Models.db
             con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
             List<Fiber> fibers = new List<Fiber>();
             //color info, is in type info
-            string qry = "SELECT f.Foid,fo.name AS foid_name,f.fiber_nr,st.order_nr AS order_nr,fc.id AS fiber_color_id,fc.name_en AS fiber_color_name_en,st.module_nr,fm.id AS module_color_id,fm.name_en AS module_color_name_en,f.quality FROM fibers AS f LEFT JOIN FOID AS fo ON f.FOID=fo.id,sections AS s,section_type_info AS st,fiber_color AS fc,fiber_color AS fm WHERE f.section_id='" + SectieId +"' AND f.fiber_nr=st.fiber_nr AND f.section_id=s.id AND s.type_id=st.type_id AND st.fiber_color_id=fc.id AND st.module_color_id=fm.id ORDER BY st.order_nr";
+            string qry = "SELECT f.Foid,f.FOID_serial_nr,FOID_fibre_nr,fo.name AS foid_name,f.fiber_nr,st.order_nr AS order_nr,fc.id AS fiber_color_id,fc.name_en AS fiber_color_name_en,st.module_nr,fm.id AS module_color_id,fm.name_en AS module_color_name_en,f.quality FROM fibers AS f LEFT JOIN FOID AS fo ON f.FOID=fo.id,sections AS s,section_type_info AS st,fiber_color AS fc,fiber_color AS fm WHERE f.section_id='" + SectieId +"' AND f.fiber_nr=st.fiber_nr AND f.section_id=s.id AND s.type_id=st.type_id AND st.fiber_color_id=fc.id AND st.module_color_id=fm.id ORDER BY st.order_nr";
 
             using (con) //con in Db_general
             {
@@ -178,6 +178,8 @@ namespace Eindwerk2018.Models.db
                                 {
                                     Foid = MyConvertInt(sdr["Foid"].ToString()),
                                     FoidName = sdr["foid_name"].ToString(),
+                                    FoidSerialNr = MyConvertInt(sdr["FOID_serial_nr"].ToString()),
+                                    FoidFibreNr = MyConvertInt(sdr["FOID_fibre_nr"].ToString()),
                                     OrderNr = MyConvertInt(sdr["order_nr"].ToString()),
                                     FiberNr = MyConvertInt(sdr["fiber_nr"].ToString()),
                                     FiberColor = new Color { Id= MyConvertInt(sdr["fiber_color_id"].ToString()), NameEn = sdr["fiber_color_name_en"].ToString() },
@@ -204,6 +206,7 @@ namespace Eindwerk2018.Models.db
         public int NextSectionNr(int kabelId, int sectionNr)
         {
             int nextSectionNr = 0;
+            con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
 
             string qry = "SELECT section_nr FROM sections WHERE kabel_id='"+ kabelId + "' AND section_nr > '"+ sectionNr +"' ORDER BY section_nr LIMIT 1";
 
@@ -243,7 +246,7 @@ namespace Eindwerk2018.Models.db
                 string query = "INSERT INTO sections (section_nr,kabel_id,odf_start,odf_end,type_id,length,active) VALUES ('" + sectie.SectieNr + "','" + sectie.KabelId + "','" + sectie.OdfStartId + "','" + sectie.OdfEndId + "','" + sectie.SectionTypeId + "','" + sectie.Lengte + "','" + sectie.Active + "')"; //query
                 this.ShortQuery(query);
                 int newId = GetLastInsertedId(); //return new id
-                query = "INSERT INTO fibers (section_id,fiber_nr,FOID,FOID_serial_nr,FOID_fibre_nr) SELECT '" + newId + "',fiber_nr,FOID,FOID_serial_nr,FOID_fibre_nr FROM section_type_info WHERE type_id='" + sectie.SectionTypeId + "'"; //others are default fields,
+                query = "INSERT INTO fibers (section_id,fiber_nr,FOID,FOID_serial_nr,FOID_fibre_nr) SELECT '" + newId + "',fiber_nr,FOID,FOID_serial_nr,FOID_fibre_nr FROM fibers WHERE section_id='" + sectie.Id + "'"; //others are default fields,
                 this.ShortQuery(query);
                 return newId;
             }

@@ -15,6 +15,7 @@ namespace Eindwerk2018.Controllers
     {
         private Db_Sectie dbSectie = new Db_Sectie();
         private Db_SectieType dbSectieType = new Db_SectieType();
+        private Db_Foid dbFoid= new Db_Foid();
         //BezettingVanDeVezelsModel bezettingVanDeVezelsModel; 
 
         // GET: Sectie
@@ -202,29 +203,79 @@ namespace Eindwerk2018.Controllers
                 splitSectie.Lengte = 0;
                 //date ?
 
-
                 //so how to do it
                 //change section nr, how ??
                 //100 = 25 and 75 ? //100 = 75 and 125 ?
-
                 //get next nr and put the difference in 2
                 //SELECT section_nr FROM sections WHERE kabel_id='' AND section_nr > '' LIMIT 1
-                int addNr = (dbSectie.NextSectionNr(splitSectie.KabelId, splitSectie.SectieNr) - splitSectie.SectieNr) /2;
+                int addNr = dbSectie.NextSectionNr(splitSectie.KabelId, splitSectie.SectieNr);
+                if (addNr == 0) addNr = 100;
+                else addNr = (addNr - splitSectie.SectieNr) / 2;
                 int newSectieNr = splitSectie.SectieNr + addNr;
                 newSectie.SectieNr = newSectieNr;
 
                 //insert section sectie in db, section and fibers
                 dbSectie.Edit(splitSectie); //first section
-                //dbSectie.Add(newSectie); //new section
+                //dbSectie.Add(newSectie); //new section; vervangen door dbSectie.AddSplitSectie
                 //fibers are still empty
 
                 // is er geen betere manier ?
-                //sql select insert, maar dan moet wel add eruit worden gehaald.
-                dbSectie.AddSplitSectie(splitSectie);
+                //sql select insert
+                newSectie.Id = dbSectie.AddSplitSectie(splitSectie);
+                dbSectie.Edit(newSectie); //still need to updat a few things
 
                 //update FOID serial nr ! how ? direction is important ?
-                //Which one comes first rename all ?
+                //Which one comes first redo all ?
+                foreach (Fiber foidsectie in splitSectie.Fibers)
+                {
+                    if (foidsectie.Foid != 0 && foidsectie.FoidFibreNr == 1) //is run twice if a FOID has 2 fbers -> check FoidFibreNr
+                    {
+                        //increase the count of FOID_serial_nr
+                        dbFoid.UpdateSerial(foidsectie.Foid, foidsectie.FoidSerialNr);
+
+                        //still the new one, or old one, based on start odf or end odf of previous section of FOID
+                        Sectie prevFoidSectie = dbFoid.PreviousSection(foidsectie.Foid, foidsectie.FoidSerialNr);
+
+                        if (prevFoidSectie.OdfEndId == splitSectie.OdfStartId || prevFoidSectie.OdfStartId == splitSectie.OdfStartId)
+                        { //newSectie  needs updating
+                            //newSectie.
+                            dbFoid.SetFoidSerial(newSectie.Id, foidsectie.Foid);
+                        }
+                        else //splitSectie needs updating
+                        {
+                            dbFoid.SetFoidSerial(splitSectie.Id, foidsectie.Foid);
+                        }
+                    }
+                }
             }
+        }
+
+        // GET: user/Edit/5
+        public ActionResult Split(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Sectie sectie = dbSectie.Get((int)id);
+
+            if (sectie == null) return HttpNotFound();
+            SplitSectieViewModel splitSectie = new SplitSectieViewModel() { Sectie = sectie};
+
+            return View(splitSectie);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Split([Bind(Include = "Sectie,SplitOdfId")] SplitSectieViewModel splitSectie)
+        {
+            if (ModelState.IsValid)
+            {
+                //nu splitsen
+                SplitSection(splitSectie.Sectie.Id,splitSectie.SplitOdfId);
+
+                return RedirectToAction("Details", "Sectie", new { Id = splitSectie.Sectie.Id });
+            }
+
+            return View(splitSectie);
         }
     }
 }

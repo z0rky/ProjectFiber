@@ -491,4 +491,10 @@
   <data name="LinkSearchOptions" xml:space="preserve">
     <value>Zoek Opties</value>
   </data>
+  <data name="SectieSplitOdf" xml:space="preserve">
+    <value>Odf om tussen te voegen</value>
+  </data>
+  <data name="LinkSplit" xml:space="preserve">
+    <value>Splitsen</value>
+  </data>
 </root>
