@@ -55,7 +55,7 @@ namespace Eindwerk2018.Controllers
         {
             
 
-            //naam OK
+           
             if (locatie.LocatieNaam != null)
             {
                 if (!ModelState.IsValid)
@@ -109,7 +109,6 @@ namespace Eindwerk2018.Controllers
             }
             
 
-            // nog query maken !!!!!!!!
             if (locatie.PostCode != 0)
             {
                 if (!ModelState.IsValid)
@@ -134,7 +133,7 @@ namespace Eindwerk2018.Controllers
 
             }
 
-            // nog query maken !!!!!!!!!!!!
+            
             if (locatie.Plaats != null)
             {
                 if (!ModelState.IsValid)

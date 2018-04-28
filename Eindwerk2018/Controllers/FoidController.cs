@@ -16,6 +16,13 @@ namespace Eindwerk2018.Controllers
         private Db_User dbUser = new Db_User();
         private Db_Odf dbOdf = new Db_Odf();
 
+        public NieuweFoidViewModel NieuweFoidViewModel
+        {
+            get => default(NieuweFoidViewModel);
+            set
+            {
+            }
+        }
 
         public ActionResult Index()
         {

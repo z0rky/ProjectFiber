@@ -38,9 +38,10 @@
 @section scripts
 {
     <script>
-     $(document).ready(function() {
-         $("#locatieType").DataTable();
-     });
+        $(document).ready(function() {
+            $("#locatieType").DataTable({ searching: false, bInfo: false });
+        
+    });
  </script>
 }
     

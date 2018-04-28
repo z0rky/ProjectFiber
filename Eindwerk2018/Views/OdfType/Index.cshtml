@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>OdfType</h2>
 
 @*<p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkCreate, "Create")
@@ -38,7 +38,7 @@
 {
     <script>
         $(document).ready(function () {
-            $("#odfTypeTable").DataTable();
+            $("#odfTypeTable").DataTable({ searching: false, bInfo: false });
         });
     </script>
 }
