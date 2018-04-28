@@ -29,7 +29,12 @@ namespace Eindwerk2018.Models.db
         public List<Sectie> SearchOdf(int odfId)
         { //might have to expand it to location of odfId
             if (odfId == 0) return null;
-            string query = "SELECT s.id,s.section_nr,s.kabel_id,k.name AS kabel_name,s.odf_start,os.name AS odf_start_name,s.odf_end,oe.name AS odf_end_name,s.type_id,st.name AS type_name,s.length,s.active FROM sections AS s, kabel AS k, ODF as os, ODF as oe,section_type AS st WHERE (s.odf_start ='" + odfId + "' OR s.odf_end ='" + odfId + "') AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=st.id ORDER BY s.kabel_id,s.section_nr LIMIT " + Max_row; //query
+            //string query = "SELECT s.id,s.section_nr,s.kabel_id,k.name AS kabel_name,s.odf_start,os.name AS odf_start_name,s.odf_end,oe.name AS odf_end_name,s.type_id,st.name AS type_name,s.length,s.active FROM sections AS s, kabel AS k, ODF as os, ODF as oe,section_type AS st WHERE (s.odf_start ='" + odfId + "' OR s.odf_end ='" + odfId + "') AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=st.id ORDER BY s.kabel_id,s.section_nr LIMIT " + Max_row; //query
+
+            string query = "SELECT s.id,s.section_nr,s.kabel_id,k.name AS kabel_name,s.odf_start,os.name AS odf_start_name,s.odf_end,oe.name AS odf_end_name,s.type_id,st.name AS type_name,s.length,s.active "+
+                        "FROM sections AS s, kabel AS k, ODF as os, ODF as oe,section_type AS st " +
+                        "WHERE (s.odf_start IN (SELECT id FROM ODF WHERE location_id=(SELECT location_id FROM ODF WHERE id='" + odfId + "')) OR s.odf_end IN (SELECT id FROM ODF WHERE location_id=(SELECT location_id FROM ODF WHERE id='" + odfId + "'))) AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=st.id " +
+                        "ORDER BY s.kabel_id,s.section_nr LIMIT " + Max_row;
 
             return ListQueries(query);
         }
@@ -193,6 +198,56 @@ namespace Eindwerk2018.Models.db
             }
 
             return fibers;
+        }
+
+
+        public int NextSectionNr(int kabelId, int sectionNr)
+        {
+            int nextSectionNr = 0;
+
+            string qry = "SELECT section_nr FROM sections WHERE kabel_id='"+ kabelId + "' AND section_nr > '"+ sectionNr +"' ORDER BY section_nr LIMIT 1";
+
+            using (con) //con in Db_general
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(qry))
+                    {
+                        cmd.Connection = con;
+                        con.Open();
+                        using (MySqlDataReader sdr = cmd.ExecuteReader())
+                        {
+                            while (sdr.Read())
+                            {
+                                nextSectionNr = MyConvertInt(sdr["section_nr"].ToString());
+                            }
+                        }
+                        con.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    //throw new System.InvalidOperationException("No connection to database");
+                    Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+                }
+            }
+
+            return nextSectionNr;
+        }
+
+
+        public int AddSplitSectie(Sectie sectie)
+        {
+            if (sectie != null)
+            {
+                string query = "INSERT INTO sections (section_nr,kabel_id,odf_start,odf_end,type_id,length,active) VALUES ('" + sectie.SectieNr + "','" + sectie.KabelId + "','" + sectie.OdfStartId + "','" + sectie.OdfEndId + "','" + sectie.SectionTypeId + "','" + sectie.Lengte + "','" + sectie.Active + "')"; //query
+                this.ShortQuery(query);
+                int newId = GetLastInsertedId(); //return new id
+                query = "INSERT INTO fibers (section_id,fiber_nr,FOID,FOID_serial_nr,FOID_fibre_nr) SELECT '" + newId + "',fiber_nr,FOID,FOID_serial_nr,FOID_fibre_nr FROM section_type_info WHERE type_id='" + sectie.SectionTypeId + "'"; //others are default fields,
+                this.ShortQuery(query);
+                return newId;
+            }
+            return 0;
         }
     }
 }

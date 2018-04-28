@@ -44,8 +44,17 @@
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.Foid)</td>
-                <td>@Html.DisplayFor(modelItem => item.FoidName)</td>
+                @if (!item.FoidName.IsEmpty())
+                {
+                    <td>@Html.ActionLink(item.Foid.ToString(), "Details", "Foid", new { id = item.Foid },null)</td>
+                    <td>@Html.ActionLink(item.FoidName, "Details", "Foid", new { id = item.Foid },null)</td>
+                }
+                else
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Foid)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FoidName)</td>
+                }
+
                 <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
                 <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
                 <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
@@ -64,7 +73,7 @@
 {
     <script>
         $(document).ready(function () {
-            $("#sectieTable").DataTable();
+            $("#sectieTable").DataTable({ searching: false, bInfo: false });
         });
     </script>
 }
