@@ -352,5 +352,63 @@ namespace Eindwerk2018.Models.db
 
             return fibers;
         }
+
+        public int UpdateSerial(int foidNr, int foidSerialNr)
+        {
+            if (foidNr != 0 && foidSerialNr != 0)
+            {
+                string query = "UPDATE fibers SET FOID_serial_nr = FOID_serial_nr+1 WHERE FOID='"+ foidNr + "' AND FOID_serial_nr>'"+ foidSerialNr + "'"; //query
+                this.ShortQuery(query);
+            }
+            return 0;
+        }
+
+        public int SetFoidSerial(int SectieId, int foidNr)
+        {
+            if (SectieId != 0 && foidNr != 0)
+            {
+                string query = "UPDATE fibers SET FOID_serial_nr = FOID_serial_nr+1 WHERE section_id='"+ SectieId + "' AND FOID='" + foidNr + "'"; //query
+                this.ShortQuery(query);
+            }
+            return 0;
+        }
+
+        /*for use in split of section*/
+        public Sectie PreviousSection(int foidId,int foidSerialNr)
+        {
+            if (foidId == 0 || foidSerialNr == 0) return null;
+            con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
+
+            List<Sectie> sectieFibers = new List<Sectie>();
+            String query = "SELECT s.odf_start, s.odf_end FROM fibers AS f, sections AS s WHERE f.FOID='"+ foidId + "' AND f.FOID_serial_nr='"+ foidSerialNr + "' AND f.section_id=s.id ORDER BY f.FOID_serial_nr LIMIT 1";
+
+            try
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    con.Open();
+                    using (MySqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            sectieFibers.Add(new Sectie
+                            {
+                                OdfStartId = MyConvertInt(sdr["odf_start"].ToString()),
+                                OdfEndId = MyConvertInt(sdr["odf_end"].ToString())
+                            });
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                //throw new System.InvalidOperationException("No connection to database");
+                Console.WriteLine("No connection to database. " + e.Message); //should rethrow and handle it in the user part somewhere
+            }
+
+            return sectieFibers[0];
+        }
     }
 }
