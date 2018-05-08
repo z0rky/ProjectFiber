@@ -153,7 +153,7 @@ namespace Eindwerk2018.Controllers
             return null;
         }
 
-
+        //for pdf
         public ActionResult ReportSectie(Sectie sectie )
         {
             int tempId = sectie.Id;

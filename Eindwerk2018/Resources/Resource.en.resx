@@ -497,4 +497,7 @@
   <data name="LinkSplit" xml:space="preserve">
     <value>Split</value>
   </data>
+  <data name="LinkPrint" xml:space="preserve">
+    <value>Print</value>
+  </data>
 </root>

@@ -245,7 +245,16 @@ namespace Eindwerk2018.Models.db
             con = new MySqlConnection(constr); //moet opnieuw worden ingesteld als het al is gebruikt
 
             List<Sectie> sectiefibers = new List<Sectie>();
-            string query = "SELECT s.id AS sectie_id,k.id AS cable_id,k.name AS cable_name,s.section_nr,f.fiber_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,st.virtual,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name FROM fibers AS f, sections AS s, section_type AS st, kabel AS k, ODF AS os, ODF AS oe WHERE f.FOID='" + foid + "' AND f.section_id=s.id AND s.type_id=st.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
+            /*string query = "SELECT s.id AS sectie_id,k.id AS cable_id,k.name AS cable_name,s.section_nr,f.fiber_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,st.virtual,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name " +
+            "FROM fibers AS f, sections AS s, section_type AS st, kabel AS k, ODF AS os, ODF AS oe " +
+            "WHERE f.FOID='" + foid + "' AND f.section_id=s.id AND s.type_id=st.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
+            */
+
+            /*query is redelijk zwaar, +2seconde, en enkel voor pdf gebruikt*/
+            string query = "SELECT s.id AS sectie_id,k.id AS cable_id,k.name AS cable_name,s.section_nr,f.fiber_nr,s.length,f.FOID_serial_nr,f.FOID_fibre_nr,st.virtual,os.id AS odf_start_id,os.name AS odf_start_name,oe.id AS odf_end_id, oe.name AS odf_end_name, cf.name_en AS fiber_color, cm.name_en AS module_color " +
+                "FROM fibers AS f, sections AS s, section_type AS st, kabel AS k, ODF AS os, ODF AS oe, section_type_info AS sti, fiber_color AS cf, fiber_color AS cm " +
+                "WHERE f.FOID='"+ foid +"' AND f.section_id=s.id AND s.type_id=st.id AND s.kabel_id=k.id AND s.odf_start=os.id AND s.odf_end=oe.id AND s.type_id=sti.type_id AND f.fiber_nr=sti.fiber_nr AND sti.fiber_color_id=cf.id AND sti.module_color_id=cm.id ORDER BY FOID_serial_nr, FOID_fibre_nr";
+
 
             using (con) //con in Db_general
             {
@@ -272,7 +281,9 @@ namespace Eindwerk2018.Models.db
                                         {
                                             FiberNr = MyConvertInt(sdr["fiber_nr"].ToString()),
                                             FoidSerialNr = MyConvertInt(sdr["FOID_serial_nr"].ToString()),
-                                            FoidFibreNr = MyConvertInt(sdr["FOID_fibre_nr"].ToString())
+                                            FoidFibreNr = MyConvertInt(sdr["FOID_fibre_nr"].ToString()),
+                                            FiberColor = new Color{ NameEn = sdr["fiber_color"].ToString() },
+                                            ModuleColor = new Color{ NameEn = sdr["module_color"].ToString() }
                                         }
                                     },
                                     SectieVirtual = Convert.ToBoolean(sdr["virtual"]),
@@ -353,6 +364,7 @@ namespace Eindwerk2018.Models.db
             return fibers;
         }
 
+        /*increase Serialnr by one on everything higher then this foidSerialNr for foidNr*/
         public int UpdateSerial(int foidNr, int foidSerialNr)
         {
             if (foidNr != 0 && foidSerialNr != 0)
@@ -363,6 +375,7 @@ namespace Eindwerk2018.Models.db
             return 0;
         }
 
+        /*increase Serialnr by one on specific foidNr and sectie*/
         public int SetFoidSerial(int SectieId, int foidNr)
         {
             if (SectieId != 0 && foidNr != 0)

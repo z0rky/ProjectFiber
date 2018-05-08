@@ -29,54 +29,55 @@
 
     <table id="sectieTable" class="table table-bordered table-hover">
         <thead>
-        <tr>
-            <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoid</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFoidName</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberFiberColor</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
-            <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
-        </tr>
+            <tr>
+                <th>@Eindwerk2018.Resources.Resource.fiberFiberNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoid</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFoidName</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberFiberColor</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberModuleNr</th>
+                <th>@Eindwerk2018.Resources.Resource.fiberModuleColor</th>
+            </tr>
         </thead>
         <tbody>
 
-        @foreach (var item in Model.Fibers)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
-                @if (!item.FoidName.IsEmpty())
-                {
-                    <td>@Html.ActionLink(item.Foid.ToString(), "Details", "Foid", new { id = item.Foid },null)</td>
-                    <td>@Html.ActionLink(item.FoidName, "Details", "Foid", new { id = item.Foid },null)</td>
-                }
-                else
-                {
-                    <td>@Html.DisplayFor(modelItem => item.Foid)</td>
-                    <td>@Html.DisplayFor(modelItem => item.FoidName)</td>
-                }
+            @foreach (var item in Model.Fibers)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FiberNr)</td>
+                    @if (!item.FoidName.IsEmpty())
+                    {
+                        <td>@Html.ActionLink(item.Foid.ToString(), "Details", "Foid", new { id = item.Foid }, null)</td>
+                        <td>@Html.ActionLink(item.FoidName, "Details", "Foid", new { id = item.Foid }, null)</td>
+                    }
+                    else
+                    {
+                        <td>@Html.DisplayFor(modelItem => item.Foid)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FoidName)</td>
+                    }
 
-                <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
-                <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
-            </tr>
-        }
+                    <td>@Html.DisplayFor(modelItem => item.FiberColor.NameEn)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ModuleNr)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ModuleColor.NameEn)</td>
+                </tr>
+            }
         </tbody>
     </table>
 
 
-<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
-<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ReportSectie", Model)'">Print</button>
-@*<input type="button" class="btn btn-primary" value="Foid Toevoegen" onclick="location.href='@Url.Action("ReportSectie", "Sectie")'" />*@
+    <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
+    <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkPrint onclick="location.href='@Url.Action("ReportSectie", Model)'" />
+    @*@Html.ActionLink(Eindwerk2018.Resources.Resource.LinkPrint, "ReportSectie", new { id = Model.Id }, new { @target = "_blank", @class = "btn btn-primary" })*@
+    @*<input type="button" class="btn btn-primary" value="Foid Toevoegen" onclick="location.href='@Url.Action("ReportSectie", "Sectie")'" />*@
 
 
-@section scripts
+    @section scripts
 {
-    <script>
-        $(document).ready(function () {
-            $("#sectieTable").DataTable({ searching: false, bInfo: false });
-        });
-    </script>
-}
+        <script>
+            $(document).ready(function () {
+                $("#sectieTable").DataTable({ searching: false, bInfo: false });
+            });
+        </script>
+    }
 </div>
 @*<p>
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkBackList, "Index", "Sectie", new { kabelId =Model.KabelId }, null)

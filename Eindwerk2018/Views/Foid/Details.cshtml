@@ -101,10 +101,10 @@
                 <td>@Html.DisplayFor(modelItem => item.SectieNr)</td>
                 <td>
                     @foreach (var fiber in item.Fibers)
-        {
-            @Html.DisplayFor(modelItem => fiber.FiberNr)
-            <br />
-}
+                    {
+                        @Html.DisplayFor(modelItem => fiber.FiberNr)
+                        <br />
+                    }
                 </td>
             </tr>
         }
@@ -117,5 +117,7 @@
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEditSection, "EditSections", new { id = Model.Id }, new { @class = "btn btn-primary" })
     @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEditFibers, "EditFibers", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkPrint,"ReportSectie", new { id = Model.Id }, new { @target = "_blank", @class = "btn btn-primary" })
+    @*<input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkPrint onclick="location.href='@Url.Action("ReportSectie", Model)'" />*@
     @*<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","Foid", new {id = Model.Id })'">@Eindwerk2018.Resources.Resource.LinkEdit</button>*@
 </p>
