@@ -16,7 +16,7 @@ namespace Eindwerk2018.Models
         [Display(Name = "UserLastName", ResourceType = typeof(Resources.Resource))]
         public String LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "UserUserName", ResourceType = typeof(Resources.Resource))]
         public String UserName { get; set; }
 

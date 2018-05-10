@@ -12,7 +12,7 @@ namespace Eindwerk2018.Models
         [Display(Name = "Foid")]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [StringLength(200)]
         [Display(Name = "FoidName", ResourceType = typeof(Resources.Resource))]
         public string Name { get; set; }

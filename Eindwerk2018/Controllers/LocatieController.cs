@@ -52,6 +52,7 @@ namespace Eindwerk2018.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save (Locatie locatie)
         {
             if (!ModelState.IsValid)

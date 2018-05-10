@@ -503,4 +503,7 @@
   <data name="ErrorNameUnique" xml:space="preserve">
     <value>Name is not unique.</value>
   </data>
+  <data name="ErrorFieldRequired" xml:space="preserve">
+    <value>This field is required</value>
+  </data>
 </root>

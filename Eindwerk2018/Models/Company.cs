@@ -11,7 +11,7 @@ namespace Eindwerk2018.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "CompanyName", ResourceType = typeof(Resources.Resource))]
         public String Name { get; set; }
     }

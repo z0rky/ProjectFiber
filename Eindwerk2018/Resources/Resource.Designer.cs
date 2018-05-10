@@ -169,6 +169,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This field is required.
+        /// </summary>
+        public static string ErrorFieldRequired {
+            get {
+                return ResourceManager.GetString("ErrorFieldRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name is not unique..
         /// </summary>
         public static string ErrorNameUnique {

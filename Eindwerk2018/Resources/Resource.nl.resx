@@ -503,4 +503,7 @@
   <data name="ErrorNameUnique" xml:space="preserve">
     <value>Naam bestaan al.</value>
   </data>
+  <data name="ErrorFieldRequired" xml:space="preserve">
+    <value>Dit veld is verplicht.</value>
+  </data>
 </root>

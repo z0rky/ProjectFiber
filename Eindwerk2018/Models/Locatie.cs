@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,10 +15,12 @@ namespace Eindwerk2018.Models
         public string LocatieNaam { get; set; }
 
         //[Range(-180, 180)] //makes it required, not something we want
+        [DefaultValue(0)]
         [Display(Name = "LocationGpsLong", ResourceType = typeof(Resources.Resource))]
         public double GpsLong { get; set; }
 
         //[Range(-90, 90)] //makes it required, not something we want
+        [DefaultValue(0)]
         [Display(Name = "LocationGpsLat", ResourceType = typeof(Resources.Resource))]
         public double GpsLat { get; set; }
 
@@ -38,6 +41,7 @@ namespace Eindwerk2018.Models
         public string HuisNr { get; set; }
 
         //[Range(999, 9999)] //makes it required, not something we want
+        [DefaultValue(0)]
         [Display(Name = "AdresPostcode", ResourceType = typeof(Resources.Resource))]
         public int PostCode { get; set; }
 
@@ -51,6 +55,7 @@ namespace Eindwerk2018.Models
         [Display(Name = "LocationLijnNr", ResourceType = typeof(Resources.Resource))]
         public String LijnNr { get; set; }
 
+        [DefaultValue(0)]
         [Display(Name = "LocationBK", ResourceType = typeof(Resources.Resource))]
         public int BK { get; set; }
     }

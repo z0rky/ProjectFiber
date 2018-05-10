@@ -10,12 +10,12 @@ namespace Eindwerk2018.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [StringLength(200)]
         [Display(Name = "ColorNameNl", ResourceType = typeof(Resources.Resource))] //used from color, but it is the same
         public string NameNL { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [StringLength(200)]
         [Display(Name = "ColorNameFr", ResourceType = typeof(Resources.Resource))]
         public string NameFR { get; set; }
