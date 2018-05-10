@@ -66,6 +66,7 @@
 
     <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
     <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkPrint onclick="location.href='@Url.Action("ReportSectie", Model)'" />
+    @*target doesn't work on input or button, only on link*@
     @*@Html.ActionLink(Eindwerk2018.Resources.Resource.LinkPrint, "ReportSectie", new { id = Model.Id }, new { @target = "_blank", @class = "btn btn-primary" })*@
     @*<input type="button" class="btn btn-primary" value="Foid Toevoegen" onclick="location.href='@Url.Action("ReportSectie", "Sectie")'" />*@
 

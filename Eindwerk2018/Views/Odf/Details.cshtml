@@ -24,4 +24,5 @@
 </div>
 <p>
     <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkBack onclick="history.go(-1);" />
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Edit","Odf", new {id = Model.Id })'">@Eindwerk2018.Resources.Resource.LinkEdit</button>
 </p>

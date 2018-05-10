@@ -500,4 +500,7 @@
   <data name="LinkPrint" xml:space="preserve">
     <value>Print</value>
   </data>
+  <data name="ErrorNameUnique" xml:space="preserve">
+    <value>Naam bestaan al.</value>
+  </data>
 </root>

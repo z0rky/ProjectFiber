@@ -169,6 +169,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name is not unique..
+        /// </summary>
+        public static string ErrorNameUnique {
+            get {
+                return ResourceManager.GetString("ErrorNameUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string fiberActive {
