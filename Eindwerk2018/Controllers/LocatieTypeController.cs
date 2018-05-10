@@ -2,10 +2,10 @@
 using Eindwerk2018.Models.db;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using Eindwerk2018.Resources;
+
 
 namespace Eindwerk2018.Controllers
 {
@@ -45,14 +45,16 @@ namespace Eindwerk2018.Controllers
 
             try
             {
-                // TODO: Add insert logic here
-                dbLocatieTypes.Add(locatieType);
-                return RedirectToAction("Index");
+                if (dbLocatieTypes.CheckName(locatieType.NaamNL)) ModelState.AddModelError("NaamNL", Resource.ErrorNameUnique);
+                else
+                {
+                    int newId = dbLocatieTypes.Add(locatieType);
+                    if(newId> 0) return RedirectToAction("Edit", "LocationType", new { Id = newId });
+                }
             }
-            catch
-            {
-                return View(locatieType);
-            }
+            catch { }
+
+            return View(locatieType);
         }
 
         // GET: LocationType/Edit/5
@@ -74,13 +76,16 @@ namespace Eindwerk2018.Controllers
 
             try
             {
-                dbLocatieTypes.Edit(locatieType);
-                return RedirectToAction("Details", "LocatieType", new { Id = locatieType.Id });
+                if (dbLocatieTypes.CheckName(locatieType.NaamNL, locatieType.Id)) ModelState.AddModelError("NaamNL", Resource.ErrorNameUnique);
+                else
+                {
+                    dbLocatieTypes.Edit(locatieType);
+                    return RedirectToAction("Details", "LocatieType", new { Id = locatieType.Id });
+                }
             }
-            catch
-            {
-                return View(locatieType);
-            }
+            catch { }
+
+            return View(locatieType);
         }
 
         // GET: LocationType/Delete/5

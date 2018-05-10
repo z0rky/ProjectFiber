@@ -23,9 +23,20 @@ namespace Eindwerk2018.Models.db
         public List<KabelType> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT  id, name_nl,name_fr FROM kabel_type WHERE name_nl LIKE '%" + search + "%' OR name_fr LIKE '%" + search + "%'  LIMIT " + Max_row; //query
+            string query = "SELECT id, name_nl,name_fr FROM kabel_type WHERE name_nl LIKE '%" + search + "%' OR name_fr LIKE '%" + search + "%'  LIMIT " + Max_row; //query
 
             return ListQueries(query);
+        }
+
+        public Boolean CheckName(string search, int id = 0)
+        {
+            if (search == null) return true;
+            string query = "SELECT id, name_nl,name_fr FROM kabel_type WHERE name_nl='" + search + "'";
+            if (id > 0) query += " AND id!='" + id + "'";
+            query += " LIMIT " + Max_row; //query
+
+            if (ListQueries(query).Count() == 0) return false;
+            return true;
         }
 
         public KabelType Get(int id)

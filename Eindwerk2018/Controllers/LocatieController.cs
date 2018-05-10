@@ -45,13 +45,11 @@ namespace Eindwerk2018.Controllers
             var viewModel = new LocatieFormViewModel()
             {
                 LocatieTypes = locatielijst
-
             };
 
             return View("LocatieForm", viewModel);
         }
 
-       
 
         [HttpPost]
         public ActionResult Save (Locatie locatie)

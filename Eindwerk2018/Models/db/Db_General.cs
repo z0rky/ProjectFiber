@@ -18,6 +18,7 @@ namespace Eindwerk2018.Models.db
         //public List<var> List() { return List(0; }; //replaced now
         //public List<var> List(int Start=0) {}
         //public List<var> Search(string search) {}
+        //public Boolean CheckName(string search, int id = 0);
         //public var Get(int id) {}
         //public void Add(model) {}
         //public void Edit(model) {}

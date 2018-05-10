@@ -56,6 +56,18 @@ namespace Eindwerk2018.Models.db
         }
 
 
+        /*check id name exists, except own id (when filled in)*/
+        public Boolean CheckName(string search, int id = 0)
+        {
+            if (search == null) return true;
+            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id WHERE l.name='" + search + "'";
+            if (id > 0) query += " AND l.id!='" + id + "'";
+            query += " LIMIT " + Max_row; //query
+
+            if (ListQueries(query).Count() == 0) return false;
+            return true;
+        }
+
         public Locatie Get(int id)
         {
             if (id == 0) return null;

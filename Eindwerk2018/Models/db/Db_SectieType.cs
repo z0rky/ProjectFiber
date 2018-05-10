@@ -26,6 +26,18 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
+        /*check id name exists, except own id (when filled in)*/
+        public Boolean CheckName(string search, int id = 0)
+        {
+            if (search == null) return true;
+            string query = "SELECT id, name,description, virtual FROM section_type WHERE name='" + search + "'";
+            if (id > 0) query += " AND id!='" + id + "'";
+            query += " LIMIT " + Max_row; //query
+
+            if (ListQueries(query).Count() == 0) return false;
+            return true;
+        }
+
         public SectieType Get(int id)
         {
             if (id == 0) return null;
@@ -39,7 +51,7 @@ namespace Eindwerk2018.Models.db
         {
             if (sectieType != null)
             {
-                string query = "INSERT INTO section_type (name,description,virtual) VALUES ('" + sectieType.Naam + "','" + sectieType.Beschrijving + "','" + sectieType.Virtueel + "')"; //query
+                string query = "INSERT INTO section_type (name,description,virtual) VALUES ('" + sectieType.Naam + "','" + sectieType.Beschrijving + "'," + sectieType.Virtueel + ")"; //query
                 this.ShortQuery(query);
                 return GetLastInsertedId(); //return new id
             }
@@ -50,7 +62,7 @@ namespace Eindwerk2018.Models.db
         {
             if (sectieType != null || sectieType.Id != 0)
             {
-                string query = "UPDATE kabel SET name='" + sectieType.Naam + "', description='" + sectieType.Beschrijving + "', virtual'" + sectieType.Virtueel + "' WHERE id='" + sectieType.Id + "' LIMIT 1"; //query
+                string query = "UPDATE section_type SET name='" + sectieType.Naam + "', description='" + sectieType.Beschrijving + "', virtual=" + sectieType.Virtueel + " WHERE id='" + sectieType.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }

@@ -41,6 +41,7 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
+        /*check id name exists, except own id (when filled in)*/
         public Boolean CheckName(string search, int id=0)
         {
             if (search == null) return true;

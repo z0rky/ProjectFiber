@@ -63,7 +63,7 @@ namespace Eindwerk2018.Controllers
                         Location = new Locatie { Id = odfModel.LocatieId, LocatieNaam = odfModel.LocatieName },
                         OdfType = new OdfType { Id = odfModel.OdfTypeId }
                     });
-                    return RedirectToAction("Edit", "Odf", new { Id = newId });
+                    if(newId > 0) return RedirectToAction("Edit", "Odf", new { Id = newId });
                 }
             }
 
