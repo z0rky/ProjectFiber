@@ -87,7 +87,7 @@ namespace Eindwerk2018.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    LocatieZoek = dbLocaties.SearchGPS(locatie.GpsLat, locatie.GpsLong).ToList();
+                    LocatieZoek = dbLocaties.SearchGPS((double)locatie.GpsLat, (double)locatie.GpsLong).ToList();
                     var locatieZoekViewModel = new SearchLocatieResultViewModel
                     {
                         GezochteLocaties = LocatieZoek
@@ -115,7 +115,7 @@ namespace Eindwerk2018.Controllers
                 if (!ModelState.IsValid)
                 {   
                     
-                    LocatieZoek = dbLocaties.SearchPostCode(locatie.PostCode).ToList();
+                    LocatieZoek = dbLocaties.SearchPostCode((int)locatie.PostCode).ToList();
                     var locatieZoekViewModel = new SearchLocatieResultViewModel
                     {
                         GezochteLocaties = LocatieZoek

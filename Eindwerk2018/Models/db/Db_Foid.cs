@@ -14,7 +14,7 @@ namespace Eindwerk2018.Models.db
         {
             if (Start < 0) Start = 0;
 
-            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f ORDER BY f.id DESC LIMIT " + Start + "," + Max_row; //query
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name','first_name','last_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f ORDER BY f.id DESC LIMIT " + Start + "," + Max_row; //query
 
             return ListQueries(query);
         }
@@ -22,7 +22,7 @@ namespace Eindwerk2018.Models.db
         public List<Foid> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,'user_name','first_name','last_name',f.comments,f.length_calculated,f.length_otdr,f.start_odf,f.end_odf,'OdfStartName','OdfEndName' FROM FOID AS f WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
         }
@@ -39,7 +39,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,u.user_name AS user_name,f.comments,f.length_calculated,f.length_otdr,f.start_odf,oa.name AS OdfStartName,f.end_odf,oe.name AS OdfEndName FROM FOID AS f, user AS u, ODF AS oa, ODF AS oe WHERE  f.id='" + id + "' AND f.start_odf=oa.id AND f.end_odf=oe.id AND f.requestor_id=u.id LIMIT 1"; //query
+            string query = "SELECT f.id,f.name,f.date_creation,f.status,f.date_last_status,f.requestor_id,u.user_name AS user_name,u.first_name AS first_name,u.last_name AS last_name,f.comments,f.length_calculated,f.length_otdr,f.start_odf,oa.name AS OdfStartName,f.end_odf,oe.name AS OdfEndName FROM FOID AS f, user AS u, ODF AS oa, ODF AS oe WHERE  f.id='" + id + "' AND f.start_odf=oa.id AND f.end_odf=oe.id AND f.requestor_id=u.id LIMIT 1"; //query
 
             Foid foid = ListQueries(query)[0];
 
@@ -86,7 +86,7 @@ namespace Eindwerk2018.Models.db
             {
                 //length_calculated='" + foid.LengthOtdr + "', should be updated by another process, not by edit
                 //fibers/sections is also another funtions
-                string query = "UPDATE FOID SET name='" + foid.Name + "', status='" + foid.Status + "', date_last_status='" + MySqlDate(foid.LastStatusDate) + "', requestor_id='" + foid.RequestorId + "', comments='" + foid.Comments + "', start_odf='" + foid.StartOdfId + "', end_odf='" + foid.EndOdfId + "' WHERE id='" + foid.Id + "' LIMIT 1"; //query
+                string query = "UPDATE FOID SET name='" + foid.Name + "', status='" + foid.Status + "', date_last_status='" + MySqlDate(foid.LastStatusDate) + "', requestor_id='" + foid.RequestorId + "', comments='" + foid.Comments + "', start_odf='" + foid.StartOdfId + "', end_odf='" + foid.EndOdfId + "', length_otdr='"+ foid.LengthOtdr +"' WHERE id='" + foid.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
             }
         }
@@ -160,7 +160,7 @@ namespace Eindwerk2018.Models.db
                                         LastStatusDate= statusDate, //somtimes null, connectionstring adapted (Convert Zero Datetime=True)
                                         //Lastdate Sometimes has a problem
                                         RequestorId = MyConvertInt(sdr["requestor_id"].ToString()),
-                                        Requestor = new User { Id = Convert.ToInt32(sdr["requestor_id"]), UserName = sdr["user_name"].ToString() },
+                                        Requestor = new User { Id = Convert.ToInt32(sdr["requestor_id"]), UserName = sdr["user_name"].ToString(), FirstName = sdr["first_name"].ToString(), LastName = sdr["last_name"].ToString() },
                                         Comments = sdr["comments"].ToString(),
                                         LengthCalculated = MyConvertInt(sdr["length_calculated"].ToString()),
                                         //LengthOtdr = Convert.ToInt32(sdr["length_otdr"]), //when  null, blockes, so created own funtion

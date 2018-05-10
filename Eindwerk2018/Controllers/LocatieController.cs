@@ -16,8 +16,8 @@ namespace Eindwerk2018.Controllers
         private Db_Locatie dbLocaties = new Db_Locatie();
 
         public List<LocatieType> locatielijst = new List<LocatieType>();
-        public List<Locatie> locatie = new List<Locatie>();
-        public List<Locatie> locatieFakeDataTest = new List<Locatie>();
+        //public List<Locatie> locatie = new List<Locatie>();
+        //public List<Locatie> locatieFakeDataTest = new List<Locatie>();
 
 
         public void GetLocatieTypes()

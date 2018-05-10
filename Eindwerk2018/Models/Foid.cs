@@ -44,8 +44,8 @@ namespace Eindwerk2018.Models
 
         [Display(Name = "FoidLengthOtdr", ResourceType = typeof(Resources.Resource))]
         [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = false)]
-        [Required(AllowEmptyStrings = true)] //werkt niet
-        public int LengthOtdr { get; set; }
+        //[RegularExpression("([1-9][0-9]*)", ErrorMessage = "Count must be a natural number")] //nope doesnt work
+        public int? LengthOtdr { get; set; }
 
         [Display(Name = "FoidStartOdfId", ResourceType = typeof(Resources.Resource))]
         public int StartOdfId { get; set; }

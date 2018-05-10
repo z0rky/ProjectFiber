@@ -169,7 +169,25 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This field is required.
+        ///   Looks up a localized string similar to This is not a valid email-address..
+        /// </summary>
+        public static string ErrorFieldEmail {
+            get {
+                return ResourceManager.GetString("ErrorFieldEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is not a valid number..
+        /// </summary>
+        public static string ErrorFieldNumber {
+            get {
+                return ResourceManager.GetString("ErrorFieldNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This field ({0}) is required..
         /// </summary>
         public static string ErrorFieldRequired {
             get {

@@ -20,7 +20,8 @@ namespace Eindwerk2018.Models
         [Display(Name = "UserUserName", ResourceType = typeof(Resources.Resource))]
         public String UserName { get; set; }
 
-        [EmailAddress]
+        [EmailAddress(ErrorMessageResourceName = "ErrorFieldEmail", ErrorMessageResourceType = typeof(Resources.Resource))]
+        //some jquery get in front of this before sending to controler.
         [Display(Name = "UserEmail", ResourceType = typeof(Resources.Resource))]
         public String Email { get; set; }
 

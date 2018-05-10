@@ -140,6 +140,7 @@ namespace Eindwerk2018.Controllers
         }
 
 
+        /*Ajax Search for Odfs*/
         [HttpPost]
         public JsonResult SearchOdfs(string Prefix)
         {
@@ -149,8 +150,9 @@ namespace Eindwerk2018.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        //Search for connected Odf's of odfId (via section)
         [HttpPost]
-        public JsonResult SearchConnectedOdf(int? odfId) //Search for connected Odf's of odfId (via section)
+        public JsonResult SearchConnectedOdf(int? odfId)
         {
             if(odfId != null && odfId !=0)
             { 

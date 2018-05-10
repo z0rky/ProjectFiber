@@ -504,6 +504,12 @@
     <value>Naam bestaan al.</value>
   </data>
   <data name="ErrorFieldRequired" xml:space="preserve">
-    <value>Dit veld is verplicht.</value>
+    <value>Dit veld ({0}) is verplicht.</value>
+  </data>
+  <data name="ErrorFieldNumber" xml:space="preserve">
+    <value>Dit is geen geldig nummer.</value>
+  </data>
+  <data name="ErrorFieldEmail" xml:space="preserve">
+    <value>Dit is geen geldig email adres.</value>
   </data>
 </root>

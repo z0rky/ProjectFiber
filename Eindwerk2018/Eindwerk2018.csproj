@@ -678,7 +678,6 @@
     <Content Include="Views\SearchLocatie\IndexSearchResult.cshtml" />
     <Content Include="Views\SearchFoid\IndexSearchResult.cshtml" />
     <Content Include="Views\Kabel\Details.cshtml" />
-    <Content Include="Views\Kabel\DetailsToSections.cshtml" />
     <Content Include="Views\SearchKabel\IndexSearchResult.cshtml" />
     <Content Include="Views\Color\Create.cshtml" />
     <Content Include="Views\Color\Delete.cshtml" />
@@ -717,7 +716,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Pdf\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
