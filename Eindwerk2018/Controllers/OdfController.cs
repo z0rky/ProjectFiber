@@ -139,6 +139,25 @@ namespace Eindwerk2018.Controllers
             return RedirectToAction("Index");
         }
 
+        /*Search*/
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string SearchString)
+        {
+            if (ModelState.IsValid)
+            {
+                var OdfList = dbOdfs.Search(SearchString);
+                return View("Index", OdfList);
+            }
+
+            return View();
+        }
+
 
         /*Ajax Search for Odfs*/
         [HttpPost]

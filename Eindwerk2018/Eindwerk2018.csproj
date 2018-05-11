@@ -713,6 +713,10 @@
     <Content Include="Views\Foid\EditFibers.cshtml" />
     <Content Include="Views\Shared\_Navbar_level2.cshtml" />
     <Content Include="Views\Sectie\Split.cshtml" />
+    <Content Include="Views\Odf\Search.cshtml" />
+    <Content Include="Views\OdfType\Search.cshtml" />
+    <Content Include="Views\KabelType\Search.cshtml" />
+    <Content Include="Views\LocatieType\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
