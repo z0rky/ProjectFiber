@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Eindwerk2018.Resources;
 using Eindwerk2018.Models;
 using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
@@ -47,10 +48,14 @@ namespace Eindwerk2018.Controllers
             //if (ModelState.IsValid) //is false because name of owner and Type is not filled in
             if (kabelView.Kabel.Naam != null && kabelView.Kabel.Naam.Trim() != "" && kabelView.Kabel.Owner.Id > 0 && kabelView.Kabel.KabelType.Id > 0)
             {
-                kabelView.Kabel.CreatieDatum = DateTime.Now;
-                int newId = dbKabels.Add(kabelView.Kabel);
+                if (dbKabels.CheckName(kabelView.Kabel.Naam)) ModelState.AddModelError("Kabel.Naam", Resource.ErrorNameUnique);
+                else
+                {
+                    kabelView.Kabel.CreatieDatum = DateTime.Now;
+                    int newId = dbKabels.Add(kabelView.Kabel);
 
-                if (newId != 0) return RedirectToAction("Edit", "Kabel", new { Id = newId });
+                    if (newId != 0) return RedirectToAction("Edit", "Kabel", new { Id = newId });
+                }
             }
 
             var viewModel = new NieuweKabelViewModel
@@ -86,8 +91,12 @@ namespace Eindwerk2018.Controllers
             {
                 try
                 {
-                    dbKabels.Edit(kabelView.Kabel);
-                    return RedirectToAction("Details", "Kabel", new { Id = kabelView.Kabel.Id });
+                    if (dbKabels.CheckName(kabelView.Kabel.Naam,kabelView.Kabel.Id)) ModelState.AddModelError("Kabel.Naam", Resource.ErrorNameUnique);
+                    else
+                    {
+                        dbKabels.Edit(kabelView.Kabel);
+                        return RedirectToAction("Details", "Kabel", new { Id = kabelView.Kabel.Id });
+                    }
                 }
                 catch { }
             }

@@ -497,4 +497,19 @@
   <data name="LinkSplit" xml:space="preserve">
     <value>Splitsen</value>
   </data>
+  <data name="LinkPrint" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="ErrorNameUnique" xml:space="preserve">
+    <value>Naam bestaan al.</value>
+  </data>
+  <data name="ErrorFieldRequired" xml:space="preserve">
+    <value>Dit veld ({0}) is verplicht.</value>
+  </data>
+  <data name="ErrorFieldNumber" xml:space="preserve">
+    <value>Dit is geen geldig nummer.</value>
+  </data>
+  <data name="ErrorFieldEmail" xml:space="preserve">
+    <value>Dit is geen geldig email adres.</value>
+  </data>
 </root>

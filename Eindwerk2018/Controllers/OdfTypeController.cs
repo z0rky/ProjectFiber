@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Eindwerk2018.Resources;
 using Eindwerk2018.Models;
 using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
@@ -48,8 +49,12 @@ namespace Eindwerk2018.Controllers
             { 
                 try
                 {
-                    dbOdfTypes.Add(odfType);
-                    return RedirectToAction(nameof(Index));
+                    if (dbOdfTypes.CheckName(odfType.Name)) ModelState.AddModelError("Name", Resource.ErrorNameUnique);
+                    else
+                    {
+                        int newId = dbOdfTypes.Add(odfType);
+                        return RedirectToAction("Edit", "OdfType", new { Id = newId });
+                    }
                 }
                 catch { }
             }
@@ -78,14 +83,16 @@ namespace Eindwerk2018.Controllers
 
             try
             {
-                dbOdfTypes.Edit(odfType);
+                if (dbOdfTypes.CheckName(odfType.Name,odfType.Id)) ModelState.AddModelError("Name", Resource.ErrorNameUnique);
+                else
+                {
+                    dbOdfTypes.Edit(odfType);
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Details", "Odftype", new { Id = odfType.Id });
+                }
             }
-            catch
-            {
-                return View(odfType);
-            }
+            catch { }
+            return View(odfType);
         }
 
         // GET: OdfTypes/Delete/5
@@ -116,6 +123,24 @@ namespace Eindwerk2018.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string SearchString)
+        {
+            if (ModelState.IsValid)
+            {
+                var OdfTypesList = dbOdfTypes.Search(SearchString);
+                return View("Index", OdfTypesList);
+            }
+
+            return View();
         }
     }
 }

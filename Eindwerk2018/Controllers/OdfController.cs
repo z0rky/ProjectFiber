@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Eindwerk2018;
+using Eindwerk2018.Resources;
 using Eindwerk2018.Models;
 using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
@@ -54,12 +51,20 @@ namespace Eindwerk2018.Controllers
         {
             if (ModelState.IsValid)
             {
-                int newId = dbOdfs.Add(new Odf {
+                //verify if the name is unique
+                //search ? nee, gebruikt like name
+                //check name
+                if (dbOdfs.CheckName(odfModel.OdfName)) ModelState.AddModelError("OdfName", Resource.ErrorNameUnique);
+                else
+                {
+                    int newId = dbOdfs.Add(new Odf
+                    {
                         Name = odfModel.OdfName,
-                        Location =new Locatie { Id= odfModel.LocatieId,LocatieNaam= odfModel.LocatieName},
-                        OdfType = new OdfType { Id=odfModel.OdfTypeId}
+                        Location = new Locatie { Id = odfModel.LocatieId, LocatieNaam = odfModel.LocatieName },
+                        OdfType = new OdfType { Id = odfModel.OdfTypeId }
                     });
-                return RedirectToAction("Edit", "Odf", new { Id = newId });
+                    if(newId > 0) return RedirectToAction("Edit", "Odf", new { Id = newId });
+                }
             }
 
             //add list
@@ -93,14 +98,26 @@ namespace Eindwerk2018.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Location_id,Type_id,Name")] Odf odf)
+        public ActionResult Edit([Bind(Include = "Id,LocatieId,LocatieName,OdfTypeId,OdfName")] NieuweOdfViewModel odfViewModel)
         {
             if (ModelState.IsValid)
             {
-                dbOdfs.Edit(odf);
-                return RedirectToAction("Index");
+                //hier ook nakijken of de naam al bestaat, natuurlijk want de eigen naam bestaat al
+                if (dbOdfs.CheckName(odfViewModel.OdfName,odfViewModel.Id)) ModelState.AddModelError("OdfName", Resource.ErrorNameUnique);
+                else
+                {   //toevoegen maar eerst omzetten on odf-object
+                    dbOdfs.Edit(new Odf { Id=odfViewModel.Id,
+                        Location = new Locatie { Id = odfViewModel.LocatieId },
+                        OdfType = new OdfType { Id=odfViewModel.OdfTypeId},
+                        Name = odfViewModel.OdfName
+                    });
+                    return RedirectToAction("Details", "Odf", new { Id = odfViewModel.Id });
+                }
             }
-            return View(odf);
+
+            odfViewModel.OdfTypes = dbOdfTypes.List();
+
+            return View(odfViewModel);
         }
 
         // GET: Odfs/Delete/5
@@ -122,7 +139,27 @@ namespace Eindwerk2018.Controllers
             return RedirectToAction("Index");
         }
 
+        /*Search*/
+        public ActionResult Search()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string SearchString)
+        {
+            if (ModelState.IsValid)
+            {
+                var OdfList = dbOdfs.Search(SearchString);
+                return View("Index", OdfList);
+            }
+
+            return View();
+        }
+
+
+        /*Ajax Search for Odfs*/
         [HttpPost]
         public JsonResult SearchOdfs(string Prefix)
         {
@@ -132,8 +169,9 @@ namespace Eindwerk2018.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
+        //Search for connected Odf's of odfId (via section)
         [HttpPost]
-        public JsonResult SearchConnectedOdf(int? odfId) //Search for connected Odf's of odfId (via section)
+        public JsonResult SearchConnectedOdf(int? odfId)
         {
             if(odfId != null && odfId !=0)
             { 

@@ -15,10 +15,5 @@ namespace Eindwerk2018.Reports
         public IEnumerable<Color> ModuleColors { get; set; }
 
         public IEnumerable<Color> FiberColors { get; set; }
-
-
-
-
-
     }
 }

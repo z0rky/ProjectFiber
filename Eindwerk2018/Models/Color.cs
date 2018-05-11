@@ -10,15 +10,15 @@ namespace Eindwerk2018.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "ColorNameEn", ResourceType = typeof(Resources.Resource))]
         public String NameEn { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "ColorNameNl", ResourceType = typeof(Resources.Resource))]
         public String NameNl { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "ColorNameFr", ResourceType = typeof(Resources.Resource))]
         public String NameFr { get; set; }
     }

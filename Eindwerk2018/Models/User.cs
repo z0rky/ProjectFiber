@@ -16,11 +16,12 @@ namespace Eindwerk2018.Models
         [Display(Name = "UserLastName", ResourceType = typeof(Resources.Resource))]
         public String LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "UserUserName", ResourceType = typeof(Resources.Resource))]
         public String UserName { get; set; }
 
-        [EmailAddress]
+        [EmailAddress(ErrorMessageResourceName = "ErrorFieldEmail", ErrorMessageResourceType = typeof(Resources.Resource))]
+        //some jquery get in front of this before sending to controler.
         [Display(Name = "UserEmail", ResourceType = typeof(Resources.Resource))]
         public String Email { get; set; }
 

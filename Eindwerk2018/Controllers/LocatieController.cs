@@ -16,8 +16,8 @@ namespace Eindwerk2018.Controllers
         private Db_Locatie dbLocaties = new Db_Locatie();
 
         public List<LocatieType> locatielijst = new List<LocatieType>();
-        public List<Locatie> locatie = new List<Locatie>();
-        public List<Locatie> locatieFakeDataTest = new List<Locatie>();
+        //public List<Locatie> locatie = new List<Locatie>();
+        //public List<Locatie> locatieFakeDataTest = new List<Locatie>();
 
 
         public void GetLocatieTypes()
@@ -45,15 +45,14 @@ namespace Eindwerk2018.Controllers
             var viewModel = new LocatieFormViewModel()
             {
                 LocatieTypes = locatielijst
-
             };
 
             return View("LocatieForm", viewModel);
         }
 
-       
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save (Locatie locatie)
         {
             if (!ModelState.IsValid)

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Eindwerk2018.Models;
 using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
+using Eindwerk2018.Reports;
 
 namespace Eindwerk2018.Controllers
 {
@@ -195,11 +196,14 @@ namespace Eindwerk2018.Controllers
 
             foreach (int sectieId in sectieFoid.Newsecties)
             {
+                //hier zouden we met strategies kunnen werken,
+                //eerste vrije fiber, of zoveel moglijk dezlfde fiber in secties van dezelfde kabel, ...
                 List<Fiber> freeFiberList = dbFoid.ListFreeFibers(sectieId);
                 foidFibreNr = 1;
                 fiberNr = freeFiberList[0].FiberNr;
 
                 dbFoid.AddSecties(new FiberFoid() { Foid = sectieFoid.Foid.Id, SectieNr = sectieId, FoidSerialNr = serieNr, FoidFibreNr = foidFibreNr, FiberNr = fiberNr });
+
                 //for now 2 foidFibreNr
                 foidFibreNr = 2;
                 fiberNr = freeFiberList[1].FiberNr;
@@ -373,6 +377,22 @@ namespace Eindwerk2018.Controllers
             }
 
             return returnFiberList;
+        }
+
+        //for pdf
+        public ActionResult ReportSectie(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Foid foid2 = dbFoid.Get((int) id);
+
+            BezettingFoidModel bezettingFoidModel = new BezettingFoidModel();
+            bezettingFoidModel.Foid = foid2;
+            bezettingFoidModel.Secties = OrderSecties(foid2.Secties, foid2.StartOdfId, foid2.EndOdfId);
+
+            BezettingFoidPdfReport bezettingFoidPdfReport = new BezettingFoidPdfReport();
+            byte[] abytes2 = bezettingFoidPdfReport.PrepareReport(bezettingFoidModel);
+            return File(abytes2, "application/pdf");
         }
     }
 }

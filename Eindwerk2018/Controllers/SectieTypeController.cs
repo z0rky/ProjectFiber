@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Eindwerk2018.Resources;
 using Eindwerk2018.Models;
 using Eindwerk2018.Models.db;
 using Eindwerk2018.ViewModels;
@@ -44,17 +44,19 @@ namespace Eindwerk2018.Controllers
         // POST: SectieTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include = "Naam,Beschrijving,Virtueel")]SectieType sectieType)
         {
             try
             {
-                //dbSectieTypes.Add();
-                return RedirectToAction(nameof(Index));
+                if (dbSectieTypes.CheckName(sectieType.Naam)) ModelState.AddModelError("Naam", Resource.ErrorNameUnique);
+                else
+                {
+                    int newId = dbSectieTypes.Add(sectieType);
+                    if(newId>0) return RedirectToAction("Edit", "SectieType", new { Id = newId });
+                }
             }
-            catch
-            {
-                return View();
-            }
+            catch { }
+            return View();
         }
 
         // GET: SectieTypes/Edit/5
@@ -70,18 +72,19 @@ namespace Eindwerk2018.Controllers
         // POST: SectieTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit([Bind(Include = "Id,Naam,Beschrijving,Virtueel")] SectieType sectieType)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                if (dbSectieTypes.CheckName(sectieType.Naam,sectieType.Id)) ModelState.AddModelError("Naam", Resource.ErrorNameUnique);
+                else
+                {
+                    dbSectieTypes.Edit(sectieType);
+                    return RedirectToAction("Details", "SectieType", new { Id = sectieType.Id });
+                }
             }
-            catch
-            {
-                return View();
-            }
+            catch { }
+            return View();
         }
 
         // GET: SectieTypes/Delete/5
@@ -110,6 +113,25 @@ namespace Eindwerk2018.Controllers
             {
                 return View();
             }
+        }
+
+        /*Search*/
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string SearchString)
+        {
+            if (ModelState.IsValid)
+            {
+                var OdfList = dbSectieTypes.Search(SearchString);
+                return View("Index", OdfList);
+            }
+
+            return View();
         }
     }
 }

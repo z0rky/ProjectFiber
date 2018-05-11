@@ -103,5 +103,24 @@ namespace Eindwerk2018.Controllers
                 return View();
             }
         }
+
+        /*Search*/
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string SearchString)
+        {
+            if (ModelState.IsValid)
+            {
+                var OdfList = dbColor.Search(SearchString);
+                return View("Index", OdfList);
+            }
+
+            return View();
+        }
     }
 }

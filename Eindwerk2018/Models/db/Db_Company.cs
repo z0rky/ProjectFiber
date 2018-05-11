@@ -21,9 +21,21 @@ namespace Eindwerk2018.Models.db
         public List<Company> Search(string search)
         {
             if (search == null) return null;
-            string query = "SELECT id, name WHERE company LIKE '%" + search + "%' LIMIT " + Max_row; //query
+            string query = "SELECT id, name FROM company WHERE name LIKE '%" + search + "%' LIMIT " + Max_row; //query
 
             return ListQueries(query);
+        }
+
+        /*check id name exists, except own id (when filled in)*/
+        public Boolean CheckName(string search, int id = 0)
+        {
+            if (search == null) return true;
+            string query = "SELECT id, name FROM company WHERE name ='" + search + "'";
+            if (id > 0) query += " AND id!='" + id + "'";
+            query += " LIMIT " + Max_row; //query
+
+            if (ListQueries(query).Count() == 0) return false;
+            return true;
         }
 
         public Company Get(int id)

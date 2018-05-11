@@ -12,6 +12,7 @@ namespace Eindwerk2018.Models
     {
         public int Id { get; set; }
 
+        //error message is in NieuwOdfViewModel
         [Required]
         [Display(Name = "OdfLocationName", ResourceType = typeof(Resources.Resource))]
         public Locatie Location { get; set; }

@@ -15,17 +15,18 @@ namespace Eindwerk2018.ViewModels
         //oplossing enkel required values
         public int Id { get; set; }  //for edit
 
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "OdfLocationName", ResourceType = typeof(Resources.Resource))]
         public String LocatieName { get; set; }
 
         [Required]
         public int LocatieId { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "OdfTypeId", ResourceType = typeof(Resources.Resource))]
         public int OdfTypeId { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "OdfName", ResourceType = typeof(Resources.Resource))]
         public String OdfName { get; set; }
 

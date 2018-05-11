@@ -12,16 +12,16 @@ namespace Eindwerk2018.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [StringLength(200)]
         [Display(Name = "KabelName", ResourceType = typeof(Resources.Resource))]
         public string Naam { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "KabelKabelType", ResourceType = typeof(Resources.Resource))]
         public KabelType KabelType { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorFieldRequired", ErrorMessageResourceType = typeof(Resources.Resource))]
         [Display(Name = "KabelOwner", ResourceType = typeof(Resources.Resource))]
         public Company Owner { get; set; }
 

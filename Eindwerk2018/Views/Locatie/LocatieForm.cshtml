@@ -2,7 +2,6 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-
 @{
     ViewBag.Title = "New";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,7 +14,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Locatie.Id)
 
-    @Html.ValidationSummary(true, "Los volgende fouten op")
+    @Html.ValidationSummary(true, "Error !")
 
     <div class="form-group">
         @Html.LabelFor(m => m.Locatie.LocatieNaam)

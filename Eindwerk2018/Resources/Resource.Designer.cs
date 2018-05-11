@@ -169,6 +169,42 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is not a valid email-address..
+        /// </summary>
+        public static string ErrorFieldEmail {
+            get {
+                return ResourceManager.GetString("ErrorFieldEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is not a valid number..
+        /// </summary>
+        public static string ErrorFieldNumber {
+            get {
+                return ResourceManager.GetString("ErrorFieldNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This field ({0}) is required..
+        /// </summary>
+        public static string ErrorFieldRequired {
+            get {
+                return ResourceManager.GetString("ErrorFieldRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name is not unique..
+        /// </summary>
+        public static string ErrorNameUnique {
+            get {
+                return ResourceManager.GetString("ErrorNameUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string fiberActive {
@@ -687,6 +723,15 @@ namespace Eindwerk2018.Resources {
         public static string LinkOther {
             get {
                 return ResourceManager.GetString("LinkOther", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print.
+        /// </summary>
+        public static string LinkPrint {
+            get {
+                return ResourceManager.GetString("LinkPrint", resourceCulture);
             }
         }
         

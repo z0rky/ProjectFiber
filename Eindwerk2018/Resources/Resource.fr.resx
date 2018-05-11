@@ -497,4 +497,19 @@
   <data name="LinkSplit" xml:space="preserve">
     <value>Diviser</value>
   </data>
+  <data name="LinkPrint" xml:space="preserve">
+    <value>Imprimer</value>
+  </data>
+  <data name="ErrorNameUnique" xml:space="preserve">
+    <value>Le nom existe déjà.</value>
+  </data>
+  <data name="ErrorFieldRequired" xml:space="preserve">
+    <value>Ce champ ({0}) est obligatoire.</value>
+  </data>
+  <data name="ErrorFieldNumber" xml:space="preserve">
+    <value>Ce n'est pas un nombre valide.</value>
+  </data>
+  <data name="ErrorFieldEmail" xml:space="preserve">
+    <value>Cette adresse email n'est pas valide.</value>
+  </data>
 </root>

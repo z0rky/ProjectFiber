@@ -1,8 +1,7 @@
 ﻿using Eindwerk2018.Models;
+using Eindwerk2018.Resources;
 using Eindwerk2018.Models.db;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -44,8 +43,12 @@ namespace Eindwerk2018.Controllers
             {
                 try
                 {
-                    dbKabelType.Add(kabelType);
-                    return RedirectToAction("Index");
+                    if (dbKabelType.CheckName(kabelType.NameNL)) ModelState.AddModelError("NameNL", Resource.ErrorNameUnique);
+                    else
+                    {
+                        int newId = dbKabelType.Add(kabelType);
+                        return RedirectToAction("Edit", "KabelType", new { Id = newId });
+                    }
                 }
                 catch { }
             }
@@ -72,8 +75,12 @@ namespace Eindwerk2018.Controllers
             {
                 try
                 {
-                    dbKabelType.Edit(kabelType);
-                    return RedirectToAction("Details", "KabelType", new { Id = kabelType.Id });
+                    if (dbKabelType.CheckName(kabelType.NameNL,kabelType.Id)) ModelState.AddModelError("NameNL", Resource.ErrorNameUnique);
+                    else
+                    {
+                        dbKabelType.Edit(kabelType);
+                        return RedirectToAction("Details", "KabelType", new { Id = kabelType.Id });
+                    }
                 }
                 catch { }
             }
@@ -100,6 +107,25 @@ namespace Eindwerk2018.Controllers
             {
                 return View();
             }
+        }
+
+        /*Search*/
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string SearchString)
+        {
+            if (ModelState.IsValid)
+            {
+                var OdfList = dbKabelType.Search(SearchString);
+                return View("Index", OdfList);
+            }
+
+            return View();
         }
     }
 }

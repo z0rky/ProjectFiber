@@ -221,7 +221,9 @@
     <Compile Include="Controllers\KabelController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Models\Locatie.cs" />
+    <Compile Include="Reports\BezettingFoidModel.cs" />
     <Compile Include="Reports\BezettingVanDeVezelsModel.cs" />
+    <Compile Include="Reports\BezettingFoidPdfReport.cs" />
     <Compile Include="Reports\BezettingVanDeVezelsPdfReport.cs" />
     <Compile Include="Reports\PdfReports.cs" />
     <Compile Include="Reports\PdfReportsSectie.cs" />
@@ -676,7 +678,6 @@
     <Content Include="Views\SearchLocatie\IndexSearchResult.cshtml" />
     <Content Include="Views\SearchFoid\IndexSearchResult.cshtml" />
     <Content Include="Views\Kabel\Details.cshtml" />
-    <Content Include="Views\Kabel\DetailsToSections.cshtml" />
     <Content Include="Views\SearchKabel\IndexSearchResult.cshtml" />
     <Content Include="Views\Color\Create.cshtml" />
     <Content Include="Views\Color\Delete.cshtml" />
@@ -712,10 +713,17 @@
     <Content Include="Views\Foid\EditFibers.cshtml" />
     <Content Include="Views\Shared\_Navbar_level2.cshtml" />
     <Content Include="Views\Sectie\Split.cshtml" />
+    <Content Include="Views\Odf\Search.cshtml" />
+    <Content Include="Views\OdfType\Search.cshtml" />
+    <Content Include="Views\KabelType\Search.cshtml" />
+    <Content Include="Views\LocatieType\Search.cshtml" />
+    <Content Include="Views\User\Search.cshtml" />
+    <Content Include="Views\SectieType\Search.cshtml" />
+    <Content Include="Views\Company\Search.cshtml" />
+    <Content Include="Views\Color\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Pdf\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

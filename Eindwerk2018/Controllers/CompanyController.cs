@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Eindwerk2018;
+using Eindwerk2018.Resources;
 using Eindwerk2018.Models;
 using Eindwerk2018.Models.db;
 
@@ -48,8 +46,12 @@ namespace Eindwerk2018.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbCompany.Add(company);
-                return RedirectToAction("Index");
+                if (dbCompany.CheckName(company.Name)) ModelState.AddModelError("Name", Resource.ErrorNameUnique);
+                else
+                {
+                    int newId = dbCompany.Add(company);
+                    if(newId > 0) return RedirectToAction("Edit", "Company", new { Id = newId });
+                }
             }
 
             return View(company);
@@ -75,8 +77,12 @@ namespace Eindwerk2018.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbCompany.Edit(company);
-                return RedirectToAction("Details", "Company", new { Id = company.Id });
+                if (dbCompany.CheckName(company.Name,company.Id)) ModelState.AddModelError("Name", Resource.ErrorNameUnique);
+                else
+                {
+                    dbCompany.Edit(company);
+                    return RedirectToAction("Details", "Company", new { Id = company.Id });
+                }
             }
 
             return View(company);
@@ -109,6 +115,25 @@ namespace Eindwerk2018.Controllers
                 //db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        /*Search*/
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string SearchString)
+        {
+            if (ModelState.IsValid)
+            {
+                var OdfList = dbCompany.Search(SearchString);
+                return View("Index", OdfList);
+            }
+
+            return View();
         }
     }
 }

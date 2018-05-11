@@ -108,5 +108,24 @@ namespace Eindwerk2018.Controllers
             }
             base.Dispose(disposing);
         }
+
+        /*Search*/
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Search(string SearchString)
+        {
+            if (ModelState.IsValid)
+            {
+                var OdfList = dbUsers.Search(SearchString);
+                return View("Index", OdfList);
+            }
+
+            return View();
+        }
     }
 }

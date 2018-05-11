@@ -27,6 +27,18 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
+        /*check id name exists, except own id (when filled in)*/
+        public Boolean CheckName(string search, int id = 0)
+        {
+            if (search == null) return true;
+            string query = "SELECT id, name_nl, name_fr, description_nl,description_fr FROM location_type WHERE name_nl= '" + search + "'";
+            if (id > 0) query += " AND id!='" + id + "'";
+            query += " LIMIT " + Max_row; //query
+
+            if (ListQueries(query).Count() == 0) return false;
+            return true;
+        }
+
         public LocatieType Get(int id)
         {
             if (id == 0) return null;

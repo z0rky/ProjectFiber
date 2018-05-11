@@ -33,12 +33,24 @@ namespace Eindwerk2018.Models.db
                 " UNION SELECT o.id, o.location_id,'' AS locatie_name, o.type_id, '' AS type_name, o.name FROM ODF AS o,sections AS s WHERE s.odf_end='" + odfId + "' AND s.odf_start=o.id " +
                 "LIMIT " + Max_row; //only kabels of odf
             */
-            //query that includes location, still needs to be tested
+            //query that includes location
             string query = "SELECT o.id, o.location_id, o.type_id, o.name FROM ODF AS o,sections AS s WHERE s.odf_end IN(SELECT ob.id FROM ODF AS oa, ODF AS ob WHERE oa.id= '27843' AND oa.location_id= ob.location_id) AND s.odf_start = o.id"+
                 " UNION SELECT o.id, o.location_id, o.type_id, o.name FROM ODF AS o,sections AS s WHERE s.odf_end IN(SELECT ob.id FROM ODF AS oa, ODF AS ob WHERE oa.id= '27843' AND oa.location_id= ob.location_id) AND s.odf_start = o.id"+
                 " LIMIT " + Max_row;
 
             return ListQueries(query);
+        }
+
+        /*check id name exists, except own id (when filled in)*/
+        public Boolean CheckName(string search, int id=0)
+        {
+            if (search == null) return true;
+            string query = "SELECT o.id, o.location_id, l.name AS locatie_name, o.type_id, ot.name AS type_name, o.name FROM ODF AS o, ODF_type AS ot, location AS l WHERE o.name = '" + search + "'";
+            if (id > 0) query += " AND o.id!='"+id+"'";
+            query += " AND o.type_id=ot.id AND o.location_id=l.id LIMIT " + Max_row; //query
+
+            if (ListQueries(query).Count() == 0) return false;
+            return true;
         }
 
         public Odf Get(int id)
