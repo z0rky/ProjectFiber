@@ -717,6 +717,10 @@
     <Content Include="Views\OdfType\Search.cshtml" />
     <Content Include="Views\KabelType\Search.cshtml" />
     <Content Include="Views\LocatieType\Search.cshtml" />
+    <Content Include="Views\User\Search.cshtml" />
+    <Content Include="Views\SectieType\Search.cshtml" />
+    <Content Include="Views\Company\Search.cshtml" />
+    <Content Include="Views\Color\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
