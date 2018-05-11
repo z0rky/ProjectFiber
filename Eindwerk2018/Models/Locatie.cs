@@ -33,6 +33,9 @@ namespace Eindwerk2018.Models
         [Display(Name = "LocationTypeId", ResourceType = typeof(Resources.Resource))]
         public int LocatieTypeId { get; set; }
 
+        [Display(Name = "LocationTypeName", ResourceType = typeof(Resources.Resource))]
+        public String LocatieTypeName { get; set; }
+
         [Display(Name= "AdresStraat", ResourceType = typeof(Resources.Resource))]
         public string Straat { get; set; }
 

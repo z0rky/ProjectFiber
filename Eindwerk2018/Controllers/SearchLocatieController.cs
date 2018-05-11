@@ -53,8 +53,6 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult ZoekLocatie(Locatie locatie)
         {
-            
-
             //naam OK
             if (locatie.LocatieNaam != null)
             {
