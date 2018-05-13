@@ -247,6 +247,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.nl.resx</DependentUpon>
     </Compile>
+    <Compile Include="ValuesController1.cs" />
     <Compile Include="ViewModels\AddSectieFoidViewModel.cs" />
     <Compile Include="ViewModels\EditFiberSectieViewModel.cs" />
     <Compile Include="ViewModels\NieuweOdfViewModel.cs" />
@@ -474,7 +475,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="ClassDiagramDB.cd" />
     <Content Include="Controllers\ClassDiagramDB.cd" />
     <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -618,14 +618,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <None Include="Content\bootstrap-solar.css" />
-    <Content Include="Content\bootstrap-dark.css" />
-    <Content Include="Content\bootstrap-darkly.css" />
-    <Content Include="Content\bootstrap-slade.css" />
     <Content Include="Views\Locatie\LocatieForm.cshtml" />
     <Content Include="Views\Kabel\Index.cshtml" />
     <Content Include="Views\Other\Index.cshtml" />
-    <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Views\OdfType\Details.cshtml" />
     <Content Include="Views\OdfType\Index.cshtml" />
     <Content Include="Views\OdfType\Create.cshtml" />
@@ -709,7 +704,6 @@
     <Content Include="Views\Foid\Edit.cshtml" />
     <Content Include="Views\Sectie\Create.cshtml" />
     <Content Include="Views\Kabel\Edit.cshtml" />
-    <Content Include="Views\PdfGeneration\GeneratePdf.cshtml" />
     <Content Include="Views\Foid\EditFibers.cshtml" />
     <Content Include="Views\Shared\_Navbar_level2.cshtml" />
     <Content Include="Views\Sectie\Split.cshtml" />

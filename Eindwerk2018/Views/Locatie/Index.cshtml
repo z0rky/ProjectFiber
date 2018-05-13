@@ -41,6 +41,23 @@
     </table>    
 
 <input type="button" class="btn btn-primary" value=@Eindwerk2018.Resources.Resource.LinkCreate2 onclick="location.href='@Url.Action("New", "Locatie")'" />
+
+@*@using (Html.BeginForm("ZoekLocatie", "SearchLocatie"))
+{
+   
+    <div class="form-group">
+        @Html.LabelFor("Naam");
+        @Html.TextBoxFor(l => l.Locatie.Naam, new {@class = "form-control", id = "LocatieLcodeId"})
+    </div>
+    
+    <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSearch</button>
+   
+}*@
+          
+
+
+
+
 @section scripts
 {
     <script>

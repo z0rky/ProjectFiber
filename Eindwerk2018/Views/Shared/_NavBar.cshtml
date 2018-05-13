@@ -11,12 +11,13 @@
             <ul class="nav navbar-nav">
 
 
-                <li class="dropdown">
+                <li class="dropdown" >
                     <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">@Eindwerk2018.Resources.Resource.LinkSearch<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTitle, "Index", "SearchLocatie", null, new { id = "locatie" })</li>
-                        <li>@Html.ActionLink("FOID", "Index", "SearchFoid", null, new { id = "FOID" })</li>
-                        <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTitle, "Index", "SearchKabel", null, new { id = "Kabel" })</li>
+                        <li class="special2">@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTitle, "Index", "SearchLocatie", null, new { id = "locatie" })</li>
+                        <li class="special2">@Html.ActionLink("FOID", "Index", "SearchFoid", null, new { id = "FOID" })</li>
+                        <li class="special2">@Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTitle, "Index", "SearchKabel", null, new { id = "Kabel" })</li>
+                        <li>___________________________</li>
                         <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.LinkOther, "Index", "Other", null, new { id = "Other" })</li>
 
                     </ul>
@@ -24,10 +25,11 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">@Eindwerk2018.Resources.Resource.LinkAdd<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTypeTitle, "Index", "LocatieType")</li>
-                        <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTitle, "Index", "Locatie", null, new { id = "locatie" })</li>
-                        <li>@Html.ActionLink("FOID", "Index", "Foid", null, new { id = "FOID" })</li>
-                        <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTitle, "Index", "Kabel", null, new { id = "Kabel" })</li>
+                        <li class="special2">@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTypeTitle, "Index", "LocatieType")</li>
+                        <li class="special2">@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTitle, "Index", "Locatie", null, new { id = "locatie" })</li>
+                        <li class="special2">@Html.ActionLink("FOID", "Index", "Foid", null, new { id = "FOID" })</li>
+                        <li class="special2">@Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTitle, "Index", "Kabel", null, new { id = "Kabel" })</li>
+                        <li>___________________________</li>
                         <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTypeTitle, "Index", "KabelType", null, new { id = "KabelType" })</li>
                         <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.SectieTitle, "Index", "Sectie", null, new { id = "Sectie" })</li>
                         <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.SectieTypeTitle, "Index", "SectieType", null, new { id = "SectieType" })</li>
