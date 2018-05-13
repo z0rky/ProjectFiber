@@ -14,16 +14,20 @@ namespace Eindwerk2018.Controllers
     public class SectieController : Controller
     {
         private Db_Sectie dbSectie = new Db_Sectie();
+        private Db_Kabel dbKabel = new Db_Kabel();
         private Db_SectieType dbSectieType = new Db_SectieType();
         private Db_Foid dbFoid= new Db_Foid();
-        //BezettingVanDeVezelsModel bezettingVanDeVezelsModel; 
 
         // GET: Sectie
         public ActionResult Index(int? kabelId)
         {
             List < Sectie > secties = new List<Sectie>();
-            if (kabelId == null) secties=dbSectie.List();
-            else secties = dbSectie.Search((int)kabelId);
+            if (kabelId == null) secties = dbSectie.List();
+            else
+            {
+                secties = dbSectie.Search((int)kabelId);
+                ViewBag.KabelId = (int)kabelId;
+            }
 
             return View(secties);
         }
@@ -40,9 +44,22 @@ namespace Eindwerk2018.Controllers
         }
 
         // GET: User/Create
-        public ActionResult Create()
+        public ActionResult Create(int? kabelId)
         {
-            var viewModel = new NieuweSectieViewModel() { SectieTypes = dbSectieType.List() };
+            var viewModel = new NieuweSectieViewModel() { SectieTypes = dbSectieType.List(), Sectie = new Sectie { } };
+
+            //id kabelId
+            if (kabelId != null)
+            {
+                Kabel kabel = dbKabel.Get((int)kabelId);
+                Sectie previeusSectie = dbSectie.GetLastSection(kabel.Id);
+                viewModel.Sectie.KabelId = (int)kabelId;
+                viewModel.Sectie.KabelName = kabel.Naam;
+                viewModel.Sectie.SectieNr = previeusSectie.SectieNr+100;
+                viewModel.Sectie.SectionTypeId = previeusSectie.SectionTypeId;
+                viewModel.Sectie.OdfStartId = previeusSectie.OdfEndId;
+                viewModel.Sectie.OdfStartName = previeusSectie.OdfEndName;
+            }
 
             return View(viewModel);
         }
