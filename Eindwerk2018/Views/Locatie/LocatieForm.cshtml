@@ -14,7 +14,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Locatie.Id)
 
-    @Html.ValidationSummary(true, "Error !")
+    @Html.ValidationSummary(false, "" , new { @class = "text-danger" })
 
     <div class="form-group">
         @Html.LabelFor(m => m.Locatie.LocatieNaam)

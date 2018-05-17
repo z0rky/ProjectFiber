@@ -14,11 +14,11 @@ namespace Eindwerk2018.Models
         [Display(Name = "LocationName", ResourceType = typeof(Resources.Resource))]
         public string LocatieNaam { get; set; }
 
-        [Range(-180, 180)] //makes it required, not something we want
+        [Range(-180, 180)] //makes it required, not something we want, ? corrects this
         [Display(Name = "LocationGpsLong", ResourceType = typeof(Resources.Resource))]
         public double? GpsLong { get; set; }
 
-        [Range(-90, 90)] //makes it required, not something we want
+        [Range(-90, 90)] //makes it required, not something we want, ? corrects this
         [Display(Name = "LocationGpsLat", ResourceType = typeof(Resources.Resource))]
         public double? GpsLat { get; set; }
 

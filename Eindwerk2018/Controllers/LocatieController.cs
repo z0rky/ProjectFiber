@@ -7,6 +7,7 @@ using Eindwerk2018.Models;
 using Eindwerk2018.ViewModels;
 using System.Data.Entity;
 using Eindwerk2018.Models.db;
+using System.Net;
 
 namespace Eindwerk2018.Controllers
 {
@@ -31,9 +32,11 @@ namespace Eindwerk2018.Controllers
             return View(locaties);
         } 
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            var DetailsLocatie = dbLocaties.Get(id);
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var DetailsLocatie = dbLocaties.Get((int) id);
 
             return View("Details", DetailsLocatie);
         }
@@ -44,6 +47,7 @@ namespace Eindwerk2018.Controllers
 
             var viewModel = new LocatieFormViewModel()
             {
+                Locatie = new Locatie { Id = 1 }, //fake id to make it 
                 LocatieTypes = locatielijst
             };
 
@@ -65,12 +69,13 @@ namespace Eindwerk2018.Controllers
                 };
                 return View("LocatieForm", viewModel);
             }
-            if (locatie.Id == 0)
+            if (locatie.Id < 2) // 1 is fake id
             {
-                dbLocaties.Add(locatie);
+                locatie.Id = dbLocaties.Add(locatie);
             }
+            //edit er niet bij ?
 
-             return RedirectToAction("Details", "Locatie", new { Id = locatie.Id });
+            return RedirectToAction("Details", "Locatie", new { Id = locatie.Id });
         }
 
 

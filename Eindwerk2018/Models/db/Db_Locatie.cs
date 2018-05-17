@@ -72,7 +72,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id, location_type AS lt WHERE l.id='" + id+ "' AND l.location_type=lt.id LIMIT 1"; //Including id to complete the normal class
+            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id, location_type AS lt WHERE l.id='" + id +"' AND l.location_type=lt.id LIMIT 1"; //Including id to complete the normal class
 
             return ListQueries(query)[0];
         }
@@ -81,7 +81,7 @@ namespace Eindwerk2018.Models.db
         {
             if (locatie != null)
             {
-                string query = "INSERT INTO location ( name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein,location_type,lijnnr,l.bk) VALUES ('" + locatie.LocatieNaam + "','" + locatie.GpsLong + "','" + locatie.GpsLat + "','" + locatie.Lcode + "','" + locatie.LocatieInfrabel + "','" + locatie.LocatieTypeId + "','"+locatie.LijnNr+ "','" + locatie.BK + "')"; //query
+                string query = "INSERT INTO location ( name, GPS_Longitude, GPS_Latidude,Lcode,infrabel_terein,location_type,lijnnr,bk) VALUES ('" + locatie.LocatieNaam + "','" + locatie.GpsLong + "','" + locatie.GpsLat + "','" + locatie.Lcode + "','" + locatie.LocatieInfrabel + "','" + locatie.LocatieTypeId + "','"+locatie.LijnNr+ "','" + locatie.BK + "')"; //query
                 this.ShortQuery(query);
                 int newId = GetLastInsertedId();
                 //add address
