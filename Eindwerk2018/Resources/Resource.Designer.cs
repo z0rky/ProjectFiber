@@ -1141,6 +1141,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of Fibers.
+        /// </summary>
+        public static string SectieTypeTotalFibers {
+            get {
+                return ResourceManager.GetString("SectieTypeTotalFibers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual.
         /// </summary>
         public static string SectieTypeVirtual {

@@ -515,4 +515,7 @@
   <data name="LocationTypeName" xml:space="preserve">
     <value>Type Nom</value>
   </data>
+  <data name="SectieTypeTotalFibers" xml:space="preserve">
+    <value>Nombre de fibres</value>
+  </data>
 </root>
