@@ -25,11 +25,11 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown">@Eindwerk2018.Resources.Resource.LinkAdd<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li class="special2">@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTypeTitle, "Index", "LocatieType")</li>
                         <li class="special2">@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTitle, "Index", "Locatie", null, new { id = "locatie" })</li>
                         <li class="special2">@Html.ActionLink("FOID", "Index", "Foid", null, new { id = "FOID" })</li>
                         <li class="special2">@Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTitle, "Index", "Kabel", null, new { id = "Kabel" })</li>
                         <li>___________________________</li>
+                        <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.LocationTypeTitle, "Index", "LocatieType")</li>
                         <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.KabelTypeTitle, "Index", "KabelType", null, new { id = "KabelType" })</li>
                         <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.SectieTitle, "Index", "Sectie", null, new { id = "Sectie" })</li>
                         <li>@Html.ActionLink(@Eindwerk2018.Resources.Resource.SectieTypeTitle, "Index", "SectieType", null, new { id = "SectieType" })</li>

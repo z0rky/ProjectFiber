@@ -512,4 +512,7 @@
   <data name="ErrorFieldEmail" xml:space="preserve">
     <value>Cette adresse email n'est pas valide.</value>
   </data>
+  <data name="LocationTypeName" xml:space="preserve">
+    <value>Type Nom</value>
+  </data>
 </root>

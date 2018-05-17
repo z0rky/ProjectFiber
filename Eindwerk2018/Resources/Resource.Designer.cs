@@ -880,6 +880,15 @@ namespace Eindwerk2018.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type Name.
+        /// </summary>
+        public static string LocationTypeName {
+            get {
+                return ResourceManager.GetString("LocationTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name French.
         /// </summary>
         public static string LocationTypeNameFR {

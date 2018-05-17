@@ -40,7 +40,7 @@ namespace Eindwerk2018.Models.db
         public List<Locatie> SearchPlaats(string search)
         {
             if (search == null) return null;
-            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id " +
+            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id, location_type AS lt  " +
                            "WHERE a.city LIKE '%" + search + "%' AND l.location_type=lt.id LIMIT " + Max_row; //query
 
             return ListQueries(query);
@@ -49,7 +49,7 @@ namespace Eindwerk2018.Models.db
         public List<Locatie> SearchGPS(double search1, double search2)
         {
             if (search1 == 0 || search2 == 0) return null;
-            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id " +
+            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id, location_type AS lt  " +
                            "WHERE l.GPS_Longitude BETWEEN '" + search1 + "%' AND '" + search2 + "%' OR l.GPS_Latidude BETWEEN '" + search1 + "%' AND '" + search2 + "%' AND l.location_type=lt.id LIMIT " + Max_row; //query
 
             return ListQueries(query);
@@ -60,7 +60,7 @@ namespace Eindwerk2018.Models.db
         public Boolean CheckName(string search, int id = 0)
         {
             if (search == null) return true;
-            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id WHERE l.name='" + search + "' AND l.location_type=lt.id";
+            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id, location_type AS lt  WHERE l.name='" + search + "' AND l.location_type=lt.id";
             if (id > 0) query += " AND l.id!='" + id + "'";
             query += " LIMIT " + Max_row; //query
 
@@ -72,7 +72,7 @@ namespace Eindwerk2018.Models.db
         {
             if (id == 0) return null;
 
-            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id WHERE l.id='" + id+ "' AND l.location_type=lt.id LIMIT 1"; //Including id to complete the normal class
+            string query = "SELECT l.id, l.name, l.GPS_Longitude, l.GPS_Latidude,l.Lcode,l.infrabel_terein,l.location_type,lt.name_nl,l.lijnnr,l.bk,a.street,a.nr,a.postcode,a.city FROM location AS l LEFT JOIN adres AS a ON l.id=a.id, location_type AS lt WHERE l.id='" + id+ "' AND l.location_type=lt.id LIMIT 1"; //Including id to complete the normal class
 
             return ListQueries(query)[0];
         }

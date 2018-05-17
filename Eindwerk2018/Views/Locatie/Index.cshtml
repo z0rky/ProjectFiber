@@ -31,9 +31,9 @@
             <td>@locatie.LocatieBedrijf</td>
             <td>@locatie.LocatieTypeName</td>
             <td>
-                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = locatie.Id } ) |
-                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = locatie.Id }) |
-                    @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = locatie.Id })
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkEdit, "Edit", new { id = locatie.Id }) |
+                @Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDetails, "Details", new { id = locatie.Id }) |
+                @*@Html.ActionLink(Eindwerk2018.Resources.Resource.LinkDelete, "Delete", new { id = locatie.Id })*@
             </td>
         </tr> 
         }
@@ -54,9 +54,6 @@
    
 }*@
           
-
-
-
 
 @section scripts
 {

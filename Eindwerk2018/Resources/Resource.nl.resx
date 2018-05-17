@@ -512,4 +512,7 @@
   <data name="ErrorFieldEmail" xml:space="preserve">
     <value>Dit is geen geldig email adres.</value>
   </data>
+  <data name="LocationTypeName" xml:space="preserve">
+    <value>Type Naam</value>
+  </data>
 </root>

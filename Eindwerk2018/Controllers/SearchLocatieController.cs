@@ -83,7 +83,7 @@ namespace Eindwerk2018.Controllers
             
             // mogelijkheid om enkel op long of lat te zoeken??
             
-            if ((locatie.GpsLat !=0) || (locatie.GpsLong != 0))
+            if ( (locatie.GpsLat !=0) || (locatie.GpsLong != 0))
             {
                 if (!ModelState.IsValid)
                 {
