@@ -22,7 +22,7 @@ namespace Eindwerk2018.Controllers
 
         public ViewResult Index()
         {
-            return View();
+            return View("SearchLocatieNaam");
         }
 
         public ActionResult SearchLcode()
@@ -53,13 +53,11 @@ namespace Eindwerk2018.Controllers
         [HttpPost]
         public ActionResult ZoekLocatie(Locatie locatie)
         {
-            
-
             //naam OK
             if (locatie.LocatieNaam != null)
             {
-                if (!ModelState.IsValid)
-                {
+                if (ModelState.IsValid)
+                {  //zoeken
                     LocatieZoek = dbLocaties.SearchNaam(locatie.LocatieNaam).ToList();
                     var locatieZoekViewModel = new SearchLocatieResultViewModel
                     {
@@ -75,17 +73,14 @@ namespace Eindwerk2018.Controllers
                     };
 
                     return View("SearchLocatieNaam", viewModel);
-                    
                 }
-
-
             }
             
             // mogelijkheid om enkel op long of lat te zoeken??
-            
-            if ( (locatie.GpsLat !=0) || (locatie.GpsLong != 0))
+            //word altijd uitgevoerd
+            /*if ( (locatie.GpsLat !=0) || (locatie.GpsLong != 0))
             {
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     LocatieZoek = dbLocaties.SearchGPS((double)locatie.GpsLat, (double)locatie.GpsLong).ToList();
                     var locatieZoekViewModel = new SearchLocatieResultViewModel
@@ -93,8 +88,6 @@ namespace Eindwerk2018.Controllers
                         GezochteLocaties = LocatieZoek
                     };
                     return View("IndexSearchResult", locatieZoekViewModel);
-
-                    
                 }
                 else
                 {
@@ -105,15 +98,13 @@ namespace Eindwerk2018.Controllers
 
                     return View("SearchLocatieGps", viewModel);
                 }
-
-            }
+            }*/
             
-
-            if (locatie.PostCode != 0)
+            //wordt altijd uitgevoerd
+            if (locatie.PostCode > 0)
             {
-                if (!ModelState.IsValid)
+                /*if (ModelState.IsValid) //will always be false, name need to be filled in
                 {   
-                    
                     LocatieZoek = dbLocaties.SearchPostCode((int)locatie.PostCode).ToList();
                     var locatieZoekViewModel = new SearchLocatieResultViewModel
                     {
@@ -130,15 +121,20 @@ namespace Eindwerk2018.Controllers
 
                     return View("SearchLocatiePostCode", viewModel);
                 }
-
+                */
+                LocatieZoek = dbLocaties.SearchPostCode((int)locatie.PostCode).ToList();
+                var locatieZoekViewModel = new SearchLocatieResultViewModel
+                {
+                    GezochteLocaties = LocatieZoek
+                };
+                return View("IndexSearchResult", locatieZoekViewModel);
             }
 
             
             if (locatie.Plaats != null)
             {
-                if (!ModelState.IsValid)
+                /*if (ModelState.IsValid) //false
                 {
-
                     LocatieZoek = dbLocaties.SearchPlaats(locatie.Plaats).ToList();
                     var locatieZoekViewModel = new SearchLocatieResultViewModel
                     {
@@ -154,10 +150,14 @@ namespace Eindwerk2018.Controllers
                     };
 
                     return View("SearchLocatiePlaats", viewModel);
-
-
                 }
-
+                */
+                LocatieZoek = dbLocaties.SearchPlaats(locatie.Plaats).ToList();
+                var locatieZoekViewModel = new SearchLocatieResultViewModel
+                {
+                    GezochteLocaties = LocatieZoek
+                };
+                return View("IndexSearchResult", locatieZoekViewModel);
             }
 
             return View("Index");
@@ -166,12 +166,10 @@ namespace Eindwerk2018.Controllers
         private IEnumerable<Locatie> GezochteLocaties()
         {
             return dbLocaties.List();
-
         }
 
         public ActionResult Details(int id)
         {
-
             var DetailsLocatie = dbLocaties.Get(id);
 
             return View("~/Views/Locatie/Details.cshtml", DetailsLocatie);

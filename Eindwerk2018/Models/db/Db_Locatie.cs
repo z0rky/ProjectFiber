@@ -27,7 +27,6 @@ namespace Eindwerk2018.Models.db
             return ListQueries(query);
         }
 
-        // query nog aanpassen
         public List<Locatie> SearchPostCode(int search)
         {
             if (search == 0) return null;
@@ -36,7 +35,7 @@ namespace Eindwerk2018.Models.db
 
             return ListQueries(query);
         }
-        // query nog aanpassen
+        
         public List<Locatie> SearchPlaats(string search)
         {
             if (search == null) return null;
@@ -45,7 +44,7 @@ namespace Eindwerk2018.Models.db
 
             return ListQueries(query);
         }
-        // query nog aanpassen
+        
         public List<Locatie> SearchGPS(double search1, double search2)
         {
             if (search1 == 0 || search2 == 0) return null;
@@ -96,7 +95,7 @@ namespace Eindwerk2018.Models.db
         {
             if (locatie != null || locatie.Id != 0)
             {
-                string query = "UPDATE location SET name='" + locatie.LocatieNaam + "', GPS_Longitude='" + locatie.GpsLong + "', GPS_Latidude='" + locatie.GpsLat + "',Lcode='"+ locatie.Lcode +"', infrabel_terein='" + locatie.LocatieInfrabel + "', location_type='" + locatie.LocatieTypeId + "' WHERE id='" + locatie.Id + "',lijnnr='" + locatie.LijnNr + "',l.bk='" + locatie.BK + "' LIMIT 1"; //query
+                string query = "UPDATE location SET name='" + locatie.LocatieNaam + "', GPS_Longitude='" + locatie.GpsLong + "', GPS_Latidude='" + locatie.GpsLat + "',Lcode='"+ locatie.Lcode +"', infrabel_terein='" + locatie.LocatieInfrabel + "', location_type='" + locatie.LocatieTypeId + "',lijnnr='" + locatie.LijnNr + "',bk='" + locatie.BK + "' WHERE id='" + locatie.Id + "' LIMIT 1"; //query
                 this.ShortQuery(query);
                 //should also edit adres
                 query = "UPDATE adres SET street='" + locatie.Straat + "', nr='" + locatie.HuisNr+ "', postcode='" + locatie.PostCode + "', city='" + locatie.Plaats+ "' WHERE id='" + locatie.Id + "' LIMIT 1";

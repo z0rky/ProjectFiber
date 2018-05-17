@@ -73,7 +73,7 @@ namespace Eindwerk2018.Controllers
             {
                 locatie.Id = dbLocaties.Add(locatie);
             }
-            //edit er niet bij ?
+            else dbLocaties.Edit(locatie); //edit part
 
             return RedirectToAction("Details", "Locatie", new { Id = locatie.Id });
         }

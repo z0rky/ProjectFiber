@@ -1,11 +1,13 @@
 ﻿@model Eindwerk2018.ViewModels.SearchLocatieViewModel
-    
+
 
 @{
     ViewBag.Title = Eindwerk2018.Resources.Resource.LinkSearch;
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link href="~/content/simple-sidebar.css" rel="stylesheet">
 }
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
 <div id="wrapper">
     <div id="sidebar-wrapper">
@@ -17,19 +19,19 @@
             @*<li>@Html.ActionLink("Plaats", "SearchPlaats", "SearchLocatie")</li>*@
         </ul>
     </div>
-  
+
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <h2>Locatie</h2>
 
             @using (Html.BeginForm("ZoekLocatie", "SearchLocatie"))
             {
-   
+
                 <div class="form-group">
                     @Html.LabelFor(m => m.Locatie.Plaats)
-                    @Html.TextBoxFor(l => l.Locatie.Plaats, new {@class = "form-control", id = "LocatiePlaatsId"})
+                    @Html.TextBoxFor(l => l.Locatie.Plaats, new { @class = "form-control", id = "LocatiePlaatsId" })
                 </div>
-   
+
                 <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSearch</button>
                 <button href="#menu-toggle" class="btn btn-primary" id="menu-toggle">@Eindwerk2018.Resources.Resource.LinkSearchOptions</button>
             }
@@ -41,7 +43,7 @@
 @*<script src="~/Scripts/bootstrap_SideBar/js/bootstrap.bundle.min.js"></script>*@
 
 <script>
-    $("#menu-toggle").click(function(e) {
+    $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });

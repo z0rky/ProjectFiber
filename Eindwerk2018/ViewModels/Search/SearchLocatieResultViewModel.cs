@@ -12,8 +12,5 @@ namespace Eindwerk2018.ViewModels
     public class SearchLocatieResultViewModel
     {
         public IEnumerable<Locatie> GezochteLocaties { get; set; }
-
-
-
     }
 }

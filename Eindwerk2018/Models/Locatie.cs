@@ -42,7 +42,8 @@ namespace Eindwerk2018.Models
         [Display(Name="AdresNummer", ResourceType = typeof(Resources.Resource))]
         public string HuisNr { get; set; }
 
-        [Range(999, 9999, ErrorMessageResourceName = "ErrorFieldNumber", ErrorMessageResourceType = typeof(Resources.Resource))]
+        //[Range(999, 9999, ErrorMessageResourceName = "ErrorFieldNumber", ErrorMessageResourceType = typeof(Resources.Resource))]
+        //geeft problemen bij edit
         [Display(Name = "AdresPostcode", ResourceType = typeof(Resources.Resource))]
         public int? PostCode { get; set; } //the ? makes it not required
 
