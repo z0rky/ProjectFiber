@@ -6,14 +6,18 @@
     <link href="~/content/simple-sidebar.css" rel="stylesheet">
 }
 
-<h2>Foid</h2>
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <h2>Foid</h2>
 
-@using (Html.BeginForm("SearchFoid", "SearchFoid"))
-{
-    <div class="form-group">
-        @Html.TextBoxFor(l => l.SearchString, new { @class = "form-control", id = "FoidNameId" })
+        @using (Html.BeginForm("SearchFoid", "SearchFoid"))
+        {
+            <div class="form-group">
+                @Html.TextBoxFor(l => l.SearchString, new { @class = "form-control", id = "FoidNameId" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSearch</button>
+            @*<button href="#menu-toggle" class="btn btn-primary" id="menu-toggle">@Eindwerk2018.Resources.Resource.LinkSearchOptions</button>*@
+        }
     </div>
-
-    <button type="submit" class="btn btn-primary">@Eindwerk2018.Resources.Resource.LinkSearch</button>
-    @*<button href="#menu-toggle" class="btn btn-primary" id="menu-toggle">@Eindwerk2018.Resources.Resource.LinkSearchOptions</button>*@
-}
+</div>
